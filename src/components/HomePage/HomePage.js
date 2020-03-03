@@ -11,6 +11,10 @@ const UserPage = (props) => (
       Welcome, { props.user.username }!
     </h1>
     <p>Your ID is: {props.user.id}</p>
+    <button onClick={() => props.history.push('/CollectBooks')}>Collect Books</button>
+    <button onClick={() => props.history.push('/DistributeBooks')}>Distribute Books</button>
+    <button onClick={() => props.history.push('/DataReporting')}>Data Reporting</button>
+    <br/>
     <LogOutButton className="log-in" />
   </div>
 );
