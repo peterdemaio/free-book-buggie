@@ -16,4 +16,18 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/search', (req, res) => {
+    const searchquery = [`%${req.query.searchterm}%`]
+    const queryText = `SELECT * FROM "organizations"
+                        WHERE "name" ILIKE $1;`;
+    console.log('in organizations router.get', req.query)
+    pool.query(queryText, searchquery)
+        .then(result => {
+            console.log(result.rows)
+            res.send(result.rows)
+        }).catch(error => {
+            console.log('error in organizations GET', error)
+            res.sendStatus(500);
+        })
+})
 module.exports = router;

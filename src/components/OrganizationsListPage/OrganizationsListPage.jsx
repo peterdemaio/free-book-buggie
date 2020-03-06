@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
+import {withStyles, Grid } from '@material-ui/core';
+
+const styles = {
+    list : {
+
+    }
+}
 
 class OrganizationsListPage extends React.Component {
 
-    state = {
-        queryText: ''
-    }
     componentDidMount() {
         console.log('organizations page ready')
         this.props.dispatch({
@@ -14,17 +18,29 @@ class OrganizationsListPage extends React.Component {
         })
     }
 
-
     render() {
         return (
-            <div>
-                {/* <input placeholder="search for organization" value={this.state.queryText} onChange={(event) => this.handleSearch(event)}></input> */}
-                <ul className="organizationsList">
-                    {this.props.reduxStore.organizations.map(org =>
-                        <OrganizationsListItem key={org.id} org={org} />
-                    )}
-                </ul>
-            </div>
+            <>
+                <div >
+                    <input placeholder="Search for organization"
+                        onChange={(event) => this.props.dispatch({
+                            type: 'SEARCH_ORGANIZATIONS',
+                            payload: event.target.value
+                        })}>
+                    </input>
+                </div>
+                <div>
+                    <Grid container 
+                    direction="column"
+                    justify="space-evenly"
+                    alignItems="center"
+                    >
+                        {this.props.reduxStore.organizations.map(org =>
+                            <OrganizationsListItem key={org.id} org={org} />
+                        )}
+                    </Grid>
+                </div>
+            </>
         )
     }
 }
