@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('in organizations post router')
+    console.log('in organizations post router', req.body)
     const newEntry = req.body;
     console.log(newEntry)
     const queryText = `INSERT INTO "organizations" ("name", "logo", "type", 
@@ -29,6 +30,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         newEntry.logo,
         newEntry.type,
         newEntry.address_number,
+        newEntry.address_street,
         newEntry.address_unit,
         newEntry.city,
         newEntry.state,

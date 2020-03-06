@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 
 class NewOrganization extends Component {
@@ -26,8 +27,7 @@ class NewOrganization extends Component {
             newEntry: {
                 ...this.state.newEntry,
                 [propertyName]: event.target.value
-             
-
+            
             }
         })
     }
@@ -60,13 +60,13 @@ class NewOrganization extends Component {
                             onChange={(event) => this.handleChangeFor(event, 'type')} />
                         <input
                             placeholder="Address Number"
-                            onChange={(event) => this.handleChangeFor(event, 'number')} />
+                            onChange={(event) => this.handleChangeFor(event, 'address_number')} />
                         <input
                             placeholder="Address Street"
-                            onChange={(event) => this.handleChangeFor(event, 'street')} />
+                            onChange={(event) => this.handleChangeFor(event, 'address_street')} />
                         <input
                             placeholder="Unit"
-                            onChange={(event) => this.handleChangeFor(event, 'unit')} />
+                            onChange={(event) => this.handleChangeFor(event, 'address_unit')} />
                         <input
                             placeholder="City"
                             onChange={(event) => this.handleChangeFor(event, 'city')} />
@@ -97,4 +97,4 @@ class NewOrganization extends Component {
     }
 }
 
-export default NewOrganization;
+export default connect()(NewOrganization);
