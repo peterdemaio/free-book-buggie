@@ -74,7 +74,11 @@ CREATE TABLE "demographics_age" (
     "8-12" integer,
     "13-18" integer
 );
+
 INSERT INTO "demographics_age" ("organizations_id", "0-3", "4-7", "8-12", "13-18")
+
+
+
 VALUES(1, 0, 75, 25, 0),
 (2, 25, 75, 0, 0),
 (3, 25, 50, 25, 0),
@@ -140,9 +144,11 @@ VALUES(1, 350),
 (4, 250),
 (5, 150);
 
+
 CREATE TABLE  "user"(
     "id" serial PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "admin" BOOLEAN DEFAULT false
+
 );
