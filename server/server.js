@@ -36,7 +36,7 @@ app.use('/api/bookOut', bookOutRouter);
 app.use('/api/contacts', contactsRouter);
 app.use('/api/demographics', demographicsRouter);
 app.use('/api/events', eventsRouter);
-app.use('//api/organizations', organizationsRouter);
+app.use('/api/organizations', organizationsRouter);
 
 // Serve static files
 app.use(express.static('build'));
