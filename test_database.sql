@@ -139,3 +139,10 @@ VALUES(1, 350),
 (3, 700),
 (4, 250),
 (5, 150);
+
+CREATE TABLE  "user"(
+    "id" serial PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL,
+    "admin" BOOLEAN DEFAULT false
+);
