@@ -19,6 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import DataReporting from '../DataReporting/DataReporting';
 import DistributeBooks from '../DistributeBooks/DistributeBooks';
 import CollectBooks from '../CollectBooks/CollectBooks';
+import NewOrganization from '../NewOrganization/NewOrganization';
+import EditOrganization from '../EditOrganization/EditOrganization';
+import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 
 import './App.css';
 
@@ -72,6 +75,21 @@ class App extends Component {
               exact
               path="/collectBooks"
               component={CollectBooks}
+            />
+            <ProtectedRoute
+              exact
+              path="/newOrganization"
+              component={NewOrganization}
+            />
+            <ProtectedRoute
+              exact
+              path="/editOrganization"
+              component={EditOrganization}
+            />
+            <ProtectedRoute
+              exact
+              path="/organizationsListPage"
+              component={OrganizationsListPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
