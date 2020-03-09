@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem';
+import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 
 
 // Material UI imports
@@ -39,6 +39,8 @@ class CollectBooks extends Component {
             <>
                 <h1>CollectBooks page</h1>
                 {/* Search functionality for orgs, make clickable to display info */}
+                <OrganizationsListPage/>
+
                 {/* <div >
                     <input placeholder="Search for organization"
                         onChange={(event) => this.props.dispatch({
@@ -86,8 +88,8 @@ class CollectBooks extends Component {
                                 New Individual
                             </Button>
                         </Grid>
-                    </Grid>
-                </div>
+                    {/* </Grid> */}
+                {/* </div> */}
                 <button onClick={() => this.props.history.push('/editOrganization')}>Sample Organization</button>
                 <button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</button>
                 <button onClick={() => this.props.history.push('/home')}>Home</button>
