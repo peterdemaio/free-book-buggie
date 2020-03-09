@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     VALUES ($1, $2);`
 
   pool.query(queryText,
-    [req.body.event_id, req.body.total_number_of_books, req.body.baby, req.body.beginner, req.body.intermediate, req.body.chapter, req.body.non_fiction, req.body.spring_holidays, req.body.fall_holidays, req.body.christmas])
+    [req.body.event_id, req.body.total_number_of_books])
     .then(result => {
       console.log(result.rows)
       res.send(result.rows)
