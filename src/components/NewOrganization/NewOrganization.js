@@ -18,7 +18,8 @@ class NewOrganization extends Component {
             zip: '',
             notes: ''
 
-        }
+        },
+        submitBoolean: false
     }
 
     handleChangeFor = (event, propertyName) => {
@@ -32,16 +33,33 @@ class NewOrganization extends Component {
         })
     }
 
-    handleClick = (event) => {
+    handleClick = async (event) => {
         event.preventDefault()
-        this.props.dispatch({
-            type: 'POST_NEW_ORGANIZATION',
-            payload: this.state.newEntry
-        })
-        this.props.history.push(`/organizationsListPage`);
+        try {
+            await this.props.dispatch({
+                type: 'POST_NEW_ORGANIZATION',
+                payload: this.state.newEntry
+            })
+        } catch {
+            console.log('dispatch error')
+        }
+        // if (this.props.reduxStore.demographicsBoolean === true){
+        this.setState ({
+            submitBoolean: true
+
+        }) 
+            // this.props.history.push(`/organizationsListPage`);
+        // }
+        // this.props.history.push(`/organizationsListPage`);
     }
 
     render() {
+
+        // let formText = ''
+        if (this.props.reduxStore.demographicsBoolean === true){
+            alert('way to go, proud of you')
+            // this.props.history.push(`/organizationsListPage`)
+        }
         return (
             <>
                 <div>
@@ -97,4 +115,8 @@ class NewOrganization extends Component {
     }
 }
 
-export default connect()(NewOrganization);
+const mapStateToProps = (reduxStore) => ({
+    reduxStore
+})
+
+export default connect(mapStateToProps)(NewOrganization);
