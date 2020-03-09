@@ -87,7 +87,7 @@ class CollectBooks extends Component {
 
     state = {
         numOfBooks: '',
-        eventType: '',
+        type: '',
         open: false,
     }
 
@@ -105,7 +105,7 @@ class CollectBooks extends Component {
     };
 
     submitBooks = (event) => {
-        console.log('adding books');
+        console.log('adding books', this.state.numOfBooks);
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_BOOKS',
@@ -115,7 +115,8 @@ class CollectBooks extends Component {
         })
     }
 
-    handleInputChangeFor = propertyName => (event) => {
+    handleInputChangeFor = (event, propertyName) => {
+        console.log('testing handleInputChangeFor')
         this.setState({
             [propertyName]: event.target.value
         })
@@ -181,9 +182,16 @@ class CollectBooks extends Component {
                     <DialogTitle>Add Books and Organization Type</DialogTitle>
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
-                            <FormControl className={classes.margin}>
-                                <InputLabel htmlFor="number">Number</InputLabel>
-                                <BootstrapInput />
+                            <FormControl className={classes.margin}
+                            value={this.state.numOfBooks}
+                            onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}
+                            >
+                                <InputLabel
+                                    htmlFor="numOfBooks"
+                                    
+
+                                >Number</InputLabel>
+                                <BootstrapInput/>
                                 {/* <Select
                                     native
                                     value={this.state.numOfBooks}
@@ -195,18 +203,15 @@ class CollectBooks extends Component {
                             </FormControl>
                             <br />
                             <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="age-simple">Age</InputLabel>
+                                <InputLabel htmlFor="age-simple">Type of Collector</InputLabel>
                                 <Select
-                                    value={this.state.age}
-                                    onChange={this.handleChange('age')}
-                                    input={<Input id="age-simple" />}
+                                    value={this.state.type}
+                                    onChange={this.handleChange('type')}
+                                    input={<Input id="type" />}
                                 >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={1}>Organization</MenuItem>
+                                    <MenuItem value={2}>Event</MenuItem>
+                                    <MenuItem value={3}>Individual</MenuItem>
                                 </Select>
                             </FormControl>
                         </form>
