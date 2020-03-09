@@ -49,11 +49,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-    const searchquery = [`%${req.query.searchterm}%`]
+    const searchquery = `%${req.query.searchterm}%`
     const queryText = `SELECT * FROM "organizations"
                         WHERE "name" ILIKE $1;`;
     console.log('in organizations router.get', req.query)
-    pool.query(queryText, searchquery)
+    pool.query(queryText, [searchquery])
         .then(result => {
             console.log(result.rows)
             res.send(result.rows)
@@ -61,5 +61,36 @@ router.get('/search', (req, res) => {
             console.log('error in organizations GET', error)
             res.sendStatus(500);
         })
+})
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('ready to edit organization with', req.body)
+    let id = req.body.id
+    let address_number = req.body.address_number
+    let address_street = req.body.address_street
+    let address_unit = req.body.address_unit
+    let city = req.body.city
+    let state = req.body.state
+    let zip = req.body.zip
+    let county = req.body.county
+    let notes = req.body.notes
+
+    let sqlText = `UPDATE "organizations" 
+                SET "address_number" = $1, 
+                    "address_street" = $2, 
+                    "address_unit" = $3, 
+                    "city" = $4, 
+                    "state" = $5, 
+                    "zip" = $6, 
+                    "county" = $7, 
+                    "notes" = $8 
+                    WHERE "id" = $9;`;
+    pool.query(sqlText, [address_number, address_street, address_unit, city, state, zip, county, notes, id])
+    .then(() => { res.sendStatus(201); })
+        .catch((err) => {
+            console.log('Error updating organization', err);
+            res.sendStatus(500);
+        })
+        
 })
 module.exports = router;

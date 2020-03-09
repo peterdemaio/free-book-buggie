@@ -1,20 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Input from '@material-ui/core/Input';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
 import {withStyles, Grid } from '@material-ui/core';
 
 const styles = {
+    input : {
+        justify: 'center'
+    },
     list : {
-
+        paddingLeft: '250px',
+        paddingRight: '250px'
+        // margin: 'px'
     }
 }
 
 class OrganizationsListPage extends React.Component {
 
+
+    state = {
+        queryText: '',
+        currentlyDisplayed: []
+    }
+
     componentDidMount() {
         console.log('organizations page ready')
-        this.props.dispatch({
-            type: 'GET_ORGANIZATIONS'
+        this.setState({
+            currentlyDisplayed: this.props.reduxStore.organizations
+        })
+    }
+
+    onInputChange = (event) => {
+        console.log(event.target.value)
+        let newlyDisplayed = this.props.reduxStore.organizations.filter( 
+            organization => organization.name.toLowerCase().includes(event.target.value.toLowerCase()));
+
+        this.setState({
+            queryText: event.target.value,
+            currentlyDisplayed: newlyDisplayed
         })
     }
 
@@ -22,20 +45,20 @@ class OrganizationsListPage extends React.Component {
         return (
             <>
                 <div >
-                    <input placeholder="Search for organization"
-                        onChange={(event) => this.props.dispatch({
-                            type: 'SEARCH_ORGANIZATIONS',
-                            payload: event.target.value
-                        })}>
-                    </input>
+                    <Input 
+                        className={this.props.classes.input}
+                        placeholder="Search for organization"
+                        onChange={this.onInputChange}>
+                    </Input>
                 </div>
                 <div>
                     <Grid container 
+                    className={this.props.classes.list}
                     direction="column"
                     justify="space-evenly"
-                    alignItems="center"
+                    alignItems="left"
                     >
-                        {this.props.reduxStore.organizations.map(org =>
+                        {this.state.currentlyDisplayed.map(org =>
                             <OrganizationsListItem key={org.id} org={org} />
                         )}
                     </Grid>
@@ -49,4 +72,6 @@ const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapStateToProps)(OrganizationsListPage)
+const styledOrganizationsListPage = withStyles(styles)(OrganizationsListPage)
+
+export default connect(mapStateToProps)(styledOrganizationsListPage)
