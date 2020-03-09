@@ -39,7 +39,7 @@ class CollectBooks extends Component {
             <>
                 <h1>CollectBooks page</h1>
                 {/* Search functionality for orgs, make clickable to display info */}
-                <div >
+                {/* <div >
                     <input placeholder="Search for organization"
                         onChange={(event) => this.props.dispatch({
                             type: 'SEARCH_ORGANIZATIONS',
@@ -56,7 +56,7 @@ class CollectBooks extends Component {
                     >
                         {this.props.reduxStore.organizations.map(org =>
                             <OrganizationsListItem key={org.id} org={org} />
-                        )}
+                        )} */}
                         <Grid item
                             direction="column"
                             justify="flex-end"
