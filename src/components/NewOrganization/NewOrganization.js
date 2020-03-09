@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputBase from '@material-ui/core/InputBase';
 
 
 class NewOrganization extends Component {
@@ -19,7 +27,7 @@ class NewOrganization extends Component {
             notes: ''
 
         },
-        submitBoolean: false
+      
     }
 
     handleChangeFor = (event, propertyName) => {
@@ -43,22 +51,14 @@ class NewOrganization extends Component {
         } catch {
             console.log('dispatch error')
         }
-        // if (this.props.reduxStore.demographicsBoolean === true){
-        this.setState ({
-            submitBoolean: true
-
-        }) 
-            // this.props.history.push(`/organizationsListPage`);
-        // }
-        // this.props.history.push(`/organizationsListPage`);
+      
     }
 
     render() {
 
-        // let formText = ''
         if (this.props.reduxStore.demographicsBoolean === true){
             alert('way to go, proud of you')
-            // this.props.history.push(`/organizationsListPage`)
+          
         }
         return (
             <>
