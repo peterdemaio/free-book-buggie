@@ -4,6 +4,17 @@ import axios from 'axios'
 function* organizationsSaga() {
     yield takeEvery ('GET_ORGANIZATIONS', getOrganizations)
     yield takeEvery ('SEARCH_ORGANIZATIONS', searchOrganizations)
+    yield takeEvery ('EDIT_ORGANIZATION', editOrganization)
+}
+
+function* editOrganization(action) {
+    console.log('ready to edit organizaiton:', action.payload)
+    try {
+        yield axios.put('/api/organizations', action.payload)
+        yield put ({type: 'GET_ORGANIZATIONS'})
+    } catch (err) {
+        console.log('err editing organization', err)
+    }
 }
 function* getOrganizations(action) {
     try {

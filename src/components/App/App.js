@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -26,10 +26,11 @@ import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPag
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch({
-            type: 'FETCH_USER',
-      })
+      type: 'FETCH_USER',
+      type: 'GET_ORGANIZATIONS'
+    })
   }
 
   render() {
@@ -99,7 +100,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);
