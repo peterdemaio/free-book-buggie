@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem';
+
 
 // Material UI imports
 import {
@@ -21,7 +23,9 @@ const styles = theme => ({
 
 class CollectBooks extends Component {
 
-
+    let id = this.props.id
+    let index = id -1
+    let organization = this.props.reduxStore.organization[index]
 
     render() {
         return (
