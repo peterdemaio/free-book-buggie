@@ -111,6 +111,7 @@ class CollectBooks extends Component {
             type: 'ADD_BOOKS',
             payload: {
                 numOfBooks: this.state.numOfBooks,
+                type: this.state.type
             }
         })
     }
