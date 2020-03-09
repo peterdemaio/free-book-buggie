@@ -204,15 +204,15 @@ class CollectBooks extends Component {
                             </FormControl>
                             <br />
                             <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="age-simple">Type of Collector</InputLabel>
+                                <InputLabel htmlFor="type-simple">Type of Collector</InputLabel>
                                 <Select
                                     value={this.state.type}
                                     onChange={this.handleChange('type')}
                                     input={<Input id="type" />}
                                 >
-                                    <MenuItem value={1}>Organization</MenuItem>
-                                    <MenuItem value={2}>Event</MenuItem>
-                                    <MenuItem value={3}>Individual</MenuItem>
+                                    <MenuItem value="Organization">Organization</MenuItem>
+                                    <MenuItem value="Event">Event</MenuItem>
+                                    <MenuItem value="Individual">Individual</MenuItem>
                                 </Select>
                             </FormControl>
                         </form>
