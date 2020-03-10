@@ -122,13 +122,13 @@ class NewOrganization extends Component {
                     <FormControl className={classes.margin}>
                         <InputLabel htmlFor="age-customized-select" className={classes.bootstrapFormLabel}>
                             Age
-          </InputLabel>
+                        </InputLabel>
                         <BootstrapInput />
                     </FormControl>
                     <FormControl className={classes.margin}>
                         <InputLabel htmlFor="age-customized-select" className={classes.bootstrapFormLabel}>
                             Age
-          </InputLabel>
+                        </InputLabel>
                         <Select
                             value={this.state.age}
                             onChange={this.handleChange}
@@ -145,7 +145,7 @@ class NewOrganization extends Component {
                     <FormControl className={classes.margin}>
                         <InputLabel htmlFor="age-customized-native-simple" className={classes.bootstrapFormLabel}>
                             Age
-          </InputLabel>
+                    </InputLabel>
                         <NativeSelect
                             value={this.state.age}
                             onChange={this.handleChange}
