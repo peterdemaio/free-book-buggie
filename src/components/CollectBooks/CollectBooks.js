@@ -17,6 +17,7 @@ import {
     Input,
     MenuItem,
     FormControl,
+    FormHelperText,
     TextField,
     Select,
     Option,
@@ -70,6 +71,9 @@ const styles = theme => ({
     bootstrapFormLabel: {
         fontSize: 18,
     },
+    button: {
+        alignItems: 'center'
+    }
 });
 
 class CollectBooks extends Component {
@@ -143,6 +147,12 @@ class CollectBooks extends Component {
                         justify="flex-end"
                         alignItems="flex-end"
                     >
+                        <Button
+                            onClick={this.handleClickOpen}
+                            variant="contained"
+                            color="primary"
+                            >Add Books</Button>
+                            <br/>
                         <Button container
                             color="primary"
                             className={this.props.classes.button}
@@ -168,48 +178,31 @@ class CollectBooks extends Component {
                             </Button>
                     </Grid>
                 </Grid>
-
-                <Button
-                    onClick={this.handleClickOpen}
-                    variant="contained"
-                    color="primary"
-                >Add Books</Button>
                 <Dialog
                     disableBackdropClick
                     disableEscapeKeyDown
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>Add Books and Organization Type</DialogTitle>
+                    <DialogTitle>Add Books and Donor Type</DialogTitle>
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
-                            <FormControl className={classes.margin}
-                            value={this.state.numOfBooks}
-                            onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}
-                            >
-                                <InputLabel
-                                    htmlFor="numOfBooks"
-                                    
+                            <FormControl
 
-                                >Number</InputLabel>
+                                className={classes.margin}
+                                value={this.state.numOfBooks}
+                                onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}>
+                                <InputLabel htmlFor="numOfBooks" >Number of Books</InputLabel>
                                 <BootstrapInput/>
-                                {/* <Select
-                                    native
-                                    value={this.state.numOfBooks}
-                                    onChange={this.handleChange('age')}
-                                    input={<Input id="age-native-simple" />}
-                                >
-                                    <option type="number" />
-                                </Select> */}
                             </FormControl>
                             <br />
-                            <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="type-simple">Type of Collector</InputLabel>
+                            <FormControl className={classes.container}>
+                                <InputLabel htmlFor="type-simple" value="sm">Type of Donor</InputLabel>
+                                    
                                 <Select
                                     value={this.state.type}
                                     onChange={this.handleChange('type')}
                                     input={<Input id="type" />}
-                                    type="text"
                                 >
                                     <MenuItem value={1}>Organization</MenuItem>
                                     <MenuItem value={2}>Event</MenuItem>
