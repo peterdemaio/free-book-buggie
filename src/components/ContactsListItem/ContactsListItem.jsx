@@ -14,7 +14,6 @@ import Avatar from '@material-ui/core/Avatar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
-import HeaderPurple from './HeaderPurple.png'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 
@@ -60,32 +59,30 @@ const styles = theme => ({
     }
 })
 
-class OrganizationsListPageItem extends React.Component {
+class ContactsListPageItem extends React.Component {
 
     state = {
         expanded: false,
         anchorEl: null,
         open: false,
-        address: {
-            id: this.props.org.id,
-            address_number: this.props.org.address_number,
-            address_street: this.props.org.address_street,
-            address_unit: this.props.org.address_unit,
-            city: this.props.org.city,
-            state: this.props.org.state,
-            zip: this.props.org.zip,
-            county: this.props.org.county,
-            notes: this.props.org.notes || ''
+        contact: {
+            id: this.props.contact.id,
+            contact_name: this.props.contact.contact_name,
+            phone_number: this.props.contact.phone_number,
+            phone_number_type: this.props.contact.phone_number_type,
+            email: this.props.contact.email,
+            notes: this.props.contact.notes,
+
         }
     }
 
     menuOpen = (event) => {
-        console.log(`clicked the open button for ${this.props.org.name}!`)
+        console.log(`clicked the open button for ${this.props.contact.name}!`)
         this.setState({ expanded: !this.state.expanded })
     }
 
     edit = () => {
-        console.log('ready to edit:', this.props.org.name)
+        console.log('ready to edit:', this.props.contact.name)
         this.setState({ open: true })
     }
     handleClose = () => {
@@ -95,19 +92,19 @@ class OrganizationsListPageItem extends React.Component {
     setDetails = (event, type) => {
         // This updates state with the details submitted
         this.setState({
-            address: {
-                ...this.state.address,
+            contact: {
+                ...this.state.contact,
                 [type]: event.target.value
             }
         })
-        console.log('Ready to edit with', this.state.address)
+        console.log('Ready to edit with', this.state.contact)
     }
 
-    saveOrg = () => {
-        console.log('ready to save org with: ', this.state.address)
+    saveContact = () => {
+        console.log('ready to save org with: ', this.state.contact)
         this.props.dispatch({
-            type: 'EDIT_ORGANIZATION',
-            payload: this.state.address
+            type: 'EDIT_CONTACT',
+            payload: this.state.contact
         })
         this.setState({
             ...this.state,
@@ -122,14 +119,7 @@ class OrganizationsListPageItem extends React.Component {
                     <CardHeader
                         className={this.props.classes.header}
                         disableTypography={true}
-                        avatar={
-                            <Avatar
-                                alt={this.props.org.name}
-                                src={this.props.org.logo}
-                            />
-                        }
-                        
-                        title={this.props.org.name} 
+                        title={this.props.contact.contact_name} 
                         // fontSize={36}                  
                         action={
                             <IconButton
@@ -147,27 +137,18 @@ class OrganizationsListPageItem extends React.Component {
                     <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
                         <div onClick={this.edit}>
                             <div>
-                                Address:
-                                <br></br>
-                                <br></br>
-                                <span>{this.props.org.address_number} </span>
-                                <span>{this.props.org.address_street} </span>
-                                {this.props.org.address_unit}
+                                <span>Phone Number: {this.props.contact.phone_number} </span>
+                                <span>({this.props.contact.phone_number_type})</span>
                             </div>
                             <div>
-                                <span>{this.props.org.city} </span>
-                                <span>{this.props.org.state} </span>
-                                <span>{this.props.org.zip} </span>
-                            </div>
-                            <div>
-                                <span>County: {this.props.org.county} </span>
-                            </div>
-                            <br></br>
-                            <br></br>
-                            <div>
-                                <span>Notes: {this.props.org.notes}</span>
+                                <span>Email: {this.props.contact.email} </span>
                             </div>
 
+                            <div>
+                                <span>Organization: {this.props.contact.name}</span>
+                                <br></br>
+                                <span>Notes: {this.props.contact.notes}</span>
+                            </div>
                         </div>
                     </Collapse>
                 </Card>
@@ -176,56 +157,38 @@ class OrganizationsListPageItem extends React.Component {
                     onClose={this.handleClose}
                     maxWidth = 'lg'
                 >
-                    <DialogTitle> Edit Organization</DialogTitle>
+                    <DialogTitle> Edit Contact</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Number: 
+                            Name: 
                             <Input
-                                value= {this.state.address.address_number}
-                                onChange={(event) => this.setDetails(event, 'address_number')}
+                                value= {this.state.contact.contact_name}
+                                onChange={(event) => this.setDetails(event, 'contact_name')}
                             >
                             </Input>
-                            Street: 
+                            Phone Number: 
                             <Input
-                                value= {this.state.address.address_street}
-                                onChange={(event) => this.setDetails(event, 'address_street')}
+                                value= {this.state.contact.phone_number}
+                                onChange={(event) => this.setDetails(event, 'phone_number')}
                             >
                             </Input>
-                            Unit: 
+                            Type:
                             <Input
-                                value= {this.state.address.address_unit}
-                                onChange={(event) => this.setDetails(event, 'address_unit')}
-                            >
-                            </Input>
-                            <br></br>
-                            City: 
-                            <Input
-                                value= {this.state.address.city}
-                                onChange={(event) => this.setDetails(event, 'city')}
-                            >
-                            </Input>
-                            State: 
-                            <Input
-                                value= {this.state.address.state}
-                                onChange={(event) => this.setDetails(event, 'state')}
-                            >
-                            </Input>
-                            Zip: 
-                            <Input
-                                value= {this.state.address.zip}
-                                onChange={(event) => this.setDetails(event, 'zip')}
-                            >
-                            </Input>
-                            County: 
-                            <Input
-                                value= {this.state.address.county}
-                                onChange={(event) => this.setDetails(event, 'county')}
+                                value= {this.state.contact.phone_number_type}
+                                onChange={(event) => this.setDetails(event, 'phone_number_type')}
                             >
                             </Input>
                             <br></br>
+                            Email: 
+                            <Input
+                                value= {this.state.contact.email}
+                                onChange={(event) => this.setDetails(event, 'email')}
+                            >
+                            </Input>
+                             <br></br>
                             Notes: 
                             <Input
-                                value= {this.state.address.notes}
+                                value= {this.state.contact.notes}
                                 onChange={(event) => this.setDetails(event, 'notes')}
                             >
                             </Input>
@@ -234,7 +197,7 @@ class OrganizationsListPageItem extends React.Component {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.saveOrg}    
+                                onClick={this.saveContact}    
                             >
                                 Save Details
                             </Button>
@@ -247,13 +210,13 @@ class OrganizationsListPageItem extends React.Component {
     }
 }
 
-OrganizationsListPageItem.propTypes = {
+ContactsListPageItem.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-const styledOrganizationsListPageItem = withStyles(styles)(OrganizationsListPageItem)
+const styledContactsListPageItem = withStyles(styles)(ContactsListPageItem)
 
-export default connect(mapStateToProps)(styledOrganizationsListPageItem)
+export default connect(mapStateToProps)(styledContactsListPageItem)

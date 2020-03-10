@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
-import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
+import ContactsListItem from '../ContactsListItem/ContactsListItem'
 import {withStyles, Grid } from '@material-ui/core';
 
 const styles = {
@@ -11,29 +11,26 @@ const styles = {
     list : {
         paddingLeft: '25px',
         paddingRight: '25px'
-        // margin: 'px'
     }
 }
-
-class OrganizationsListPage extends React.Component {
+class ContactsListPage extends React.Component {
 
     componentDidMount() {
         this.props.dispatch({
-            type: 'UPDATE_ORGANIZATIONS',
-            payload: this.props.reduxStore.organizations
+            type: 'UPDATE_CONTACTS',
+            payload: this.props.reduxStore.contacts
         })
     }
 
     onInputChange = (event) => {
         console.log(event.target.value)
-        let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.name.toLowerCase().includes(event.target.value.toLowerCase()) || 
-            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            organization.county.toLowerCase().includes(event.target.value.toLowerCase())
+        let newlyDisplayed = this.props.reduxStore.contacts.filter( 
+            contact => contact.contact_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            contact.name.toLowerCase().includes(event.target.value.toLowerCase())
             );
 
         this.props.dispatch({
-            type: 'UPDATE_ORGANIZATIONS',
+            type: 'UPDATE_CONTACTS',
             payload: newlyDisplayed
         })
     }
@@ -42,8 +39,7 @@ class OrganizationsListPage extends React.Component {
         return (
             <>
                 <div>
-                    <span>Search for an organization by name, city or county: </span>
-
+                    <span>Search for an contact by name or organization: </span>
                     <Input 
                         className={this.props.classes.input}
                         placeholder="search here "
@@ -55,11 +51,9 @@ class OrganizationsListPage extends React.Component {
                     className={this.props.classes.list}
                     direction="column"
                     justify="space-evenly"
-                    alignItems="left"
-                    >
-                        {this.props.reduxStore.updateOrganizations.map(org =>
-
-                            <OrganizationsListItem key={org.id} org={org} />
+                    alignItems="left">
+                        {this.props.reduxStore.updateContacts.map(contact =>
+                            <ContactsListItem key={contact.id} contact={contact} />
                         )}
                     </Grid>
                 </div>
@@ -72,6 +66,6 @@ const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-const styledOrganizationsListPage = withStyles(styles)(OrganizationsListPage)
+const styledContactsListPage = withStyles(styles)(ContactsListPage)
 
-export default connect(mapStateToProps)(styledOrganizationsListPage)
+export default connect(mapStateToProps)(styledContactsListPage)

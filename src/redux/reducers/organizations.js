@@ -9,4 +9,5 @@ const organizations = (state = [], action) => {
     }
 };
 
-export default organizations
+export default organizations;
+  
