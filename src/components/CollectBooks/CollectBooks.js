@@ -209,10 +209,11 @@ class CollectBooks extends Component {
                                     value={this.state.type}
                                     onChange={this.handleChange('type')}
                                     input={<Input id="type" />}
+                                    type="text"
                                 >
-                                    <MenuItem value="Organization">Organization</MenuItem>
-                                    <MenuItem value="Event">Event</MenuItem>
-                                    <MenuItem value="Individual">Individual</MenuItem>
+                                    <MenuItem value={1}>Organization</MenuItem>
+                                    <MenuItem value={2}>Event</MenuItem>
+                                    <MenuItem value={3}>Individual</MenuItem>
                                 </Select>
                             </FormControl>
                         </form>

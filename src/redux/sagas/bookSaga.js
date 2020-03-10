@@ -9,7 +9,7 @@ function* submitBooks(action) {
     try {
         let response = yield axios.post('/api/bookIn', action.payload)
         console.log(response.data)
-        yield put({ type: 'POST_HILL', payload: response.data})
+        yield put({ type: 'POST_BOOK', payload: response.data})
     }
     catch (error) {
         console.log('Error submitting books collected', error)
