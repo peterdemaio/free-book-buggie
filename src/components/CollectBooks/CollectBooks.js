@@ -197,7 +197,7 @@ class CollectBooks extends Component {
                                 value={this.state.numOfBooks}
                                 onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}>
                                 
-                                {/* <InputLabelHelper>Number of Books</InputLabelHelper> */}
+                                
                                 <TextField
                                     type="number"
                                     label="Number of Books"
@@ -207,7 +207,7 @@ class CollectBooks extends Component {
                                         className: classes.input,
                                     }}
                                 />
-                                {/* <InputLabel htmlFor="numOfBooks">Number of Books</InputLabel> */}
+                                
                             </FormControl>
                             <br />
                             <FormControl className={classes.container}>
