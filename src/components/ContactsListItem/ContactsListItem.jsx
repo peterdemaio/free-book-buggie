@@ -20,7 +20,7 @@ import Button from '@material-ui/core/Button'
 const styles = theme => ({
     card: {
         justify: 'flex-start',
-        minWidth: '200px',
+        minWidth: '600px',
         maxWidth: '600px',
         padding: '10px',
         margin: '12px',

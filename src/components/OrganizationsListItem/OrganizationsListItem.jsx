@@ -14,7 +14,6 @@ import Avatar from '@material-ui/core/Avatar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
-import HeaderPurple from './HeaderPurple.png'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 

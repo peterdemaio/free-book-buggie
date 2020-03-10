@@ -5,8 +5,13 @@ import ContactsListItem from '../ContactsListItem/ContactsListItem'
 import {withStyles, Grid } from '@material-ui/core';
 
 const styles = {
+    searchBar : {
+        paddingTop: '50px',
+        // maxWidth: '600px'
+    },
     input : {
-        justify: 'center'
+        justify: 'center',
+        padding: '10px'
     },
     list : {
         paddingLeft: '25px',
@@ -38,20 +43,24 @@ class ContactsListPage extends React.Component {
     render() {
         return (
             <>
-                <div>
-                    <span>Search for an contact by name or organization: </span>
+                <Grid container 
+                justify="center"
+                alignItems="center"
+                className={this.props.classes.searchBar}
+                >
+                    <span className={this.props.classes.searchBar}>Search for an contact by name or organization: </span><br></br>
                     <Input 
                         className={this.props.classes.input}
                         placeholder="search here "
                         onChange={this.onInputChange}>
                     </Input>
-                </div>
+                </Grid>
                 <div>
                     <Grid container 
                     className={this.props.classes.list}
                     direction="column"
                     justify="space-evenly"
-                    alignItems="left">
+                    alignItems="center">
                         {this.props.reduxStore.updateContacts.map(contact =>
                             <ContactsListItem key={contact.id} contact={contact} />
                         )}
