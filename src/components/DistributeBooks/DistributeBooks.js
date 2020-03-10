@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 
 // Material UI imports
 import {
