@@ -5,8 +5,24 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 
+const styles = {
+    root: {
+        backgroundColor: 'red',
+        textDecoration: 'inherit',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    },
+};
 
 
 
@@ -27,8 +43,9 @@ class NewOrganization extends Component {
             notes: '',
             contact_name: '',
             phone_number: '',
-
-
+            phone_number_type: '',
+            email: '',
+            notes: ''
         },
     }
 
@@ -64,14 +81,19 @@ class NewOrganization extends Component {
 
         return (
             <>
-               
-                <div>
-                    <h1 align="center">Add New Organization</h1>
+                <Grid >
+                    <Grid container
+                        direction="row"
+                        justify="center"
+                        alignItems="center">
+                        <Grid item lg={6}>
+                            <div >
+                                <h1 align="center">Add New Organization</h1>
                     {/* <button onClick={() => this.props.history.push('/collectBooks')}>Add</button>
                     <button onClick={() => this.props.history.push('/collectBooks')}>Cancel</button> */}
-                    <Card>
-                        <CardContent>
-                            <form className="org-input">
+                            <Card>
+                                <CardContent>
+                           
                                 <TextField
                                     type="text"
                                     label="Name of Organization"
@@ -121,41 +143,62 @@ class NewOrganization extends Component {
                                     type="text"
                                     label="County"
                                     onChange={(event) => this.handleChangeFor(event, 'county')} />
-                                <TextField
-                                    type="text"
-                                    label="Contact Name"
-                                    onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
-                                <TextField
-                                    type="text"
-                                    label="Phone Number" 
-                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
-                                <TextField
-                                    type="text"
-                                    label="Phone Number Type"
-                                    onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
-                                <TextField
-                                    type="text"
-                                    label="Email"
-                                    onChange={(event) => this.handleChangeFor(event, 'email')} />
-                                <TextField
-                                    type="text"
-                                    label="Notes"
-                                    onChange={(event) => this.handleChangeFor(event, 'notes')} />
+                                <br></br>
+                                
                         {/* <textarea
                             placeholder="Notes"
                             rows="6" cols="50"
                             onChange={(event) => this.handleChangeFor(event, 'notes')}
                         /> */}
 
-                    <br />
+                    {/* <br />
                     <button className='submit-button'
                     onClick={this.handleClick}>
                     Add </button>
-                    <br/>
-                    </form>
+                    <br/> */}
+                 
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent>
+                                        <TextField
+                                            type="text"
+                                            label="Contact Name"
+                                            onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
+                                        <br></br>
+                                        <TextField
+                                            type="text"
+                                            label="Phone Number"
+                                            onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                        <br></br>
+                                        <TextField
+                                            type="text"
+                                            label="Phone Number Type"
+                                            helperText="Mobile, Home, etc."
+                                            onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
+                                        <br></br>
+                                        <TextField
+                                            type="text"
+                                            label="Email"
+                                            helperText="name@mail.com"
+                                            onChange={(event) => this.handleChangeFor(event, 'email')} />
+                                        <br></br>
+                                        <TextField
+                                            type="text"
+                                            label="Notes"
+                                            onChange={(event) => this.handleChangeFor(event, 'notes')} />
+                                        <br></br>
                         </CardContent>
                     </Card>
                 </div>
+                            <br />
+                            <button className='submit-button'
+                                onClick={this.handleClick}>
+                                Add </button>
+                            <br />
+                        </Grid>
+                    </Grid>
+                </Grid>
             </>     
         )
     }
@@ -166,7 +209,4 @@ const mapStateToProps = (reduxStore) => ({
 })
 
 
-let connectApp = connect(mapStateToProps)(NewOrganization)
-
-
-export default (connectApp);
+export default connect(mapStateToProps)(NewOrganization);
