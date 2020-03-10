@@ -6,6 +6,9 @@ import organizations from './organizations';
 import updateOrganizations from './updateOrganizations';
 import contacts from './contacts';
 import updateContacts from './updateContacts'
+
+import demographicsBoolean from './demographicsBooleanReducer'
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -19,7 +22,8 @@ const rootReducer = combineReducers({
   organizations,
   updateOrganizations,
   contacts,
-  updateContacts
+  updateContacts,
+  demographicsBoolean
 });
 
 export default rootReducer;
