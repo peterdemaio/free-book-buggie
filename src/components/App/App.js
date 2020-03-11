@@ -105,6 +105,11 @@ class App extends Component {
               path="/organizationsListPage"
               component={OrganizationsListPage}
             />
+            <DataReporting
+              exact
+              path="/dataReporting"
+              component={DataReporting}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
