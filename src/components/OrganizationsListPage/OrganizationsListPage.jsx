@@ -9,45 +9,44 @@ const styles = {
         justify: 'center'
     },
     list : {
-        paddingLeft: '250px',
-        paddingRight: '250px'
+        paddingLeft: '25px',
+        paddingRight: '25px'
         // margin: 'px'
     }
 }
 
 class OrganizationsListPage extends React.Component {
 
-
-    state = {
-        queryText: '',
-        currentlyDisplayed: []
-    }
-
     componentDidMount() {
-        console.log('organizations page ready')
-        this.setState({
-            currentlyDisplayed: this.props.reduxStore.organizations
+        this.props.dispatch({
+            type: 'UPDATE_ORGANIZATIONS',
+            payload: this.props.reduxStore.organizations
         })
     }
 
     onInputChange = (event) => {
         console.log(event.target.value)
         let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.name.toLowerCase().includes(event.target.value.toLowerCase()));
+            organization => organization.name.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            organization.county.toLowerCase().includes(event.target.value.toLowerCase())
+            );
 
-        this.setState({
-            queryText: event.target.value,
-            currentlyDisplayed: newlyDisplayed
+        this.props.dispatch({
+            type: 'UPDATE_ORGANIZATIONS',
+            payload: newlyDisplayed
         })
     }
 
     render() {
         return (
             <>
-                <div >
+                <div>
+                    <span>Search for an organization by name, city or county: </span>
+
                     <Input 
                         className={this.props.classes.input}
-                        placeholder="Search for organization"
+                        placeholder="search here "
                         onChange={this.onInputChange}>
                     </Input>
                 </div>
@@ -58,7 +57,8 @@ class OrganizationsListPage extends React.Component {
                     justify="space-evenly"
                     alignItems="left"
                     >
-                        {this.state.currentlyDisplayed.map(org =>
+                        {this.props.reduxStore.updateOrganizations.map(org =>
+
                             <OrganizationsListItem key={org.id} org={org} />
                         )}
                     </Grid>

@@ -6,6 +6,8 @@ class DistributeBooks extends Component {
         return (
             <>
                 <h1>DistributeBooks page</h1>
+                <button onClick={this.props.history.push('/newOrganization')}>Add New Organization</button>
+                <button onClick={this.props.history.push('/home')}>Add Books</button>
             </>
         )
     }
