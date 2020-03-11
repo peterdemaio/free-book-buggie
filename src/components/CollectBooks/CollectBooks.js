@@ -89,6 +89,7 @@ const styles = theme => ({
 class CollectBooks extends Component {
     state = {
         numOfBooks: '',
+        orgType: '',
         type: 0,
         open: false,
     }
@@ -103,7 +104,7 @@ class CollectBooks extends Component {
     onInputChange = (event) => {
         console.log(event.target.value)
         let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.name.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
             organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
             organization.county.toLowerCase().includes(event.target.value.toLowerCase())
             );
@@ -135,7 +136,7 @@ class CollectBooks extends Component {
             type: 'ADD_BOOKS',
             payload: {
                 numOfBooks: this.state.numOfBooks,
-                type: this.state.type
+                orgType: this.state.orgType
             }
         })
     }
@@ -176,8 +177,6 @@ class CollectBooks extends Component {
                         )}
                     </Grid>
                 </div>
-
-
                 <Grid container
                     direction="column"
                     justify="space-evenly"
@@ -226,16 +225,13 @@ class CollectBooks extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>Add Books and Donor Type</DialogTitle>
+                    <DialogTitle>Add Books and Organization Type</DialogTitle>
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
                             <FormControl
-
                                 className={classes.FormControl}
                                 value={this.state.numOfBooks}
                                 onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}>
-                                
-                                
                                 <TextField
                                     type="number"
                                     label="Number of Books"
@@ -245,10 +241,24 @@ class CollectBooks extends Component {
                                         className: classes.input,
                                     }}
                                 />
-                                
                             </FormControl>
                             <br />
-                            <FormControl className={classes.container}>
+                            <FormControl
+                                className={classes.FormControl}
+                                value={this.state.orgType}
+                                onChange={(event) => this.handleInputChangeFor(event, 'orgType')}>
+                                <TextField
+                                    type="text"
+                                    label="Organization Type"
+                                    margin="dense"
+                                    fullWidth
+                                    InputProps={{
+                                        className: classes.input,
+                                    }}
+                                />
+                            </FormControl>
+
+                            {/* <FormControl className={classes.container}>
                                 <InputLabel
                                     htmlFor="type-donor"
                                     ref={ref => {
@@ -275,7 +285,7 @@ class CollectBooks extends Component {
                                     <MenuItem value={2}>Event</MenuItem>
                                     <MenuItem value={3}>Individual</MenuItem>
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                         </form>
                     </DialogContent>
                     <DialogActions>
