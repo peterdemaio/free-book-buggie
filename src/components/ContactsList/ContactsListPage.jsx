@@ -8,6 +8,7 @@ const styles = {
     searchBar : {
         paddingTop: '50px',
         // maxWidth: '600px'
+        textSize: '36px'
     },
     input : {
         justify: 'center',
