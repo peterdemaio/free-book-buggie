@@ -84,6 +84,11 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+      },
 });
 
 class CollectBooks extends Component {
@@ -235,8 +240,9 @@ class CollectBooks extends Component {
                                 <TextField
                                     type="number"
                                     label="Number of Books"
-                                    margin="dense"
-                                    fullWidth
+                                    // margin="normal"
+                                    // fullWidth
+                                    className={classes.textField}
                                     InputProps={{
                                         className: classes.input,
                                     }}
@@ -250,7 +256,7 @@ class CollectBooks extends Component {
                                 <TextField
                                     type="text"
                                     label="Organization Type"
-                                    margin="dense"
+                                    margin="normal"
                                     fullWidth
                                     InputProps={{
                                         className: classes.input,
