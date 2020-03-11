@@ -1,6 +1,6 @@
 CREATE TABLE "organizations" (
 	"id" serial PRIMARY KEY,
-	"name" varchar(255),
+	"org_name" varchar(255),
 	"logo" varchar(255),
 	"type" varchar(255),
 	"address_number" varchar(255),
@@ -13,7 +13,7 @@ CREATE TABLE "organizations" (
 	"notes" varchar(255)
 );
 
-INSERT INTO "organizations" ("name", "logo", "type", "address_number", "address_street", "address_unit", "city", "state", "county", "zip")
+INSERT INTO "organizations" ("org_name", "logo", "type", "address_number", "address_street", "address_unit", "city", "state", "county", "zip")
 VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uploads/big05_01c_Dagon_Lovecraft_T-Shirt-100x100.jpg','non-profit','1234','Main Street', '#112', 'Burnsville','MN','Dakota','55337'),
 ('Read To the Animals', 'https://www.mainstreetbooksminot.com/sites/mainstreetbooksminot.com/files/Reading%20With%20Rover.png','non-profit','987','West Barkway', NULL, 'Minneapolis','MN','Hennepin','55411'),
 ('The Human Fund', 'https://images.adagio.com/images2/custom_blends/33590.jpg','non-profit','1000', 'Wall St.', '#5001', 'New York','NY', NULL,'10281'),
@@ -24,7 +24,7 @@ VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uplo
 
 CREATE TABLE "contacts" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"contact_name" varchar(255) NOT NULL,
 	"title" varchar(255),
 	"organizations_id" integer REFERENCES organizations,
 	"phone_number" varchar(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE "contacts" (
 	"notes" varchar(255)
 );
 
-INSERT INTO "contacts" ("name", "title", "organizations_id", "phone_number", "phone_number_type", "email")
+INSERT INTO "contacts" ("contact_name", "title", "organizations_id", "phone_number", "phone_number_type", "email")
 VALUES ('Ctulhu Mythos', 'Pastor', 1, '800-246-1357', 'office', 'ctulhu@dagon.com'),
 ('Steve Edwin', 'Volunteed', 2, '612-555-2345', 'cell', 'steve@RTTA.org'),
 ('George C.', 'Director', 3, '952-555-9876', 'office', 'costanza@humanfund.com'),

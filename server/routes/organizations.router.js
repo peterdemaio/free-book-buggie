@@ -21,7 +21,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in organizations post router', req.body)
     const newEntry = req.body;
     console.log(newEntry)
-    const queryText = `INSERT INTO "organizations" ("name", "logo", "type", 
+    const queryText = `INSERT INTO "organizations" ("org_name", "logo", "type", 
                             "address_number", "address_street", "address_unit", "city",
                             "state", "county", "zip", "notes") 
                             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;

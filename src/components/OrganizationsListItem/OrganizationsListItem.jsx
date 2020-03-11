@@ -84,7 +84,7 @@ class OrganizationsListPageItem extends React.Component {
     }
 
     edit = () => {
-        console.log('ready to edit:', this.props.org.name)
+        console.log('ready to edit:', this.props.org.org_name)
         this.setState({ open: true })
     }
     handleClose = () => {
@@ -123,12 +123,12 @@ class OrganizationsListPageItem extends React.Component {
                         disableTypography={true}
                         avatar={
                             <Avatar
-                                alt={this.props.org.name}
+                                alt={this.props.org.org_name}
                                 src={this.props.org.logo}
                             />
                         }
                         
-                        title={this.props.org.name} 
+                        title={this.props.org.org_name} 
                         // fontSize={36}                  
                         action={
                             <IconButton

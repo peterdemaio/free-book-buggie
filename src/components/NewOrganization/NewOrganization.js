@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -14,6 +12,19 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+    form: {
+        minWidth: '300px'
+    }
+});
+
+// function PaperSheet(props) {
+//     const { classes } = props;
 
 
 class NewOrganization extends Component {
@@ -67,17 +78,20 @@ class NewOrganization extends Component {
             alert('way to go, proud of you')
         }
 
-
+      
 
         return (
             
             <>
                 <Grid >
-                    <Grid item lg={6}>
+                    <Grid item lg={6}
+                        justify="center"
+                        className={this.props.classes.form}
+                    >
                         <h1 align="center">Add New Organization</h1>
                         {/* <button onClick={() => this.props.history.push('/collectBooks')}>Add</button>
                     <button onClick={() => this.props.history.push('/collectBooks')}>Cancel</button> */}
-                            <Paper/>
+                        <Paper elevation={5}>
                                 <TextField
                                     type="text"
                                     label="Name of Organization"
@@ -127,7 +141,7 @@ class NewOrganization extends Component {
                                     type="text"
                                     label="County"
                                     onChange={(event) => this.handleChangeFor(event, 'county')} />
-                            
+                            </Paper>
                         </Grid >
                     </Grid>
                                 {/* <textarea
@@ -146,7 +160,7 @@ class NewOrganization extends Component {
 
                   <Grid> 
                     <Grid item lg={6}>
-                        <Paper/>
+                        <Paper>
                             <TextField
                                 type="text"
                                 label="Contact Name"
@@ -174,16 +188,16 @@ class NewOrganization extends Component {
                                 label="Notes"
                                 onChange={(event) => this.handleChangeFor(event, 'notes')} />
                                                                    
-                        
+                        </Paper>
 
                     
                    
                     
                     </Grid>
             </Grid>
-                    <button className='submit-button'
+                    <Button className='submit-button'
                         onClick={this.handleClick}>
-                        Add </button>
+                        Add </Button>
                         
             </>
                 
@@ -191,9 +205,12 @@ class NewOrganization extends Component {
     }
 }
 
+   
+
 const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
+let connectApp = connect(mapStateToProps)(NewOrganization)
 
-export default connect(mapStateToProps)(NewOrganization);
+export default withStyles(styles)(connectApp)
