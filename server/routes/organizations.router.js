@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const queryText = 'SELECT * FROM "organizations";'
+    const queryText = 'SELECT * FROM "organizations" ORDER BY "id";'
     console.log('in organizations router.get', req.body)
     pool.query(queryText)
         .then(result => {
@@ -48,21 +48,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.get('/search', (req, res) => {
-    const searchquery = `%${req.query.searchterm}%`
-    const queryText = `SELECT * FROM "organizations"
-                        WHERE "name" ILIKE $1;`;
-    console.log('in organizations router.get', req.query)
-    pool.query(queryText, [searchquery])
-        .then(result => {
-            console.log(result.rows)
-            res.send(result.rows)
-        }).catch(error => {
-            console.log('error in organizations GET', error)
-            res.sendStatus(500);
-        })
-})
-
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('ready to edit organization with', req.body)
     let id = req.body.id
@@ -75,7 +60,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     let county = req.body.county
     let notes = req.body.notes
 
-    let sqlText = `UPDATE "organizations" 
+    let sqlText1 = `UPDATE "organizations" 
                 SET "address_number" = $1, 
                     "address_street" = $2, 
                     "address_unit" = $3, 
@@ -84,13 +69,24 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                     "zip" = $6, 
                     "county" = $7, 
                     "notes" = $8 
-                    WHERE "id" = $9;`;
-    pool.query(sqlText, [address_number, address_street, address_unit, city, state, zip, county, notes, id])
-    .then(() => { res.sendStatus(201); })
-        .catch((err) => {
-            console.log('Error updating organization', err);
-            res.sendStatus(500);
-        })
-        
+                    WHERE "id" = $9
+                    RETURNING "organizations";`;
+    let sqlText2 = 'SELECT * FROM "organizations" ORDER BY "id";'
+    pool.query(sqlText1, [address_number, address_street, address_unit, city, state, zip, county, notes, id])
+        .then(
+            pool.query(sqlText2)
+                .then(result => {
+                    console.log(result.rows)
+                    res.send(result.rows)
+                })
+                .catch((err) => {
+                    console.log('Error updating organization', err);
+                    res.sendStatus(500);
+                })
+                .catch((err) => {
+                    console.log('Error updating organization', err);
+                    res.sendStatus(500);
+                })
+        )
 })
 module.exports = router;

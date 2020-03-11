@@ -22,17 +22,24 @@ import CollectBooks from '../CollectBooks/CollectBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import EditOrganization from '../EditOrganization/EditOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
+import ContactsListPage from '../ContactsList/ContactsListPage';
+
 
 import './App.css';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({
+
       type: 'FETCH_USER'
     })
 
+
     this.props.dispatch({
       type: 'GET_ORGANIZATIONS'
+    })
+    this.props.dispatch({
+      type: 'GET_CONTACTS'
     })
   }
 
@@ -69,8 +76,13 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/dataReporting"
-              component={DataReporting}
+              path="/contactsListPage"
+              component={ContactsListPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/organizationsListPage"
+              component={OrganizationsListPage}
             />
             <ProtectedRoute
               exact
@@ -96,6 +108,11 @@ class App extends Component {
               exact
               path="/organizationsListPage"
               component={OrganizationsListPage}
+            />
+            <DataReporting
+              exact
+              path="/dataReporting"
+              component={DataReporting}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

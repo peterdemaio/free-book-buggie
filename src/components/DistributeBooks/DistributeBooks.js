@@ -102,6 +102,7 @@ class DistributeBooks extends Component {
         const { classes } = this.props;
         return (
             <>
+
                 <h1>Distribute Books</h1>
 
                 {/* Search functionality for orgs, make clickable to display info */}
@@ -216,6 +217,11 @@ class DistributeBooks extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+
+                <h1>DistributeBooks page</h1>
+                <button onClick={this.props.history.push('/newOrganization')}>Add New Organization</button>
+                <button onClick={this.props.history.push('/home')}>Add Books</button>
+
             </>
         )
     }

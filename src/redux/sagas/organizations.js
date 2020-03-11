@@ -3,15 +3,15 @@ import axios from 'axios'
 
 function* organizationsSaga() {
     yield takeEvery ('GET_ORGANIZATIONS', getOrganizations)
-    yield takeEvery ('SEARCH_ORGANIZATIONS', searchOrganizations)
     yield takeEvery ('EDIT_ORGANIZATION', editOrganization)
 }
 
 function* editOrganization(action) {
     console.log('ready to edit organizaiton:', action.payload)
     try {
-        yield axios.put('/api/organizations', action.payload)
-        yield put ({type: 'GET_ORGANIZATIONS'})
+        let response = yield axios.put('/api/organizations', action.payload)
+        console.log('here is the returning data:', response.data)
+        yield put ({type: 'UPDATE_ORGANIZATIONS', payload: response.data })
     } catch (err) {
         console.log('err editing organization', err)
     }
@@ -26,14 +26,5 @@ function* getOrganizations(action) {
     }
 }
 
-function* searchOrganizations(action) {
-    try {
-        console.log('searching for organization:', action.payload)
-        let response = yield axios.get(`/api/organizations/search?searchterm=${action.payload}`)
-        yield put ({ type: 'SEARCH_ORGANIZATIONS_RESULTS', payload: response.data})
-    }   catch (err){
-        console.log('Error searching for organizations:', err)
-    }
-}
 
 export default organizationsSaga
