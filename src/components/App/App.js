@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -22,12 +22,21 @@ import CollectBooks from '../CollectBooks/CollectBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import EditOrganization from '../EditOrganization/EditOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
+import ContactsListPage from '../ContactsList/ContactsListPage';
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_USER',
+    })
+    this.props.dispatch({
+      type: 'GET_ORGANIZATIONS'
+    })
+    this.props.dispatch({
+      type: 'GET_CONTACTS'
+    })
   }
 
   render() {
@@ -63,8 +72,13 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/dataReporting"
-              component={DataReporting}
+              path="/contactsListPage"
+              component={ContactsListPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/organizationsListPage"
+              component={OrganizationsListPage}
             />
             <ProtectedRoute
               exact
@@ -97,7 +111,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);

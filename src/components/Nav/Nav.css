@@ -1,24 +1,31 @@
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 740;
     display: inline-block;
-    color: #f2f2f2;
-    padding-left: 10px;
+    color: #14771B;
+    padding-left: 300px;
+    align-items: flex-start;
 }
 
 .nav {
   overflow: hidden;
-  background-color: #00acb0;
+  /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
+  background-image: url('./transparent-book-buggie.png');
+  background-size: cover;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .nav-link {
   float: left;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color:#14771B;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
 
   /* these last two make the logout button in
   the nav bar look like another link */
@@ -28,9 +35,12 @@
 }
 
 .nav-link:hover {
-  background-color: #008183;
+  background-color: #40C445;
 }
 
 .nav-right {
+  padding-top: 220px;
   float: right;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
