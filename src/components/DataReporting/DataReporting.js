@@ -7,35 +7,48 @@ class DataReporting extends Component {
 
     state = {
         loading: true,
-        measurement: 'books',
-        selectedLabels: [],
-        selectedData: []
+        queryParams: {
+            yAxis: 'Books',
+            xAxis: 'Year'
+        },
+        title: 'Books Distributed'
     }
 
-    async componentDidMount() {
+    changeYAxis = async (event) => {
+        console.log('in changeYAxis. event.target.value:', event.target.value)
+        console.log('old yAxis:', this.state.queryParams.yAxis)
+        console.log('new yAxis:', this.state.queryParams.yAxis)
+        if (event.target.value === 'Books') {
+            this.setState({title: 'Books Distributed'})
+        } else if (event.target.value === 'Children') {
+            this.setState({title: 'Children Recipients'})
+        }
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: { 
+                yAxis: event.target.value,
+                xAxis: this.state.queryParams.xAxis
+            }
+        })
+        this.setState({
+            queryParams:
+                {...this.state.queryParams, yAxis: event.target.value}
+        })
+    }
+
+    componentDidMount() {
         console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
-        await this.props.dispatch({
-            type: 'GET_EVENTS'
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: this.state.queryParams
         })
-        this.getData()
+
         this.setState({loading: false})
-        
-
-    }
-
-    getData = () => {
-        for (event of this.props.reduxStore.events) {
-            selectedLabels.push(event.event_name)
-            if (this.state.measurement === 'books') {
-                selectedData.push(event.books_in)
-            } else if (this.state.measurement === 'children') {
-                selectedData.push(event.number_of_children)
-            }
-        }
     }
 
     render() {
+        
         if (this.state.loading) {
             return (
                 <div>
@@ -44,17 +57,34 @@ class DataReporting extends Component {
                         loading={this.state.loading}
                     />
                 </div>
-                
             )
         } else {
             return (
                 <>
                     <h1>DataReporting page</h1>
-    
+                    <select id='measurement' onChange={this.changeYAxis}>
+                        <option value='Books'>Books</option>
+                        <option value='Children'>Children</option>
+                    </select>
+                    <div style={{marginLeft:'12%', marginRight:'12%'}}>
+                        <Bar
+                            data={this.props.reduxStore.chartData}
+                            width={1000}
+                            height={500}
+                            options={{
+                                title:{
+                                    display: true,
+                                    text: this.state.title
+                                },
+                                legend:{
+                                    display: false
+                                }
+                            }}
+                        />
+                    </div>
+                    
                     <ul>
-                        {this.props.reduxStore.events.map((event, index) => {
-                            return (<li>{event.event_name}</li>)
-                        })}
+                        {JSON.stringify(this.props.reduxStore.data)}
                     </ul>
                     
                     
