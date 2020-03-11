@@ -27,7 +27,7 @@ const styles = theme => ({
         //fontSize: '36px',
         textAlign: 'center',
         // backgroundColor: '#40C445'
-        background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)'
+        // background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)'
     },
     header: {
         // backgroundColor: '#14771B',
@@ -35,8 +35,13 @@ const styles = theme => ({
         background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)',
         fontSize: '36px'
     },
+
+    underline: {
+        borderBottom: '1px solid red',
+        display: 'block'
+    },
     content: {
-        color: '#ffffff',
+        // color: '#ffffff',
         textAlign: 'left',
         '&:hover': {
             cursor: 'zoom-in'
@@ -44,7 +49,7 @@ const styles = theme => ({
         fontSize: '26px',
     },
     expand: {
-        color: '#ffffff',
+        // color: '#ffffff',
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
@@ -137,15 +142,14 @@ class ContactsListPageItem extends React.Component {
                     <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
                         <div onClick={this.edit}>
                             <div>
-                                <span>Phone Number: {this.props.contact.phone_number} </span>
-                                <span>({this.props.contact.phone_number_type})</span>
+                                <span className={this.props.classes.underline}>Phone Number: {this.props.contact.phone_number} ({this.props.contact.phone_number_type}) </span>
                             </div>
                             <div>
-                                <span>Email: {this.props.contact.email} </span>
+                                <span className={this.props.classes.underline}>Email: {this.props.contact.email} </span>
                             </div>
 
                             <div>
-                                <span>Organization: {this.props.contact.name}</span>
+                                <span className={this.props.classes.underline}>Organization: {this.props.contact.name}</span>
                                 <br></br>
                                 <span>Notes: {this.props.contact.notes}</span>
                             </div>
