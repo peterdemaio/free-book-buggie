@@ -14,16 +14,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 
-const styles = {
-    root: {
-        backgroundColor: 'red',
-        textDecoration: 'inherit',
-        '&:hover': {
-            textDecoration: 'underline',
-        },
-    },
-};
-
 
 
 class NewOrganization extends Component {
@@ -68,138 +58,135 @@ class NewOrganization extends Component {
             })
         } catch {
             console.log('dispatch error')
-        }   
+        }
     }
 
     render() {
 
-        if (this.props.reduxStore.demographicsBoolean === true){
+        if (this.props.reduxStore.demographicsBoolean === true) {
             alert('way to go, proud of you')
         }
 
-        
+
 
         return (
+            
             <>
                 <Grid >
-                    <Grid container
-                        direction="row"
-                        justify="center"
-                        alignItems="center">
-                        <Grid item lg={6}>
-                            <div >
-                                <h1 align="center">Add New Organization</h1>
-                    {/* <button onClick={() => this.props.history.push('/collectBooks')}>Add</button>
+                    <Grid item lg={6}>
+                        <h1 align="center">Add New Organization</h1>
+                        {/* <button onClick={() => this.props.history.push('/collectBooks')}>Add</button>
                     <button onClick={() => this.props.history.push('/collectBooks')}>Cancel</button> */}
-                            <Card>
-                                <CardContent>
-                           
+                            <Paper/>
                                 <TextField
                                     type="text"
                                     label="Name of Organization"
                                     onChange={(event) => this.handleChangeFor(event, 'name')} />
-                                <br></br>
+                                
                                 <TextField
                                     type="text"
                                     label="Organization Logo Link"
                                     onChange={(event) => this.handleChangeFor(event, 'logo')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="Non-Profit, School, etc."
                                     onChange={(event) => this.handleChangeFor(event, 'type')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="Address Number"
                                     onChange={(event) => this.handleChangeFor(event, 'address_number')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="Address Street"
                                     onChange={(event) => this.handleChangeFor(event, 'address_street')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="Unit"
                                     onChange={(event) => this.handleChangeFor(event, 'address_unit')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="City"
                                     onChange={(event) => this.handleChangeFor(event, 'city')} />
-                                <br></br>
-                                <TextField 
+                            
+                                <TextField
                                     type="text"
                                     label="State"
                                     onChange={(event) => this.handleChangeFor(event, 'state')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="Zip"
                                     onChange={(event) => this.handleChangeFor(event, 'zip')} />
-                                <br></br>
+                            
                                 <TextField
                                     type="text"
                                     label="County"
                                     onChange={(event) => this.handleChangeFor(event, 'county')} />
-                                <br></br>
-                                
-                        {/* <textarea
+                            
+                        </Grid >
+                    </Grid>
+                                {/* <textarea
                             placeholder="Notes"
                             rows="6" cols="50"
                             onChange={(event) => this.handleChangeFor(event, 'notes')}
                         /> */}
 
-                    {/* <br />
+                                {/* <br />
                     <button className='submit-button'
                     onClick={this.handleClick}>
                     Add </button>
                     <br/> */}
-                 
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardContent>
-                                        <TextField
-                                            type="text"
-                                            label="Contact Name"
-                                            onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
-                                        <br></br>
-                                        <TextField
-                                            type="text"
-                                            label="Phone Number"
-                                            onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
-                                        <br></br>
-                                        <TextField
-                                            type="text"
-                                            label="Phone Number Type"
-                                            helperText="Mobile, Home, etc."
-                                            onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
-                                        <br></br>
-                                        <TextField
-                                            type="text"
-                                            label="Email"
-                                            helperText="name@mail.com"
-                                            onChange={(event) => this.handleChangeFor(event, 'email')} />
-                                        <br></br>
-                                        <TextField
-                                            type="text"
-                                            label="Notes"
-                                            onChange={(event) => this.handleChangeFor(event, 'notes')} />
-                                        <br></br>
-                        </CardContent>
-                    </Card>
-                </div>
-                            <br />
-                            <button className='submit-button'
-                                onClick={this.handleClick}>
-                                Add </button>
-                            <br />
-                        </Grid>
+
+                            
+
+                  <Grid> 
+                    <Grid item lg={6}>
+                        <Paper/>
+                            <TextField
+                                type="text"
+                                label="Contact Name"
+                                onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
+                            
+                            <TextField
+                                type="text"
+                                label="Phone Number"
+                                onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                                                    
+                            <TextField
+                                type="text"
+                                label="Phone Number Type"
+                                helperText="Mobile, Home, etc."
+                                onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
+                                                                    
+                            <TextField
+                                type="text"
+                                label="Email"
+                                helperText="name@mail.com"
+                                onChange={(event) => this.handleChangeFor(event, 'email')} />
+                                                                    
+                            <TextField
+                                type="text"
+                                label="Notes"
+                                onChange={(event) => this.handleChangeFor(event, 'notes')} />
+                                                                   
+                        
+
+                    
+                   
+                    
                     </Grid>
-                </Grid>
-            </>     
+            </Grid>
+                    <button className='submit-button'
+                        onClick={this.handleClick}>
+                        Add </button>
+                        
+            </>
+                
         )
     }
 }
