@@ -16,7 +16,10 @@ import {
     InputBase,
     Input,
     MenuItem,
+    OutlinedInput,
     FormControl,
+    NativeSelect,
+    FormHelperText,
     TextField,
     Select,
     Option,
@@ -54,7 +57,7 @@ const BootstrapInput = withStyles(theme => ({
         '&:focus': {
             borderRadius: 4,
             borderColor: '#80bdff',
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+            // boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
         },
     },
 }))(InputBase);
@@ -70,26 +73,31 @@ const styles = theme => ({
     bootstrapFormLabel: {
         fontSize: 18,
     },
+    button: {
+        alignItems: 'center'
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
 });
 
 class CollectBooks extends Component {
-
-    // let id = this.props.id
-    // let index = id - 1
-    // let organization = this.props.reduxStore.organization[index]
-
-    // componentDidMount() {
-    //     console.log('organizations page ready')
-    //     this.props.dispatch({
-    //         type: 'GET_ORGANIZATIONS'
-    //     })
-    // }
-
     state = {
         numOfBooks: '',
-        type: '',
+        type: 0,
         open: false,
     }
+
+    // componentDidMount() {
+    //     this.props.dispatch({
+    //         type: 'FETCH_USER'
+    //     })
+    // }
 
     // MUI Select controls
     handleClickOpen = () => {
@@ -136,13 +144,19 @@ class CollectBooks extends Component {
                     direction="column"
                     justify="space-evenly"
                     alignItems="center"
-                    spacing={12}
+                    spacing={10}
                 >
                     <Grid item
                         direction="column"
                         justify="flex-end"
                         alignItems="flex-end"
                     >
+                        <Button
+                            onClick={this.handleClickOpen}
+                            variant="contained"
+                            color="primary"
+                        >Add Books</Button>
+                        <br />
                         <Button container
                             color="primary"
                             className={this.props.classes.button}
@@ -168,48 +182,57 @@ class CollectBooks extends Component {
                             </Button>
                     </Grid>
                 </Grid>
-
-                <Button
-                    onClick={this.handleClickOpen}
-                    variant="contained"
-                    color="primary"
-                >Add Books</Button>
                 <Dialog
                     disableBackdropClick
                     disableEscapeKeyDown
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>Add Books and Organization Type</DialogTitle>
+                    <DialogTitle>Add Books and Donor Type</DialogTitle>
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
-                            <FormControl className={classes.margin}
-                            value={this.state.numOfBooks}
-                            onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}
-                            >
-                                <InputLabel
-                                    htmlFor="numOfBooks"
-                                    
+                            <FormControl
 
-                                >Number</InputLabel>
-                                <BootstrapInput/>
-                                {/* <Select
-                                    native
-                                    value={this.state.numOfBooks}
-                                    onChange={this.handleChange('age')}
-                                    input={<Input id="age-native-simple" />}
-                                >
-                                    <option type="number" />
-                                </Select> */}
+                                className={classes.FormControl}
+                                value={this.state.numOfBooks}
+                                onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}>
+                                
+                                
+                                <TextField
+                                    type="number"
+                                    label="Number of Books"
+                                    margin="dense"
+                                    fullWidth
+                                    InputProps={{
+                                        className: classes.input,
+                                    }}
+                                />
+                                
                             </FormControl>
                             <br />
-                            <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="age-simple">Type of Collector</InputLabel>
+                            <FormControl className={classes.container}>
+                                <InputLabel
+                                    htmlFor="type-donor"
+                                    ref={ref => {
+                                        this.InputLabelRef = ref;
+                                    }}
+                                >Type of Donor</InputLabel>
                                 <Select
                                     value={this.state.type}
                                     onChange={this.handleChange('type')}
-                                    input={<Input id="type" />}
+
+                                    // input={<BootstrapInput name="age" id="type-donor" />}
+                                    input={
+                                        <OutlinedInput
+                                            labelWidth={this.state.labelWidth}
+                                            name="age"
+                                            id="type-donor"
+                                        />
+                                    }
+                                    defaultValue={0}
                                 >
+                                    >
+                                    <MenuItem disabled value={0}>Select A Donor</MenuItem>
                                     <MenuItem value={1}>Organization</MenuItem>
                                     <MenuItem value={2}>Event</MenuItem>
                                     <MenuItem value={3}>Individual</MenuItem>
