@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const queryText = `SELECT "contacts".id, "contacts".name, "contacts".phone_number, "contacts".phone_number_type, "contacts".email, "contacts".notes, "organizations".name FROM "contacts"
+    const queryText = `SELECT "contacts".id, "contacts".contact_name, "contacts".phone_number, "contacts".phone_number_type, "contacts".email, "contacts".notes, "organizations".org_name FROM "contacts"
     JOIN "organizations" ON "organizations".id = "contacts".organizations_id;`
     console.log('in contacts router.get', req.body)
     pool.query(queryText)
