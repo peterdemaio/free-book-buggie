@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -11,24 +11,54 @@ import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
     },
+    container: {
+        minHeight: '400px'
+    },
     form: {
-        minWidth: '300px'
+        minWidth: '750px',
+        maxWidth: '1000px',
+        minHeight: '400px',
+        minHeight: '350',
+        display: 'block',
+        justify: 'center',
+        alignItems: 'center',
+        padding: '10px'
+    },
+    line: {
+        padding: '25px',
+        margin: '10px',
+
+    },
+    inputs: {
+        width: '250px',
+        padding: '10px'
+    },
+    submitButton: {
+        justify: 'center',
+        alignItems: 'center'
+    },
+    demographicsInputs: {
+        width: '50px',
+    },
+    demographicsLine: {
+        paddingLeft: '25px',
+        paddingBottom: '10px',
+        margin: '10px',
+
+    },
+    question: {
+        paddingLeft: '25px'
     }
+
 });
 
-// function PaperSheet(props) {
-//     const { classes } = props;
-
-
 class NewOrganization extends Component {
-
     state = {
         newEntry: {
             name: '',
@@ -41,15 +71,24 @@ class NewOrganization extends Component {
             state: '',
             county: '',
             zip: '',
-            notes: '',
             contact_name: '',
             phone_number: '',
             phone_number_type: '',
             email: '',
-            notes: ''
+            notes: '',
+            demographics_age_0_3: '',
+            demographics_age_4_7: '',
+            demographics_age_8_12: '',
+            demographics_age_13_18: '',
+            demographics_race_white: '',
+            demographics_race_black: '',
+            demographics_race_native: '',
+            demographics_race_asian: '',
+            demographics_race_pacific: '',
+            demographics_poverty: ''
+
         },
     }
-
     handleChangeFor = (event, propertyName) => {
         console.log(event.target.value, propertyName);
         this.setState({
@@ -59,9 +98,9 @@ class NewOrganization extends Component {
             }
         })
     }
-
     handleClick = async (event) => {
         event.preventDefault()
+        console.log(this.state.newEntry)
         try {
             await this.props.dispatch({
                 type: 'POST_NEW_ORGANIZATION',
@@ -71,141 +110,230 @@ class NewOrganization extends Component {
             console.log('dispatch error')
         }
     }
-
     render() {
-
-        if (this.props.reduxStore.demographicsBoolean === true) {
-            alert('way to go, proud of you')
-        }
-
-      
-
         return (
-            
             <>
-                <Grid >
-                    <Grid item lg={6}
+                <Grid className={this.props.classes.container}
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Grid className={this.props.classes.form}
+                        item lg={4}
                         justify="center"
-                        className={this.props.classes.form}
-                    >
-                        <h1 align="center">Add New Organization</h1>
-                        {/* <button onClick={() => this.props.history.push('/collectBooks')}>Add</button>
-                    <button onClick={() => this.props.history.push('/collectBooks')}>Cancel</button> */}
-                        <Paper elevation={5}>
+                    ><h1 align="center">Add New Organization</h1>
+                        <Paper elevation={5}
+                        >
+                            <span className={this.props.classes.line}>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    margin="normal"
+                                    size='medium'
                                     type="text"
                                     label="Name of Organization"
                                     onChange={(event) => this.handleChangeFor(event, 'name')} />
-                                
+                                <span>{' '}</span>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    margin="normal"
                                     type="text"
                                     label="Organization Logo Link"
                                     onChange={(event) => this.handleChangeFor(event, 'logo')} />
-                            
+                            </span>
+                            <br></br>
+                            <span className={this.props.classes.line}>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="Non-Profit, School, etc."
                                     onChange={(event) => this.handleChangeFor(event, 'type')} />
-                            
+                                <span>{' '}</span>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="Address Number"
                                     onChange={(event) => this.handleChangeFor(event, 'address_number')} />
-                            
+                            </span>
+                            <br></br>
+                            <span className={this.props.classes.line}>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="Address Street"
                                     onChange={(event) => this.handleChangeFor(event, 'address_street')} />
-                            
+                                <span>{' '}</span>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="Unit"
                                     onChange={(event) => this.handleChangeFor(event, 'address_unit')} />
-                            
+                            </span>
+                            <br></br>
+                            <span className={this.props.classes.line}>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="City"
                                     onChange={(event) => this.handleChangeFor(event, 'city')} />
-                            
+                                <span>{' '}</span>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="State"
                                     onChange={(event) => this.handleChangeFor(event, 'state')} />
-                            
+                            </span>
+                            <br></br>
+                            <span className={this.props.classes.line}>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="Zip"
                                     onChange={(event) => this.handleChangeFor(event, 'zip')} />
-                            
+                                <span>{' '}</span>
                                 <TextField
+                                    className={this.props.classes.inputs}
                                     type="text"
                                     label="County"
                                     onChange={(event) => this.handleChangeFor(event, 'county')} />
-                            </Paper>
-                        </Grid >
-                    </Grid>
-                                {/* <textarea
-                            placeholder="Notes"
-                            rows="6" cols="50"
-                            onChange={(event) => this.handleChangeFor(event, 'notes')}
-                        /> */}
-
-                                {/* <br />
-                    <button className='submit-button'
-                    onClick={this.handleClick}>
-                    Add </button>
-                    <br/> */}
-
-                            
-
-                  <Grid> 
-                    <Grid item lg={6}>
-                        <Paper>
-                            <TextField
-                                type="text"
-                                label="Contact Name"
-                                onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
-                            
-                            <TextField
-                                type="text"
-                                label="Phone Number"
-                                onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
-                                                                    
-                            <TextField
-                                type="text"
-                                label="Phone Number Type"
-                                helperText="Mobile, Home, etc."
-                                onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
-                                                                    
-                            <TextField
-                                type="text"
-                                label="Email"
-                                helperText="name@mail.com"
-                                onChange={(event) => this.handleChangeFor(event, 'email')} />
-                                                                    
-                            <TextField
-                                type="text"
-                                label="Notes"
-                                onChange={(event) => this.handleChangeFor(event, 'notes')} />
-                                                                   
+                            </span>
+                            <h3 className={this.props.classes.question}>If you have demographics information please record it below.</h3>
+                            <Grid container
+                                className={this.props.classes.demographicsLine}
+                                direction="column"
+                                justify="center"
+                                alignItems="flex-start"
+                            ><p>Age breakdown by percentage (Should add up to 100%):</p>
+                                    <Grid item>
+                                    
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="integer"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_age_0_3')} />
+                                <span>0-3</span></Grid><Grid item>
+                                    
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_age_4_7')} />
+                                <span>4-7</span></Grid><Grid item>
+                                    
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_age_8-12')} />
+                               <span>8-12</span></Grid><Grid item>
+                                    
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_age_13_18')} />
+                                <span>13-18</span></Grid>
+                            </Grid>
+                            <Grid container
+                                className={this.props.classes.demographicsLine}
+                                direction="column"
+                                justify="center"
+                                alignItems="flex-start"
+                            ><p>Racial breakdown by percentage (Should add up to 100%):</p>
+                                    <Grid item>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="integer"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_race_white')} />
+                                <span>White</span></Grid><Grid item>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_race_black')} />
+                                <span>Black or African American:</span></Grid><Grid item>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_race_native')} />
+                               <span>American Indian or Alaska Native:</span></Grid><Grid item>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_race_asian')} />
+                                <span>Asian</span></Grid><Grid item>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="text"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_race_pacific')} />
+                                <span>Native Hawaiian or Pacific Islander</span></Grid>
+                            </Grid>
+                            <Grid container
+                                className={this.props.classes.demographicsLine}
+                                direction="column"
+                                justify="center"
+                                alignItems="flex-start"
+                            ><p>Percentage of children who qualify for free or reduced school lunch:</p>
+                                    <TextField
+                                        className={this.props.classes.demographicsInputs}
+                                        type="integer"
+                                        onChange={(event) => this.handleChangeFor(event, 'demographics_poverty')} />
+                            </Grid>
                         </Paper>
+                    </Grid >
+                    <Grid item lg={4}
+                        justify="center"
+                        className={this.props.classes.form}
+                    ><h2 align="center">Contact Information</h2>
+                        <Paper elevation={5}>
+                            <span className={this.props.classes.line}>
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
+                                    label="Contact Name"
+                                    onChange={(event) => this.handleChangeFor(event, 'contact_name')} />
 
-                    
-                   
-                    
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
+                                    label="Phone Number"
+                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                            </span>
+                            <br></br>
+                            <span className={this.props.classes.line}>
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
+                                    label="Phone Number Type"
+                                    helperText="Mobile, Home, etc."
+                                    onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
+
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
+                                    label="Email"
+                                    helperText="name@mail.com"
+                                    onChange={(event) => this.handleChangeFor(event, 'email')} />
+                                <br></br>
+                            </span>
+                            <span className={this.props.classes.line}>
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
+                                    label="Notes"
+                                    onChange={(event) => this.handleChangeFor(event, 'notes')} />
+                            </span>
+                        </Paper>
                     </Grid>
-            </Grid>
-                    <Button className='submit-button'
-                        onClick={this.handleClick}>
-                        Add </Button>
-                        
-            </>
+                    <Button className={this.props.classes.submitButton}
+                    onClick={this.handleClick}
+                    size={'large'}
+                    variant={'outlined'}>
+                    Add
+                </Button>
+                </Grid>
                 
+            </>
         )
     }
 }
 
-   
+
 
 const mapStateToProps = (reduxStore) => ({
     reduxStore
