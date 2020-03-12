@@ -6,7 +6,7 @@ import dataReportingSaga from './dataReportingSaga';
 import contactsSaga from './contacts';
 import organizationsSaga from './organizations';
 import newOrganizationSaga from './newOrganizationSaga';
-import bookSaga from './bookSaga';
+import eventSaga from './eventSaga';
 
 
 // rootSaga is the primary saga.
@@ -25,6 +25,6 @@ export default function* rootSaga() {
     contactsSaga(),
     organizationsSaga(),
     newOrganizationSaga(),
-    bookSaga(),
+    eventSaga(),
   ]);
 }
