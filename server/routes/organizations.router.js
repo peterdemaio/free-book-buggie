@@ -17,41 +17,6 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('in organizations post router', req.body)
-    const newEntry = req.body;
-    console.log(newEntry)
-    const queryText = `INSERT INTO "organizations" ("org_name", "logo", "type", 
-                            "address_number", "address_street", "address_unit", "city",
-                            "state", "county", "zip", "notes") 
-                            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
-                        INSERT INTO "contacts" ("contact_name", "title", )`;
-    const queryValues = [
-        newEntry.name,
-        newEntry.logo,
-        newEntry.type,
-        newEntry.address_number,
-        newEntry.address_street,
-        newEntry.address_unit,
-        newEntry.city,
-        newEntry.state,
-        newEntry.county,
-        newEntry.zip,
-        newEntry.notes,
-        newEntry.contact_name,
-        newEntry.phone_number,
-        newEntry.email,
-        
-    ];
-    pool.query(queryText, queryValues)
-        .then(() => {
-            res.sendStatus(201);
-            console.log(queryValues)
-        }).catch((err) => {
-            console.log('Error in router.post on entry router', err);
-            res.sendStatus(500);
-        })
-});
 
 //Route setup for post to multiple tables from 'add new organization form'
 
@@ -98,8 +63,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             newEntry.email,
             newEntry.notes
         ]
-        await connection.query(sqlAddContact, contactQueryValues, [id]);
-        const contactId = result.rows[0].id;
+        await connection.query(sqlAddContact, contactQueryValues);
 
         const sqlAddDemographics = `INSERT INTO "demographics_age"
                                     ("organizations_id", "0-3", "4-7", "8-12", "13-18")
@@ -112,7 +76,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             newEntry.demographics_age_13_18
         ]
         await connection.query(sqlAddDemographics, demQueryValues);
-        const contactId = result.rows[0].id;
+        
 
 
         await connection.query('COMMIT');
