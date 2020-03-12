@@ -46,7 +46,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             newEntry.zip,
         ];
         // Save the result so we can get the returned value
-        const result = await connection.query(sqlAddOrganization, organizationQueryValues, [id]);
+        const result = await connection.query(sqlAddOrganization, organizationQueryValues);
         // Get the id from the result - will have 1 row with the id 
         const organizationsId = result.rows[0].id;
 
@@ -65,7 +65,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         ]
         await connection.query(sqlAddContact, contactQueryValues);
 
-        const sqlAddDemographics = `INSERT INTO "demographics_age"
+        const sqlAddAgeDemographics = `INSERT INTO "demographics_age"
                                     ("organizations_id", "0-3", "4-7", "8-12", "13-18")
                                     VALUES ($1, $2, $3, $4, $5)`;
         const demQueryValues = [
@@ -75,10 +75,32 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             newEntry.demographics_age_8_12,
             newEntry.demographics_age_13_18
         ]
-        await connection.query(sqlAddDemographics, demQueryValues);
+        await connection.query(sqlAddAgeDemographics, demQueryValues);
+
+        const sqlAddRaceDemographics = `INSERT INTO "demographics_race"
+                                    ("organizations_id", "white", "black_or_african_american", 
+                                    "american_indian_or_alaska_native", "asian", 
+                                    "native_hawaiian_or_pacific_islander")
+                                    VALUES ($1, $2, $3, $4, $5, $6)`;
+        const demRaceQueryValues = [
+            organizationsId,
+            newEntry.demographics_race_white,
+            newEntry.demographics_race_black,
+            newEntry.demographics_race_native,
+            newEntry.demographics_race_asian,
+            newEntry.demographics_race_pacific
+        ]
+        await connection.query(sqlAddRaceDemographics, demRaceQueryValues);
+
+        const sqlAddPovertyDemographics = `INSERT INTO "demographics_poverty"
+                                            ("organizations_id", "percentage_NSLP")
+                                            VALUES ($1, $2)`;
+        const povertyQueryValues = [
+            organizationsId,
+            newEntry.demographics_poverty
+        ]
+        await connection.query(sqlAddPovertyDemographics, povertyQueryValues)
         
-
-
         await connection.query('COMMIT');
         res.sendStatus(200);
     } catch (error) {
