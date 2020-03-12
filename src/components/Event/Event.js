@@ -126,9 +126,9 @@ class CollectForm extends Component {
 
     render() {
 
-        let optionItems = this.props.reduxStore.updateOrganizations.map(org =>
+        let optionItems = this.props.reduxStore.organizations.map(org =>
 
-            <OrganizationsListItem key={org.id} org={org} />
+        <option key={org.org_name}>{org.org_name} </option>
         );
 
         const { classes } = this.props;
@@ -206,12 +206,16 @@ class CollectForm extends Component {
                                 />
                             </FormControl>
 
-                            <FormControl
+                            <Select>
+                                {optionItems}
+                            </Select>
+
+                            {/* <FormControl
                                 className={classes.FormControl} >
                                 <select>
                                     {optionItems}
                                 </select>
-                            </FormControl>
+                            </FormControl> */}
 
                             <FormControl
                                 className={this.props.classes.FormControl}
