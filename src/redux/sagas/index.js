@@ -4,9 +4,9 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import dataReportingSaga from './dataReportingSaga';
 import contactsSaga from './contacts';
-import organizationsSaga from './organizations'
-import newOrganizationSaga from './newOrganizationSaga'
-import bookSaga from './bookSaga'
+import organizationsSaga from './organizations';
+import newOrganizationSaga from './newOrganizationSaga';
+import bookSaga from './bookSaga';
 
 
 // rootSaga is the primary saga.

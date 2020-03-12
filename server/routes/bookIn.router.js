@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log(req.body)
   const queryText =
-    `INSERT INTO "books_in" ("events_id", "number_of_books")
+    `INSERT INTO "events" ("books_in")
     VALUES ($1, $2);`
 
   pool.query(queryText,
