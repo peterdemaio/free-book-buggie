@@ -1,58 +1,64 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
 
 // Material UI imports
 import {
     withStyles,
     Button,
     Grid,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    InputLabel,
-    InputBase,
-    Input,
-    MenuItem,
-    OutlinedInput,
-    FormControl,
-    NativeSelect,
-    FormHelperText,
+    Paper,
     TextField,
     Select,
-    Option,
+    MenuItem,
+    InputLabel
 }
     from '@material-ui/core';
 
 const styles = theme => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing.unit,
-    },
-    bootstrapFormLabel: {
-        fontSize: 18,
-    },
-    button: {
-        alignItems: 'center'
-    },
-    formControl: {
-        margin: theme.spacing.unit,
-        width: 300,
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
     },
     container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        background: 'white' // overrides gray background color
+        minHeight: '400px'
     },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 500,
+    form: {
+        minWidth: '750px',
+        maxWidth: '1000px',
+        minHeight: '400px',
+        minHeight: '350',
+        display: 'block',
+        justify: 'center',
+        alignItems: 'center',
+        padding: '10px'
     },
+    line: {
+        padding: '25px',
+        margin: '10px',
+
+    },
+    inputs: {
+        width: '250px',
+        padding: '10px'
+    },
+    submitButton: {
+        justify: 'center',
+        alignItems: 'center'
+    },
+    demographicsInputs: {
+        width: '50px',
+    },
+    demographicsLine: {
+        paddingLeft: '25px',
+        paddingBottom: '10px',
+        margin: '10px',
+
+    },
+    question: {
+        paddingLeft: '25px'
+    }
+
 });
 
 
@@ -71,18 +77,10 @@ class CollectForm extends Component {
         distBooks: 0,
         numOfKids: 0,
         numEslAdults: 0,
+        notes: '',
         type: 0,
         open: false,
     }
-
-    // MUI Select controls
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
 
     handleChange = name => event => {
         this.setState({ [name]: Number(event.target.value) });
@@ -97,7 +95,7 @@ class CollectForm extends Component {
     }
 
     // submit event handler
-    submitBooks = (event) => {
+    newEvent = (event) => {
         console.log('adding event', this.state.event_name);
         event.preventDefault();
         this.props.dispatch({
@@ -112,7 +110,8 @@ class CollectForm extends Component {
                 collectBooks: this.state.collectBooks,
                 distBooks: this.state.distBooks,
                 numOfKids: this.state.numOfKids,
-                numEslAdults: this.state.numEslAdults
+                numEslAdults: this.state.numEslAdults,
+                notes: this.state.notes
             }
         })
     }
@@ -128,7 +127,7 @@ class CollectForm extends Component {
 
         let optionItems = this.props.reduxStore.organizations.map(org =>
 
-        <option key={org.org_name}>{org.org_name} </option>
+            <MenuItem key={org.org_name}>{org.org_name} </MenuItem>
         );
 
         const { classes } = this.props;
@@ -137,212 +136,126 @@ class CollectForm extends Component {
             <>
                 <h1>Events Page</h1>
 
-                <Grid container
+                <Grid className={this.props.classes.container}
+                    container
                     direction="column"
-                    justify="space-evenly"
+                    justify="center"
                     alignItems="center"
-                    spacing={10}
                 >
+                    <Grid className={this.props.classes.form}
+                        item lg={4}
+                        justify="center"
+                    ><h1 align="center">Add New Event</h1>
+                        <Paper elevation={5}>
+                            <span className={this.props.classes.line}>
 
-                    <Button
-                        onClick={this.handleClickOpen}
-                        variant="contained"
-                        color="primary"
-                    >Add Event</Button>
-                </Grid>
-                <Dialog
-                    disableBackdropClick
-                    disableEscapeKeyDown
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                >
-
-                    <DialogTitle>Event Collection Form</DialogTitle>
-                    <DialogContent>
-                        <form className={classes.container} autoComplete="off">
-                            <FormControl
-
-                                value={this.state.event_name}
-                                onChange={(event) => this.handleInputChangeFor(event, 'event_name')}>
+                                <Select >
+                                    <InputLabel>Organization Name</InputLabel>
+                                    {optionItems}
+                                </Select>
+                                <br />
                                 <TextField
-                                    className={this.props.classes.TextField}
+                                    className={this.props.classes.inputs}
+                                    value={this.state.event_name}
                                     type="text"
                                     label="Event Name"
                                     margin="normal"
-                                // fullWidth
-                                // InputProps={{
-                                //     className: classes.input,
-                                // }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'event_name')}
                                 />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.date}
-                                onChange={(event) => this.handleInputChangeFor(event, 'date')}>
                                 <TextField
-                                    type="date"
-                                    label="Date of Event"
-                                    margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
-                                />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.location}
-                                onChange={(event) => this.handleInputChangeFor(event, 'location')}>
-                                <TextField
-                                    type="text"
-                                    label="Location of Event"
-                                    margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
-                                />
-                            </FormControl>
-
-                            <Select>
-                                {optionItems}
-                            </Select>
-
-                            {/* <FormControl
-                                className={classes.FormControl} >
-                                <select>
-                                    {optionItems}
-                                </select>
-                            </FormControl> */}
-
-                            <FormControl
-                                className={this.props.classes.FormControl}
-                                value={this.state.start_time}
-                                onChange={(event) => this.handleInputChangeFor(event, 'start_time')}>
-                                <TextField
-                                    type="time"
-                                    label="Start Time"
-                                    margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
-                                />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.end_time}
-                                onChange={(event) => this.handleInputChangeFor(event, 'end_time')}>
-                                <TextField
-                                    type="time"
-                                    label="End Time"
-                                    margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
-                                />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.volunteers}
-                                onChange={(event) => this.handleInputChangeFor(event, 'volunteers')}>
-                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.volunteers}
                                     type="text"
                                     label="Names of Volunteers"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'volunteers')}
                                 />
-                            </FormControl>
-
-                            {/* conditionally render...? */}
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.collectBooks}
-                                onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.location}
+                                    type="text"
+                                    margin="normal"
+                                    label="Location of Event"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'location')}
+                                />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.start_time}
+                                    type="time"
+                                    label="Start Time"
+                                    margin="normal"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'start_time')}
+                                />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.end_time}
+                                    type="time"
+                                    label="End Time"
+                                    margin="normal"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'end_time')}
+                                />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.date}
+                                    type="date"
+                                    margin="normal"
+                                    label="Date of Event"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'date')}
+                                />
+                                {/* conditionally render...? */}
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.collectBooks}
                                     type="number"
                                     label="Books Collected"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
                                 />
-                            </FormControl>
-
-                            {/* conditionally render...? */}
-                            {/* Select */}
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.distBooks}
-                                onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.distBooks}
                                     type="number"
                                     label="Books Distributed"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
                                 />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.numOfKids}
-                                onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.numOfKids}
                                     type="number"
                                     label="Number of Children"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                                 />
-                            </FormControl>
-
-                            <FormControl
-                                className={classes.FormControl}
-                                value={this.state.numEslAdults}
-                                onChange={(event) => this.handleInputChangeFor(event, 'numOfEslAdults')}>
                                 <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.numEslAdults}
                                     type="number"
                                     label="Number of ESL Adults"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                    onChange={(event) => this.handleInputChangeFor(event, 'numEslAdults')}
                                 />
-                            </FormControl>
-                        </form>
-                    </DialogContent>
-
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={this.handleClose} onClick={this.submitBooks} color="primary">
-                            Ok
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-
-                {/* Nav Links */}
-                <br />
-                <Button onClick={() => this.props.history.push('/editOrganization')}>Sample Organization</Button>
-                <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button>
-                <Button onClick={() => this.props.history.push('/home')}>Home</Button>
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.notes}
+                                    type="text"
+                                    margin="normal"
+                                    label="Notes"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'notes')}
+                                />
+                                <Button color="primary">
+                                    Cancel
+                                </Button>
+                                <Button onClick={this.newEvent} color="primary">
+                                    Submit
+                                </Button>
+                            </span>
+                        </Paper>
+                    </Grid>
+                    <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button>
+                    <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button>
+                    <Button onClick={() => this.props.history.push('/home')}>Home</Button>
+                </Grid>
             </>
         )
     }
