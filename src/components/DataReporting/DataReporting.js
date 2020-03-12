@@ -9,30 +9,54 @@ class DataReporting extends Component {
         loading: true,
         queryParams: {
             yAxis: 'Books',
-            xAxis: 'Year'
+            xAxis: 'Time'
         },
         title: 'Books Distributed'
     }
 
-    changeYAxis = async (event) => {
+    changeYAxis = (event) => {
         console.log('in changeYAxis. event.target.value:', event.target.value)
         console.log('old yAxis:', this.state.queryParams.yAxis)
         console.log('new yAxis:', this.state.queryParams.yAxis)
-        if (event.target.value === 'Books') {
-            this.setState({title: 'Books Distributed'})
-        } else if (event.target.value === 'Children') {
-            this.setState({title: 'Children Recipients'})
+        switch(event.target.value) {
+            case 'Books':
+                this.setState({title: 'Books Distributed'})
+                break;
+            case 'Children':
+                this.setState({title: 'Children Recipients'})
+                break;
+            case 'Adult ESL Learners':
+                this.setState({title: 'Adult ESL Learner Recipients'})
+                break;
+            default:
+                console.log('changeYAxis error')
         }
+
         this.props.dispatch({
             type: 'GET_DATA',
             payload: { 
-                yAxis: event.target.value,
-                xAxis: this.state.queryParams.xAxis
+                xAxis: this.state.queryParams.xAxis,
+                yAxis: event.target.value
             }
         })
         this.setState({
             queryParams:
                 {...this.state.queryParams, yAxis: event.target.value}
+        })
+    }
+
+    changeXAxis = (event) => {
+        console.log('in changeXAxis. event.target.value:', event.target.value)
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                xAxis: event.target.value,
+                yAxis: this.state.queryParams.yAxis
+            }
+        })
+        this.setState({
+            queryParams:
+                {...this.state.queryParams, xAxis: event}
         })
     }
 
@@ -62,9 +86,16 @@ class DataReporting extends Component {
             return (
                 <>
                     <h1>DataReporting page</h1>
-                    <select id='measurement' onChange={this.changeYAxis}>
+                    <select id='yAxis' onChange={this.changeYAxis}>
                         <option value='Books'>Books</option>
                         <option value='Children'>Children</option>
+                        <option value='Adult ESL Learners'>Adult ESL Learners</option>
+                    </select>
+                    <select id='xAxis' onChange={this.changeXAxis}>
+                        <option value='Time'>Time</option>
+                        <option value='Events'>Events</option>
+                        <option value='Organizations'>Organizations</option>
+                        <option value='Demographics'>Demographics</option>
                     </select>
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
