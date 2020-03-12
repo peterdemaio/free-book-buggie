@@ -6,18 +6,18 @@ function* newOrganizationSaga() {
 }
 
 function* postNewOrganization(action) {
-    console.log('in postNewOrganization', action.payload)
+    // console.log('in postNewOrganization', action.payload)
 
     try {
         let response = yield axios.post(`/api/organizations`, action.payload)
-        console.log('newOrganzationSaga', response);
+        // console.log('newOrganzationSaga', response);
         
         if (response.status = 201) {
             yield put({ type: 'ORG_DEM_BOOL'})
         }
         
     } catch (error) {
-        console.log('Error in newOrganizationSaga: ', error);
+        // console.log('Error in newOrganizationSaga: ', error);
     }
 }
 
