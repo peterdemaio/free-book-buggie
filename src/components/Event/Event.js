@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
 
 // Material UI imports
 import {
@@ -40,7 +41,7 @@ const styles = theme => ({
     },
     formControl: {
         margin: theme.spacing.unit,
-        minWidth: 120,
+        width: 300,
     },
     container: {
         display: 'flex',
@@ -50,8 +51,8 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
-      },
+        width: 500,
+    },
 });
 
 
@@ -66,10 +67,10 @@ class CollectForm extends Component {
         start_time: '',
         end_time: '',
         volunteers: '',
-        booksIn: '',
-        booksOut: '',
-        numOfKids: '',
-        numEslAdults: '',
+        collectBooks: 0,
+        distBooks: 0,
+        numOfKids: 0,
+        numEslAdults: 0,
         type: 0,
         open: false,
     }
@@ -87,8 +88,15 @@ class CollectForm extends Component {
         this.setState({ [name]: Number(event.target.value) });
     };
 
+    // mount organizations on page load
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'UPDATE_ORGANIZATIONS',
+            payload: this.props.reduxStore.organizations
+        })
+    }
+
     // submit event handler
-    // change payload to state variables
     submitBooks = (event) => {
         console.log('adding event', this.state.event_name);
         event.preventDefault();
@@ -101,8 +109,8 @@ class CollectForm extends Component {
                 start_time: this.state.start_time,
                 end_time: this.state.end_time,
                 volunteers: this.state.volunteers,
-                booksIn: this.state.booksIn,
-                booksOut: this.state.booksOut,
+                collectBooks: this.state.collectBooks,
+                distBooks: this.state.distBooks,
                 numOfKids: this.state.numOfKids,
                 numEslAdults: this.state.numEslAdults
             }
@@ -114,15 +122,20 @@ class CollectForm extends Component {
         this.setState({
             [propertyName]: event.target.value
         })
-    }
+    };
 
     render() {
+
+        let optionItems = this.props.reduxStore.updateOrganizations.map(org =>
+
+            <OrganizationsListItem key={org.id} org={org} />
+        );
 
         const { classes } = this.props;
 
         return (
             <>
-                <h1>Collection Form</h1>
+                <h1>Events Page</h1>
 
                 <Grid container
                     direction="column"
@@ -148,17 +161,18 @@ class CollectForm extends Component {
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
                             <FormControl
-                                className={classes.FormControl}
+
                                 value={this.state.event_name}
                                 onChange={(event) => this.handleInputChangeFor(event, 'event_name')}>
                                 <TextField
+                                    className={this.props.classes.TextField}
                                     type="text"
                                     label="Event Name"
                                     margin="normal"
-                                    fullWidth
-                                    InputProps={{
-                                        className: classes.input,
-                                    }}
+                                // fullWidth
+                                // InputProps={{
+                                //     className: classes.input,
+                                // }}
                                 />
                             </FormControl>
 
@@ -193,7 +207,14 @@ class CollectForm extends Component {
                             </FormControl>
 
                             <FormControl
-                                className={classes.FormControl}
+                                className={classes.FormControl} >
+                                <select>
+                                    {optionItems}
+                                </select>
+                            </FormControl>
+
+                            <FormControl
+                                className={this.props.classes.FormControl}
                                 value={this.state.start_time}
                                 onChange={(event) => this.handleInputChangeFor(event, 'start_time')}>
                                 <TextField
@@ -241,8 +262,8 @@ class CollectForm extends Component {
 
                             <FormControl
                                 className={classes.FormControl}
-                                value={this.state.booksIn}
-                                onChange={(event) => this.handleInputChangeFor(event, 'booksIn')}>
+                                value={this.state.collectBooks}
+                                onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}>
                                 <TextField
                                     type="number"
                                     label="Books Collected"
@@ -255,14 +276,14 @@ class CollectForm extends Component {
                             </FormControl>
 
                             {/* conditionally render...? */}
-
+                            {/* Select */}
                             <FormControl
                                 className={classes.FormControl}
-                                value={this.state.booksOut}
-                                onChange={(event) => this.handleInputChangeFor(event, 'booksOut')}>
+                                value={this.state.distBooks}
+                                onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}>
                                 <TextField
                                     type="number"
-                                    label="Books Donated"
+                                    label="Books Distributed"
                                     margin="normal"
                                     fullWidth
                                     InputProps={{
