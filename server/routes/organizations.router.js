@@ -31,7 +31,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const sqlAddOrganization = `INSERT INTO "organizations" 
                                     ("org_name", "logo", "type", "address_number", "address_street", 
                                     "address_unit", "city", "state", "county", "zip") 
-                                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10); 
+                                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
                                     RETURNING id`;
         const organizationQueryValues = [
             newEntry.name,
@@ -66,7 +66,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddContact, contactQueryValues);
 
         const sqlAddAgeDemographics = `INSERT INTO "demographics_age"
-                                    ("organizations_id", "0-3", "4-7", "8-12", "13-18")
+                                    ("organization_id", "0-3", "4-7", "8-12", "13-18")
                                     VALUES ($1, $2, $3, $4, $5)`;
         const demQueryValues = [
             organizationsId,
@@ -78,7 +78,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddAgeDemographics, demQueryValues);
 
         const sqlAddRaceDemographics = `INSERT INTO "demographics_race"
-                                    ("organizations_id", "white", "black_or_african_american", 
+                                    ("organization_id", "white", "black_or_african_american", 
                                     "american_indian_or_alaska_native", "asian", 
                                     "native_hawaiian_or_pacific_islander")
                                     VALUES ($1, $2, $3, $4, $5, $6)`;
@@ -93,7 +93,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddRaceDemographics, demRaceQueryValues);
 
         const sqlAddPovertyDemographics = `INSERT INTO "demographics_poverty"
-                                            ("organizations_id", "percentage_NSLP")
+                                            ("organization_id", "percentage_NSLP")
                                             VALUES ($1, $2)`;
         const povertyQueryValues = [
             organizationsId,
