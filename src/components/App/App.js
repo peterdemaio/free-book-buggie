@@ -23,6 +23,7 @@ import NewOrganization from '../NewOrganization/NewOrganization';
 import EditOrganization from '../EditOrganization/EditOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
+import Event from '../Event/Event';
 
 
 import './App.css';
@@ -91,8 +92,8 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/collectBooks"
-              component={CollectBooks}
+              path="/Event"
+              component={Event}
             />
             <ProtectedRoute
               exact

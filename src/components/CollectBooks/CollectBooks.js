@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
+import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem';
 
 
 // Material UI imports
@@ -84,20 +84,41 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+      },
 });
 
 class CollectBooks extends Component {
     state = {
         numOfBooks: '',
+        orgType: '',
         type: 0,
         open: false,
     }
 
-    // componentDidMount() {
-    //     this.props.dispatch({
-    //         type: 'FETCH_USER'
-    //     })
-    // }
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'UPDATE_ORGANIZATIONS',
+            payload: this.props.reduxStore.organizations
+        })
+    }
+
+    onInputChange = (event) => {
+        console.log(event.target.value)
+        let newlyDisplayed = this.props.reduxStore.organizations.filter( 
+            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            organization.county.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+
+        this.props.dispatch({
+            type: 'UPDATE_ORGANIZATIONS',
+            payload: newlyDisplayed
+        })
+    }
 
     // MUI Select controls
     handleClickOpen = () => {
@@ -112,6 +133,7 @@ class CollectBooks extends Component {
         this.setState({ [name]: Number(event.target.value) });
     };
 
+    // submit books event handler
     submitBooks = (event) => {
         console.log('adding books', this.state.numOfBooks);
         event.preventDefault();
@@ -119,7 +141,7 @@ class CollectBooks extends Component {
             type: 'ADD_BOOKS',
             payload: {
                 numOfBooks: this.state.numOfBooks,
-                type: this.state.type
+                orgType: this.state.orgType
             }
         })
     }
@@ -138,8 +160,28 @@ class CollectBooks extends Component {
                 <h1>Collect Books</h1>
                 {/* Search functionality for orgs, make clickable to display info */}
                 {/* <OrganizationsListPage /> */}
+                <div>
+                    <span>Search for an organization by name, city or county: </span>
 
+                    <Input 
+                        className={this.props.classes.input}
+                        placeholder="search here "
+                        onChange={this.onInputChange}>
+                    </Input>
+                </div>
+                <div>
+                    <Grid container 
+                    className={this.props.classes.list}
+                    direction="column"
+                    justify="space-evenly"
+                    alignItems="left"
+                    >
+                        {this.props.reduxStore.updateOrganizations.map(org =>
 
+                            <OrganizationsListItem key={org.id} org={org} />
+                        )}
+                    </Grid>
+                </div>
                 <Grid container
                     direction="column"
                     justify="space-evenly"
@@ -188,29 +230,41 @@ class CollectBooks extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>Add Books and Donor Type</DialogTitle>
+                    <DialogTitle>Add Books and Organization Type</DialogTitle>
                     <DialogContent>
                         <form className={classes.container} autoComplete="off">
                             <FormControl
-
                                 className={classes.FormControl}
                                 value={this.state.numOfBooks}
                                 onChange={(event) => this.handleInputChangeFor(event, 'numOfBooks')}>
-                                
-                                
                                 <TextField
                                     type="number"
                                     label="Number of Books"
-                                    margin="dense"
+                                    // margin="normal"
+                                    // fullWidth
+                                    className={classes.textField}
+                                    InputProps={{
+                                        className: classes.input,
+                                    }}
+                                />
+                            </FormControl>
+                            <br />
+                            <FormControl
+                                className={classes.FormControl}
+                                value={this.state.orgType}
+                                onChange={(event) => this.handleInputChangeFor(event, 'orgType')}>
+                                <TextField
+                                    type="text"
+                                    label="Organization Type"
+                                    margin="normal"
                                     fullWidth
                                     InputProps={{
                                         className: classes.input,
                                     }}
                                 />
-                                
                             </FormControl>
-                            <br />
-                            <FormControl className={classes.container}>
+
+                            {/* <FormControl className={classes.container}>
                                 <InputLabel
                                     htmlFor="type-donor"
                                     ref={ref => {
@@ -237,7 +291,7 @@ class CollectBooks extends Component {
                                     <MenuItem value={2}>Event</MenuItem>
                                     <MenuItem value={3}>Individual</MenuItem>
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                         </form>
                     </DialogContent>
                     <DialogActions>
