@@ -45,6 +45,7 @@ const styles = theme => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+        background: 'white' // overrides gray background color
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -86,16 +87,24 @@ class CollectForm extends Component {
         this.setState({ [name]: Number(event.target.value) });
     };
 
-    // submit books event handler
+    // submit event handler
     // change payload to state variables
     submitBooks = (event) => {
-        console.log('adding books', this.state.numOfBooks);
+        console.log('adding event', this.state.event_name);
         event.preventDefault();
         this.props.dispatch({
-            type: 'ADD_BOOKS',
+            type: 'ADD_EVENT',
             payload: {
-                numOfBooks: this.state.numOfBooks,
-                orgType: this.state.orgType
+                event_name: this.state.event_name,
+                location: this.state.location,
+                date: this.state.date,
+                start_time: this.state.start_time,
+                end_time: this.state.end_time,
+                volunteers: this.state.volunteers,
+                booksIn: this.state.booksIn,
+                booksOut: this.state.booksOut,
+                numOfKids: this.state.numOfKids,
+                numEslAdults: this.state.numEslAdults
             }
         })
     }
@@ -110,7 +119,7 @@ class CollectForm extends Component {
     render() {
 
         const { classes } = this.props;
-        
+
         return (
             <>
                 <h1>Collection Form</h1>
@@ -268,7 +277,7 @@ class CollectForm extends Component {
                                 onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}>
                                 <TextField
                                     type="number"
-                                    label="Number of Children at Event"
+                                    label="Number of Children"
                                     margin="normal"
                                     fullWidth
                                     InputProps={{
@@ -293,6 +302,7 @@ class CollectForm extends Component {
                             </FormControl>
                         </form>
                     </DialogContent>
+
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
                             Cancel
@@ -302,6 +312,7 @@ class CollectForm extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+
                 {/* Nav Links */}
                 <br />
                 <Button onClick={() => this.props.history.push('/editOrganization')}>Sample Organization</Button>
