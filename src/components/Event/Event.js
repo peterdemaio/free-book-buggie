@@ -36,12 +36,14 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
-
     },
     inputs: {
         width: '250px',
-        padding: '22px',
-        margin: '10px'
+        padding: '25px',
+        margin: '10px',
+    },
+    dropdown: {
+        width: '250px',
     },
     submitButton: {
         justify: 'center',
@@ -49,17 +51,16 @@ const styles = theme => ({
     },
     demographicsInputs: {
         width: '50px',
+        alignItems: 'center',
     },
     demographicsLine: {
         paddingLeft: '25px',
         paddingBottom: '10px',
         margin: '10px',
-
     },
     question: {
         paddingLeft: '25px'
     }
-
 });
 
 
@@ -69,8 +70,8 @@ class CollectForm extends Component {
         event_name: '',
         location: '',
         date: '',
-        // organization_id: '',
-        // contact_id: '',
+        organization_id: '',
+        contact_id: '',
         start_time: '',
         end_time: '',
         volunteers: '',
@@ -88,12 +89,16 @@ class CollectForm extends Component {
     };
 
     // mount organizations on page load
-    componentDidMount() {
-        this.props.dispatch({
-            type: 'UPDATE_ORGANIZATIONS',
-            payload: this.props.reduxStore.organizations
-        })
-    }
+    // componentDidMount() {
+    //     this.props.dispatch({
+    //         type: 'GET_ORGANIZATIONS',
+    //         payload: this.props.reduxStore.organizations
+    //     })
+    //     this.props.dispatch({
+    //         type: 'GET_CONTACTS',
+    //         payload: this.props.reduxStore.contacts
+    //     })
+    // }
 
     // submit event handler
     newEvent = (event) => {
@@ -112,7 +117,9 @@ class CollectForm extends Component {
                 distBooks: this.state.distBooks,
                 numOfKids: this.state.numOfKids,
                 numEslAdults: this.state.numEslAdults,
-                notes: this.state.notes
+                notes: this.state.notes,
+                organization_id: this.state.organization_id,
+                contact_id: this.state.contact_id,
             }
         })
     }
@@ -126,12 +133,17 @@ class CollectForm extends Component {
 
     render() {
 
-        let optionItems = this.props.reduxStore.organizations.map(org =>
-
-            <MenuItem key={org.org_name} className={this.props.classes.inputs}>{org.org_name} </MenuItem>
+        // map over organizations, display in drop down, store in local state when clicked
+        let orgList = this.props.reduxStore.organizations.map(org =>
+            <MenuItem key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </MenuItem>
         );
 
-        const { classes } = this.props;
+        // map over contacts, display in drop down, store in local state when clicked
+        let contactList = this.props.reduxStore.contacts.map(people =>
+            <MenuItem key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </MenuItem>
+        );
+
+        // const { classes } = this.props;
 
         return (
             <>
@@ -150,11 +162,15 @@ class CollectForm extends Component {
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                <Select >
+                                <Select className={this.props.classes.inputs}>
                                     <InputLabel>Organization Name</InputLabel>
-                                    {optionItems}
+                                    {orgList}
                                 </Select>
                                 <br />
+                                <Select className={this.props.classes.inputs}>
+                                    <InputLabel>Contact Name</InputLabel>
+                                    {contactList}
+                                </Select>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.event_name}
