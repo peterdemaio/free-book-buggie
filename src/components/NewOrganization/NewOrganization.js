@@ -115,6 +115,9 @@ class NewOrganization extends Component {
                 type: 'POST_NEW_ORGANIZATION',
                 payload: this.state.newEntry
             })
+            alert('Organization added!')
+            
+            this.props.history.push('/organizationsListPage')
         } catch {
             console.log('dispatch error')
         }
