@@ -162,12 +162,12 @@ class CollectForm extends Component {
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                <Select >
+                                <Select className={this.props.classes.inputs}>
                                     <InputLabel>Organization Name</InputLabel>
                                     {orgList}
                                 </Select>
                                 <br />
-                                <Select >
+                                <Select className={this.props.classes.inputs}>
                                     <InputLabel>Contact Name</InputLabel>
                                     {contactList}
                                 </Select>
