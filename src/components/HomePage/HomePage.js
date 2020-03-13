@@ -8,8 +8,6 @@ import CountUp, { startAnimation } from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 
 
-
-
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
@@ -56,6 +54,7 @@ class UserPage extends Component {
               </div>
             )} */}
           </CountUp>
+          <br/>
           <CountUp
             start={0}
             end={12957}
