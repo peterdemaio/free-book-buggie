@@ -76,16 +76,16 @@ class NewOrganization extends Component {
             phone_number_type: '',
             email: '',
             notes: '',
-            demographics_age_0_3: '',
-            demographics_age_4_7: '',
-            demographics_age_8_12: '',
-            demographics_age_13_18: '',
-            demographics_race_white: '',
-            demographics_race_black: '',
-            demographics_race_native: '',
-            demographics_race_asian: '',
-            demographics_race_pacific: '',
-            demographics_poverty: ''
+            demographics_age_0_3: 0,
+            demographics_age_4_7: 0,
+            demographics_age_8_12: 0,
+            demographics_age_13_18: 0,
+            demographics_race_white: 0,
+            demographics_race_black: 0,
+            demographics_race_native: 0,
+            demographics_race_asian: 0,
+            demographics_race_pacific: 0,
+            demographics_poverty: 0
 
         },
     }

@@ -17,80 +17,101 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('in organizations post router', req.body)
-    const newEntry = req.body;
-    console.log(newEntry)
-    const queryText = `INSERT INTO "organizations" ("org_name", "logo", "type", 
-                            "address_number", "address_street", "address_unit", "city",
-                            "state", "county", "zip", "notes") 
-                            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
-                        INSERT INTO "contacts" ("contact_name", "title", )`;
-    const queryValues = [
-        newEntry.name,
-        newEntry.logo,
-        newEntry.type,
-        newEntry.address_number,
-        newEntry.address_street,
-        newEntry.address_unit,
-        newEntry.city,
-        newEntry.state,
-        newEntry.county,
-        newEntry.zip,
-        newEntry.notes,
-        newEntry.contact_name,
-        newEntry.phone_number,
-        newEntry.email,
-        
-    ];
-    pool.query(queryText, queryValues)
-        .then(() => {
-            res.sendStatus(201);
-            console.log(queryValues)
-        }).catch((err) => {
-            console.log('Error in router.post on entry router', err);
-            res.sendStatus(500);
-        })
-});
 
 //Route setup for post to multiple tables from 'add new organization form'
 
-// router.post('/', rejectUnauthenticated, async (req, res) => {
-//     const newEntry = req.body;
+router.post('/', rejectUnauthenticated, async (req, res) => {
+    const newEntry = req.body;
     
-//     console.log(newEntry);
+    console.log(newEntry);
 
-//     const connection = await pool.connect()
-//     try {
-//         await connection.query('BEGIN');
-//         const sqlAddOrganization = `INSERT INTO "organizations" 
-//                                     ("org_name", "logo", "type", "address_number", "address_street", 
-//                                     "address_unit", "city", "state", "county", "zip", "notes") 
-//                                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11); 
-//                                     RETURNING id`;
-//         // Save the result so we can get the returned value
-//         const result = await connection.query(sqlAddOrganization, [id]);
-//         // Get the id from the result - will have 1 row with the id 
-//         const organizationId = result.rows[0].id;
-//         const sqlAddContact = `INSERT INTO "contacts" 
-//                                 ("contact_name", "title", )
-//                                 VALUES ($1, $2)
-//                                 RETURNING id`;
-//         await connection.query(sqlAddContact, [organizationId, id]);
-//         const contactId = result.rows[0].id;
-//         const sqlAddDemographics
+    const connection = await pool.connect()
+    try {
+        await connection.query('BEGIN');
+        const sqlAddOrganization = `INSERT INTO "organizations" 
+                                    ("org_name", "logo", "type", "address_number", "address_street", 
+                                    "address_unit", "city", "state", "county", "zip") 
+                                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+                                    RETURNING id`;
+        const organizationQueryValues = [
+            newEntry.name,
+            newEntry.logo,
+            newEntry.type,
+            newEntry.address_number,
+            newEntry.address_street,
+            newEntry.address_unit,
+            newEntry.city,
+            newEntry.state,
+            newEntry.county,
+            newEntry.zip,
+        ];
+        // Save the result so we can get the returned value
+        const result = await connection.query(sqlAddOrganization, organizationQueryValues);
+        // Get the id from the result - will have 1 row with the id 
+        const organizationsId = result.rows[0].id;
 
+        const sqlAddContact = `INSERT INTO "contacts" 
+                                ("contact_name", "title", "organizations_id", "phone_number",
+                                "phone_number_type", "email", "notes")
+                                VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+        const contactQueryValues = [
+            newEntry.contact_name,
+            newEntry.title,
+            organizationsId,
+            newEntry.phone_number,
+            newEntry.phone_number_type,
+            newEntry.email,
+            newEntry.notes
+        ]
+        await connection.query(sqlAddContact, contactQueryValues);
 
-//         await connection.query('COMMIT');
-//         res.sendStatus(200);
-//     } catch (error) {
-//         await connection.query('ROLLBACK');
-//         console.log(`Transaction Error - Rolling back new account`, error);
-//         res.sendStatus(500);
-//     } finally {
-//         connection.release()
-//     }
-// });
+        const sqlAddAgeDemographics = `INSERT INTO "demographics_age"
+                                    ("organization_id", "0-3", "4-7", "8-12", "13-18")
+                                    VALUES ($1, $2, $3, $4, $5)`;
+        const demQueryValues = [
+            organizationsId,
+            newEntry.demographics_age_0_3,
+            newEntry.demographics_age_4_7,
+            newEntry.demographics_age_8_12,
+            newEntry.demographics_age_13_18
+        ]
+        await connection.query(sqlAddAgeDemographics, demQueryValues);
+
+        const sqlAddRaceDemographics = `INSERT INTO "demographics_race"
+                                    ("organization_id", "white", "black_or_african_american", 
+                                    "american_indian_or_alaska_native", "asian", 
+                                    "native_hawaiian_or_pacific_islander")
+                                    VALUES ($1, $2, $3, $4, $5, $6)`;
+        const demRaceQueryValues = [
+            organizationsId,
+            newEntry.demographics_race_white,
+            newEntry.demographics_race_black,
+            newEntry.demographics_race_native,
+            newEntry.demographics_race_asian,
+            newEntry.demographics_race_pacific
+        ]
+        await connection.query(sqlAddRaceDemographics, demRaceQueryValues);
+
+        const sqlAddPovertyDemographics = `INSERT INTO "demographics_poverty"
+                                            ("organization_id", "percentage_NSLP")
+                                            VALUES ($1, $2)`;
+        const povertyQueryValues = [
+            organizationsId,
+            newEntry.demographics_poverty
+        ]
+        await connection.query(sqlAddPovertyDemographics, povertyQueryValues)
+        
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log(`Transaction Error - Rolling back new account`, error);
+        res.sendStatus(500);
+    } finally {
+        connection.release()
+    }
+    
+});
 
 
 router.put('/', rejectUnauthenticated, (req, res) => {
