@@ -12,7 +12,8 @@ class DataReporting extends Component {
             xAxis: 'Time',
             startDate: '2010-01-01',
             endDate: '2021-01-01',
-            timeUnit: 'Year'
+            timeUnit: 'Year',
+            metric: 'Age'
         },
         title: 'Books Distributed'
     }
@@ -43,8 +44,9 @@ class DataReporting extends Component {
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, yAxis: event.target.value}
+            queryParams: {
+                ...this.state.queryParams, yAxis: event.target.value
+            }
         })
     }
 
@@ -58,23 +60,36 @@ class DataReporting extends Component {
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, xAxis: event.target.value}
+            queryParams: {
+                ...this.state.queryParams, xAxis: event.target.value
+            }
         })
     }
 
     changeTimeUnit = (event) => {
-        console.log('in handleTimeUnitChange')
+        console.log('in changeTimeUnit. event.target.value:', event.target.value)
         this.props.dispatch({
             type: 'GET_DATA',
             payload: {
                 ...this.state.queryParams,
-                timeUnit: event.target.value
+                metric: event.target.value
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, timeUnit: event.target.value}
+            queryParams: {
+                ...this.state.queryParams,  metric: event.target.value
+            }
+        })
+    }
+
+    changeMetric = (event) => {
+        console.log('in changeMetric')
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                metric: event.target.value
+            }
         })
     }
 
@@ -88,8 +103,9 @@ class DataReporting extends Component {
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, startDate: event.target.value}
+            queryParams: {
+                ...this.state.queryParams, startDate: event.target.value
+            }
         })
     }
 
@@ -103,8 +119,9 @@ class DataReporting extends Component {
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, endDate: event.target.value}
+            queryParams: {
+                ...this.state.queryParams, endDate: event.target.value
+            }
         })
     }
 
@@ -154,7 +171,16 @@ class DataReporting extends Component {
                 break;
             case 'Demographics':
                 thirdOption = <>
-                                <h5>this part has yet to be completed</h5>
+                                <label for='metric'>Metric</label>
+                                <select id='thirdDropdown' onChange={this.changeMetric}>
+                                        <option value='Age'>Age</option>
+                                        <option value='Poverty'>Poverty</option>
+                                        <option value='Race'>Race</option>
+                                </select>
+                                <label for='startDate'>Start Date</label>
+                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                                <label for='endDate'>End Date</label>
+                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
                               </>
                 break;
             default: 
