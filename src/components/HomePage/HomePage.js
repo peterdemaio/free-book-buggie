@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
-//importing components for animated countup
-// import { render } from 'react-dom';
-import CountUp, { startAnimation } from 'react-countup';
-import VisibilitySensor from 'react-visibility-sensor';
 
 
 // this could also be written with destructuring parameters as:
@@ -27,61 +23,7 @@ class UserPage extends Component {
         <br />
         <button onClick={() => this.props.history.push('/organizationsListPage')}>Organization List</button>
         <LogOutButton className="log-in" />
-        <h1>
-          <CountUp
-            start={0}
-            end={18164}
-            duration={3}
-            separator=","
-            decimals={0}
-            decimal=","
-            prefix="Total books received to date: "
-            suffix=" "
-            onEnd={() => console.log('Ended! 👏')}
-            onStart={() => console.log('Started! 💨')}
-            // ref={CountUp => { this.myCountUp = CountUp; }}
-          >
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
-                </VisibilitySensor>
-              )}
-              {/* removing button in favor of page load  */}
-            {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
-          </CountUp>
-          <br/>
-          <CountUp
-            start={0}
-            end={12957}
-            duration={3}
-            separator=","
-            decimals={0}
-            decimal=","
-            prefix="Children impacted to date: "
-            suffix=" "
-            onEnd={() => console.log('Ended! 👏')}
-            onStart={() => console.log('Started! 💨')}
-            // ref={CountUp => { this.myCountUp = CountUp; }}
-          >
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
-                </VisibilitySensor>
-              )}
-              {/* removing button in favor of page load */}
-            {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
-          </CountUp>
-        </h1>
+        
      </> 
     );
   }
