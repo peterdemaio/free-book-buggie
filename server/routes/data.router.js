@@ -51,28 +51,54 @@ router.post('/', (req,res) => {
             console.log('after query, before break. dataArr:', dataArr)
             break;
         case 'Time':
-            queryText = `SELECT "date", SUM("${sumColumn}") FROM "events"
-                         WHERE "date" > '${req.body.startDate}'
-                         AND "date" < '${req.body.endDate}'
-                         GROUP BY "date";`;
-            pool.query(queryText)
-            .then((response) => {
-                console.log(response.rows)
-                for (event of response.rows) {
-                    labelsArr.push(event.date)
-                    dataArr.push(event.sum)
-                }
-                res.send({
-                    data: dataArr,
-                    labels: labelsArr,
-                    label: label
+            if (req.body.timeUnit === 'Month') {
+                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                queryText = `SELECT DATE_PART('month', "date") AS "month", SUM("${sumColumn}") FROM "events"
+                            WHERE "date" > '${req.body.startDate}'
+                            AND "date" < '${req.body.endDate}'
+                            GROUP BY "month";`;
+                pool.query(queryText)
+                .then((response) => {
+                    console.log(response.rows)
+                    for (event of response.rows) {
+                        labelsArr.push(months[event.month-1])
+                        dataArr.push(event.sum)
+                    }
+                    res.send({
+                        data: dataArr,
+                        labels: labelsArr,
+                        label: label
+                    })
                 })
-            })
-            .catch((error) => {
-                console.log('data case Time error:', error)
-            })
-            console.log('after query, before break')
-            break;
+                .catch((error) => {
+                    console.log('data case Time error:', error)
+                })
+                console.log('after query, before break')
+                break;
+            } else if (req.body.timeUnit === 'Year') {
+                queryText = `SELECT DATE_PART('year', "date") AS "year", SUM("${sumColumn}") FROM "events"
+                            WHERE "date" > '${req.body.startDate}'
+                            AND "date" < '${req.body.endDate}'
+                            GROUP BY "year";`;
+                pool.query(queryText)
+                .then((response) => {
+                    console.log(response.rows)
+                    for (event of response.rows) {
+                        labelsArr.push(event.year)
+                        dataArr.push(event.sum)
+                    }
+                    res.send({
+                        data: dataArr,
+                        labels: labelsArr,
+                        label: label
+                    })
+                })
+                .catch((error) => {
+                    console.log('data case Time error:', error)
+                })
+                console.log('after query, before break')
+                break;
+            }
         case 'Organizations':
             queryText = `SELECT "org_name", SUM("${sumColumn}") FROM "events"
                              JOIN "organizations" ON "events".organizations_id = "organizations".id
