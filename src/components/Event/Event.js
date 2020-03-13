@@ -205,7 +205,6 @@ class CollectForm extends Component {
                                     }}
                                 />
                             </FormControl>
-
                             <Select>
                                 {optionItems}
                             </Select>

@@ -53,7 +53,15 @@ const styles = theme => ({
 
     },
     question: {
-        paddingLeft: '25px'
+        paddingLeft: '25px',
+        margin: '10px'
+    },
+    nameInput: {
+        width: '400px',
+    },
+    nameLine : {
+            paddingLeft: '35px',
+            // margin: '10px',
     }
 
 });
@@ -63,6 +71,7 @@ class NewOrganization extends Component {
         newEntry: {
             name: '',
             logo: '',
+            url: '',
             type: '',
             address_number: '',
             address_unit: '',
@@ -119,20 +128,28 @@ class NewOrganization extends Component {
                     justify="center"
                     alignItems="center"
                 >
-                    <Grid className={this.props.classes.form}
-                        item lg={4}
-                        justify="center"
-                    ><h1 align="center">Add New Organization</h1>
-                        <Paper elevation={5}
-                        >
+                    <h1 align="center">Add New Organization</h1>
+                    <Paper elevation={5}>
+                        <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
+                            <TextField
+                                className={this.props.classes.nameInput}
+                                margin="normal"
+                                size='medium'
+                                type="text"
+                                label="Name of Organization"
+                                onChange={(event) => this.handleChangeFor(event, 'name')} /></Grid>
+                        <Grid className={this.props.classes.form}
+                            item lg={4}
+                            justify="center">
+                            <br></br>
                             <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     margin="normal"
                                     size='medium'
                                     type="text"
-                                    label="Name of Organization"
-                                    onChange={(event) => this.handleChangeFor(event, 'name')} />
+                                    label="Website Link"
+                                    onChange={(event) => this.handleChangeFor(event, 'url')} />
                                 <span>{' '}</span>
                                 <TextField
                                     className={this.props.classes.inputs}
@@ -204,31 +221,31 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Age breakdown by percentage (Should add up to 100%):</p>
-                                    <Grid item>
-                                    
+                                <Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="integer"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_0_3')} />
-                                <span>0-3</span></Grid><Grid item>
-                                    
+                                    <span>0-3</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_4_7')} />
-                                <span>4-7</span></Grid><Grid item>
-                                    
+                                    <span>4-7</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_8-12')} />
-                               <span>8-12</span></Grid><Grid item>
-                                    
+                                    <span>8-12</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_13_18')} />
-                                <span>13-18</span></Grid>
+                                    <span>13-18</span></Grid>
                             </Grid>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -236,32 +253,32 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Racial breakdown by percentage (Should add up to 100%):</p>
-                                    <Grid item>
+                                <Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="integer"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_white')} />
-                                <span>White</span></Grid><Grid item>
+                                    <span>White</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_black')} />
-                                <span>Black or African American:</span></Grid><Grid item>
+                                    <span>Black or African American:</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_native')} />
-                               <span>American Indian or Alaska Native:</span></Grid><Grid item>
+                                    <span>American Indian or Alaska Native:</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_asian')} />
-                                <span>Asian</span></Grid><Grid item>
+                                    <span>Asian</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_pacific')} />
-                                <span>Native Hawaiian or Pacific Islander</span></Grid>
+                                    <span>Native Hawaiian or Pacific Islander</span></Grid>
                             </Grid>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -269,13 +286,14 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Percentage of children who qualify for free or reduced school lunch:</p>
-                                    <TextField
-                                        className={this.props.classes.demographicsInputs}
-                                        type="integer"
-                                        onChange={(event) => this.handleChangeFor(event, 'demographics_poverty')} />
+                                <TextField
+                                    className={this.props.classes.demographicsInputs}
+                                    type="integer"
+                                    onChange={(event) => this.handleChangeFor(event, 'demographics_poverty')} />
                             </Grid>
-                        </Paper>
-                    </Grid >
+
+                        </Grid >
+                    </Paper>
                     <Grid item lg={4}
                         justify="center"
                         className={this.props.classes.form}
@@ -321,13 +339,13 @@ class NewOrganization extends Component {
                         </Paper>
                     </Grid>
                     <Button className={this.props.classes.submitButton}
-                    onClick={this.handleClick}
-                    size={'large'}
-                    variant={'outlined'}>
-                    Add
+                        onClick={this.handleClick}
+                        size={'large'}
+                        variant={'outlined'}>
+                        Add
                 </Button>
                 </Grid>
-                
+
             </>
         )
     }
