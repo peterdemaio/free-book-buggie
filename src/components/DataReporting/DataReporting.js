@@ -11,7 +11,8 @@ class DataReporting extends Component {
             yAxis: 'Books',
             xAxis: 'Time',
             startDate: '2010-01-01',
-            endDate: '2021-01-01'
+            endDate: '2021-01-01',
+            timeUnit: 'Year'
         },
         title: 'Books Distributed'
     }
@@ -64,6 +65,17 @@ class DataReporting extends Component {
 
     changeTimeUnit = (event) => {
         console.log('in handleTimeUnitChange')
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                timeUnit: event.target.value
+            }
+        })
+        this.setState({
+            queryParams:
+                {...this.state.queryParams, timeUnit: event.target.value}
+        })
     }
 
     changeStartDate = (event) => {
