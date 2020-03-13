@@ -27,9 +27,9 @@ class OrganizationsListPage extends React.Component {
     onInputChange = (event) => {
         console.log(event.target.value)
         let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
-            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            organization.county.toLowerCase().includes(event.target.value.toLowerCase())
+            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) //|| 
+            // organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            // organization.county.toLowerCase().includes(event.target.value.toLowerCase())
             );
 
         this.props.dispatch({

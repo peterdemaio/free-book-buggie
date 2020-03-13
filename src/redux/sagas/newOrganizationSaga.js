@@ -13,7 +13,7 @@ function* postNewOrganization(action) {
         yield put ({type: 'UPDATE_ORGANIZATIONS', payload: response.data })
         
     } catch (error) {
-        console.log('Error in newOrganizationSaga: ', error);
+        // console.log('Error in newOrganizationSaga: ', error);
     }
 }
 

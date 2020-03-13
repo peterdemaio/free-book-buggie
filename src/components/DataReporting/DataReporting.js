@@ -9,30 +9,119 @@ class DataReporting extends Component {
         loading: true,
         queryParams: {
             yAxis: 'Books',
-            xAxis: 'Year'
+            xAxis: 'Time',
+            startDate: '2010-01-01',
+            endDate: '2021-01-01',
+            timeUnit: 'Year',
+            metric: 'Age'
         },
         title: 'Books Distributed'
     }
 
-    changeYAxis = async (event) => {
+    changeYAxis = (event) => {
         console.log('in changeYAxis. event.target.value:', event.target.value)
         console.log('old yAxis:', this.state.queryParams.yAxis)
         console.log('new yAxis:', this.state.queryParams.yAxis)
-        if (event.target.value === 'Books') {
-            this.setState({title: 'Books Distributed'})
-        } else if (event.target.value === 'Children') {
-            this.setState({title: 'Children Recipients'})
+        switch(event.target.value) {
+            case 'Books':
+                this.setState({title: 'Books Distributed'})
+                break;
+            case 'Children':
+                this.setState({title: 'Children Recipients'})
+                break;
+            case 'Adult ESL Learners':
+                this.setState({title: 'Adult ESL Learner Recipients'})
+                break;
+            default:
+                console.log('changeYAxis error')
         }
+
         this.props.dispatch({
             type: 'GET_DATA',
             payload: { 
-                yAxis: event.target.value,
-                xAxis: this.state.queryParams.xAxis
+                ...this.state.queryParams,
+                yAxis: event.target.value
             }
         })
         this.setState({
-            queryParams:
-                {...this.state.queryParams, yAxis: event.target.value}
+            queryParams: {
+                ...this.state.queryParams, yAxis: event.target.value
+            }
+        })
+    }
+
+    changeXAxis = (event) => {
+        console.log('in changeXAxis. event.target.value:', event.target.value)
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                xAxis: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams, xAxis: event.target.value
+            }
+        })
+    }
+
+    changeTimeUnit = (event) => {
+        console.log('in changeTimeUnit. event.target.value:', event.target.value)
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                metric: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams,  metric: event.target.value
+            }
+        })
+    }
+
+    changeMetric = (event) => {
+        console.log('in changeMetric')
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                metric: event.target.value
+            }
+        })
+    }
+
+    changeStartDate = (event) => {
+        console.log('in handleStartDateChange. event.target.value:', event.target.value)
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                startDate: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams, startDate: event.target.value
+            }
+        })
+    }
+
+    changeEndDate = (event) => {
+        console.log('in handleEndDateChange. event.target.value:', event.target.value)
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                endDate: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams, endDate: event.target.value
+            }
         })
     }
 
@@ -48,7 +137,57 @@ class DataReporting extends Component {
     }
 
     render() {
-        
+        console.log('in render. this.state.queryparams:', this.state.queryParams)
+        let thirdOption
+        switch (this.state.queryParams.xAxis) {
+            case 'Time':
+                thirdOption = <>
+                                <label for='thirdDropdown'>Time Unit</label>
+                                <select id='thirdDropdown' onChange={this.changeTimeUnit}>
+                                        <option value='Year'>Year</option>
+                                        <option value='Month'>Month</option>
+                                </select>
+                                <label for='startDate'>Start Date</label>
+                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                                <label for='endDate'>End Date</label>
+                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                              </>
+                break;
+            case 'Events':
+                thirdOption = <>
+                                <label for='startDate'>Start Date</label>
+                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                                <label for='endDate'>End Date</label>
+                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                              </>
+                break;
+            case 'Organizations':
+                thirdOption = <>
+                                <label for='startDate'>Start Date</label>
+                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                                <label for='endDate'>End Date</label>
+                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                              </>
+                break;
+            case 'Demographics':
+                thirdOption = <>
+                                <label for='metric'>Metric</label>
+                                <select id='thirdDropdown' onChange={this.changeMetric}>
+                                        <option value='Age'>Age</option>
+                                        <option value='Poverty'>Poverty</option>
+                                        <option value='Race'>Race</option>
+                                </select>
+                                <label for='startDate'>Start Date</label>
+                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                                <label for='endDate'>End Date</label>
+                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                              </>
+                break;
+            default: 
+                thirdOption = <>
+                              </>
+        }
+             
         if (this.state.loading) {
             return (
                 <div>
@@ -62,10 +201,20 @@ class DataReporting extends Component {
             return (
                 <>
                     <h1>DataReporting page</h1>
-                    <select id='measurement' onChange={this.changeYAxis}>
+                    <label for='yAxis'>Vertical Axis</label>
+                    <select id='yAxis' onChange={this.changeYAxis}>
                         <option value='Books'>Books</option>
                         <option value='Children'>Children</option>
+                        <option value='Adult ESL Learners'>Adult ESL Learners</option>
                     </select>
+                    <label for='xAxis'>Horizontal Axis</label>
+                    <select id='xAxis' onChange={this.changeXAxis}>
+                        <option value='Time'>Time</option>
+                        <option value='Events'>Events</option>
+                        <option value='Organizations'>Organizations</option>
+                        <option value='Demographics'>Demographics</option>
+                    </select>
+                    {thirdOption}
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
                             data={this.props.reduxStore.chartData}
