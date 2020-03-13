@@ -40,7 +40,8 @@ const styles = theme => ({
     },
     inputs: {
         width: '250px',
-        padding: '10px'
+        padding: '22px',
+        margin: '10px'
     },
     submitButton: {
         justify: 'center',
@@ -127,7 +128,7 @@ class CollectForm extends Component {
 
         let optionItems = this.props.reduxStore.organizations.map(org =>
 
-            <MenuItem key={org.org_name}>{org.org_name} </MenuItem>
+            <MenuItem key={org.org_name} className={this.props.classes.inputs}>{org.org_name} </MenuItem>
         );
 
         const { classes } = this.props;
@@ -246,6 +247,7 @@ class CollectForm extends Component {
                                 <Button color="primary">
                                     Cancel
                                 </Button>
+                                
                                 <Button onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>

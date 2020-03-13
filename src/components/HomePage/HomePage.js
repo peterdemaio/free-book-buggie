@@ -2,20 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
+import {
+  Button
+}
+  from '@material-ui/core';
+
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 const UserPage = (props) => (
   <div>
     <h1 id="welcome">
-      Welcome, { props.user.username }!
+      Welcome, {props.user.username}!
     </h1>
     <p>Your ID is: {props.user.id}</p>
-    <button onClick={() => props.history.push('/collectBooks')}>Collect Books</button>
-    <button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</button>
-    <button onClick={() => props.history.push('/dataReporting')}>Data Reporting</button>
-    <br/>
-    <button onClick={() => props.history.push('/organizationsListPage')}>Organization List</button>
+    <Button onClick={() => props.history.push('/event')}>New Event</Button>
+    <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button>
+    <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button>
+    <br />
+    <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button>
     <LogOutButton className="log-in" />
   </div>
 );
