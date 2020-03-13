@@ -73,8 +73,7 @@ router.post('/', (req,res) => {
                 .catch((error) => {
                     console.log('data case Time error:', error)
                 })
-                console.log('after query, before break')
-                break;
+                
             } else if (req.body.timeUnit === 'Year') {
                 queryText = `SELECT DATE_PART('year', "date") AS "year", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
@@ -96,9 +95,8 @@ router.post('/', (req,res) => {
                 .catch((error) => {
                     console.log('data case Time error:', error)
                 })
-                console.log('after query, before break')
-                break;
             }
+            break;
         case 'Organizations':
             queryText = `SELECT "org_name", SUM("${sumColumn}") FROM "events"
                              JOIN "organizations" ON "events".organizations_id = "organizations".id
@@ -124,27 +122,39 @@ router.post('/', (req,res) => {
             console.log('after query, before break')
             break;
         case 'Demographics':
-            queryText = `SELECT * FROM "events"
-                         JOIN "organizations" ON "events".organizations_id = "organizations".id
-                         WHERE "date" > '${req.body.startDate}'
-                         AND "date" < '${req.body.endDate}';`;
-            pool.query(queryText)
-            .then((response) => {
-                console.log(response.rows)
-                for (event of response.rows) {
-                    // labelsArr.push(event.org_name)
-                }
-                res.send({
-                    data: dataArr,
-                    labels: labelsArr,
-                    label: label
-                })
-            })
-            .catch((error) => {
-                console.log('data case Demographics error:', error)
-            })
-            console.log('after query, before break')
-            break;
+            switch (req.body.metric) {
+                case 'Age':
+                    queryText = `SELECT * FROM "events"
+                    JOIN "organizations" ON "events".organizations_id = "organizations".id
+                    JOIN "demographics_age" ON "organizations".id = "demographics_age".organization_id
+                    WHERE "date" > '${req.body.startDate}'
+                    AND "date" < '${req.body.endDate}';`;
+                    pool.query(queryText)
+                    .then((response) => {
+                        console.log(response.rows)
+                        labelsArr = ['0-3','4-7','8-12','13-18']
+                        dataArr = [0,0,0,0]
+                        for (ageGroup in labelsArr) {
+                            for (event of response.rows) {
+                                console.log(Math.round(((event[labelsArr[ageGroup]])/100)*event[sumColumn]))
+                                dataArr[ageGroup] += Math.round((event[labelsArr[ageGroup]]/100)*event[sumColumn])
+                            }
+                        }
+                        console.log(dataArr)
+                        res.send({
+                            data: dataArr,
+                            labels: labelsArr,
+                            label: label
+                        })
+                    })
+                    .catch((error) => {
+                        console.log('data case Demographics error:', error)
+                    })
+                    console.log('after query, before break')
+                    break
+            }
+            
+            
     }
     console.log('dataArr:', dataArr)
     console.log('labelsArr:', labelsArr)
