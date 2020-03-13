@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
 //importing components for animated countup
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import CountUp, { startAnimation } from 'react-countup';
-// import VisibilitySensor from 'react-visibility-sensor';
+import VisibilitySensor from 'react-visibility-sensor';
 
 
 
@@ -15,22 +15,13 @@ import CountUp, { startAnimation } from 'react-countup';
 // and then instead of `props.user.username` you could use `user.username`
 class UserPage extends Component {
 
-  componentDidMount() {
-    console.log('in componentDidMount')
-    
-    
-  }
-
-
-
   render() {
 
     return (
-      <div>
+      <>
         <h1 id="welcome">
           Welcome, {this.props.user.username}!
     </h1>
-
         <p>Your ID is: {this.props.user.id}</p>
         <button onClick={() => this.props.history.push('/collectBooks')}>Collect Books</button>
         <button onClick={() => this.props.history.push('/distributeBooks')}>Distribute Books</button>
@@ -38,8 +29,6 @@ class UserPage extends Component {
         <br />
         <button onClick={() => this.props.history.push('/organizationsListPage')}>Organization List</button>
         <LogOutButton className="log-in" />
-
-
         <h1>
           <CountUp
             start={0}
@@ -52,13 +41,20 @@ class UserPage extends Component {
             suffix=" "
             onEnd={() => console.log('Ended! 👏')}
             onStart={() => console.log('Started! 💨')}
+            // ref={CountUp => { this.myCountUp = CountUp; }}
           >
-            {({ countUpRef, start }) => (
+              {({ countUpRef, start }) => (
+                <VisibilitySensor onChange={start} delayedCall>
+                  <span ref={countUpRef} />
+                </VisibilitySensor>
+              )}
+              {/* removing button in favor of page load  */}
+            {/* {({ countUpRef, start }) => (
               <div>
                 <span ref={countUpRef} />
                 <button onClick={start}>Start</button>
               </div>
-            )}
+            )} */}
           </CountUp>
           <CountUp
             start={0}
@@ -71,17 +67,23 @@ class UserPage extends Component {
             suffix=" "
             onEnd={() => console.log('Ended! 👏')}
             onStart={() => console.log('Started! 💨')}
+            // ref={CountUp => { this.myCountUp = CountUp; }}
           >
-            {({ countUpRef, start }) => (
+              {({ countUpRef, start }) => (
+                <VisibilitySensor onChange={start} delayedCall>
+                  <span ref={countUpRef} />
+                </VisibilitySensor>
+              )}
+              {/* removing button in favor of page load */}
+            {/* {({ countUpRef, start }) => (
               <div>
                 <span ref={countUpRef} />
                 <button onClick={start}>Start</button>
               </div>
-            )}
+            )} */}
           </CountUp>
         </h1>
-
-      </div>
+     </> 
     );
   }
 }
