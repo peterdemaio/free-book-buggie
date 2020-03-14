@@ -116,6 +116,3 @@ CREATE TABLE  "user"(
     "password" VARCHAR (1000) NOT NULL,
     "admin" BOOLEAN DEFAULT false
 );
-
-INSERT INTO "user" ("username", "password", "admin")
-VALUES ('admin', 'admin', TRUE);
