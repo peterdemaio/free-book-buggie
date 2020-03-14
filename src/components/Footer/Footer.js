@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; The Free Book Buggie
+    {/* &copy; The Free Book Buggie */}
   </footer>
 );
 

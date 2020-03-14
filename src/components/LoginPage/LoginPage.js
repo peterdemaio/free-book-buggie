@@ -106,10 +106,14 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <div className="login-div"
+
+        <div 
+        className="login-div"
           onSubmit={this.login}>
-          <h4 className="login-label">User Login</h4>
-          <div>
+          {/* <h4 className="login-label">User Login</h4> */}
+          {/* <br></br> */}
+
+          <div className="username-div">
             <label htmlFor="username">
               Username:
               <input
@@ -120,7 +124,8 @@ class LoginPage extends Component {
               />
             </label>
           </div>
-          <div>
+
+            <div className="password-div">
             <label htmlFor="password">
               Password:
               <input
@@ -131,16 +136,19 @@ class LoginPage extends Component {
               />
             </label>
           </div>
-          <div>
+
+          <div >
             <input
-              className="log-in"
+              className="login-button"
               type="submit"
               name="submit"
-              value="Log In dflkdjfkd"
+              value="User Log In"
               onClick={this.login}
             />
           </div>
+
         </div>
+        {/* Volunteer Registration moved to home page */}
         {/* <center>
           <button
             type="button"

@@ -28,8 +28,10 @@ const UserPage = (props) => (
   </div>
   
   <div>
+    <h3>Register a new volunteer here: </h3>
   <center >
     <button
+      
       className="login-button"
       type="button"
       onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
