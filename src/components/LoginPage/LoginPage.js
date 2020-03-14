@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 //importing components for animated countup
-
 import CountUp  from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
-
-
-
-
-
-
 
 class LoginPage extends Component {
   state = {
@@ -20,7 +13,8 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
-
+    console.log('in login function');
+    
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
@@ -113,7 +107,7 @@ class LoginPage extends Component {
           </h2>
         )}
         <div className="login-div"
-        onSubmit={this.login}>
+          onSubmit={this.login}>
           <h4 className="login-label">User Login</h4>
           <div>
             <label htmlFor="username">
@@ -142,21 +136,20 @@ class LoginPage extends Component {
               className="log-in"
               type="submit"
               name="submit"
-              value="Log In"
+              value="Log In dflkdjfkd"
+              onClick={this.login}
             />
           </div>
         </div>
-        
-        <center >
+        <center>
           <button
-            className="login-button"
             type="button"
+            className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Volunteer Registration
           </button>
         </center>
-
       </div>
       </>
 
