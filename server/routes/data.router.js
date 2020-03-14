@@ -6,6 +6,8 @@ const router = express.Router();
 router.post('/', (req,res) => {
     console.log('req.body.xAxis:', req.body.xAxis)
     console.log('req.body.yAxis:', req.body.yAxis)
+    console.log(req.body);
+    
     let dataArr = []
     let labelsArr = []
     let label = req.body.yAxis
