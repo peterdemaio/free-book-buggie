@@ -28,7 +28,7 @@ const UserPage = (props) => (
   </div>
   
   <div>
-  {/* <center >
+  <center >
     <button
       className="login-button"
       type="button"
@@ -36,7 +36,7 @@ const UserPage = (props) => (
     >
       Volunteer Registration
           </button>
-  </center> */}
+  </center>
   </div>
   </>
 );

@@ -141,7 +141,7 @@ class LoginPage extends Component {
             />
           </div>
         </div>
-        <center>
+        {/* <center>
           <button
             type="button"
             className="link-button"
@@ -149,7 +149,7 @@ class LoginPage extends Component {
           >
             Volunteer Registration
           </button>
-        </center>
+        </center> */}
       </div>
       </>
 
