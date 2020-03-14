@@ -136,7 +136,7 @@ router.post('/', (req,res) => {
                         dataArr = [0,0,0,0]
                         for (ageGroup in labelsArr) {
                             for (event of response.rows) {
-                                console.log(Math.round(((event[labelsArr[ageGroup]])/100)*event[sumColumn]))
+                                //console.log(Math.round(((event[labelsArr[ageGroup]])/100)*event[sumColumn]))
                                 dataArr[ageGroup] += Math.round((event[labelsArr[ageGroup]]/100)*event[sumColumn])
                             }
                         }

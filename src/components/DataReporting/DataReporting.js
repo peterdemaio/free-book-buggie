@@ -45,7 +45,8 @@ class DataReporting extends Component {
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams, yAxis: event.target.value
+                ...this.state.queryParams, 
+                yAxis: event.target.value
             }
         })
     }
@@ -61,7 +62,8 @@ class DataReporting extends Component {
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams, xAxis: event.target.value
+                ...this.state.queryParams, 
+                xAxis: event.target.value
             }
         })
     }
@@ -72,22 +74,29 @@ class DataReporting extends Component {
             type: 'GET_DATA',
             payload: {
                 ...this.state.queryParams,
-                metric: event.target.value
+                timeUnit: event.target.value
             }
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams,  metric: event.target.value
+                ...this.state.queryParams,  
+                timeUnit: event.target.value
             }
         })
     }
 
     changeMetric = (event) => {
-        console.log('in changeMetric')
+        console.log('in changeMetric. event.target.value:', event.target.value)
         this.props.dispatch({
             type: 'GET_DATA',
             payload: {
                 ...this.state.queryParams,
+                metric: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams,  
                 metric: event.target.value
             }
         })
