@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 //importing components for animated countup
-// import { render } from 'react-dom';
-import CountUp, { startAnimation } from 'react-countup';
+
+import CountUp  from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
+
+
+
+
+
+
 
 class LoginPage extends Component {
   state = {
@@ -38,7 +43,10 @@ class LoginPage extends Component {
   render() {
     return (
       <>
-        <h1>
+      <div className="counter-div">
+        <h1 className="counter-style"
+            // font-size= "200%"
+        >
           <CountUp
             start={0}
             end={18164}
@@ -46,7 +54,7 @@ class LoginPage extends Component {
             separator=","
             decimals={0}
             decimal=","
-            prefix="Total books received to date: "
+            prefix="Books received to date: "
             suffix=" "
             onEnd={() => console.log('Ended! 👏')}
             onStart={() => console.log('Started! 💨')}
@@ -93,6 +101,7 @@ class LoginPage extends Component {
             )} */}
           </CountUp>
         </h1>
+        </div>
       
       <div>
         {this.props.errors.loginMessage && (
@@ -103,8 +112,9 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
+        <div className="login-div"
+        onSubmit={this.login}>
+          <h4 className="login-label">User Login</h4>
           <div>
             <label htmlFor="username">
               Username:
@@ -135,16 +145,18 @@ class LoginPage extends Component {
               value="Log In"
             />
           </div>
-        </form>
-        <center>
+        </div>
+        
+        <center >
           <button
+            className="login-button"
             type="button"
-            className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Register
+            Volunteer Registration
           </button>
         </center>
+
       </div>
       </>
 

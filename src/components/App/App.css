@@ -22,7 +22,7 @@ input {
     margin-bottom: 10px;
 }
 
-.log-in, .log-out, .register {
+.log-out, .register {
   background-color: #00acb0;
   border-radius: 4px;
   color: #f8f8f8;
@@ -35,6 +35,8 @@ input {
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
 }
+
+
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
@@ -57,3 +59,51 @@ input {
     padding: 25px;
     border-radius: 2px;
 }
+
+.login-label, .login-div, {
+    font-family: "Museo Slab";
+    color: #14771B;
+    size: 18px;
+  }
+  /* login button styling */
+  .login-button, .log-in {
+    /* color:  #14771B; */
+    border: none;
+    font-family: "Museo Slab";
+    border-bottom:  1px solid #444; 
+    cursor: pointer;
+    size: 20px;
+    border-radius: 10;
+    background-color:#14771B;
+    border-radius: 10px;
+    color: #f8f8f8;
+    min-height: 50px;
+    min-width: 100px;
+    outline:0;
+    cursor: pointer;
+
+}
+
+  /* styling for up-counter component on login page */
+  .counter-style {
+    font-family: "Museo Slab";
+    color: #3CB64A;
+    font-weight: 900;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 8px;
+    /* size: 50px; */
+  }
+  .counter-div {
+    position: static;
+    /* width: 800px; */
+    /* height: 200px; */
+    /* z-index: 30; */
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 200px;
+    /* border: 8px solid, #3CB64A; */
+    font-size: 120%;
+    width: 58%;
+  }
+  
