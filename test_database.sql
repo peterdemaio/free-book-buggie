@@ -40,13 +40,11 @@ VALUES ('Ctulhu Mythos', 'Pastor', 1, '800-246-1357', 'office', 'ctulhu@dagon.co
 ('Craig Pelton', 'Teacher', 4, '651-555-4332', 'office', 'cpelton@greendale.com'),
 ('Fabrizzio Cavatappi', 'Boilerman', 5, '715-555-4321', 'cell', 'cavatappi@noodlyappendage.com');
 
--- Events
-
 CREATE TABLE "events" (
 	"id" serial PRIMARY KEY,
 	"event_name" varchar(255) NOT NULL,
 	"organizations_id" integer REFERENCES organizations,
-    "contact_id" integer REFERENCES contacts,
+    "contacts_id" integer REFERENCES contacts,
 	"date" DATE NOT NULL,
 	"start_time" TIME,
 	"end_time" TIME,
@@ -54,17 +52,17 @@ CREATE TABLE "events" (
 	"books_out" int,
 	"number_of_children" int,
 	"number_of_adult_esl_learners" int,
+	"location" varchar(255),
+	"volunteers" varchar(255),
 	"notes" varchar(255)
 );
 
-INSERT INTO "events" ("event_name", "organizations_id", "contact_id", "date", "start_time", "end_time", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners")
+INSERT INTO "events" ("event_name", "organizations_id", "contacts_id", "date", "start_time", "end_time", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners")
 VALUES ('Free Book Giveaway', 1, 1, '2020-02-29', '10:00', '14:00', 0, 142, 64, 0),
 ('Books for Pets Day', 2, 2, '2019-11-27', '16:00', '20:00', 25, 62, 15, 0),
 ('Vandelay Book Day', 3, 3, '2019-12-18', '12:00', '13:00', 0, 10, 3, 0),
 ('Books Down Under', 4, 4, '2019-10-01', '16:00', '20:00', 10, 75, 25, 0),
 ('Noodly Holiday Party', 5, 5, '2019-12-11', '16:00', '19:00', 0, 15, 5, 0);
-
---demographics
 
 CREATE TABLE "demographics_age" (
     "id" serial PRIMARY KEY,
@@ -76,7 +74,6 @@ CREATE TABLE "demographics_age" (
 );
 
 INSERT INTO "demographics_age" ("organizations_id", "0-3", "4-7", "8-12", "13-18")
-
 VALUES(1, 0, 75, 25, 0),
 (2, 25, 75, 0, 0),
 (3, 25, 50, 25, 0),
@@ -112,35 +109,6 @@ VALUES(1, 75),
 (3, 0),
 (4, 100),
 (5, 42);
-
--- book tracking
-
-CREATE TABLE "books_in" (
-    "id" serial PRIMARY KEY,
-    "events_id" integer REFERENCES events,
-    "number_of_books" integer
-
-);
-
-INSERT INTO "books_in" ("events_id", "number_of_books")
-VALUES(1, 0),
-(2, 350),
-(3, 0),
-(4, 1000),
-(5, 0);
-
-CREATE TABLE "books_out" (
-    "id" serial PRIMARY KEY,
-    "events_id" integer REFERENCES events,
-    "number_of_books" integer
-);
-
-INSERT INTO "books_out" ("events_id", "number_of_books")
-VALUES(1, 350),
-(2,0),
-(3, 700),
-(4, 250),
-(5, 150);
 
 CREATE TABLE  "user"(
     "id" serial PRIMARY KEY,
