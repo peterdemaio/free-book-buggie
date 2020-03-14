@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 class DataReporting extends Component {
-
+    
     state = {
         loading: true,
         queryParams: {
@@ -15,8 +15,11 @@ class DataReporting extends Component {
             timeUnit: 'Year',
             metric: 'Age'
         },
-        title: 'Books Distributed'
+        title: 'Books Distributed',
+        myRef: React.createRef()
     }
+
+    
 
     changeYAxis = (event) => {
         console.log('in changeYAxis. event.target.value:', event.target.value)
@@ -133,8 +136,12 @@ class DataReporting extends Component {
             }
         })
     }
-
+m
     componentDidMount() {
+        //let myRef = React.createRef()
+
+        console.log('this.state.myRef:', this.state.myRef)
+        //console.log('this.myRef.current.getElementsByTagName("canvas")[0]:', this.myRef.current.getElementsByTagName("canvas")[0])
         console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
@@ -147,7 +154,11 @@ class DataReporting extends Component {
 
     render() {
         console.log('in render. this.state.queryparams:', this.state.queryParams)
+        
+        // declare jsx object that contains conditionally-rendered dropdowns 
         let thirdOption
+
+        // conditionally define the thirdOption jsx object based on selected xAxis
         switch (this.state.queryParams.xAxis) {
             case 'Time':
                 thirdOption = <>
@@ -214,7 +225,6 @@ class DataReporting extends Component {
                     <select id='yAxis' onChange={this.changeYAxis}>
                         <option value='Books'>Books</option>
                         <option value='Children'>Children</option>
-                        <option value='Adult ESL Learners'>Adult ESL Learners</option>
                     </select>
                     <label for='xAxis'>Horizontal Axis</label>
                     <select id='xAxis' onChange={this.changeXAxis}>
@@ -223,9 +233,13 @@ class DataReporting extends Component {
                         <option value='Organizations'>Organizations</option>
                         <option value='Demographics'>Demographics</option>
                     </select>
+
+                    {/* render conditionally-defined jsx from above */}
                     {thirdOption}
+
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
+                            ref={this.state.myRef}
                             data={this.props.reduxStore.chartData}
                             width={1000}
                             height={500}

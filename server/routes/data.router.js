@@ -126,7 +126,7 @@ router.post('/', (req,res) => {
                 case 'Age':
                     queryText = `SELECT * FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
-                    JOIN "demographics_age" ON "organizations".id = "demographics_age".organization_id
+                    JOIN "demographics_age" ON "organizations".id = "demographics_age".organizations_id
                     WHERE "date" > '${req.body.startDate}'
                     AND "date" < '${req.body.endDate}';`;
                     pool.query(queryText)
@@ -135,10 +135,14 @@ router.post('/', (req,res) => {
                         labelsArr = ['0-3','4-7','8-12','13-18']
                         dataArr = [0,0,0,0]
                         for (ageGroup in labelsArr) {
+                            console.log('age group:', labelsArr[ageGroup])
                             for (event of response.rows) {
-                                //console.log(Math.round(((event[labelsArr[ageGroup]])/100)*event[sumColumn]))
+                                console.log(event[labelsArr[ageGroup]], '% *', event[sumColumn])
+                                console.log('=', Math.round(((event[labelsArr[ageGroup]])/100)*event[sumColumn]))
                                 dataArr[ageGroup] += Math.round((event[labelsArr[ageGroup]]/100)*event[sumColumn])
                             }
+                            console.log('sum:', dataArr[ageGroup])
+
                         }
                         console.log(dataArr)
                         res.send({
