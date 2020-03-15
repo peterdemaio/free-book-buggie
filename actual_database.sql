@@ -138,4 +138,4 @@ VALUES( '360 Communities','https://360communities.org/wp-content/uploads/2019/04
 ('Western Service Center', NULL, 'municiapl', '14955', 'Galaxie Avenue', NULL, 'Apple Valley', 'MN', 'Dakota', '55124', NULL),
 ('Dakota City Heritage Village', 'http://www.dakotacity.org/wp-content/uploads/2015/03/DCHV.Logo1_.jpg', 'municipal', '4008', '220th ST', NULL, 'Farmington', 'MN', 'Dakota', '55024', NULL),
 ('Easter Lutheran Church', 'https://easter.org/wordpress/wp-content/uploads/2017/08/Easter_Logo_v2f-Notag-NEWWEB3-300x161.jpg', 'religious', '4200', 'Pilot Knob RD', NULL, 'Eagan', 'MN', 'Dakota', '55122', NULL),
-('Community Education Burnsville', 'https://www.communityed191.org/thumbnails/www.communityed191.org/files/images/logo_0_auto_auto.png', '200', 'W Burnsville PKWY', 'Suite 100', 'Burnsville', 'MN', 'Dakota', '55337', NULL),
+('Community Education Burnsville', 'https://www.communityed191.org/thumbnails/www.communityed191.org/files/images/logo_0_auto_auto.png', '200', 'W Burnsville PKWY', 'Suite 100', 'Burnsville', 'MN', 'Dakota', '55337', NULL)
