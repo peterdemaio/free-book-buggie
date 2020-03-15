@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     console.log('in organizations router.get', req.body)
     pool.query(queryText)
         .then(result => {
-            console.log(result.rows)
+            //console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
             console.log('error in organizations GET', error)
