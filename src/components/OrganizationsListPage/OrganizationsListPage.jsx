@@ -18,6 +18,7 @@ const styles = {
 class OrganizationsListPage extends React.Component {
 
     componentDidMount() {
+        console.log('trying to make an updateorganizations reducer', this.props.reduxStore.organizations)
         this.props.dispatch({
             type: 'UPDATE_ORGANIZATIONS',
             payload: this.props.reduxStore.organizations
@@ -27,9 +28,9 @@ class OrganizationsListPage extends React.Component {
     onInputChange = (event) => {
         console.log(event.target.value)
         let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) //|| 
-            // organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            // organization.county.toLowerCase().includes(event.target.value.toLowerCase())
+            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            organization.county_name.toLowerCase().includes(event.target.value.toLowerCase())
             );
 
         this.props.dispatch({
