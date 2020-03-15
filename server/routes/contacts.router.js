@@ -7,10 +7,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
     const queryText = `SELECT "contacts".id, "contacts".contact_name, "contacts".phone_number, "contacts".phone_number_type, "contacts".email, "contacts".notes, "organizations".org_name FROM "contacts"
     JOIN "organizations" ON "organizations".id = "contacts".organizations_id;`
-    console.log('in contacts router.get', req.body)
+    //console.log('in contacts router.get', req.body)
     pool.query(queryText)
         .then(result => {
-            console.log(result.rows)
+            //console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
             console.log('error in contacts GET', error)
