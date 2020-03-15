@@ -8,6 +8,7 @@ import contacts from './contacts';
 import updateContacts from './updateContacts';
 import demographicsBoolean from './demographicsBooleanReducer';
 import chartData from './chartDataReducer';
+import counties from './counties'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   contacts,
   updateContacts,
   demographicsBoolean,
-  chartData
+  chartData,
+  counties
 });
 
 export default rootReducer;

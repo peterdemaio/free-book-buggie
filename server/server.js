@@ -17,6 +17,7 @@ const demographicsRouter = require('./routes/demographics.router');
 const eventsRouter = require('./routes/events.router');
 const organizationsRouter = require('./routes/organizations.router');
 const dataRouter = require('./routes/data.router');
+const countiesRouter = require('./routes/counties.router')
 
 
 // Body parser middleware
@@ -39,6 +40,7 @@ app.use('/api/demographics', demographicsRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/organizations', organizationsRouter);
 app.use('/api/data', dataRouter);
+app.use('/api/counties', countiesRouter)
 
 // Serve static files
 app.use(express.static('build'));

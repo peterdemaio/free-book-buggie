@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+
+import {
+    Button,
+    TextField,
+    Grid,
+    FormLabel,
+    FormControl,
+    Paper,
+    MenuItem,
+    Select,
+    InputLabel
+}
+    from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
@@ -59,11 +64,24 @@ const styles = theme => ({
     nameInput: {
         width: '400px',
     },
-    nameLine : {
-            paddingLeft: '35px',
-            // margin: '10px',
-    }
+    nameLine: {
+        paddingLeft: '35px',
+        // margin: '10px',
+    },
+    dropdown: {
+        paddingLeft: '25px'
 
+    },
+    dropdownMenu: {
+        padding: '25px',
+        width: '250px',
+        paddingLeft: '25px',
+        margin: '10px'
+    },
+    dropdownItem: {
+        width: '250px',
+        paddingLeft: '25px'
+    }
 });
 
 class NewOrganization extends Component {
@@ -98,14 +116,21 @@ class NewOrganization extends Component {
 
         },
     }
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'FETCH_COUNTIES'
+        })
+    }
+
     handleChangeFor = (event, propertyName) => {
-        console.log(event.target.value, propertyName);
+        console.log('Setting state for:', event.target.value, propertyName);
         this.setState({
             newEntry: {
                 ...this.state.newEntry,
                 [propertyName]: event.target.value
             }
         })
+        console.log(this.state.newEntry)
     }
     handleClick = async (event) => {
         event.preventDefault()
@@ -116,7 +141,7 @@ class NewOrganization extends Component {
                 payload: this.state.newEntry
             })
             alert('Organization added!')
-            
+
             this.props.history.push('/organizationsListPage')
         } catch {
             console.log('dispatch error')
@@ -210,13 +235,19 @@ class NewOrganization extends Component {
                                     type="text"
                                     label="Zip"
                                     onChange={(event) => this.handleChangeFor(event, 'zip')} />
-                                <span>{' '}</span>
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    type="text"
-                                    label="County"
-                                    onChange={(event) => this.handleChangeFor(event, 'county')} />
                             </span>
+                            <br></br>
+                            <span className={this.props.classes.dropdown}>County:  </span>
+                            <FormControl >
+                                <Select
+                                    native
+                                    className={this.props.classes.dropdownItem}
+                                    onChange={(event) => this.handleChangeFor(event, 'county')}>
+                                    {this.props.reduxStore.counties.map(county =>
+                                        <option value={county.id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
+                                    )}
+                                </Select>
+                            </FormControl>
                             <h3 className={this.props.classes.question}>If you have demographics information please record it below.</h3>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -348,7 +379,6 @@ class NewOrganization extends Component {
                         Add
                 </Button>
                 </Grid>
-
             </>
         )
     }
