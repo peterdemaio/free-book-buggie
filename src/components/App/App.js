@@ -34,8 +34,6 @@ class App extends Component {
 
       type: 'FETCH_USER'
     })
-
-
     this.props.dispatch({
       type: 'GET_ORGANIZATIONS'
     })
