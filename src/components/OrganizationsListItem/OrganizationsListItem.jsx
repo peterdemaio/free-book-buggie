@@ -180,7 +180,7 @@ class OrganizationsListPageItem extends React.Component {
                                 <span>{this.props.org.zip} </span>
                             </div>
                             <div>
-                                <span>County: {this.props.org.county} </span>
+                                <span>County: {this.props.org.county_name} </span>
                             </div>
                             <br></br>
                             <br></br>
