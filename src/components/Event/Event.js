@@ -195,22 +195,6 @@ class CollectForm extends Component {
                                     label="Location of Event"
                                     onChange={(event) => this.handleInputChangeFor(event, 'location')}
                                 />
-                            
-                            <Select>
-                                {optionItems}
-                            </Select>
-
-                            {/* <FormControl
-                                className={classes.FormControl} >
-                                <select>
-                                    {optionItems}
-                                </select>
-                            </FormControl> */}
-
-                            <FormControl
-                                className={this.props.classes.FormControl}
-                                value={this.state.start_time}
-                                onChange={(event) => this.handleInputChangeFor(event, 'start_time')}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.start_time}
@@ -283,7 +267,6 @@ class CollectForm extends Component {
                                 <Button onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>
-                            </FormControl>
                             </span>
                         </Paper>
                     </Grid>
