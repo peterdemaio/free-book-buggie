@@ -99,6 +99,7 @@ class NewOrganization extends Component {
             county: '',
             zip: '',
             contact_name: '',
+            title: '',
             phone_number: '',
             phone_number_type: '',
             email: '',
@@ -343,27 +344,33 @@ class NewOrganization extends Component {
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
-                                    label="Phone Number"
-                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                    label="Title"
+                                    helperText="director, volunteer, etc"
+                                    onChange={(event) => this.handleChangeFor(event, 'title')} />
                             </span>
                             <br></br>
                             <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
+                                    label="Phone Number"
+                                    helperText="xxx-xxx-xxxx"
+                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
                                     label="Phone Number Type"
                                     helperText="Mobile, Home, etc."
                                     onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
-
-                                <TextField
+                                <br></br>
+                            </span>
+                            <span className={this.props.classes.line}>
+                            <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
                                     label="Email"
                                     helperText="name@mail.com"
                                     onChange={(event) => this.handleChangeFor(event, 'email')} />
-                                <br></br>
-                            </span>
-                            <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"

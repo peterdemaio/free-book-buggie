@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
-import {withStyles, Grid } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 
 const styles = {
-    input : {
+    input: {
         justify: 'center'
     },
-    list : {
+    list: {
         paddingLeft: '25px',
         paddingRight: '25px'
         // margin: 'px'
@@ -17,25 +17,29 @@ const styles = {
 
 class OrganizationsListPage extends React.Component {
 
+    state = {
+        organizations: [],
+        filteredOrganizations: []
+    }
+
     componentDidMount() {
-        console.log('trying to make an updateorganizations reducer', this.props.reduxStore.organizations)
-        this.props.dispatch({
-            type: 'UPDATE_ORGANIZATIONS',
-            payload: this.props.reduxStore.organizations
-        })
+        fetch(this.props.dispatch({
+            type: 'GET_ORGANIZATIONS'
+        }))
+        .then(this.setState({
+            organizations: this.props.reduxStore.organizations,
+            filteredOrganizations: this.props.reduxStore.organizations
+        }))
     }
 
     onInputChange = (event) => {
-        console.log(event.target.value)
-        let newlyDisplayed = this.props.reduxStore.organizations.filter( 
-            organization => organization.org_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
-            organization.city.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            organization.county_name.toLowerCase().includes(event.target.value.toLowerCase())
-            );
-
-        this.props.dispatch({
-            type: 'UPDATE_ORGANIZATIONS',
-            payload: newlyDisplayed
+        let searchQuery = event.target.value.toLowerCase()
+        this.setState({
+            filteredOrganizations: this.props.reduxStore.organizations.filter(
+                organization => organization.org_name.toLowerCase().includes(searchQuery) ||
+                    organization.city.toLowerCase().includes(searchQuery) ||
+                    organization.county_name.toLowerCase().includes(searchQuery)
+            )
         })
     }
 
@@ -45,20 +49,20 @@ class OrganizationsListPage extends React.Component {
                 <div>
                     <span>Search for an organization by name, city or county: </span>
 
-                    <Input 
+                    <Input
                         className={this.props.classes.input}
                         placeholder="search here "
                         onChange={this.onInputChange}>
                     </Input>
                 </div>
                 <div>
-                    <Grid container 
-                    className={this.props.classes.list}
-                    direction="column"
-                    justify="space-evenly"
-                    alignItems="left"
+                    <Grid container
+                        className={this.props.classes.list}
+                        direction="column"
+                        justify="space-evenly"
+                        alignItems="left"
                     >
-                        {this.props.reduxStore.updateOrganizations.map(org =>
+                        {this.state.filteredOrganizations.map(org =>
 
                             <OrganizationsListItem key={org.id} org={org} />
                         )}
