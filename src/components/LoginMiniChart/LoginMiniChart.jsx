@@ -12,13 +12,13 @@ class LoginMiniChart extends Component {
         this.props.dispatch({
             type: 'GET_DATA',
             payload: {
-                yAxis: 'Books',
+                yAxis: 'Books Collected',
                 xAxis: 'Time',
                 startDate: '2010-01-01',
                 endDate: '2021-01-01',
                 timeUnit: 'Month'
             },
-            title: 'Books Distributed',
+            title: 'Books Collected',
         })
         this.setState({ loading: false })
     }
@@ -32,8 +32,8 @@ class LoginMiniChart extends Component {
         <div style={{ marginLeft: '12%', marginRight: '12%' }}>
             <Bar
                 data={this.props.reduxStore.chartData}
-                width={1000}
-                height={500}
+                width={600}
+                height={200}
                 options={{
                     
                     legend: {
