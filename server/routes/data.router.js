@@ -12,11 +12,14 @@ router.post('/', (req,res) => {
     let queryText;
     let sumColumn;
     switch(req.body.yAxis) {
-        case 'Books':
+        case 'Books Distributed':
             sumColumn = 'books_out'
             break;
         case 'Children':
             sumColumn = 'number_of_children'
+            break;
+        case 'Books Collected':
+            sumColumn = 'books_in'
             break;
         default:
             console.log('yAxis error')
