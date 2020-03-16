@@ -12,7 +12,8 @@ import {
     MenuItem,
     InputLabel,
     FormControl,
-    Input
+    Input,
+    NativeSelect
 }
     from '@material-ui/core';
 
@@ -154,17 +155,17 @@ class CollectForm extends Component {
 
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
-            <MenuItem key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </MenuItem>
+            <option key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
         );
 
         // map over organizations, get individual organization name ???
-        let orgName = this.props.reduxStore.organizations.map(orgName =>
-            <MenuItem key={orgName.org_name}>{orgName.org_name}</MenuItem>
+        let orgName = this.props.reduxStore.organizations.map(nameOrg =>
+            <option key={nameOrg.org_name}>{nameOrg.org_name}</option>
         );
 
         // map over contacts, display in drop down, store in local state when clicked
         let contactList = this.props.reduxStore.contacts.map(people =>
-            <MenuItem key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </MenuItem>
+            <option key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </option>
         );
 
         // const { classes } = this.props;
@@ -186,14 +187,13 @@ class CollectForm extends Component {
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                <form className={this.props.classes.inputs} autoComplete="off">
+                                {/* <form className={this.props.classes.inputs} autoComplete="off"> */}
                                     <FormControl className={this.props.classes.inputs} >
-                                        {/* <InputLabel>Organization Name</InputLabel> */}
-                                        <Select
+                                        <InputLabel>Organization Name</InputLabel>
+                                        <NativeSelect
                                             input={<Input name="age" id="age-label-placeholder" />}
-                                            displayEmpty
-                                            name="age"
-                                            className={classes.selectEmpty}>
+                                            value={this.state.orgName}
+                                            >
                                             <MenuItem disabled value="">
                                                 <em>Placeholder</em>
                                             </MenuItem>
@@ -205,7 +205,7 @@ class CollectForm extends Component {
                                             </MenuItem>
                                             ))} */}
                                             {orgList}
-                                        </Select>
+                                        </NativeSelect>
                                     </FormControl>
 
                                     <FormControl className={this.props.classes.inputs} >
@@ -214,7 +214,7 @@ class CollectForm extends Component {
                                             {contactList}
                                         </Select>
                                     </FormControl>
-                                </form>
+                                {/* </form> */}
 
                                 <TextField
                                     className={this.props.classes.inputs}
