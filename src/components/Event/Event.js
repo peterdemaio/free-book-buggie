@@ -67,7 +67,7 @@ const styles = theme => ({
     },
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
-      },
+    },
 });
 
 const ITEM_HEIGHT = 48;
@@ -105,18 +105,6 @@ class CollectForm extends Component {
     handleChange = name => event => {
         this.setState({ [name]: Number(event.target.value) });
     };
-
-    // mount organizations on page load
-    // componentDidMount() {
-    //     this.props.dispatch({
-    //         type: 'GET_ORGANIZATIONS',
-    //         payload: this.props.reduxStore.organizations
-    //     })
-    //     this.props.dispatch({
-    //         type: 'GET_CONTACTS',
-    //         payload: this.props.reduxStore.contacts
-    //     })
-    // }
 
     // submit event handler
     newEvent = (event) => {
@@ -168,8 +156,6 @@ class CollectForm extends Component {
             <option key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </option>
         );
 
-        // const { classes } = this.props;
-
         return (
             <>
                 <h1>Events Page</h1>
@@ -188,32 +174,26 @@ class CollectForm extends Component {
                             <span className={this.props.classes.line}>
 
                                 {/* <form className={this.props.classes.inputs} autoComplete="off"> */}
-                                    <FormControl className={this.props.classes.inputs} >
-                                        <InputLabel>Organization Name</InputLabel>
-                                        <NativeSelect
-                                            input={<Input name="age" id="age-label-placeholder" />}
-                                            value={this.state.orgName}
-                                            >
-                                            <MenuItem disabled value="">
-                                                <em>Placeholder</em>
-                                            </MenuItem>
+                                <FormControl className={this.props.classes.inputs} >
+                                    <InputLabel>Organization Name</InputLabel>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'organization')}>
+                                        >
+                                        {orgList}
+                                    </Select>
+                                </FormControl>
 
-                                            {/* attempt to get selection from drop down to display */}
-                                            {/* {this.props.orgList.map(orgName => (
-                                            <MenuItem disabled key={this.props.orgName} value={this.props.orgName}>
-                                                {orgName}
-                                            </MenuItem>
-                                            ))} */}
-                                            {orgList}
-                                        </NativeSelect>
-                                    </FormControl>
-
-                                    <FormControl className={this.props.classes.inputs} >
-                                        <Select className={this.props.classes.select}>
-                                            <InputLabel>Contact Name</InputLabel>
-                                            {contactList}
-                                        </Select>
-                                    </FormControl>
+                                <FormControl className={this.props.classes.inputs} >
+                                    <InputLabel>Contact Name</InputLabel>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'contact')}>
+                                        {contactList}
+                                    </Select>
+                                </FormControl>
                                 {/* </form> */}
 
                                 <TextField
