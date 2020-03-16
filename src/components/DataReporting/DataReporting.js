@@ -229,13 +229,14 @@ class DataReporting extends Component {
                         {thirdOption}
                         <div className='chart-input'>
                             <label for='startDate'>Start Date</label>
-                            <input type='date' id='startDate' name='Start Date' className='dateInput' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                            <input type='date' id='startDate' name='Start Date' className='date-input' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
                         </div>
                         <div className='chart-input'>
                             <label for='endDate'>End Date</label>
-                            <input type='date' id='endDate' name='End Date' className='dateInput' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                            <input type='date' id='endDate' name='End Date' className='date-input' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
                         </div>
                     </div>
+                    <br/>
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
                             ref={this.state.myRef}
@@ -252,11 +253,13 @@ class DataReporting extends Component {
                                 },
                                 scales: {
                                     yAxes: [{
+                                        scaleFontSize: 32,
                                         display: true,
                                         ticks: {
                                             beginAtZero: true   // minimum value will be 0.
                                         }
-                                    }]
+                                    }],
+                                    scaleLabel: { fontSize: 32 }
                                 }
                             }}
                         />

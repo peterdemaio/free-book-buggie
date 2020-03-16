@@ -167,20 +167,37 @@ input {
   .chart-input {
     padding-left: 40px;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    font-size: 20px;
   }
 
-  .dateInput {
-    padding: 5px;
+  .date-input {
+    /* padding: 3px; */
     font-size: 20px;
     margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: grey;
+    margin-top: 4px;
 
   }
   
   .chart-select {
-    position: relative;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: grey;
+    margin-top: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* position: relative; */
+    height: 32px;
+    /* appearance: none; */
+    /* background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 96% !important; */
+    /* background: url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/16x16/ic_arrow_drop_down_48px-512.png") white no-repeat 96% !important; */
+    /* padding: 4px; */
+    font-size: 20px;
+    /* padding-right: 60px; */
   }
 
-  .chart-select select {
-    display: none;
-  }
+  
