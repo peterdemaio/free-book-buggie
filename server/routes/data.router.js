@@ -6,6 +6,8 @@ const router = express.Router();
 router.post('/', (req,res) => {
     console.log('req.body.xAxis:', req.body.xAxis)
     console.log('req.body.yAxis:', req.body.yAxis)
+    console.log(req.body);
+    
     let dataArr = []
     let labelsArr = []
     let label = req.body.yAxis
@@ -67,7 +69,7 @@ router.post('/', (req,res) => {
                         console.log('year:', year)
                         labelsArr.push(months[monthInt-1] + ' ' + year)
                         dataArr.push(event.sum)
-                    }
+                    } 
                     res.send({
                         data: dataArr,
                         labels: labelsArr,
@@ -89,8 +91,11 @@ router.post('/', (req,res) => {
                     for (event of response.rows) {
                         labelsArr.push(event.year)
                         dataArr.push(event.sum)
-                    }
-                    res.send({
+                    } 
+                    
+                    res.send(
+                       
+                        {
                         data: dataArr,
                         labels: labelsArr,
                         label: label

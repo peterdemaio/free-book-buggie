@@ -10,7 +10,10 @@ import {
     TextField,
     Select,
     MenuItem,
-    InputLabel
+    InputLabel,
+    FormControl,
+    Input,
+    NativeSelect
 }
     from '@material-ui/core';
 
@@ -41,6 +44,7 @@ const styles = theme => ({
         width: '250px',
         padding: '25px',
         margin: '10px',
+        backgroundColor: 'white'
     },
     dropdown: {
         width: '250px',
@@ -60,8 +64,22 @@ const styles = theme => ({
     },
     question: {
         paddingLeft: '25px'
-    }
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+    },
 });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 
 class CollectForm extends Component {
@@ -70,8 +88,8 @@ class CollectForm extends Component {
         event_name: '',
         location: '',
         date: '',
-        organization_id: '',
-        contact_id: '',
+        organization_id: 1,
+        contact_id: 1,
         start_time: '',
         end_time: '',
         volunteers: '',
@@ -80,29 +98,15 @@ class CollectForm extends Component {
         numOfKids: 0,
         numEslAdults: 0,
         notes: '',
-        type: 0,
-        open: false,
     }
 
     handleChange = name => event => {
         this.setState({ [name]: Number(event.target.value) });
     };
 
-    // mount organizations on page load
-    // componentDidMount() {
-    //     this.props.dispatch({
-    //         type: 'GET_ORGANIZATIONS',
-    //         payload: this.props.reduxStore.organizations
-    //     })
-    //     this.props.dispatch({
-    //         type: 'GET_CONTACTS',
-    //         payload: this.props.reduxStore.contacts
-    //     })
-    // }
-
     // submit event handler
     newEvent = (event) => {
-        console.log('adding event', this.state.event_name);
+        console.log('adding event', this.state);
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_EVENT',
@@ -133,44 +137,63 @@ class CollectForm extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
-            <MenuItem key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </MenuItem>
+            <option value={org.id} key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
         );
+
+        // map over organizations, get individual organization name ???
+        // let orgName = this.props.reduxStore.organizations.map(nameOrg =>
+        //     <option key={nameOrg.org_name}>{nameOrg.org_name}</option>
+        // );
 
         // map over contacts, display in drop down, store in local state when clicked
         let contactList = this.props.reduxStore.contacts.map(people =>
-            <MenuItem key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </MenuItem>
+            <option value={people.id} key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </option>
         );
-
-        // const { classes } = this.props;
 
         return (
             <>
-                <h1>Events Page</h1>
-
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"
                     justify="center"
                     alignItems="center"
                 >
-                    <Grid className={this.props.classes.form}
+                    <Grid
+                        container
+                        className={this.props.classes.form}
                         item lg={4}
                         justify="center"
                     ><h1 align="center">Add New Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                <Select className={this.props.classes.inputs}>
+                                {/* <form className={this.props.classes.inputs} autoComplete="off"> */}
+                                <FormControl className={this.props.classes.inputs} >
                                     <InputLabel>Organization Name</InputLabel>
-                                    {orgList}
-                                </Select>
-                                <br />
-                                <Select className={this.props.classes.inputs}>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'organization_id')}>
+                                        >
+                                        {orgList}
+                                    </Select>
+                                </FormControl>
+
+                                <FormControl className={this.props.classes.inputs} >
                                     <InputLabel>Contact Name</InputLabel>
-                                    {contactList}
-                                </Select>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'contact_id')}>
+                                        {contactList}
+                                    </Select>
+                                </FormControl>
+                                {/* </form> */}
+
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.event_name}
@@ -263,7 +286,7 @@ class CollectForm extends Component {
                                 <Button color="primary">
                                     Cancel
                                 </Button>
-                                
+
                                 <Button onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>

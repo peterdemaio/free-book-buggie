@@ -20,16 +20,16 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log(req.body)
     const queryText =
-      `INSERT INTO "events" ("event_name", "location", "date", "start_time", "end_time", "volunteers", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners", "notes")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`
+      `INSERT INTO "events" ("event_name", "organizations_id", "contacts_id", "location", "date", "start_time", "end_time", "volunteers", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners", "notes")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`
   
     pool.query(queryText,
-      [req.body.event_name, req.body.location, req.body.date, req.body.start_time, req.body.end_time, req.body.volunteers, req.body.collectBooks, req.body.distBooks, req.body.numOfKids, req.body.numEslAdults, req.body.notes])
+      [req.body.event_name, req.body.organization_id, req.body.contact_id, req.body.location, req.body.date, req.body.start_time, req.body.end_time, req.body.volunteers, req.body.collectBooks, req.body.distBooks, req.body.numOfKids, req.body.numEslAdults, req.body.notes])
       .then(result => {
         console.log(result.rows)
         res.send(result.rows)
       }).catch(error => {
-        console.log('error in bookIn POST', error)
+        console.log('error in event POST', error)
         res.sendStatus(500);
       })
   })

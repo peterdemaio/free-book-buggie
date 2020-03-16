@@ -13,6 +13,7 @@ import {
 // and then instead of `props.user.username` you could use `user.username`
 
 const UserPage = (props) => (
+  <>
   <div>
     <h1 id="welcome">
       Welcome, {props.user.username}!
@@ -25,6 +26,21 @@ const UserPage = (props) => (
     <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button>
     <LogOutButton className="log-in" />
   </div>
+  
+  <div>
+    <h3>Register a new volunteer here: </h3>
+  <center >
+    <button
+      
+      className="login-button"
+      type="button"
+      onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+    >
+      Volunteer Registration
+          </button>
+  </center>
+  </div>
+  </>
 );
 
 // Instead of taking everything from state, we just want the user info.
