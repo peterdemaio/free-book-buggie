@@ -157,5 +157,30 @@ input {
     font-weight: 900;
   }
 
+  .chart-input-container {
+    display: flex;
+    justify-content: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 
+  .chart-input {
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column
+  }
+
+  .dateInput {
+    padding: 5px;
+    font-size: 20px;
+    margin: 0;
+
+  }
   
+  .chart-select {
+    position: relative;
+  }
+
+  .chart-select select {
+    display: none;
+  }

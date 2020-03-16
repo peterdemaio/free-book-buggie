@@ -19,8 +19,6 @@ class DataReporting extends Component {
         myRef: React.createRef()
     }
 
-    
-
     changeYAxis = (event) => {
         console.log('in changeYAxis. event.target.value:', event.target.value)
         console.log('old yAxis:', this.state.queryParams.yAxis)
@@ -162,45 +160,33 @@ class DataReporting extends Component {
         switch (this.state.queryParams.xAxis) {
             case 'Time':
                 thirdOption = <>
-                                <label for='thirdDropdown'>Time Unit</label>
-                                <select id='thirdDropdown' onChange={this.changeTimeUnit}>
+                                <div className='chart-input'>
+                                    <label for='thirdDropdown'>Time Unit</label>
+                                    <select id='thirdDropdown' className='chart-select' onChange={this.changeTimeUnit}>
                                         <option value='Year'>Year</option>
                                         <option value='Month'>Month</option>
-                                </select>
-                                <label for='startDate'>Start Date</label>
-                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
-                                <label for='endDate'>End Date</label>
-                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                                    </select>
+                                </div>
                               </>
                 break;
             case 'Events':
                 thirdOption = <>
-                                <label for='startDate'>Start Date</label>
-                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
-                                <label for='endDate'>End Date</label>
-                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
                               </>
                 break;
             case 'Organizations':
                 thirdOption = <>
-                                <label for='startDate'>Start Date</label>
-                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
-                                <label for='endDate'>End Date</label>
-                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
                               </>
                 break;
             case 'Demographics':
                 thirdOption = <>
-                                <label for='metric'>Metric</label>
-                                <select id='thirdDropdown' onChange={this.changeMetric}>
-                                        <option value='Age'>Age</option>
-                                        <option value='Poverty'>Poverty</option>
-                                        <option value='Race'>Race</option>
-                                </select>
-                                <label for='startDate'>Start Date</label>
-                                <input type='date' id='startDate' name='Start Date' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
-                                <label for='endDate'>End Date</label>
-                                <input type='date' id='endDate' name='End Date' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                                <div className='chart-input'>
+                                    <label for='metric'>Metric</label>
+                                    <select id='thirdDropdown' className='chart-select' onChange={this.changeMetric}>
+                                            <option value='Age'>Age</option>
+                                            <option value='Poverty'>Poverty</option>
+                                            <option value='Race'>Race</option>
+                                    </select>
+                                </div>
                               </>
                 break;
             default: 
@@ -221,23 +207,35 @@ class DataReporting extends Component {
             return (
                 <>
                     <h1>DataReporting page</h1>
-                    <label for='yAxis'>Vertical Axis</label>
-                    <select id='yAxis' onChange={this.changeYAxis}>
-                        <option value='Books Distributed'>Books Distributed</option>
-                        <option value='Books Collected'>Books Collected</option>
-                        <option value='Children'>Children</option>
-                    </select>
-                    <label for='xAxis'>Horizontal Axis</label>
-                    <select id='xAxis' onChange={this.changeXAxis}>
-                        <option value='Time'>Time</option>
-                        <option value='Events'>Events</option>
-                        <option value='Organizations'>Organizations</option>
-                        <option value='Demographics'>Demographics</option>
-                    </select>
-
-                    {/* render conditionally-defined jsx from above */}
-                    {thirdOption}
-
+                    <div className='chart-input-container'>
+                        <div className='chart-input'>
+                            <label for='yAxis'>Vertical Axis</label>
+                            <select id='yAxis' className='chart-select' onChange={this.changeYAxis}>
+                                <option value='Books Distributed'>Books Distributed</option>
+                                <option value='Books Collected'>Books Collected</option>
+                                <option value='Children'>Children</option>
+                            </select>
+                        </div>
+                        <div className='chart-input'>
+                            <label for='xAxis'>Horizontal Axis</label>
+                            <select id='xAxis' className='chart-select' onChange={this.changeXAxis}>
+                                <option value='Time'>Time</option>
+                                <option value='Events'>Events</option>
+                                <option value='Organizations'>Organizations</option>
+                                <option value='Demographics'>Demographics</option>
+                            </select>
+                        </div>
+                        {/* render conditionally-defined jsx from above */}
+                        {thirdOption}
+                        <div className='chart-input'>
+                            <label for='startDate'>Start Date</label>
+                            <input type='date' id='startDate' name='Start Date' className='dateInput' onChange={this.changeStartDate} value={this.state.queryParams.startDate}></input>
+                        </div>
+                        <div className='chart-input'>
+                            <label for='endDate'>End Date</label>
+                            <input type='date' id='endDate' name='End Date' className='dateInput' onChange={this.changeEndDate} value={this.state.queryParams.endDate}></input>
+                        </div>
+                    </div>
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
                             ref={this.state.myRef}
@@ -261,19 +259,15 @@ class DataReporting extends Component {
                                     }]
                                 }
                             }}
-                            
                         />
                     </div>
                     
                     <ul>
                         {JSON.stringify(this.props.reduxStore.data)}
-                    </ul>
-                    
-                    
+                    </ul>  
                 </>
             )
         }
-        
     }
 }
 
