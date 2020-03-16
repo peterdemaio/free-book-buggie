@@ -8,7 +8,7 @@ class DataReporting extends Component {
     state = {
         loading: true,
         queryParams: {
-            yAxis: 'Books',
+            yAxis: 'Books Distributed',
             xAxis: 'Time',
             startDate: '2010-01-01',
             endDate: '2021-01-01',
@@ -26,14 +26,14 @@ class DataReporting extends Component {
         console.log('old yAxis:', this.state.queryParams.yAxis)
         console.log('new yAxis:', this.state.queryParams.yAxis)
         switch(event.target.value) {
-            case 'Books':
+            case 'Books Distributed':
                 this.setState({title: 'Books Distributed'})
                 break;
             case 'Children':
                 this.setState({title: 'Children Recipients'})
                 break;
-            case 'Adult ESL Learners':
-                this.setState({title: 'Adult ESL Learner Recipients'})
+            case 'Books Collected':
+                this.setState({title: 'Books Collected'})
                 break;
             default:
                 console.log('changeYAxis error')
@@ -136,7 +136,7 @@ class DataReporting extends Component {
             }
         })
     }
-m
+
     componentDidMount() {
         //let myRef = React.createRef()
 
@@ -223,7 +223,8 @@ m
                     <h1>DataReporting page</h1>
                     <label for='yAxis'>Vertical Axis</label>
                     <select id='yAxis' onChange={this.changeYAxis}>
-                        <option value='Books'>Books</option>
+                        <option value='Books Distributed'>Books Distributed</option>
+                        <option value='Books Collected'>Books Collected</option>
                         <option value='Children'>Children</option>
                     </select>
                     <label for='xAxis'>Horizontal Axis</label>
