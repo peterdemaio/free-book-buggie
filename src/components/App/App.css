@@ -144,10 +144,17 @@ input {
     /* z-index: 30; */
     top: 50%;
     left: 50%;
-    margin: -50px 0 0 200px;
+    margin: -45px 0 0 425px;
     /* border: 8px solid, #3CB64A; */
     font-size: 120%;
-    width: 58%;
+    width: 40%;
+  }
+
+  .chart-title {
+    text-align: center;
+    font-family: "Museo Slab";
+    color: #3CB64A;
+    font-weight: 900;
   }
 
 

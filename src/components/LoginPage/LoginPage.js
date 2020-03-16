@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Bar } from 'react-chartjs-2';
+import LoginMiniChart from '../LoginMiniChart/LoginMiniChart';
 
 //importing components for animated countup
 import CountUp from 'react-countup';
@@ -10,22 +10,6 @@ import VisibilitySensor from 'react-visibility-sensor';
 
 class LoginPage extends Component {
 
-  componentDidMount() {
-    console.log('in DataReporting componentDidMount')
-    // get events from database and store them in redux
-    this.props.dispatch({
-      type: 'GET_DATA',
-      payload: {
-        yAxis: 'Books',
-        xAxis: 'Time',
-        startDate: '2010-01-01',
-        endDate: '2021-01-01',
-        timeUnit: 'Month'
-      }  
-    })
-
-    this.setState({ loading: false })
-  }
 
   state = {
     username: '',
@@ -34,7 +18,7 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
-    console.log('in login function');
+    // console.log('in login function');
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
@@ -55,7 +39,10 @@ class LoginPage extends Component {
     });
   }
 
+
+
   render() {
+    
     return (
       <>
         <div className="counter-div">
@@ -65,11 +52,11 @@ class LoginPage extends Component {
             <CountUp
               start={0}
               end={18164}
-              duration={2.5}
+              duration={1.5}
               separator=","
               decimals={0}
               decimal=","
-              prefix="Books received to date: "
+              prefix="Books distributed: "
               suffix=" "
               onEnd={() => console.log('Ended! 👏')}
               onStart={() => console.log('Started! 💨')}
@@ -92,11 +79,11 @@ class LoginPage extends Component {
             <CountUp
               start={0}
               end={12957}
-              duration={3}
+              duration={1.75}
               separator=","
               decimals={0}
               decimal=","
-              prefix="Children impacted to date: "
+              prefix="Children impacted: "
               suffix=" "
               onEnd={() => console.log('Ended! 👏')}
               onStart={() => console.log('Started! 💨')}
@@ -118,27 +105,6 @@ class LoginPage extends Component {
           </h1>
         </div>
 
-        <div style={{ marginLeft: '12%', marginRight: '12%' }}>
-          <Bar
-            data={this.props.reduxStore.chartData}
-            width={1000}
-            height={500}
-            options={{
-              title: {
-                display: true,
-                text: this.state.title
-              },
-              legend: {
-                display: false
-              }
-            }}
-          />
-        </div>
-
-        <ul>
-          {/* {JSON.stringify(this.props.reduxStore.data)} */}
-        </ul>
-
 
         <div>
           {this.props.errors.loginMessage && (
@@ -149,7 +115,8 @@ class LoginPage extends Component {
               {this.props.errors.loginMessage}
             </h2>
           )}
-
+          <h2 className="chart-title">Books Kept out of Landfills Monthly</h2>
+          <LoginMiniChart />
           <div
             className="login-div"
             onSubmit={this.login}>
@@ -191,6 +158,7 @@ class LoginPage extends Component {
             </div>
 
           </div>
+          
           {/* Volunteer Registration moved to home page */}
           {/* <center>
           <button
@@ -208,12 +176,13 @@ class LoginPage extends Component {
   }
 }
 
+
+
 // Instead of taking everything from state, we just want the error messages.
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({errors}) => ({ errors });
-const mapStateToProps = (state, reduxStore) => ({
+const mapStateToProps = (state) => ({
   errors: state.errors,
-  reduxStore
 });
 
 export default connect(mapStateToProps)(LoginPage);

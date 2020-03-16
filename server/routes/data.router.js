@@ -65,7 +65,7 @@ router.post('/', (req,res) => {
                     for (event of response.rows) {
                         labelsArr.push(months[event.month-1])
                         dataArr.push(event.sum)
-                    }
+                    } 
                     res.send({
                         data: dataArr,
                         labels: labelsArr,
@@ -87,8 +87,11 @@ router.post('/', (req,res) => {
                     for (event of response.rows) {
                         labelsArr.push(event.year)
                         dataArr.push(event.sum)
-                    }
-                    res.send({
+                    } 
+                    
+                    res.send(
+                       
+                        {
                         data: dataArr,
                         labels: labelsArr,
                         label: label
