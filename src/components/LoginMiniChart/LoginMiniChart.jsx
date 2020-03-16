@@ -27,6 +27,8 @@ class LoginMiniChart extends Component {
 
 
     render(){
+
+console.log('NICCCCCCC', this.props.reduxStore.chartData);
         return(
 
         <div style={{ marginLeft: '12%', marginRight: '12%' }}>

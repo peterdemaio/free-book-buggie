@@ -2,9 +2,24 @@
     font-size: 40px;
     font-weight: 740;
     display: inline-block;
-    color: #14771B;
-    padding-left: 300px;
-    align-items: flex-start;
+    color: #f2f2f2;
+    padding-right: 30px;
+    /* align-items: flex-start; */
+    text-align: center;
+    font-family: "Museo Slab";
+    font-weight: 900;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 8px;
+    padding-left: 22px;
+    width: 33%;
+
+}
+
+.nav-title-div {
+  text-align: center;
+  background-size: 325%;
+  scroll-padding-top: 10%;
 }
 
 .nav {
@@ -12,9 +27,10 @@
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
   background-image: url('./HeaderBlue.png');
   background-size: cover;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   align-items: flex-end;
-  opacity: .5;
+  opacity: .75;
+  max-height: 350px;
 }
 
 .nav-link {
@@ -40,7 +56,7 @@
 }
 
 .nav-right {
-  padding-top: 220px;
+  /* padding-top: 220px; */
   float: right;
   justify-content: flex-end;
   align-items: flex-end;
