@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles, Grid, Paper, Typography } from '@material-ui/core'
+import { withStyles, Grid} from '@material-ui/core'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -17,29 +15,27 @@ import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
-import { withRouter } from 'react-router-dom';
 
 
 const styles = theme => ({
     card: {
         justify: 'flex-start',
-        minWidth: '200px',
+        minWidth: '600px',
         maxWidth: '600px',
         padding: '10px',
         margin: '12px',
-        //fontSize: '36px',
         textAlign: 'center',
-        // backgroundColor: '#40C445'
-        background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)'
     },
     header: {
-        // backgroundColor: '#14771B',
         color: '#ffffff',
         background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)',
         fontSize: '36px'
     },
+    underline: {
+        borderBottom: '1px solid red',
+        display: 'block'
+    },
     content: {
-        color: '#ffffff',
         textAlign: 'left',
         '&:hover': {
             cursor: 'zoom-in'
@@ -47,7 +43,6 @@ const styles = theme => ({
         fontSize: '26px',
     },
     expand: {
-        color: '#ffffff',
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
@@ -151,9 +146,9 @@ class OrganizationsListPageItem extends React.Component {
                         action={
                             <>
                                 <IconButton
-                                    className={this.props.classes.expand, {
+                                    className={`this.props.classes.expand, {
                                         [this.props.classes.expandOpen]: this.state.expanded,
-                                    }}
+                                    }`}
                                     aria-label="More"
                                     aria-haspopup="true"
                                     onClick={this.menuOpen}
@@ -166,7 +161,7 @@ class OrganizationsListPageItem extends React.Component {
                     </CardHeader>
                     <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
                         <div onClick={this.edit}>
-                            <div>
+                            <div className={this.props.classes.underline}>
                                 Address:
                                 <br></br>
                                 <br></br>
@@ -174,17 +169,17 @@ class OrganizationsListPageItem extends React.Component {
                                 <span>{this.props.org.address_street} </span>
                                 {this.props.org.address_unit}
                             </div>
-                            <div>
+                            <div className={this.props.classes.underline}>
                                 <span>{this.props.org.city} </span>
                                 <span>{this.props.org.state} </span>
                                 <span>{this.props.org.zip} </span>
                             </div>
-                            <div>
+                            <div className={this.props.classes.underline}>
                                 <span>County: {this.props.org.county_name} </span>
                             </div>
                             <br></br>
                             <br></br>
-                            <div>
+                            <div className={this.props.classes.underline}>
                                 <span>Notes: {this.props.org.notes}</span>
                             </div>
 
