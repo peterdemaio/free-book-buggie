@@ -136,7 +136,7 @@ class DataReporting extends Component {
             }
         })
     }
-m
+
     componentDidMount() {
         //let myRef = React.createRef()
 

@@ -48,15 +48,19 @@ router.post('/', (req,res) => {
         case 'Time':
             if (req.body.timeUnit === 'Month') {
                 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                queryText = `SELECT DATE_PART('month', "date") AS "month", SUM("${sumColumn}") FROM "events"
+                queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
                             AND "date" < '${req.body.endDate}'
-                            GROUP BY "month";`;
+                            GROUP BY "monthYear";`;
                 pool.query(queryText)
                 .then((response) => {
                     console.log('Time/Month query response.rows:', response.rows)
                     for (event of response.rows) {
-                        labelsArr.push(months[event.month-1])
+                        let monthInt = event.monthYear.split(' ')[0]
+                        let year = event.monthYear.split(' ')[1]
+                        console.log('monthInt:', monthInt)
+                        console.log('year:', year)
+                        labelsArr.push(months[monthInt-1] + ' ' + year)
                         dataArr.push(event.sum)
                     }
                     res.send({
