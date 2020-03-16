@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+
+import {
+    Button,
+    TextField,
+    Grid,
+    FormLabel,
+    FormControl,
+    Paper,
+    MenuItem,
+    Select,
+    InputLabel
+}
+    from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
@@ -53,9 +58,30 @@ const styles = theme => ({
 
     },
     question: {
+        paddingLeft: '25px',
+        margin: '10px'
+    },
+    nameInput: {
+        width: '400px',
+    },
+    nameLine: {
+        paddingLeft: '35px',
+        // margin: '10px',
+    },
+    dropdown: {
+        paddingLeft: '25px'
+
+    },
+    dropdownMenu: {
+        padding: '25px',
+        width: '250px',
+        paddingLeft: '25px',
+        margin: '10px'
+    },
+    dropdownItem: {
+        width: '250px',
         paddingLeft: '25px'
     }
-
 });
 
 class NewOrganization extends Component {
@@ -63,6 +89,7 @@ class NewOrganization extends Component {
         newEntry: {
             name: '',
             logo: '',
+            url: '',
             type: '',
             address_number: '',
             address_unit: '',
@@ -72,6 +99,7 @@ class NewOrganization extends Component {
             county: '',
             zip: '',
             contact_name: '',
+            title: '',
             phone_number: '',
             phone_number_type: '',
             email: '',
@@ -89,14 +117,21 @@ class NewOrganization extends Component {
 
         },
     }
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'FETCH_COUNTIES'
+        })
+    }
+
     handleChangeFor = (event, propertyName) => {
-        console.log(event.target.value, propertyName);
+        console.log('Setting state for:', event.target.value, propertyName);
         this.setState({
             newEntry: {
                 ...this.state.newEntry,
                 [propertyName]: event.target.value
             }
         })
+        console.log(this.state.newEntry)
     }
     handleClick = async (event) => {
         event.preventDefault()
@@ -106,6 +141,9 @@ class NewOrganization extends Component {
                 type: 'POST_NEW_ORGANIZATION',
                 payload: this.state.newEntry
             })
+            alert('Organization added!')
+
+            this.props.history.push('/organizationsListPage')
         } catch {
             console.log('dispatch error')
         }
@@ -119,20 +157,28 @@ class NewOrganization extends Component {
                     justify="center"
                     alignItems="center"
                 >
-                    <Grid className={this.props.classes.form}
-                        item lg={4}
-                        justify="center"
-                    ><h1 align="center">Add New Organization</h1>
-                        <Paper elevation={5}
-                        >
+                    <h1 align="center">Add New Organization</h1>
+                    <Paper elevation={5}>
+                        <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
+                            <TextField
+                                className={this.props.classes.nameInput}
+                                margin="normal"
+                                size='medium'
+                                type="text"
+                                label="Name of Organization"
+                                onChange={(event) => this.handleChangeFor(event, 'name')} /></Grid>
+                        <Grid className={this.props.classes.form}
+                            item lg={4}
+                            justify="center">
+                            <br></br>
                             <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     margin="normal"
                                     size='medium'
                                     type="text"
-                                    label="Name of Organization"
-                                    onChange={(event) => this.handleChangeFor(event, 'name')} />
+                                    label="Website Link"
+                                    onChange={(event) => this.handleChangeFor(event, 'url')} />
                                 <span>{' '}</span>
                                 <TextField
                                     className={this.props.classes.inputs}
@@ -190,13 +236,19 @@ class NewOrganization extends Component {
                                     type="text"
                                     label="Zip"
                                     onChange={(event) => this.handleChangeFor(event, 'zip')} />
-                                <span>{' '}</span>
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    type="text"
-                                    label="County"
-                                    onChange={(event) => this.handleChangeFor(event, 'county')} />
                             </span>
+                            <br></br>
+                            <span className={this.props.classes.dropdown}>County:  </span>
+                            <FormControl >
+                                <Select
+                                    native
+                                    className={this.props.classes.dropdownItem}
+                                    onChange={(event) => this.handleChangeFor(event, 'county')}>
+                                    {this.props.reduxStore.counties.map(county =>
+                                        <option value={county.id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
+                                    )}
+                                </Select>
+                            </FormControl>
                             <h3 className={this.props.classes.question}>If you have demographics information please record it below.</h3>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -204,31 +256,31 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Age breakdown by percentage (Should add up to 100%):</p>
-                                    <Grid item>
-                                    
+                                <Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="integer"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_0_3')} />
-                                <span>0-3</span></Grid><Grid item>
-                                    
+                                    <span>0-3</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_4_7')} />
-                                <span>4-7</span></Grid><Grid item>
-                                    
+                                    <span>4-7</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_8-12')} />
-                               <span>8-12</span></Grid><Grid item>
-                                    
+                                    <span>8-12</span></Grid><Grid item>
+
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_age_13_18')} />
-                                <span>13-18</span></Grid>
+                                    <span>13-18</span></Grid>
                             </Grid>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -236,32 +288,32 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Racial breakdown by percentage (Should add up to 100%):</p>
-                                    <Grid item>
+                                <Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="integer"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_white')} />
-                                <span>White</span></Grid><Grid item>
+                                    <span>White</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_black')} />
-                                <span>Black or African American:</span></Grid><Grid item>
+                                    <span>Black or African American:</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_native')} />
-                               <span>American Indian or Alaska Native:</span></Grid><Grid item>
+                                    <span>American Indian or Alaska Native:</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_asian')} />
-                                <span>Asian</span></Grid><Grid item>
+                                    <span>Asian</span></Grid><Grid item>
                                     <TextField
                                         className={this.props.classes.demographicsInputs}
                                         type="text"
                                         onChange={(event) => this.handleChangeFor(event, 'demographics_race_pacific')} />
-                                <span>Native Hawaiian or Pacific Islander</span></Grid>
+                                    <span>Native Hawaiian or Pacific Islander</span></Grid>
                             </Grid>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -269,13 +321,14 @@ class NewOrganization extends Component {
                                 justify="center"
                                 alignItems="flex-start"
                             ><p>Percentage of children who qualify for free or reduced school lunch:</p>
-                                    <TextField
-                                        className={this.props.classes.demographicsInputs}
-                                        type="integer"
-                                        onChange={(event) => this.handleChangeFor(event, 'demographics_poverty')} />
+                                <TextField
+                                    className={this.props.classes.demographicsInputs}
+                                    type="integer"
+                                    onChange={(event) => this.handleChangeFor(event, 'demographics_poverty')} />
                             </Grid>
-                        </Paper>
-                    </Grid >
+
+                        </Grid >
+                    </Paper>
                     <Grid item lg={4}
                         justify="center"
                         className={this.props.classes.form}
@@ -291,27 +344,33 @@ class NewOrganization extends Component {
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
-                                    label="Phone Number"
-                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                    label="Title"
+                                    helperText="director, volunteer, etc"
+                                    onChange={(event) => this.handleChangeFor(event, 'title')} />
                             </span>
                             <br></br>
                             <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
+                                    label="Phone Number"
+                                    helperText="xxx-xxx-xxxx"
+                                    onChange={(event) => this.handleChangeFor(event, 'phone_number')} />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    type="text"
                                     label="Phone Number Type"
                                     helperText="Mobile, Home, etc."
                                     onChange={(event) => this.handleChangeFor(event, 'phone_number_type')} />
-
-                                <TextField
+                                <br></br>
+                            </span>
+                            <span className={this.props.classes.line}>
+                            <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
                                     label="Email"
                                     helperText="name@mail.com"
                                     onChange={(event) => this.handleChangeFor(event, 'email')} />
-                                <br></br>
-                            </span>
-                            <span className={this.props.classes.line}>
                                 <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
@@ -321,13 +380,12 @@ class NewOrganization extends Component {
                         </Paper>
                     </Grid>
                     <Button className={this.props.classes.submitButton}
-                    onClick={this.handleClick}
-                    size={'large'}
-                    variant={'outlined'}>
-                    Add
+                        onClick={this.handleClick}
+                        size={'large'}
+                        variant={'outlined'}>
+                        Add
                 </Button>
                 </Grid>
-                
             </>
         )
     }

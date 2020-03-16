@@ -4,33 +4,36 @@ import { Bar } from 'react-chartjs-2';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 class DataReporting extends Component {
-
+    
     state = {
         loading: true,
         queryParams: {
-            yAxis: 'Books',
+            yAxis: 'Books Distributed',
             xAxis: 'Time',
             startDate: '2010-01-01',
             endDate: '2021-01-01',
             timeUnit: 'Year',
             metric: 'Age'
         },
-        title: 'Books Distributed'
+        title: 'Books Distributed',
+        myRef: React.createRef()
     }
+
+    
 
     changeYAxis = (event) => {
         console.log('in changeYAxis. event.target.value:', event.target.value)
         console.log('old yAxis:', this.state.queryParams.yAxis)
         console.log('new yAxis:', this.state.queryParams.yAxis)
         switch(event.target.value) {
-            case 'Books':
+            case 'Books Distributed':
                 this.setState({title: 'Books Distributed'})
                 break;
             case 'Children':
                 this.setState({title: 'Children Recipients'})
                 break;
-            case 'Adult ESL Learners':
-                this.setState({title: 'Adult ESL Learner Recipients'})
+            case 'Books Collected':
+                this.setState({title: 'Books Collected'})
                 break;
             default:
                 console.log('changeYAxis error')
@@ -45,7 +48,8 @@ class DataReporting extends Component {
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams, yAxis: event.target.value
+                ...this.state.queryParams, 
+                yAxis: event.target.value
             }
         })
     }
@@ -61,7 +65,8 @@ class DataReporting extends Component {
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams, xAxis: event.target.value
+                ...this.state.queryParams, 
+                xAxis: event.target.value
             }
         })
     }
@@ -72,22 +77,29 @@ class DataReporting extends Component {
             type: 'GET_DATA',
             payload: {
                 ...this.state.queryParams,
-                metric: event.target.value
+                timeUnit: event.target.value
             }
         })
         this.setState({
             queryParams: {
-                ...this.state.queryParams,  metric: event.target.value
+                ...this.state.queryParams,  
+                timeUnit: event.target.value
             }
         })
     }
 
     changeMetric = (event) => {
-        console.log('in changeMetric')
+        console.log('in changeMetric. event.target.value:', event.target.value)
         this.props.dispatch({
             type: 'GET_DATA',
             payload: {
                 ...this.state.queryParams,
+                metric: event.target.value
+            }
+        })
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams,  
                 metric: event.target.value
             }
         })
@@ -126,6 +138,10 @@ class DataReporting extends Component {
     }
 
     componentDidMount() {
+        //let myRef = React.createRef()
+
+        console.log('this.state.myRef:', this.state.myRef)
+        //console.log('this.myRef.current.getElementsByTagName("canvas")[0]:', this.myRef.current.getElementsByTagName("canvas")[0])
         console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
@@ -138,7 +154,11 @@ class DataReporting extends Component {
 
     render() {
         console.log('in render. this.state.queryparams:', this.state.queryParams)
+        
+        // declare jsx object that contains conditionally-rendered dropdowns 
         let thirdOption
+
+        // conditionally define the thirdOption jsx object based on selected xAxis
         switch (this.state.queryParams.xAxis) {
             case 'Time':
                 thirdOption = <>
@@ -203,9 +223,9 @@ class DataReporting extends Component {
                     <h1>DataReporting page</h1>
                     <label for='yAxis'>Vertical Axis</label>
                     <select id='yAxis' onChange={this.changeYAxis}>
-                        <option value='Books'>Books</option>
+                        <option value='Books Distributed'>Books Distributed</option>
+                        <option value='Books Collected'>Books Collected</option>
                         <option value='Children'>Children</option>
-                        <option value='Adult ESL Learners'>Adult ESL Learners</option>
                     </select>
                     <label for='xAxis'>Horizontal Axis</label>
                     <select id='xAxis' onChange={this.changeXAxis}>
@@ -214,9 +234,13 @@ class DataReporting extends Component {
                         <option value='Organizations'>Organizations</option>
                         <option value='Demographics'>Demographics</option>
                     </select>
+
+                    {/* render conditionally-defined jsx from above */}
                     {thirdOption}
+
                     <div style={{marginLeft:'12%', marginRight:'12%'}}>
                         <Bar
+                            ref={this.state.myRef}
                             data={this.props.reduxStore.chartData}
                             width={1000}
                             height={500}

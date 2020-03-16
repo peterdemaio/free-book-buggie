@@ -8,9 +8,13 @@ import React from 'react';
 const AboutPage = () => (
   <div>
     <div>
-      <p>
-        This about page is for anyone to read!
-      </p>
+      <h2>
+        Welcome to the Free Book Buggie Administration Application
+      </h2>
+      <p>if you're looking for the free book buggie website 
+        you can find it here: https://thefreebookbuggie.org/</p>
+      <p>If you are an admin you can access your admin tools and 
+        register a new volunteer by logging in.</p>
     </div>
   </div>
 );

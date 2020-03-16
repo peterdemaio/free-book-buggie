@@ -21,23 +21,26 @@ const styles = {
 }
 class ContactsListPage extends React.Component {
 
+    state = {
+        contacts: [],
+        filteredContacts: []
+    }
     componentDidMount() {
-        this.props.dispatch({
-            type: 'UPDATE_CONTACTS',
-            payload: this.props.reduxStore.contacts
-        })
+        fetch(this.props.dispatch({
+            type: 'GET_CONTACTS'
+          }))
+        .then(this.setState({
+            contacts: this.props.reduxStore.contacts,
+            filteredContacts: this.props.reduxStore.contacts
+        }))
     }
 
     onInputChange = (event) => {
-        console.log(event.target.value)
-        let newlyDisplayed = this.props.reduxStore.contacts.filter( 
-            contact => contact.contact_name.toLowerCase().includes(event.target.value.toLowerCase()) || 
-            contact.name.toLowerCase().includes(event.target.value.toLowerCase())
-            );
-
-        this.props.dispatch({
-            type: 'UPDATE_CONTACTS',
-            payload: newlyDisplayed
+        let searchQuery = event.target.value.toLowerCase();
+        this.setState({
+            filteredContacts: this.props.reduxStore.contacts.filter( 
+                contact => contact.contact_name.toLowerCase().includes(searchQuery)
+                )
         })
     }
 
@@ -62,7 +65,7 @@ class ContactsListPage extends React.Component {
                     direction="column"
                     justify="space-evenly"
                     alignItems="center">
-                        {this.props.reduxStore.updateContacts.map(contact =>
+                        {this.state.filteredContacts.map(contact =>
                             <ContactsListItem key={contact.id} contact={contact} />
                         )}
                     </Grid>

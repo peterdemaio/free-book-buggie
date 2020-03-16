@@ -22,7 +22,7 @@ input {
     margin-bottom: 10px;
 }
 
-.log-in, .log-out, .register {
+.log-out, .register {
   background-color: #00acb0;
   border-radius: 4px;
   color: #f8f8f8;
@@ -32,9 +32,11 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+.log-in:hover, .log-out:hover, .register:hover, .login-button:hover {
+  background-color: rgb(44, 145, 47);
 }
+
+
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
@@ -57,3 +59,103 @@ input {
     padding: 25px;
     border-radius: 2px;
 }
+
+ .login-div {
+    /* font-family: "Museo Slab";
+    color: #14771B;
+    size: 18px;
+    top: -100%;
+    left: 100%;
+    position: fixed; */
+    /* width: 800px; */
+    /* height: 200px; */
+    /* z-index: 30; */
+    /* top: 50%;
+    left: 50%;
+    margin: 200px 0 0 320px; */
+    /* border: 8px solid, #3CB64A; */
+    /* font-size: 120%; */
+    /* height:100px;
+    width:100px; */
+    /* display: inline-block; */
+    text-align: center;
+  } 
+
+  .username-div {
+    /* top: -10%;
+    left: -10%; */
+    /* margin: -10px 0 0 -600px; */
+    display: block;
+    /* float: left; */
+    /* display: inline-block; */
+    /* display: table-cell; */
+  }
+
+  .password-div {
+    /* top: -20%;
+    left: -10%; */
+    /* margin: -33px 0 0 -350px; */
+    /* float: left; */
+    display: block;
+    /* display: inline-block; */
+    /* display: table-cell; */
+
+  }
+
+  /* login button styling */
+  .login-button {
+    /* color:  #14771B; */
+
+    border: none;
+    font-family: "Museo Slab";
+    border-bottom:  1px solid #444; 
+    cursor: pointer;
+    /* size: 10px; */
+    background-color:#14771B;
+    border-radius: 10px;
+    color: #f8f8f8;
+    min-height: 40px;
+    min-width: 80px;
+    outline:0;
+    cursor: pointer;
+    /* margin: 70px -8 0 -70px; */
+    /* float: left; */
+    display: block;
+    display: inline-block;
+
+}
+
+
+  /* styling for up-counter component on login page */
+  .counter-style {
+    font-family: "Museo Slab";
+    color: #3CB64A;
+    font-weight: 900;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 8px;
+    padding-left: 15px;
+    /* size: 50px; */
+  }
+  .counter-div {
+    position: static;
+    /* width: 800px; */
+    /* height: 200px; */
+    /* z-index: 30; */
+    top: 50%;
+    left: 50%;
+    margin: -45px 0 0 425px;
+    /* border: 8px solid, #3CB64A; */
+    font-size: 120%;
+    width: 40%;
+  }
+
+  .chart-title {
+    text-align: center;
+    font-family: "Museo Slab";
+    color: #3CB64A;
+    font-weight: 900;
+  }
+
+
+  
