@@ -38,6 +38,14 @@ class LoginMiniChart extends Component {
                     
                     legend: {
                         display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
                 }}
             />
