@@ -18,7 +18,6 @@ function* editOrganization(action) {
 }
 function* getOrganizations(action) {
     try {
-        console.log('in get organizations saga')
         let response = yield axios.get('/api/organizations')
         yield put ({ type: 'SET_ORGANIZATIONS', payload: response.data })
     } catch (err){

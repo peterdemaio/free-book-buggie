@@ -10,12 +10,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Collapse from '@material-ui/core/Collapse';
+import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
+import { withRouter } from 'react-router-dom';
+
 
 const styles = theme => ({
     card: {
@@ -56,6 +59,14 @@ const styles = theme => ({
     },
     icon: {
         color: '#ffffff'
+    },
+    avatar: {
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    }, 
+    wideInput: {
+        width: '400px'
     }
 })
 
@@ -67,6 +78,8 @@ class OrganizationsListPageItem extends React.Component {
         open: false,
         address: {
             id: this.props.org.id,
+            url: this.props.org.url,
+            logo: this.props.org.logo,
             address_number: this.props.org.address_number,
             address_street: this.props.org.address_street,
             address_unit: this.props.org.address_unit,
@@ -87,6 +100,7 @@ class OrganizationsListPageItem extends React.Component {
         console.log('ready to edit:', this.props.org.org_name)
         this.setState({ open: true })
     }
+    
     handleClose = () => {
         this.setState({ open: false })
     }
@@ -118,29 +132,36 @@ class OrganizationsListPageItem extends React.Component {
         return (
             <Grid item>
                 <Card className={this.props.classes.card}>
+
                     <CardHeader
                         className={this.props.classes.header}
                         disableTypography={true}
+
                         avatar={
-                            <Avatar
-                                alt={this.props.org.org_name}
-                                src={this.props.org.logo}
-                            />
+                            <div className={this.props.classes.avatar} onClick={() => window.open(this.props.org.url)}>
+                                <Avatar
+                                    alt={this.props.org.org_name}
+                                    src={this.props.org.logo}
+
+                                /></div>
                         }
-                        
-                        title={this.props.org.org_name} 
+
+                        title={this.props.org.org_name}
                         // fontSize={36}                  
                         action={
-                            <IconButton
-                                className={this.props.classes.expand, {
-                                    [this.props.classes.expandOpen]: this.state.expanded,
-                                }}
-                                aria-label="More"
-                                aria-haspopup="true"
-                                onClick={this.menuOpen}
-                            >
-                                <ExpandMoreIcon className={this.props.classes.icon} />
-                            </IconButton>
+                            <>
+                                <IconButton
+                                    className={this.props.classes.expand, {
+                                        [this.props.classes.expandOpen]: this.state.expanded,
+                                    }}
+                                    aria-label="More"
+                                    aria-haspopup="true"
+                                    onClick={this.menuOpen}
+                                >
+                                    <ExpandMoreIcon className={this.props.classes.icon} />
+                                </IconButton>
+                                <Link href={this.props.org.url}></Link>
+                            </>
                         }>
                     </CardHeader>
                     <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
@@ -159,7 +180,7 @@ class OrganizationsListPageItem extends React.Component {
                                 <span>{this.props.org.zip} </span>
                             </div>
                             <div>
-                                <span>County: {this.props.org.county} </span>
+                                <span>County: {this.props.org.county_name} </span>
                             </div>
                             <br></br>
                             <br></br>
@@ -173,58 +194,72 @@ class OrganizationsListPageItem extends React.Component {
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
-                    maxWidth = 'lg'
+                    maxWidth='lg'
                 >
                     <DialogTitle> Edit Organization</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Number: 
+                            Organization URL:
                             <Input
-                                value= {this.state.address.address_number}
+                                className={this.props.classes.wideInput}
+                                value={this.state.address.url}
+                                onChange={(event) => this.setDetails(event, 'url')}
+                            ></Input>
+                            <br></br>
+                            Organization Logo Link:
+                            <Input
+                                className={this.props.classes.wideInput}
+                                value={this.state.address.logo}
+                                onChange={(event) => this.setDetails(event, 'logo')}
+                            ></Input>
+                            <br></br>   
+                            Number:
+                            <Input
+                                value={this.state.address.address_number}
                                 onChange={(event) => this.setDetails(event, 'address_number')}
                             >
                             </Input>
-                            Street: 
+                            Street:
                             <Input
-                                value= {this.state.address.address_street}
+                                value={this.state.address.address_street}
                                 onChange={(event) => this.setDetails(event, 'address_street')}
                             >
                             </Input>
-                            Unit: 
+                            Unit:
                             <Input
-                                value= {this.state.address.address_unit}
+                                value={this.state.address.address_unit}
                                 onChange={(event) => this.setDetails(event, 'address_unit')}
                             >
                             </Input>
                             <br></br>
-                            City: 
+                            City:
                             <Input
-                                value= {this.state.address.city}
+                                value={this.state.address.city}
                                 onChange={(event) => this.setDetails(event, 'city')}
                             >
                             </Input>
-                            State: 
+                            State:
                             <Input
-                                value= {this.state.address.state}
+                                value={this.state.address.state}
                                 onChange={(event) => this.setDetails(event, 'state')}
                             >
                             </Input>
-                            Zip: 
+                            Zip:
                             <Input
-                                value= {this.state.address.zip}
+                                value={this.state.address.zip}
                                 onChange={(event) => this.setDetails(event, 'zip')}
                             >
                             </Input>
-                            County: 
+                            County:
                             <Input
-                                value= {this.state.address.county}
+                                value={this.state.address.county}
                                 onChange={(event) => this.setDetails(event, 'county')}
                             >
                             </Input>
                             <br></br>
-                            Notes: 
+                            Notes:
                             <Input
-                                value= {this.state.address.notes}
+                                value={this.state.address.notes}
                                 onChange={(event) => this.setDetails(event, 'notes')}
                             >
                             </Input>
@@ -233,7 +268,7 @@ class OrganizationsListPageItem extends React.Component {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.saveOrg}    
+                                onClick={this.saveOrg}
                             >
                                 Save Details
                             </Button>
