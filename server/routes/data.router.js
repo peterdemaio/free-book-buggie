@@ -195,7 +195,6 @@ router.post('/', (req,res) => {
                     break
                 case 'Poverty':
                     
-                    
                     //query and build variables to send below
                     
 

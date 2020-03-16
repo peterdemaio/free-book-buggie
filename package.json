@@ -49,5 +49,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "heroku-run-build-script": true
+  "heroku-run-build-script": true,
+  "rules": {
+    "no-restricted-syntax": ["error", "SequenceExpression"]
+}
 }

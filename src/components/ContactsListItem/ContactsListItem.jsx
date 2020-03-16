@@ -1,21 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles, Grid, Paper, Typography } from '@material-ui/core'
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+import { 
+    withStyles,
+    Grid,
+    Card,
+    CardHeader,
+    Dialog,
+    DialogContent, 
+    DialogContentText,
+    DialogTitle,
+    Collapse,
+    IconButton,
+    Input,
+    Button
+    } 
+    from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
-import Input from '@material-ui/core/Input'
-import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
     card: {
@@ -24,13 +25,9 @@ const styles = theme => ({
         maxWidth: '600px',
         padding: '10px',
         margin: '12px',
-        //fontSize: '36px',
         textAlign: 'center',
-        // backgroundColor: '#40C445'
-        // background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)'
     },
     header: {
-        // backgroundColor: '#14771B',
         color: '#ffffff',
         background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)',
         fontSize: '36px'
@@ -41,7 +38,6 @@ const styles = theme => ({
         display: 'block'
     },
     content: {
-        // color: '#ffffff',
         textAlign: 'left',
         '&:hover': {
             cursor: 'zoom-in'
@@ -49,7 +45,6 @@ const styles = theme => ({
         fontSize: '26px',
     },
     expand: {
-        // color: '#ffffff',
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
@@ -128,9 +123,9 @@ class ContactsListPageItem extends React.Component {
                         // fontSize={36}                  
                         action={
                             <IconButton
-                                className={this.props.classes.expand, {
-                                    [this.props.classes.expandOpen]: this.state.expanded,
-                                }}
+                                className={`this.props.classes.expand, {
+                                    [this.props.classes.expandOpen]: this.state.expanded
+                                }`}
                                 aria-label="More"
                                 aria-haspopup="true"
                                 onClick={this.menuOpen}
