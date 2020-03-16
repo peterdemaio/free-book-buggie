@@ -88,8 +88,8 @@ class CollectForm extends Component {
         event_name: '',
         location: '',
         date: '',
-        organization_id: '',
-        contact_id: '',
+        organization_id: 0,
+        contact_id: 0,
         start_time: '',
         end_time: '',
         volunteers: '',
@@ -98,8 +98,6 @@ class CollectForm extends Component {
         numOfKids: 0,
         numEslAdults: 0,
         notes: '',
-        type: 0,
-        open: false,
     }
 
     handleChange = name => event => {
@@ -108,7 +106,7 @@ class CollectForm extends Component {
 
     // submit event handler
     newEvent = (event) => {
-        console.log('adding event', this.state.event_name);
+        console.log('adding event', this.state);
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_EVENT',
@@ -143,17 +141,17 @@ class CollectForm extends Component {
 
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
-            <option key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
+            <option value={org.id }key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
         );
 
         // map over organizations, get individual organization name ???
-        let orgName = this.props.reduxStore.organizations.map(nameOrg =>
-            <option key={nameOrg.org_name}>{nameOrg.org_name}</option>
-        );
+        // let orgName = this.props.reduxStore.organizations.map(nameOrg =>
+        //     <option key={nameOrg.org_name}>{nameOrg.org_name}</option>
+        // );
 
         // map over contacts, display in drop down, store in local state when clicked
         let contactList = this.props.reduxStore.contacts.map(people =>
-            <option key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </option>
+            <option value={people.id} key={people.contact_name} className={this.props.classes.dropdown}>{people.contact_name} </option>
         );
 
         return (
@@ -179,7 +177,7 @@ class CollectForm extends Component {
                                     <Select
                                         native
                                         className={this.props.classes.dropdownItem}
-                                        onChange={(event) => this.handleInputChangeFor(event, 'organization')}>
+                                        onChange={(event) => this.handleInputChangeFor(event, 'organization_id')}>
                                         >
                                         {orgList}
                                     </Select>
@@ -190,7 +188,7 @@ class CollectForm extends Component {
                                     <Select
                                         native
                                         className={this.props.classes.dropdownItem}
-                                        onChange={(event) => this.handleInputChangeFor(event, 'contact')}>
+                                        onChange={(event) => this.handleInputChangeFor(event, 'contact_id')}>
                                         {contactList}
                                     </Select>
                                 </FormControl>
