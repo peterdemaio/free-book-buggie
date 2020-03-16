@@ -68,7 +68,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddContact, contactQueryValues);
 
         const sqlAddAgeDemographics = `INSERT INTO "demographics_age"
-                                    ("organization_id", "0-3", "4-7", "8-12", "13-18")
+                                    ("organizations_id", "0-3", "4-7", "8-12", "13-18")
                                     VALUES ($1, $2, $3, $4, $5)`;
         const demQueryValues = [
             organizationsId,
@@ -80,7 +80,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddAgeDemographics, demQueryValues);
 
         const sqlAddRaceDemographics = `INSERT INTO "demographics_race"
-                                    ("organization_id", "white", "black_or_african_american", 
+                                    ("organizations_id", "white", "black_or_african_american", 
                                     "american_indian_or_alaska_native", "asian", 
                                     "native_hawaiian_or_pacific_islander")
                                     VALUES ($1, $2, $3, $4, $5, $6)`;
@@ -95,7 +95,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddRaceDemographics, demRaceQueryValues);
 
         const sqlAddPovertyDemographics = `INSERT INTO "demographics_poverty"
-                                            ("organization_id", "percentage_NSLP")
+                                            ("organizations_id", "percentage_NSLP")
                                             VALUES ($1, $2)`;
         const povertyQueryValues = [
             organizationsId,
@@ -159,8 +159,6 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                     console.log('Error updating organization', err);
                     res.sendStatus(500);
                 }) 
-        )
-        
-        
+        ) 
 })
 module.exports = router;
