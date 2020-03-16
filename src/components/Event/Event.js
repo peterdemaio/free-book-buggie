@@ -88,8 +88,8 @@ class CollectForm extends Component {
         event_name: '',
         location: '',
         date: '',
-        organization_id: 0,
-        contact_id: 0,
+        organization_id: 1,
+        contact_id: 1,
         start_time: '',
         end_time: '',
         volunteers: '',
@@ -141,7 +141,7 @@ class CollectForm extends Component {
 
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
-            <option value={org.id }key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
+            <option value={org.id} key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
         );
 
         // map over organizations, get individual organization name ???
@@ -156,15 +156,15 @@ class CollectForm extends Component {
 
         return (
             <>
-                <h1>Events Page</h1>
-
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"
                     justify="center"
                     alignItems="center"
                 >
-                    <Grid className={this.props.classes.form}
+                    <Grid
+                        container
+                        className={this.props.classes.form}
                         item lg={4}
                         justify="center"
                     ><h1 align="center">Add New Event</h1>
