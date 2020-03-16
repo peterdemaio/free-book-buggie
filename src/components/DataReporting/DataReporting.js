@@ -251,8 +251,17 @@ class DataReporting extends Component {
                                 },
                                 legend:{
                                     display: false
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        display: true,
+                                        ticks: {
+                                            beginAtZero: true   // minimum value will be 0.
+                                        }
+                                    }]
                                 }
                             }}
+                            
                         />
                     </div>
                     
