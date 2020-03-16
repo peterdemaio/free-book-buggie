@@ -10,7 +10,9 @@ import {
     TextField,
     Select,
     MenuItem,
-    InputLabel
+    InputLabel,
+    FormControl,
+    Input
 }
     from '@material-ui/core';
 
@@ -41,6 +43,7 @@ const styles = theme => ({
         width: '250px',
         padding: '25px',
         margin: '10px',
+        backgroundColor: 'white'
     },
     dropdown: {
         width: '250px',
@@ -60,8 +63,22 @@ const styles = theme => ({
     },
     question: {
         paddingLeft: '25px'
-    }
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+      },
 });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 
 class CollectForm extends Component {
@@ -133,9 +150,16 @@ class CollectForm extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
             <MenuItem key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </MenuItem>
+        );
+
+        // map over organizations, get individual organization name ???
+        let orgName = this.props.reduxStore.organizations.map(orgName =>
+            <MenuItem key={orgName.org_name}>{orgName.org_name}</MenuItem>
         );
 
         // map over contacts, display in drop down, store in local state when clicked
@@ -162,15 +186,36 @@ class CollectForm extends Component {
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                <Select className={this.props.classes.inputs}>
-                                    <InputLabel>Organization Name</InputLabel>
-                                    {orgList}
-                                </Select>
-                                <br />
-                                <Select className={this.props.classes.inputs}>
-                                    <InputLabel>Contact Name</InputLabel>
-                                    {contactList}
-                                </Select>
+                                <form className={this.props.classes.inputs} autoComplete="off">
+                                    <FormControl className={this.props.classes.inputs} >
+                                        {/* <InputLabel>Organization Name</InputLabel> */}
+                                        <Select
+                                            input={<Input name="age" id="age-label-placeholder" />}
+                                            displayEmpty
+                                            name="age"
+                                            className={classes.selectEmpty}>
+                                            <MenuItem disabled value="">
+                                                <em>Placeholder</em>
+                                            </MenuItem>
+
+                                            {/* attempt to get selection from drop down to display */}
+                                            {/* {this.props.orgList.map(orgName => (
+                                            <MenuItem disabled key={this.props.orgName} value={this.props.orgName}>
+                                                {orgName}
+                                            </MenuItem>
+                                            ))} */}
+                                            {orgList}
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl className={this.props.classes.inputs} >
+                                        <Select className={this.props.classes.select}>
+                                            <InputLabel>Contact Name</InputLabel>
+                                            {contactList}
+                                        </Select>
+                                    </FormControl>
+                                </form>
+
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.event_name}
@@ -263,7 +308,7 @@ class CollectForm extends Component {
                                 <Button color="primary">
                                     Cancel
                                 </Button>
-                                
+
                                 <Button onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>
