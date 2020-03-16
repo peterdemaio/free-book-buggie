@@ -31,6 +31,7 @@ router.post('/', (req,res) => {
             queryText = `SELECT "event_name", SUM("${sumColumn}") FROM "events"
                          WHERE "date" > '${req.body.startDate}'
                          AND "date" < '${req.body.endDate}'
+                         AND "${sumColumn}" > 0
                          GROUP BY "event_name";`;  
             pool.query(queryText)
             .then((response) => {
@@ -56,6 +57,7 @@ router.post('/', (req,res) => {
                 queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
                             AND "date" < '${req.body.endDate}'
+                            AND "${sumColumn}" > 0
                             GROUP BY "monthYear";`;
                 pool.query(queryText)
                 .then((response) => {
@@ -81,6 +83,7 @@ router.post('/', (req,res) => {
                 queryText = `SELECT DATE_PART('year', "date") AS "year", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
                             AND "date" < '${req.body.endDate}'
+                            AND "${sumColumn}" > 0
                             GROUP BY "year";`;
                 pool.query(queryText)
                 .then((response) => {
@@ -108,6 +111,7 @@ router.post('/', (req,res) => {
                              JOIN "organizations" ON "events".organizations_id = "organizations".id
                              WHERE "date" > '${req.body.startDate}'
                              AND "date" < '${req.body.endDate}'
+                             AND "${sumColumn}" > 0
                              GROUP BY "org_name";`;
             pool.query(queryText)
             .then((response) => {
@@ -134,7 +138,8 @@ router.post('/', (req,res) => {
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
                     JOIN "demographics_age" ON "organizations".id = "demographics_age".organizations_id
                     WHERE "date" > '${req.body.startDate}'
-                    AND "date" < '${req.body.endDate}';`;
+                    AND "date" < '${req.body.endDate}'
+                    AND "${sumColumn}" > 0;`;
                     pool.query(queryText)
                     .then((response) => {
                         console.log('Demographics/age query response.rows:', response.rows)
