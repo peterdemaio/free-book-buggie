@@ -27,7 +27,7 @@ input {
 .log-out, .register {
   background-color: #00acb0;
   border-radius: 4px;
-  color: #f8f8f8;
+  /* color: #f8f8f8; */
   min-height: 50px;
   min-width: 100px;
   outline:0;
@@ -54,7 +54,7 @@ input {
 
 
 .org-input {
-    background-color: #d6d0d0;
+    /* background-color: #d6d0d0; */
     width: 30%;
     height: 550px;
     margin: 20px auto;

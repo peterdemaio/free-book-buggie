@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginMiniChart from '../LoginMiniChart/LoginMiniChart';
-
+import LoginPageNav from './LoginPageNav'
+//material UI imports
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab'
 //importing components for animated countup
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#14771B"
+    }
+  }
+})
 
 
 class LoginPage extends Component {
@@ -44,7 +56,10 @@ class LoginPage extends Component {
   render() {
     
     return (
+      // <ThemeProvider theme={theme}></ThemeProvider>
       <>
+        <LoginPageNav/>
+
         <div className="counter-div">
           <h1 className="counter-style"
           // font-size= "200%"
@@ -105,7 +120,6 @@ class LoginPage extends Component {
           </h1>
         </div>
 
-
         <div>
           {this.props.errors.loginMessage && (
             <h2
@@ -148,13 +162,20 @@ class LoginPage extends Component {
             </div>
 
             <div >
-              <input
+              <Fab
+                variant="extended"
+                size="medium"
+                color="primary"
+                aria-label="Add"
                 className="login-button"
                 type="submit"
                 name="submit"
                 value="User Log In"
                 onClick={this.login}
-              />
+                theme={theme}
+              >
+                Log In
+                </Fab>
             </div>
 
           </div>
@@ -169,7 +190,10 @@ class LoginPage extends Component {
             Volunteer Registration
           </button>
         </center> */}
+        
         </div>
+        
+
       </>
 
     );
