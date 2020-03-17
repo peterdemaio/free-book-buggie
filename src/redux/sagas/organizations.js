@@ -11,7 +11,7 @@ function* editOrganization(action) {
     try {
         let response = yield axios.put('/api/organizations', action.payload)
         console.log('here is the returning data:', response.data)
-        yield put ({type: 'UPDATE_ORGANIZATIONS', payload: response.data })
+        yield put ({type: 'GET_ORGANIZATIONS', payload: response.data })
     } catch (err) {
         console.log('err editing organization', err)
     }
