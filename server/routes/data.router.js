@@ -39,7 +39,7 @@ router.post('/', (req,res) => {
                 for (event of response.rows) {
                     labelsArr.push(event.event_name)
                     dataArr.push(event.sum)
-                    console.log('in for loop. dataArr:', dataArr)
+                    // console.log('in for loop. dataArr:', dataArr)
                 }
                 res.send({
                     data: dataArr,
@@ -194,15 +194,32 @@ router.post('/', (req,res) => {
                     console.log('after query, before break')
                     break
                 case 'Poverty':
-                    
-                    //query and build variables to send below
-                    
-
-                    res.send({
-                        data: dataArr,
-                        labels: labelsArr,
-                        label: label
+                    queryText = `SELECT * FROM "events"
+                    JOIN "organizations" ON "events".organizations_id = "organizations".id
+                    JOIN "demographics_poverty" ON "organizations".id = "demographics_poverty".organizations_id
+                    WHERE "date" > '${req.body.startDate}'
+                    AND "date" < '${req.body.endDate}'
+                    AND "${sumColumn}" > 0;`;
+                    pool.query(queryText)
+                    .then((response) => {
+                        console.log('Demographics/poverty query response.rows', response.rows)
+                        for (event of response.rows) {
+                            let numOfPoorKids = (event[sumColumn] * (event.percentage_NSLP / 100))
+                            labelsArr.push(`Approx ${sumColumn} to NSLP qualifiers at ${event.event_name}`)
+                            dataArr.push(numOfPoorKids)
+                            console.log(dataArr)
+                        }
+                        res.send({
+                            data: dataArr,
+                            labels: labelsArr,
+                            label: label
+                        })
                     })
+                    .catch((error) => {
+                        console.log('data case demographics/poverty error:', error)
+                    })
+                    console.log('after query, before break')
+
                     break;
                 case 'Race':
 
