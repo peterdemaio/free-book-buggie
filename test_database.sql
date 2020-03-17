@@ -1,5 +1,5 @@
 CREATE TABLE "counties" (
-	"id" SERIAL PRIMARY KEY,
+	"county_id" SERIAL PRIMARY KEY,
 	"county_name" VARCHAR(255)
 );
 
@@ -104,7 +104,7 @@ CREATE TABLE "organizations" (
 	"address_unit" varchar(255),
 	"city" varchar(255),
 	"state" varchar(255),
-	"county" integer REFERENCES counties,
+	"county_id" integer REFERENCES counties,
 	"zip" varchar(255),
 	"notes" varchar(255)
 );
