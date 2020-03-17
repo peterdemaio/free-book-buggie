@@ -6,7 +6,6 @@ import { withStyles, Grid } from '@material-ui/core';
 import axios from 'axios'
 
 
-
 const styles = {
     searchBar: {
         paddingTop: '50px',
@@ -23,34 +22,31 @@ const styles = {
 }
 
 class OrganizationsListPage extends React.Component {
-
     state = {
+        searchQuery: "",
         organizations: [],
-        filteredOrganizations: []
     }
 
      async componentDidMount() {
-        axios.get('/api/organizations')
-        .then((response) => {
-            this.setState({
-            organizations: response.data,
-            filteredOrganizations: response.data
+         this.props.dispatch({
+             type: 'GET_ORGANIZATIONS'
+         })
+         this.props.dispatch({ 
+            type: 'FETCH_COUNTIES'
         })
-    })
     }
 
     onInputChange = (event) => {
-        let searchQuery = event.target.value.toLowerCase()
-        this.setState({
-            filteredOrganizations: this.state.organizations.filter(
-                organization => organization.org_name.toLowerCase().includes(searchQuery) ||
-                    organization.city.toLowerCase().includes(searchQuery) ||
-                    organization.county_name.toLowerCase().includes(searchQuery)
-            )
-        })
+        this.setState({ searchQuery: event.target.value.toLowerCase()})
     }
 
     render() {
+        let searchQuery = this.state.searchQuery
+        const filteredList = this.props.reduxStore.organizations.filter(
+            organization => organization.org_name.toLowerCase().includes(searchQuery) ||
+                     organization.city.toLowerCase().includes(searchQuery) ||
+                     organization.county_name.toLowerCase().includes(searchQuery) 
+        )
         return (
             <div>
                 <Grid container
@@ -61,7 +57,8 @@ class OrganizationsListPage extends React.Component {
                     <Input
                         className={this.props.classes.input}
                         placeholder="search here "
-                        onChange={this.onInputChange}>
+                        onChange={this.onInputChange}
+                        value={this.state.searchQuery}>
                     </Input>
                 </Grid>
                 <Grid container
@@ -70,7 +67,7 @@ class OrganizationsListPage extends React.Component {
                     justify="space-evenly"
                     alignItems="center"
                 >
-                    {this.state.filteredOrganizations.map(org =>
+                    {filteredList.map(org =>
                         <OrganizationsListItem key={org.id} org={org} />
                     )}
                 </Grid>
