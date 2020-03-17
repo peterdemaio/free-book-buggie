@@ -264,8 +264,7 @@ router.post('/', (req, res) => {
                                     dataArr[raceGroupIndex] += roundedApproximateRaceOfChildren
                                 }
                                 //now move on to the next age group and start with the first event again
-                                console.log('sum:', dataArr[ageGroupIndex])
-                                console.log('')
+                                console.log('sum:', dataArr[raceGroupIndex])
                             }
                             console.log('final dataArr:', dataArr)
                             res.send({
