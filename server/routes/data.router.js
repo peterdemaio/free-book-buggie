@@ -13,6 +13,7 @@ router.post('/', (req,res) => {
     let label = req.body.yAxis
     let queryText;
     let sumColumn;
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     switch(req.body.yAxis) {
         case 'Books Distributed':
             sumColumn = 'books_out'
@@ -39,7 +40,7 @@ router.post('/', (req,res) => {
                 for (event of response.rows) {
                     labelsArr.push(event.event_name)
                     dataArr.push(event.sum)
-                    console.log('in for loop. dataArr:', dataArr)
+                    // console.log('in for loop. dataArr:', dataArr)
                 }
                 res.send({
                     data: dataArr,
@@ -53,7 +54,7 @@ router.post('/', (req,res) => {
             break;
         case 'Time':
             if (req.body.timeUnit === 'Month') {
-                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
                             AND "date" < '${req.body.endDate}'
@@ -194,15 +195,33 @@ router.post('/', (req,res) => {
                     console.log('after query, before break')
                     break
                 case 'Poverty':
-                    
-                    //query and build variables to send below
-                    
-
-                    res.send({
-                        data: dataArr,
-                        labels: labelsArr,
-                        label: label
+                    queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") as "sum", AVG("demographics_poverty"."percentage_NSLP") as "NSLP"  FROM "events"
+                    JOIN "organizations" ON "events".organizations_id = "organizations".id
+                    JOIN "demographics_poverty" ON "demographics_poverty".organizations_id = "organizations".id
+                    AND "${sumColumn}" > 0
+                    GROUP BY "monthYear";`;
+                    pool.query(queryText)
+                    .then((response) => {
+                        console.log('Demographics/poverty query response.rows', response.rows)
+                        for (event of response.rows) {
+                            let numOfPoorKids = (event.sum * (event.NSLP / 100))
+                            let monthInt = event.monthYear.split(' ')[0]
+                            let year = event.monthYear.split(' ')[1]
+                            labelsArr.push(months[monthInt-1] + ' ' + year)
+                            dataArr.push(numOfPoorKids)
+                            console.log(dataArr)
+                        }
+                        res.send({
+                            data: dataArr,
+                            labels: labelsArr,
+                            label: label
+                        })
                     })
+                    .catch((error) => {
+                        console.log('data case demographics/poverty error:', error)
+                    })
+                    console.log('after query, before break')
+
                     break;
                 case 'Race':
 

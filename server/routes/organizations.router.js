@@ -5,9 +5,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const queryText = `SELECT "organizations".id, "organizations".org_name, "organizations".logo, "organizations".url, "organizations".type, "organizations".address_number, "organizations".address_street, "organizations".address_unit, "organizations".city, "organizations".state, "organizations".zip, "organizations".notes, "counties".county_name FROM "organizations"
-                        JOIN "counties" ON "counties".id = "organizations".county                 
-                        ORDER BY "id";`
+    const queryText = `SELECT "organizations".id, "organizations".org_name, "organizations".logo, "organizations".url, "organizations".type, "organizations".address_number, "organizations".address_street, "organizations".address_unit, "organizations".city, "organizations".state, "organizations".zip, "organizations".notes, "counties".county_id, "counties".county_name FROM "organizations"
+                        JOIN "counties" ON "counties".county_id = "organizations".county_id                 
+                        ORDER BY "organizations".org_name;`
     console.log('in organizations router.get', req.body)
     pool.query(queryText)
         .then(result => {
@@ -24,28 +24,30 @@ router.get('/', (req, res) => {
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const newEntry = req.body;
-    
+
     console.log(newEntry);
 
     const connection = await pool.connect()
     try {
         await connection.query('BEGIN');
         const sqlAddOrganization = `INSERT INTO "organizations" 
-                                    ("org_name", "logo", "type", "address_number", "address_street", 
-                                    "address_unit", "city", "state", "county", "zip") 
-                                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+                                    ("org_name", "logo", "url", "type", "address_number", "address_street", 
+                                    "address_unit", "city", "state", "county_id", "zip", "notes") 
+                                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
                                     RETURNING id`;
         const organizationQueryValues = [
             newEntry.name,
             newEntry.logo,
+            newEntry.url,
             newEntry.type,
             newEntry.address_number,
             newEntry.address_street,
             newEntry.address_unit,
             newEntry.city,
             newEntry.state,
-            newEntry.county,
+            newEntry.county_id,
             newEntry.zip,
+            newEntry.notes
         ];
         // Save the result so we can get the returned value
         const result = await connection.query(sqlAddOrganization, organizationQueryValues);
@@ -102,7 +104,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             newEntry.demographics_poverty
         ]
         await connection.query(sqlAddPovertyDemographics, povertyQueryValues)
-        
+
         await connection.query('COMMIT');
         res.sendStatus(200);
     } catch (error) {
@@ -112,7 +114,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     } finally {
         connection.release()
     }
-    
+
 });
 
 
@@ -127,7 +129,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     let city = req.body.city
     let state = req.body.state
     let zip = req.body.zip
-    let county = req.body.county
+    let county_id = req.body.county_id
     let notes = req.body.notes
 
     let sqlText1 = `UPDATE "organizations" 
@@ -139,26 +141,16 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                     "city" = $6, 
                     "state" = $7, 
                     "zip" = $8, 
-                    "county" = $9, 
+                    "county_id" = $9, 
                     "notes" = $10 
                     WHERE "id" = $11
                     RETURNING "organizations";`;
-    let sqlText2 = 'SELECT * FROM "organizations" ORDER BY "id";'
-    pool.query(sqlText1, [logo, url, address_number, address_street, address_unit, city, state, zip, county, notes, id])
-        .then(
-            pool.query(sqlText2)
-                .then(result => {
-                    console.log(result.rows)
-                    res.send(result.rows)
-                })
-                .catch((err) => {
-                    console.log('Error updating organization', err);
-                    res.sendStatus(500);
-                })
-                .catch((err) => {
-                    console.log('Error updating organization', err);
-                    res.sendStatus(500);
-                }) 
-        ) 
+    pool.query(sqlText1, [logo, url, address_number, address_street, address_unit, city, state, zip, county_id, notes, id])
+    .then(result => {
+        console.log(result.rows)
+      }).catch(error => {
+        console.log('error in event POST', error)
+        res.sendStatus(500);
+      }) 
 })
 module.exports = router;
