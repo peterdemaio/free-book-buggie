@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/', (req,res) => {
 
+    let label = req.body.yAxis
     let sumColumn;
     switch(req.body.yAxis) {
         case 'Books Distributed':
