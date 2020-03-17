@@ -157,11 +157,18 @@ input {
     font-weight: 900;
   }
 
-  .chart-input-container {
+  .chart-dashboard {
     display: flex;
-    justify-content: left;
+    flex-direction: row;
+    justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-right: 70px;
+  }
+
+  .chart-input-container {
+    display: flex;
+    flex-direction: row;
   }
 
   .chart-input {
@@ -190,14 +197,6 @@ input {
     border-color: grey;
     margin-top: 4px;
     font-family: Arial, Helvetica, sans-serif;
-    /* position: relative; */
     height: 32px;
-    /* appearance: none; */
-    /* background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 96% !important; */
-    /* background: url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/16x16/ic_arrow_drop_down_48px-512.png") white no-repeat 96% !important; */
-    /* padding: 4px; */
     font-size: 20px;
-    /* padding-right: 60px; */
   }
-
-  
