@@ -13,6 +13,7 @@ router.post('/', (req,res) => {
     let label = req.body.yAxis
     let queryText;
     let sumColumn;
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     switch(req.body.yAxis) {
         case 'Books Distributed':
             sumColumn = 'books_out'
@@ -53,7 +54,7 @@ router.post('/', (req,res) => {
             break;
         case 'Time':
             if (req.body.timeUnit === 'Month') {
-                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") FROM "events"
                             WHERE "date" > '${req.body.startDate}'
                             AND "date" < '${req.body.endDate}'
@@ -194,18 +195,19 @@ router.post('/', (req,res) => {
                     console.log('after query, before break')
                     break
                 case 'Poverty':
-                    queryText = `SELECT * FROM "events"
+                    queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") as "sum", AVG("demographics_poverty"."percentage_NSLP") as "NSLP"  FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
-                    JOIN "demographics_poverty" ON "organizations".id = "demographics_poverty".organizations_id
-                    WHERE "date" > '${req.body.startDate}'
-                    AND "date" < '${req.body.endDate}'
-                    AND "${sumColumn}" > 0;`;
+                    JOIN "demographics_poverty" ON "demographics_poverty".organizations_id = "organizations".id
+                    AND "${sumColumn}" > 0
+                    GROUP BY "monthYear";`;
                     pool.query(queryText)
                     .then((response) => {
                         console.log('Demographics/poverty query response.rows', response.rows)
                         for (event of response.rows) {
-                            let numOfPoorKids = (event[sumColumn] * (event.percentage_NSLP / 100))
-                            labelsArr.push(`Approx ${sumColumn} to NSLP qualifiers at ${event.event_name}`)
+                            let numOfPoorKids = (event.sum * (event.NSLP / 100))
+                            let monthInt = event.monthYear.split(' ')[0]
+                            let year = event.monthYear.split(' ')[1]
+                            labelsArr.push(months[monthInt-1] + ' ' + year)
                             dataArr.push(numOfPoorKids)
                             console.log(dataArr)
                         }
