@@ -204,23 +204,7 @@ router.post('/', (req, res) => {
                     GROUP BY "monthYear";`;
                     pool.query(queryText)
 
-                        .then((response) => {
-                            console.log('Demographics/poverty query response.rows', response.rows)
-                            for (event of response.rows) {
-                                let numOfPoorKids = (event[sumColumn] * (event.percentage_NSLP / 100))
-                                labelsArr.push(`Approx ${sumColumn} to NSLP qualifiers at ${event.event_name}`)
-                                dataArr.push(numOfPoorKids)
-                                console.log(dataArr)
-                            }
-                            res.send({
-                                data: dataArr,
-                                labels: labelsArr,
-                                label: label
-                            })
-                        })
-                        .catch((error) => {
-                            console.log('data case demographics/poverty error:', error)
-=======
+                        
                     .then((response) => {
                         console.log('Demographics/poverty query response.rows', response.rows)
                         for (event of response.rows) {
@@ -238,8 +222,12 @@ router.post('/', (req, res) => {
 
                         })
                     console.log('after query, before break')
+                    })
+                    .catch((error) => {
+                        console.log('error in Peter stuff')
+                    })
 
-                    break;
+                    break
                 case 'Race':
                     queryText = `SELECT * FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
@@ -295,7 +283,7 @@ router.post('/', (req, res) => {
                         .catch((error) => {
                             console.log('data case Demographics error:', error)
                         })
-                    console.log('after query, before break')
+                    console.log('after race query, before break')
                     break
             }
     }
