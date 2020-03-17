@@ -249,16 +249,18 @@ router.post('/', (req, res) => {
 
                                     // option: raceGroup is string in labelsArr
                                     let raceGroup = labelsArr[raceGroupIndex];
-
+                                    //accessing age group columns but JS doesn't allow hyphens in 
+                                    //variable names/object keys, so using event[] instead of event.0-3
                                     let raceGroupPercentage = event[raceGroup]
+                                    //changing from 50 to 0.5, etc.
                                     raceGroupPercentage = raceGroupPercentage / 100;
-
+                                    //same as event.sumColumn
                                     let raceOfChildren = event[sumColumn];
-
+                                    //multiply race of children by the percentage
                                     let approximateRaceOfChildren = raceOfChildren * raceGroupPercentage
-
+                                    //round approximate quantity to nearest whole number
                                     let roundedApproximateRaceOfChildren = Math.round(approximateRaceOfChildren)
-
+                                    //add this quanitity to the previous events' quantities in the same age group
                                     dataArr[raceGroupIndex] += roundedApproximateRaceOfChildren
                                 }
                                 //now move on to the next age group and start with the first event again
