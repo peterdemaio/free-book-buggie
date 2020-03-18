@@ -55,7 +55,9 @@
 }
 
 .nav-link:hover {
-  background-color: #40C445;
+  background-color: rgb(29, 114, 35);
+  border-radius: 12px;
+  opacity: 90%;
 }
 
 .nav-right {

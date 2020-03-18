@@ -12,16 +12,15 @@ import {
     Select,
     InputLabel,
     FormControl,
-    
 }
     from '@material-ui/core';
 
 const styles = theme => ({
-    root: {
-        ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-    },
+    // root: {
+    //     ...theme.mixins.gutters(),
+    //     paddingTop: theme.spacing.unit * 2,
+    //     paddingBottom: theme.spacing.unit * 2,
+    // },
     container: {
         minHeight: '400px'
     },
@@ -29,7 +28,6 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
@@ -48,37 +46,37 @@ const styles = theme => ({
     dropdown: {
         width: '250px',
     },
-    submitButton: {
-        justify: 'center',
-        alignItems: 'center'
-    },
-    demographicsInputs: {
-        width: '50px',
-        alignItems: 'center',
-    },
-    demographicsLine: {
-        paddingLeft: '25px',
-        paddingBottom: '10px',
-        margin: '10px',
-    },
-    question: {
-        paddingLeft: '25px'
-    },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2,
-    },
+    // submitButton: {
+    //     justify: 'center',
+    //     alignItems: 'center'
+    // },
+    // demographicsInputs: {
+    //     width: '50px',
+    //     alignItems: 'center',
+    // },
+    // demographicsLine: {
+    //     paddingLeft: '25px',
+    //     paddingBottom: '10px',
+    //     margin: '10px',
+    // },
+    // question: {
+    //     paddingLeft: '25px'
+    // },
+    // selectEmpty: {
+    //     marginTop: theme.spacing.unit * 2,
+    // },
 });
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//     PaperProps: {
+//         style: {
+//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//             width: 250,
+//         },
+//     },
+// };
 
 
 class NewEvent extends Component {
@@ -99,9 +97,9 @@ class NewEvent extends Component {
         notes: '',
     }
 
-    handleChange = name => event => {
-        this.setState({ [name]: Number(event.target.value) });
-    };
+    // handleChange = name => event => {
+    //     this.setState({ [name]: Number(event.target.value) });
+    // };
 
     // mount organizations on page load
     componentDidMount() {
@@ -149,7 +147,7 @@ class NewEvent extends Component {
 
     render() {
 
-        const { classes } = this.props;
+        // const { classes } = this.props;
 
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
@@ -168,8 +166,10 @@ class NewEvent extends Component {
 
         return (
             <>
+
             <NewEventNav/>
                 <Grid className={this.props.classes.container}
+
                     container
                     direction="column"
                     justify="center"
@@ -180,7 +180,8 @@ class NewEvent extends Component {
                         className={this.props.classes.form}
                         item lg={4}
                         justify="center"
-                    ><h1 align="center">Add New Event</h1>
+                    >
+                        <h1 align="center">Add New Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
@@ -307,8 +308,8 @@ class NewEvent extends Component {
                         </Paper>
                     </Grid>
                     <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button>
-                    <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button>
-                    <Button onClick={() => this.props.history.push('/home')}>Home</Button>
+                    {/* <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button> */}
+                    {/* <Button onClick={() => this.props.history.push('/home')}>Home</Button> */}
                 </Grid>
             </>
         )

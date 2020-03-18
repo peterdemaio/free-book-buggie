@@ -26,7 +26,6 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
