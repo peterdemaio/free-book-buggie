@@ -18,7 +18,6 @@ import HomePage from '../HomePage/HomePage';
 import InfoPage from '../InfoPage/InfoPage';
 import DataReporting from '../DataReporting/DataReporting';
 import DistributeBooks from '../DistributeBooks/DistributeBooks';
-// import CollectBooks from '../CollectBooks/CollectBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';

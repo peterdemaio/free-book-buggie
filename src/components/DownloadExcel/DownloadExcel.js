@@ -3,8 +3,8 @@ import ReactExport from 'react-export-excel';
 import { connect } from 'react-redux';
 
 const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+// const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+// const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const ObjectsToCsv = require('objects-to-csv');
 

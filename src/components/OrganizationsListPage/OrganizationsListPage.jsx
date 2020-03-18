@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
 import { withStyles, Grid } from '@material-ui/core';
-import axios from 'axios'
+
 
 
 const styles = {

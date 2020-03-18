@@ -4,7 +4,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { connect } from 'react-redux';
 
 import CsvDownloader from 'react-csv-downloader';
-import DownloadExcel from '../DownloadExcel/DownloadExcel';
+// import DownloadExcel from '../DownloadExcel/DownloadExcel';
 
 
 const ObjectsToCsv = require('objects-to-csv');
