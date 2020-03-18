@@ -20,7 +20,6 @@ import DataReporting from '../DataReporting/DataReporting';
 import DistributeBooks from '../DistributeBooks/DistributeBooks';
 // import CollectBooks from '../CollectBooks/CollectBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
-import EditOrganization from '../EditOrganization/EditOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
 import Event from '../Event/Event';
@@ -91,11 +90,6 @@ class App extends Component {
               exact
               path="/newOrganization"
               component={NewOrganization}
-            />
-            <ProtectedRoute
-              exact
-              path="/editOrganization"
-              component={EditOrganization}
             />
             <ProtectedRoute
               exact

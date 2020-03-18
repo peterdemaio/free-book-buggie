@@ -1,5 +1,5 @@
 CREATE TABLE "counties" (
-	"id" SERIAL PRIMARY KEY,
+	"county_id" SERIAL PRIMARY KEY,
 	"county_name" VARCHAR(255)
 );
 
@@ -104,12 +104,12 @@ CREATE TABLE "organizations" (
 	"address_unit" varchar(255),
 	"city" varchar(255),
 	"state" varchar(255),
-	"county" integer REFERENCES counties,
+	"county_id" integer REFERENCES counties,
 	"zip" varchar(255),
 	"notes" varchar(255)
 );
 
-INSERT INTO "organizations" ("org_name", "logo", "url", "type", "address_number", "address_street", "address_unit", "city", "state", "county", "zip")
+INSERT INTO "organizations" ("org_name", "logo", "url", "type", "address_number", "address_street", "address_unit", "city", "state", "county_id", "zip")
 VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uploads/big05_01c_Dagon_Lovecraft_T-Shirt-100x100.jpg', 'http://www.esotericorderofdagon.org/', 'non-profit','1234','Main Street', '#112', 'Burnsville','MN', 19,'55337'),
 ('Read To the Animals', 'https://www.mainstreetbooksminot.com/sites/mainstreetbooksminot.com/files/Reading%20With%20Rover.png', 'https://www.animalhumanesociety.org/education/rescue-readers', 'non-profit','987','West Barkway', NULL, 'Minneapolis','MN',27,'55411'),
 ('The Human Fund', 'https://images.adagio.com/images2/custom_blends/33590.jpg', 'http://festivusweb.com/festivus-the-human-fund.php', 'non-profit','1000', 'Wall St.', '#5001', 'New York','NY', 62,'10281'),
@@ -211,3 +211,6 @@ CREATE TABLE  "user"(
     "password" VARCHAR (1000) NOT NULL,
     "admin" BOOLEAN DEFAULT false
 );
+
+INSERT INTO "user" ("username", "password", "admin")
+VALUE ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)

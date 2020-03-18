@@ -8,6 +8,7 @@ import contacts from './contacts';
 import updateContacts from './updateContacts';
 import demographicsBoolean from './demographicsBooleanReducer';
 import chartData from './chartDataReducer';
+import chartDataExcel from './chartDataExcelReducer';
 import counties from './counties'
 import bookCountReducer from './bookCountReducer'
 
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   demographicsBoolean,
   chartData,
   counties,
-  bookCountReducer
+  bookCountReducer,
+  chartDataExcel,
 });
 
 export default rootReducer;
