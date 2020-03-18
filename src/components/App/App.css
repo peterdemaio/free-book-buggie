@@ -32,7 +32,7 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover, .login-button:hover {
+.log-in:hover, .log-out:hover, .register:hover, .login-button:hover, .log-out-button:hover {
   background-color: rgb(44, 145, 47);
 }
 
@@ -101,7 +101,7 @@ input {
   }
 
   /* login button styling */
-  .login-button {
+  .login-button, .log-out-button {
     border: none;
     font-family: "Museo Slab";
     border-bottom:  1px solid #444; 
@@ -193,4 +193,11 @@ input {
     font-family: Arial, Helvetica, sans-serif;
     height: 32px;
     font-size: 20px;
+  }
+
+  .log-out-button-div {
+    float: right;
+    padding-top: 16px;
+    padding-left: 8px;
+
   }

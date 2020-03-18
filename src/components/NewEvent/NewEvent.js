@@ -306,8 +306,8 @@ class NewEvent extends Component {
                         </Paper>
                     </Grid>
                     <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button>
-                    <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button>
-                    <Button onClick={() => this.props.history.push('/home')}>Home</Button>
+                    {/* <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button> */}
+                    {/* <Button onClick={() => this.props.history.push('/home')}>Home</Button> */}
                 </Grid>
             </>
         )
