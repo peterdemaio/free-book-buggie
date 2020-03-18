@@ -130,12 +130,11 @@ router.post('/', (req,res) => {
                             console.log('sum:', dataArr[ageGroupIndex])
                             console.log('')
                         }
-                        console.log('final dataArr:', dataArr)
-                        res.send({
-                            data: dataArr,
-                            labels: labelsArr,
-                            label: label
-                        })
+                        let dataExcelArr = [];
+                        for (row in labelsArr) {
+                            
+                        }
+                        res.send(dataExcelArr)
                     })
                     .catch((error) => {
                         console.log('data case Demographics error:', error)
