@@ -9,11 +9,9 @@ import {
     Paper,
     TextField,
     Select,
-    MenuItem,
     InputLabel,
     FormControl,
-    Input,
-    NativeSelect
+    
 }
     from '@material-ui/core';
 
@@ -82,7 +80,7 @@ const MenuProps = {
 };
 
 
-class CollectForm extends Component {
+class NewEvent extends Component {
 
     state = {
         event_name: '',
@@ -319,4 +317,4 @@ const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(CollectForm));
+export default connect(mapStateToProps)(withStyles(styles)(NewEvent));

@@ -22,7 +22,7 @@ import DistributeBooks from '../DistributeBooks/DistributeBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
-import Event from '../Event/Event';
+import NewEvent from '../NewEvent/NewEvent';
 
 
 import './App.css';
@@ -84,7 +84,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/Event"
-              component={Event}
+              component={NewEvent}
             />
             <ProtectedRoute
               exact
