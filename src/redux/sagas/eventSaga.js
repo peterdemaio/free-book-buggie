@@ -3,10 +3,21 @@ import { put, takeEvery, } from 'redux-saga/effects';
 
 function* watcherSaga() {
     yield takeEvery('ADD_EVENT', submitEvent);
-    // yield takeEvery('DISTRIBUTE_BOOKS', giveBooks)
+    yield takeEvery('VOLUNTEER_EVENT', addBooksKids)
 }
 
 function* submitEvent(action) {
+    try {
+        let response = yield axios.post('/api/events', action.payload)
+        console.log(response.data)
+        yield put({ type: 'POST_EVENT', payload: response.data})
+    }
+    catch (error) {
+        console.log('Error submitting event collected', error)
+    }
+}
+
+function* addBooksKids(action) {
     try {
         let response = yield axios.post('/api/events', action.payload)
         console.log(response.data)
