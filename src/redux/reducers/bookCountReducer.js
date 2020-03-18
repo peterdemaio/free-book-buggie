@@ -1,5 +1,5 @@
-const bookCount = (state = [], action) => {
-    console.log('in SET_BOOK_DATA', action.payload[0]);
+const bookCountReducer = (state = [], action) => {
+    console.log('in SET_BOOK_DATA', action.payload);
     
     switch (action.type) {
         case 'SET_BOOK_DATA':
@@ -10,4 +10,4 @@ const bookCount = (state = [], action) => {
    
 };
 
-export default bookCount;
+export default bookCountReducer;

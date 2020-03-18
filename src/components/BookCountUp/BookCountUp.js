@@ -16,11 +16,15 @@ class BookCountUp extends Component {
     }
 
     render() {
-        console.log('BROOOOOOOO', this.props.reduxStore);
+        console.log('broooooooooooo', this.props.reduxStore.bookCountReducer);
+        //need to map over bookCountReducer.sum and pass to end={}
+        //then repeat for 'books out' and pass to end={} for books out countUp
         
         return (
             <>
-                <p>{JSON.stringify(this.props.reduxStore)}</p>
+                <p>{JSON.stringify(this.props.reduxStore.bookCountReducer
+                    )}</p>
+                    
             <div className="counter-div">
                 <h1 className="counter-style"
                 // font-size= "200%"

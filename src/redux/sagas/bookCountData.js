@@ -5,8 +5,9 @@ function* getBookData() {
     // console.log('in getBookSaga')
     const response = yield axios.get('/api/data')
 
-    yield put({ type: 'SET_BOOK_DATA', payload: response.data })
+    yield put({ type: 'SET_BOOK_DATA', payload: response.data})
 }
+
 
 function* getBookSaga() {
     yield takeEvery('GET_BOOK_COUNT_DATA', getBookData)
