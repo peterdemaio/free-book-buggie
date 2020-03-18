@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './HomePageNavStyle.css';
+import './ContactListNav.css';
 
 const Nav = (props) => (
-    <div className="nav">
+    <div className="nav-contact-list">
 
         <div className="nav-title-div">
             {/* <Link to="/home"> */}

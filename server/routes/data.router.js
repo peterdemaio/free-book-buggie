@@ -203,8 +203,6 @@ router.post('/', (req, res) => {
                     AND "${sumColumn}" > 0
                     GROUP BY "monthYear";`;
                     pool.query(queryText)
-
-                        
                     .then((response) => {
                         console.log('Demographics/poverty query response.rows', response.rows)
                         for (event of response.rows) {
@@ -219,14 +217,12 @@ router.post('/', (req, res) => {
                             data: dataArr,
                             labels: labelsArr,
                             label: label
-
                         })
                     console.log('after query, before break')
                     })
                     .catch((error) => {
                         console.log('error in Peter stuff')
                     })
-
                     break
                 case 'Race':
                     queryText = `SELECT * FROM "events"

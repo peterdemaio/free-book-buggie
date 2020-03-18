@@ -10,6 +10,8 @@ import {
 }
     from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import NewOrganizationNav from './NewOrganizationNav'
+
 
 const styles = theme => ({
     root: {
@@ -146,6 +148,7 @@ class NewOrganization extends Component {
     render() {
         return (
             <>
+            <NewOrganizationNav/>
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
+// import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 
 // Material UI imports
 import {
@@ -12,16 +12,11 @@ import {
     DialogContent,
     DialogTitle,
     InputLabel,
-    InputBase,
-    Input,
     MenuItem,
     OutlinedInput,
     FormControl,
-    NativeSelect,
-    FormHelperText,
     TextField,
     Select,
-    Option,
 }
     from '@material-ui/core';
 
@@ -58,13 +53,7 @@ class DistributeBooks extends Component {
         type: 0,
         open: false,
     }
-
-    // componentDidMount() {
-    //     this.props.dispatch({
-    //         type: 'FETCH_USER'
-    //     })
-    // }
-
+    
     // MUI Select controls
     handleClickOpen = () => {
         this.setState({ open: true });

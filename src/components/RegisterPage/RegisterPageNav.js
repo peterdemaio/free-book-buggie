@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './HomePageNavStyle.css';
+import './RegisterPageNav.css';
 
 const Nav = (props) => (
-    <div className="nav">
+    <div className="nav-register">
 
         <div className="nav-title-div">
             {/* <Link to="/home"> */}
@@ -33,17 +33,14 @@ const Nav = (props) => (
                     <Link className="nav-link" to="/event">
                         New Event
           </Link>
-                    <Link className="nav-link" to="/DataReporting">
-                        Data Reporting
-          </Link>
-                    <Link className="nav-link" to="/OrganizationsListPage">
-                        Organizations List
-          </Link>
                     <Link className="nav-link" to="/neworganization">
                         Add New Org
           </Link>
                     <Link className="nav-link" to="/contactsListPage">
                         Contacts List
+          </Link>
+                    <Link className="nav-link" to="/OrganizationsListPage">
+                        Organizations List
           </Link>
                     <LogOutButton className="nav-link" />
                 </>
