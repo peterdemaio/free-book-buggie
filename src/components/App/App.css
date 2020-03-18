@@ -160,10 +160,6 @@ input {
     font-weight: 900;
   }
 
-<<<<<<< HEAD
-  
-
-=======
   .chart-dashboard {
     display: flex;
     flex-direction: row;
@@ -184,7 +180,6 @@ input {
     flex-direction: column;
     font-size: 20px;
   }
->>>>>>> 321bbfa3c69a67b30d7f0639c61e66c8a10e8575
 
   .date-input {
     /* padding: 3px; */
