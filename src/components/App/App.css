@@ -106,28 +106,21 @@ input {
 
   /* login button styling */
   .login-button {
-    /* color:  #14771B; */
-
     border: none;
     font-family: "Museo Slab";
     border-bottom:  1px solid #444; 
     cursor: pointer;
-    /* size: 10px; */
-    background-color:#14771B;
     border-radius: 10px;
     color: #f8f8f8;
     min-height: 40px;
     min-width: 80px;
     outline:0;
     cursor: pointer;
-    /* margin: 70px -8 0 -70px; */
-    /* float: left; */
     display: block;
     display: inline-block;
+    background-color:#14771B;
 
 }
-
-
   /* styling for up-counter component on login page */
   .counter-style {
     font-family: "Museo Slab";

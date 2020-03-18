@@ -57,9 +57,7 @@ class LoginPage extends Component {
       // <ThemeProvider theme={theme}></ThemeProvider>
       <>
         <LoginPageNav/>
-
         <BookCountUp/>
-        
         <div>
           {this.props.errors.loginMessage && (
             <h2
@@ -113,6 +111,7 @@ class LoginPage extends Component {
                 value="User Log In"
                 onClick={this.login}
                 theme={theme}
+                
               >
                 Log In
                 </Fab>
