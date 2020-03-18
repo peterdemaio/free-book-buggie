@@ -3,72 +3,75 @@ import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
 import { withStyles, Grid } from '@material-ui/core';
+import axios from 'axios'
+
 
 const styles = {
+    searchBar: {
+        paddingTop: '50px',
+        textSize: '36px'
+    },
     input: {
-        justify: 'center'
+        justify: 'center',
+        padding: '10px'
     },
     list: {
         paddingLeft: '25px',
         paddingRight: '25px'
-        // margin: 'px'
     }
 }
 
 class OrganizationsListPage extends React.Component {
-
     state = {
+        searchQuery: "",
         organizations: [],
-        filteredOrganizations: []
     }
 
-    componentDidMount() {
-        fetch(this.props.dispatch({
-            type: 'GET_ORGANIZATIONS'
-        }))
-        .then(this.setState({
-            organizations: this.props.reduxStore.organizations,
-            filteredOrganizations: this.props.reduxStore.organizations
-        }))
-    }
-
-    onInputChange = (event) => {
-        let searchQuery = event.target.value.toLowerCase()
-        this.setState({
-            filteredOrganizations: this.props.reduxStore.organizations.filter(
-                organization => organization.org_name.toLowerCase().includes(searchQuery) ||
-                    organization.city.toLowerCase().includes(searchQuery) ||
-                    organization.county_name.toLowerCase().includes(searchQuery)
-            )
+     async componentDidMount() {
+         this.props.dispatch({
+             type: 'GET_ORGANIZATIONS'
+         })
+         this.props.dispatch({ 
+            type: 'FETCH_COUNTIES'
         })
     }
 
-    render() {
-        return (
-            <>
-                <div>
-                    <span>Search for an organization by name, city or county: </span>
+    onInputChange = (event) => {
+        this.setState({ searchQuery: event.target.value.toLowerCase()})
+    }
 
+    render() {
+        let searchQuery = this.state.searchQuery
+        const filteredList = this.props.reduxStore.organizations.filter(
+            organization => organization.org_name.toLowerCase().includes(searchQuery) ||
+                     organization.city.toLowerCase().includes(searchQuery) ||
+                     organization.county_name.toLowerCase().includes(searchQuery) 
+        )
+        return (
+            <div>
+                <Grid container
+                    justify="center"
+                    alignItems="center"
+                    className={this.props.classes.searchBar}>
+                    <span>Search for an organization by name, city or county: </span>
                     <Input
                         className={this.props.classes.input}
                         placeholder="search here "
-                        onChange={this.onInputChange}>
+                        onChange={this.onInputChange}
+                        value={this.state.searchQuery}>
                     </Input>
-                </div>
-                <div>
-                    <Grid container
-                        className={this.props.classes.list}
-                        direction="column"
-                        justify="space-evenly"
-                        alignItems="left"
-                    >
-                        {this.state.filteredOrganizations.map(org =>
-
-                            <OrganizationsListItem key={org.id} org={org} />
-                        )}
-                    </Grid>
-                </div>
-            </>
+                </Grid>
+                <Grid container
+                    className={this.props.classes.list}
+                    direction="column"
+                    justify="space-evenly"
+                    alignItems="center"
+                >
+                    {filteredList.map(org =>
+                        <OrganizationsListItem key={org.id} org={org} />
+                    )}
+                </Grid>
+            </div>
         )
     }
 }

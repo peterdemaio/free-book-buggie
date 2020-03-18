@@ -104,6 +104,18 @@ class CollectForm extends Component {
         this.setState({ [name]: Number(event.target.value) });
     };
 
+    // mount organizations on page load
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'GET_ORGANIZATIONS',
+            payload: this.props.reduxStore.organizations
+        })
+        this.props.dispatch({
+            type: 'GET_CONTACTS',
+            payload: this.props.reduxStore.contacts
+        })
+    }
+
     // submit event handler
     newEvent = (event) => {
         console.log('adding event', this.state);
@@ -126,6 +138,7 @@ class CollectForm extends Component {
                 contact_id: this.state.contact_id,
             }
         })
+        alert('Event Successfully Added!')
     }
 
     handleInputChangeFor = (event, propertyName) => {

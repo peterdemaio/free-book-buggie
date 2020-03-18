@@ -2,19 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import ContactsListItem from '../ContactsListItem/ContactsListItem'
-import {withStyles, Grid } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
+import axios from 'axios'
 
 const styles = {
-    searchBar : {
+    searchBar: {
         paddingTop: '50px',
         // maxWidth: '600px'
         textSize: '36px'
     },
-    input : {
+    input: {
         justify: 'center',
         padding: '10px'
     },
-    list : {
+    list: {
         paddingLeft: '25px',
         paddingRight: '25px'
     }
@@ -25,52 +26,49 @@ class ContactsListPage extends React.Component {
         contacts: [],
         filteredContacts: []
     }
-    componentDidMount() {
-        fetch(this.props.dispatch({
-            type: 'GET_CONTACTS'
-          }))
-        .then(this.setState({
-            contacts: this.props.reduxStore.contacts,
-            filteredContacts: this.props.reduxStore.contacts
-        }))
+    async componentDidMount() {
+        axios.get('/api/contacts')
+        .then((response) => {
+            this.setState({
+            contacts: response.data,
+            filteredContacts: response.data
+        })
+    })
     }
 
     onInputChange = (event) => {
         let searchQuery = event.target.value.toLowerCase();
         this.setState({
-            filteredContacts: this.props.reduxStore.contacts.filter( 
+            filteredContacts: this.state.contacts.filter(
                 contact => contact.contact_name.toLowerCase().includes(searchQuery)
-                )
+            )
         })
     }
 
     render() {
         return (
-            <>
-                <Grid container 
-                justify="center"
-                alignItems="center"
-                className={this.props.classes.searchBar}
-                >
-                    <span className={this.props.classes.searchBar}>Search for an contact by name or organization: </span><br></br>
-                    <Input 
+            <div>
+                <Grid container
+                    justify="center"
+                    alignItems="center"
+                    className={this.props.classes.searchBar}>
+                    <span>Search for an contact by name or organization: </span><br></br>
+                    <Input
                         className={this.props.classes.input}
                         placeholder="search here "
                         onChange={this.onInputChange}>
                     </Input>
                 </Grid>
-                <div>
-                    <Grid container 
+                <Grid container
                     className={this.props.classes.list}
                     direction="column"
                     justify="space-evenly"
                     alignItems="center">
-                        {this.state.filteredContacts.map(contact =>
-                            <ContactsListItem key={contact.id} contact={contact} />
-                        )}
-                    </Grid>
-                </div>
-            </>
+                    {this.state.filteredContacts.map(contact =>
+                        <ContactsListItem key={contact.id} contact={contact} />
+                    )}
+                </Grid>
+            </div>
         )
     }
 }

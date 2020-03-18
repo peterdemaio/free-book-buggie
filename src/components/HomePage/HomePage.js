@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import HomePageNav from './HomePageNav'
 
 
 import {
@@ -15,6 +16,7 @@ import {
 const UserPage = (props) => (
   <>
   <div>
+    <HomePageNav/>
     <h1 id="welcome">
       Welcome, {props.user.username}!
     </h1>

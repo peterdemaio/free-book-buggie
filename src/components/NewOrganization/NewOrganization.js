@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import {
     Button,
     TextField,
     Grid,
-    FormLabel,
     FormControl,
     Paper,
-    MenuItem,
     Select,
-    InputLabel
 }
     from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
@@ -96,7 +91,7 @@ class NewOrganization extends Component {
             address_street: '',
             city: '',
             state: '',
-            county: '',
+            county_id: '',
             zip: '',
             contact_name: '',
             title: '',
@@ -243,9 +238,9 @@ class NewOrganization extends Component {
                                 <Select
                                     native
                                     className={this.props.classes.dropdownItem}
-                                    onChange={(event) => this.handleChangeFor(event, 'county')}>
+                                    onChange={(event) => this.handleChangeFor(event, 'county_id')}>
                                     {this.props.reduxStore.counties.map(county =>
-                                        <option value={county.id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
+                                        <option value={county.county_id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
                                     )}
                                 </Select>
                             </FormControl>

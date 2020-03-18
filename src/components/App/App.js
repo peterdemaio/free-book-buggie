@@ -8,7 +8,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import Nav from '../Nav/Nav';
+// import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -20,7 +20,6 @@ import DataReporting from '../DataReporting/DataReporting';
 import DistributeBooks from '../DistributeBooks/DistributeBooks';
 // import CollectBooks from '../CollectBooks/CollectBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
-import EditOrganization from '../EditOrganization/EditOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
 import Event from '../Event/Event';
@@ -39,7 +38,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          {/* <Nav /> */}
+
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -90,11 +90,6 @@ class App extends Component {
               exact
               path="/newOrganization"
               component={NewOrganization}
-            />
-            <ProtectedRoute
-              exact
-              path="/editOrganization"
-              component={EditOrganization}
             />
             <ProtectedRoute
               exact

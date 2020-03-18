@@ -23,9 +23,6 @@ class LoginMiniChart extends Component {
         this.setState({ loading: false })
     }
 
-
-
-
     render(){
         return(
 
