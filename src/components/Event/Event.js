@@ -9,20 +9,20 @@ import {
     Paper,
     TextField,
     Select,
-    MenuItem,
+    // MenuItem,
     InputLabel,
     FormControl,
-    Input,
-    NativeSelect
+    // Input,
+    // NativeSelect
 }
     from '@material-ui/core';
 
 const styles = theme => ({
-    root: {
-        ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-    },
+    // root: {
+    //     ...theme.mixins.gutters(),
+    //     paddingTop: theme.spacing.unit * 2,
+    //     paddingBottom: theme.spacing.unit * 2,
+    // },
     container: {
         minHeight: '400px'
     },
@@ -30,7 +30,7 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
+        // minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
@@ -49,37 +49,37 @@ const styles = theme => ({
     dropdown: {
         width: '250px',
     },
-    submitButton: {
-        justify: 'center',
-        alignItems: 'center'
-    },
-    demographicsInputs: {
-        width: '50px',
-        alignItems: 'center',
-    },
-    demographicsLine: {
-        paddingLeft: '25px',
-        paddingBottom: '10px',
-        margin: '10px',
-    },
-    question: {
-        paddingLeft: '25px'
-    },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2,
-    },
+    // submitButton: {
+    //     justify: 'center',
+    //     alignItems: 'center'
+    // },
+    // demographicsInputs: {
+    //     width: '50px',
+    //     alignItems: 'center',
+    // },
+    // demographicsLine: {
+    //     paddingLeft: '25px',
+    //     paddingBottom: '10px',
+    //     margin: '10px',
+    // },
+    // question: {
+    //     paddingLeft: '25px'
+    // },
+    // selectEmpty: {
+    //     marginTop: theme.spacing.unit * 2,
+    // },
 });
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//     PaperProps: {
+//         style: {
+//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//             width: 250,
+//         },
+//     },
+// };
 
 
 class CollectForm extends Component {
@@ -100,9 +100,9 @@ class CollectForm extends Component {
         notes: '',
     }
 
-    handleChange = name => event => {
-        this.setState({ [name]: Number(event.target.value) });
-    };
+    // handleChange = name => event => {
+    //     this.setState({ [name]: Number(event.target.value) });
+    // };
 
     // mount organizations on page load
     componentDidMount() {
@@ -169,7 +169,8 @@ class CollectForm extends Component {
 
         return (
             <>
-                <Grid className={this.props.classes.container}
+                <Grid
+                    className={this.props.classes.container}
                     container
                     direction="column"
                     justify="center"
@@ -180,7 +181,8 @@ class CollectForm extends Component {
                         className={this.props.classes.form}
                         item lg={4}
                         justify="center"
-                    ><h1 align="center">Add New Event</h1>
+                    >
+                        <h1 align="center">Add New Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
