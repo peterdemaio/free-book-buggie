@@ -8,7 +8,6 @@ function* getData(action) {
 }
 
 function* dataReportingSaga() {
-   
     yield takeEvery('GET_DATA', getData)
 }
 

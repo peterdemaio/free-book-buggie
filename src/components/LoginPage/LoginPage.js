@@ -5,9 +5,8 @@ import LoginPageNav from './LoginPageNav'
 //material UI imports
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
-//importing components for animated countup
-import CountUp from 'react-countup';
-import VisibilitySensor from 'react-visibility-sensor';
+import BookCountUp from '../BookCountUp/BookCountUp';
+
 
 
 
@@ -21,9 +20,8 @@ const theme = createMuiTheme({
 
 
 class LoginPage extends Component {
-
-
-  state = {
+    
+    state = {
     username: '',
     password: '',
   };
@@ -60,66 +58,8 @@ class LoginPage extends Component {
       <>
         <LoginPageNav/>
 
-        <div className="counter-div">
-          <h1 className="counter-style"
-          // font-size= "200%"
-          >
-            <CountUp
-              start={0}
-              end={18164}
-              duration={1.5}
-              separator=","
-              decimals={0}
-              decimal=","
-              prefix="Books distributed: "
-              suffix=" "
-              onEnd={() => console.log('Ended! 👏')}
-              onStart={() => console.log('Started! 💨')}
-            // ref={CountUp => { this.myCountUp = CountUp; }}
-            >
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
-                </VisibilitySensor>
-              )}
-              {/* removing button in favor of page load  */}
-              {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
-            </CountUp>
-            <br />
-            <CountUp
-              start={0}
-              end={12957}
-              duration={1.75}
-              separator=","
-              decimals={0}
-              decimal=","
-              prefix="Children impacted: "
-              suffix=" "
-              onEnd={() => console.log('Ended! 👏')}
-              onStart={() => console.log('Started! 💨')}
-            // ref={CountUp => { this.myCountUp = CountUp; }}
-            >
-              {({ countUpRef, start }) => (
-                <VisibilitySensor onChange={start} delayedCall>
-                  <span ref={countUpRef} />
-                </VisibilitySensor>
-              )}
-              {/* removing button in favor of page load */}
-              {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
-            </CountUp>
-          </h1>
-        </div>
-
+        <BookCountUp/>
+        
         <div>
           {this.props.errors.loginMessage && (
             <h2
@@ -200,13 +140,12 @@ class LoginPage extends Component {
   }
 }
 
-
-
 // Instead of taking everything from state, we just want the error messages.
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({errors}) => ({ errors });
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, reduxStore) => ({
   errors: state.errors,
+  reduxStore
 });
 
 export default connect(mapStateToProps)(LoginPage);

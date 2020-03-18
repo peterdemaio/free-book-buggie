@@ -23,12 +23,7 @@ class LoginMiniChart extends Component {
         this.setState({ loading: false })
     }
 
-
-
-
     render(){
-
-
         return(
 
         <div style={{ marginLeft: '12%', marginRight: '12%' }}>
