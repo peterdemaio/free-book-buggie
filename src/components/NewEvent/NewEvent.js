@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import NewEventNav from './NewEventNav'
 
 // Material UI imports
 import {
@@ -9,11 +10,9 @@ import {
     Paper,
     TextField,
     Select,
-    MenuItem,
     InputLabel,
     FormControl,
-    Input,
-    NativeSelect
+    
 }
     from '@material-ui/core';
 
@@ -82,7 +81,7 @@ const MenuProps = {
 };
 
 
-class CollectForm extends Component {
+class NewEvent extends Component {
 
     state = {
         event_name: '',
@@ -169,6 +168,7 @@ class CollectForm extends Component {
 
         return (
             <>
+            <NewEventNav/>
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"
@@ -319,4 +319,4 @@ const mapStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(CollectForm));
+export default connect(mapStateToProps)(withStyles(styles)(NewEvent));

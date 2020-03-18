@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoginMiniChart from '../LoginMiniChart/LoginMiniChart';
 import LoginPageNav from './LoginPageNav'
 //material UI imports
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
 import BookCountUp from '../BookCountUp/BookCountUp';
 
@@ -57,9 +57,7 @@ class LoginPage extends Component {
       // <ThemeProvider theme={theme}></ThemeProvider>
       <>
         <LoginPageNav/>
-
         <BookCountUp/>
-        
         <div>
           {this.props.errors.loginMessage && (
             <h2
@@ -113,6 +111,7 @@ class LoginPage extends Component {
                 value="User Log In"
                 onClick={this.login}
                 theme={theme}
+                
               >
                 Log In
                 </Fab>
