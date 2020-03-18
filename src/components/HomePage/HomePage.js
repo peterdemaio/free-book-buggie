@@ -17,20 +17,21 @@ const UserPage = (props) => (
   <>
   <div>
     <HomePageNav/>
-    <h1 id="welcome">
+    <h1 id="welcome" className="welcome">
       Welcome, {props.user.username}!
+
     </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <Button onClick={() => props.history.push('/event')}>New Event</Button>
-    <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button>
-    <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button>
+    {/* <p>Your ID is: {props.user.id}</p> */}
+    {/* <Button onClick={() => props.history.push('/event')}>New Event</Button> */}
+    {/* <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button> */}
+    {/* <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button> */}
     <br />
-    <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button>
-    <LogOutButton className="log-in" />
+    {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
+    {/* <LogOutButton className="log-in" /> */}
   </div>
   
   <div>
-    <h3>Register a new volunteer here: </h3>
+    {/* <h3>Register a new volunteer here: </h3> */}
   <center >
     <button
       

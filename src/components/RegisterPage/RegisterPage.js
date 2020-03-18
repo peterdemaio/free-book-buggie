@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import RegisterPageNav from './RegisterPageNav'
 
 class RegisterPage extends Component {
   state = {
@@ -31,6 +32,8 @@ class RegisterPage extends Component {
 
   render() {
     return (
+      <>
+      <RegisterPageNav/>
       <div>
         {this.props.errors.registrationMessage && (
           <h2
@@ -83,6 +86,7 @@ class RegisterPage extends Component {
           </button>
         </center>
       </div>
+      </>
     );
   }
 }

@@ -33,14 +33,17 @@ const Nav = (props) => (
           <Link className="nav-link" to="/event">
             New Event
           </Link>
+          <Link className="nav-link" to="/DataReporting">
+            Data Reporting
+          </Link>
+          <Link className="nav-link" to="/OrganizationsListPage">
+            Organizations List
+          </Link>
           <Link className="nav-link" to="/neworganization">
             Add New Org
           </Link>
           <Link className="nav-link" to="/contactsListPage">
             Contacts List
-          </Link>
-          <Link className="nav-link" to="/OrganizationsListPage">
-            Organizations List
           </Link>
           <LogOutButton className="nav-link" />
         </>
