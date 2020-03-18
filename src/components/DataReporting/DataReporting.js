@@ -4,6 +4,8 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { connect } from 'react-redux';
 
 import CsvDownloader from 'react-csv-downloader';
+// import DownloadExcel from '../DownloadExcel/DownloadExcel';
+import DataReportingNav from './DataReportingNav'
 
 const ObjectsToCsv = require('objects-to-csv');
 
@@ -236,6 +238,7 @@ class DataReporting extends Component {
         } else {
             return (
                 <>
+                <DataReportingNav/>
                     <h1>DataReporting page</h1>
                     <div className='chart-dashboard'>
                         <div className='chart-input-container'>
