@@ -8,15 +8,19 @@ import VisibilitySensor from 'react-visibility-sensor';
 class BookCountUp extends Component {
 
     componentDidMount() {
-        console.log('in CountUp componentDidMount')
+        // console.log('in CountUp componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
-            type: 'GET_DATA'   
+            type: 'GET_BOOK_COUNT_DATA'   
         }) 
     }
 
     render() {
+        console.log('BROOOOOOOO', this.props.reduxStore);
+        
         return (
+            <>
+                <p>{JSON.stringify(this.props.reduxStore)}</p>
             <div className="counter-div">
                 <h1 className="counter-style"
                 // font-size= "200%"
@@ -80,10 +84,11 @@ class BookCountUp extends Component {
             </div>
 
 
-            // <ul>
-            //     {JSON.stringify(this.props.reduxStore.???)}
-            // </ul>
+           
+
+         </>
         )
+        
     }
 }
 
