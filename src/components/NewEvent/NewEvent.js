@@ -10,17 +10,11 @@ import {
     Paper,
     TextField,
     Select,
-<<<<<<< HEAD:src/components/Event/Event.js
     // MenuItem,
     InputLabel,
     FormControl,
     // Input,
     // NativeSelect
-=======
-    InputLabel,
-    FormControl,
-    
->>>>>>> 0bf2b1522d22af45a5f936190a5fe107aee600f6:src/components/NewEvent/NewEvent.js
 }
     from '@material-ui/core';
 
