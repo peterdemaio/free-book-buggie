@@ -197,19 +197,22 @@ router.post('/', (req, res) => {
                     console.log('after query, before break')
                     break
                 case 'Poverty':
+                    console.log('in poverty case')
                     queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") as "sum", AVG("demographics_poverty"."percentage_NSLP") as "NSLP"  FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
                     JOIN "demographics_poverty" ON "demographics_poverty".organizations_id = "organizations".id
+                    WHERE "date" > '${req.body.startDate}'
+                    AND "date" < '${req.body.endDate}'
                     AND "${sumColumn}" > 0
                     GROUP BY "monthYear";`;
                     pool.query(queryText)
                     .then((response) => {
                         console.log('Demographics/poverty query response.rows', response.rows)
                         for (event of response.rows) {
-                            let numOfPoorKids = (event.sum * (event.NSLP / 100))
+                            let numOfPoorKids = Math.round((event.sum * (event.NSLP / 100)))
                             let monthInt = event.monthYear.split(' ')[0]
                             let year = event.monthYear.split(' ')[1]
-                            labelsArr.push(months[monthInt-1] + ' ' + year)
+                            labelsArr.push('NSLP Kids in ' + months[monthInt-1] + ' ' + year)
                             dataArr.push(numOfPoorKids)
                             console.log(dataArr)
                         }
@@ -218,7 +221,7 @@ router.post('/', (req, res) => {
                             labels: labelsArr,
                             label: label
                         })
-                    console.log('after query, before break')
+                        console.log('after query, before break')
                     })
                     .catch((error) => {
                         console.log('error in Peter stuff')
@@ -239,6 +242,7 @@ router.post('/', (req, res) => {
                             //this array will not be modified, but its values will be used to parse each event object
 
                             labelsArr = ['white', 'black_or_african_american', 'american_indian_or_alaska_native', 'asian', 'native_hawaiian_or_pacific_islander']
+                            labelsArr2 = ['White', 'Black or African American', 'American Indian or Alaska Native', 'Asian', 'Native Hawaiian or Pacific Islander']
 
                             //this array has corresponding indices to the array above and will represent 
                             //the number of books or children in each racial group
@@ -272,7 +276,7 @@ router.post('/', (req, res) => {
                             console.log('final dataArr:', dataArr)
                             res.send({
                                 data: dataArr,
-                                labels: labelsArr,
+                                labels: labelsArr2,
                                 label: label
                             })
                         })
@@ -289,6 +293,8 @@ router.post('/', (req, res) => {
 //GET for BookCountUp component
 router.get('/', (req, res) => {
     const queryText = `SELECT SUM(books_in) 
+                       FROM events
+                       UNION SELECT SUM(books_out)
                        FROM events;`
     console.log('data.router book get')
     pool.query(queryText)

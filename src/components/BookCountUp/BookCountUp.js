@@ -22,25 +22,24 @@ class BookCountUp extends Component {
         
         return (
             <>
-                <p>{JSON.stringify(this.props.reduxStore.bookCountReducer
-                    )}</p>
-                    
+                {/* <p>{JSON.stringify(this.props.reduxStore.bookCountReducer[1].sum)}</p>  */}
+
             <div className="counter-div">
                 <h1 className="counter-style"
                 // font-size= "200%"
                 >
                     <CountUp
                         start={0}
-                        end={18164}
+                        end={Number(this.props.reduxStore.bookCountReducer[0].sum)}
                         duration={1.5}
-                        delay={.25}
+                        delay={0}
                         separator=","
                         decimals={0}
                         decimal=","
                         prefix="Books distributed: "
                         suffix=" "
-                        onEnd={() => console.log('Ended! 👏')}
-                        onStart={() => console.log('Started! 💨')}
+                        // onEnd={() => console.log('Ended! 👏')}
+                        // onStart={() => console.log('Started! 💨')}
                     // ref={CountUp => { this.myCountUp = CountUp; }}
                     >
                         {({ countUpRef, start }) => (
@@ -59,20 +58,20 @@ class BookCountUp extends Component {
                     <br />
                     <CountUp
                         start={0}
-                        end={12957}
+                        end={Number(this.props.reduxStore.bookCountReducer[1].sum)}
                         duration={1.75}
-                        delay={.25}
+                        delay={0}
                         separator=","
                         decimals={0}
                         decimal=","
                         prefix="Children impacted: "
                         suffix=" "
-                        onEnd={() => console.log('Ended! 👏')}
+                        // onEnd={() => console.log('Ended! 👏')}
                         onStart={() => console.log('Started! 💨')}
                     // ref={CountUp => { this.myCountUp = CountUp; }}
                     >
                         {({ countUpRef, start }) => (
-                            <VisibilitySensor onChange={start} delayedCall>
+                                <VisibilitySensor onChange={start} delayedCall>
                                 <span ref={countUpRef} />
                             </VisibilitySensor>
                         )}
