@@ -60,6 +60,17 @@
 
 .nav-link:hover {
   background-color: rgb(29, 114, 35);
+  opacity: 90%;
+  /* height: auto; */
+  /* margin-top: 15px; */
+  /* max-height: 10px; */
+  /* padding-bottom: 8px; */
+  /* vertical-align: 8; */
+  /* margin: 5px; */
+  /* height: 8px; */
+  /* padding-top: 5px; */
+  /* min-width: 80px; */
+  
 }
 
 .nav-right {

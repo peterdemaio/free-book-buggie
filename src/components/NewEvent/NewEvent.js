@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NewEventNav from './NewEventNav'
+import './NewEventStyle.css';
 
 // Material UI imports
 import {
@@ -181,7 +182,7 @@ class NewEvent extends Component {
                         item lg={4}
                         justify="center"
                     >
-                        <h1 align="center">Add New Event</h1>
+                        <h1 className="new-event-styles">Add an event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
@@ -307,7 +308,7 @@ class NewEvent extends Component {
                             </span>
                         </Paper>
                     </Grid>
-                    <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button>
+                    {/* <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button> */}
                     {/* <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button> */}
                     {/* <Button onClick={() => this.props.history.push('/home')}>Home</Button> */}
                 </Grid>
