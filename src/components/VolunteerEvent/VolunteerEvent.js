@@ -50,6 +50,8 @@ class volunteerEvent extends Component {
         collectBooks: 0,
         distBooks: 0,
         numOfKids: 0,
+        event_id: 1,
+        notes: '',
     }
 
     // get all events on page load
@@ -85,6 +87,11 @@ class volunteerEvent extends Component {
 
     render() {
 
+        // map over event reducer and grab the event
+        let eventList = this.props.reduxStore.eventReducer.map(event =>
+            <option value={event.id} key={event.event_name} className={this.props.classes.dropdown}>{event.event_name}</option>
+        );
+
         return (
 
             <>
@@ -105,7 +112,16 @@ class volunteerEvent extends Component {
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                {/* show event the volunteers are currently at??? */}
+                            <FormControl className={this.props.classes.inputs} >
+                                    <InputLabel>Event Name</InputLabel>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'event_id')}>
+                                        >
+                                        {eventList}
+                                    </Select>
+                                </FormControl>
 
                                 <TextField
                                     className={this.props.classes.inputs}
@@ -130,6 +146,14 @@ class volunteerEvent extends Component {
                                     label="Number of Children"
                                     margin="normal"
                                     onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
+                                />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.notes}
+                                    type="text"
+                                    margin="normal"
+                                    label="Notes"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'notes')}
                                 />
 
                                 <Button color="primary">
