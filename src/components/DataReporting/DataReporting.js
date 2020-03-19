@@ -9,7 +9,6 @@ import DataReportingNav from './DataReportingNav'
 
 const ObjectsToCsv = require('objects-to-csv');
 
-
 class DataReporting extends Component {
     
     state = {
@@ -142,17 +141,6 @@ class DataReporting extends Component {
         })
     }
 
-    // JSONtoCSV = (items) => {
-    //     console.log(items)
-    //     items = [items, items]
-    //     const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    //     const header = Object.keys(items[0])
-    //     let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-    //     csv.unshift(header.join(','))
-    //     csv = csv.join('\r\n')
-
-    //     console.log(csv)
-    // }
     downloadCSV = async () => {
         console.log(this.props.reduxStore.chartDataExcel)
         const csv = new ObjectsToCsv(this.props.reduxStore.chartDataExcel)
@@ -161,10 +149,6 @@ class DataReporting extends Component {
     }
 
     componentDidMount() {
-        //let myRef = React.createRef()
-
-        console.log('this.state.myRef:', this.state.myRef)
-        //console.log('this.myRef.current.getElementsByTagName("canvas")[0]:', this.myRef.current.getElementsByTagName("canvas")[0])
         console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
@@ -272,13 +256,11 @@ class DataReporting extends Component {
                         </div>
                         <div className='export-options'>
                             <div className='chart-input'>
-                                
-                                {/* <button onClick={() => this.JSONtoCSV(this.props.reduxStore.chartData)}>Download csv</button> */}
                                 <CsvDownloader 
                                     filename="BookBuggieData"
                                     columns={columns} 
                                     datas={this.props.reduxStore.chartDataExcel}>
-                                    <button><img src="https://img.icons8.com/color/48/000000/ms-excel.png" alt=""/></button>
+                                    <button><img src={require('./ms-excel.png')}/></button>
                                 </CsvDownloader>
                             </div>
                         </div>
