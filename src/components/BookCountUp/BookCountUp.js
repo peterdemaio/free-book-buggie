@@ -22,9 +22,8 @@ class BookCountUp extends Component {
         
         return (
             <>
-                {/* <p>{JSON.stringify(this.props.reduxStore.bookCountReducer[0].sum
-                    )}</p> */}
-                    
+                {/* <p>{JSON.stringify(this.props.reduxStore.bookCountReducer[1].sum)}</p>  */}
+
             <div className="counter-div">
                 <h1 className="counter-style"
                 // font-size= "200%"
@@ -59,7 +58,7 @@ class BookCountUp extends Component {
                     <br />
                     <CountUp
                         start={0}
-                        end={12957}
+                        end={Number(3000)}
                         duration={1.75}
                         delay={.25}
                         separator=","

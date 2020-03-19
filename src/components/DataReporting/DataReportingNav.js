@@ -33,9 +33,9 @@ const Nav = (props) => (
                     <Link className="nav-link" to="/event">
                         New Event
           </Link>
-                    {/* <Link className="nav-link" to="/DataReporting">
+                    <Link className="nav-link" to="/DataReporting">
                         Data Reporting
-          </Link> */}
+          </Link>
                     <Link className="nav-link" to="/OrganizationsListPage">
                         Organizations List
           </Link>
