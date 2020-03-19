@@ -47,6 +47,12 @@ const styles = theme => ({
         width: '400px',
         padding: '25px',
         margin: '10px',
+    },
+    button: {
+        width: '100px',
+        padding: '25px',
+        margin: '10px',
+
     }
 });
 
@@ -94,7 +100,7 @@ class volunteerEvent extends Component {
     render() {
 
         // map over event reducer and grab the event
-        let eventList = this.props.reduxStore.eventReducer.map(event =>
+        let eventList = this.props.reduxStore.currentEventReducer.map(event =>
             <option value={event.id} key={event.event_name} className={this.props.classes.dropdown}>{event.event_name}</option>
         );
 
@@ -165,13 +171,15 @@ class volunteerEvent extends Component {
                                     onChange={(event) => this.handleInputChangeFor(event, 'notes')}
                                 />
 
-                                <Button 
-                                className={this.props.classes.inputs}
-                                color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    color="primary">
                                     Cancel
                                 </Button>
 
-                                <Button onClick={this.addData} color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    onClick={this.addData} color="primary">
                                     Submit
                                 </Button>
 
