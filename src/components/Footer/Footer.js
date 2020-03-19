@@ -10,10 +10,17 @@ const Footer = () => (
 
 
   <footer>
+    <div >
+      <img 
+      className="footer-image"
+        src="https://freebookbuggie.files.wordpress.com/2018/08/cropped-bookbuggie_main1.jpg"
+        alt="the book buggie image"
+        width="700px"
+        
+      />
+    </div>
+    <div className="footer-copy">
     &copy; The Free Book Buggie
-
-    <div className="footer-image">
-
     </div>
   </footer>
 
