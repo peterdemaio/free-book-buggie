@@ -9,7 +9,7 @@ import './Footer.css'
 const Footer = () => (
 
 
-  <footer>
+  <footer className="footer-total">
     <div >
       <img 
       className="footer-image"

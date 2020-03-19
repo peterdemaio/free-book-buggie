@@ -6,7 +6,7 @@ import LoginPageNav from './LoginPageNav'
 import { createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
 import BookCountUp from '../BookCountUp/BookCountUp';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 
 
 

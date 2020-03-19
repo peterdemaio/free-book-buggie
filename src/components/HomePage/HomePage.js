@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import LogOutButton from '../LogOutButton/LogOutButton';
 import HomePageNav from './HomePageNav'
+import Footer from '../Footer/Footer'
 
 
 // import {
@@ -43,6 +44,7 @@ const UserPage = (props) => (
       {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
       {/* <LogOutButton className="log-in" /> */}
     </div>
+    <Footer/>
   </>
 );
 

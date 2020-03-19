@@ -22,3 +22,8 @@ footer {
     top: 300px;
     z-index: -1;
 }
+
+.footer-total{
+  margin-bottom: -300%;
+   
+}

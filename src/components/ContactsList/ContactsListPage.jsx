@@ -70,6 +70,8 @@ class ContactsListPage extends React.Component {
                     {this.state.filteredContacts.map(contact =>
                         <ContactsListItem key={contact.id} contact={contact} />
                     )}
+                    <br/>
+                    <br/>
                 </Grid>
             </div>
             </>

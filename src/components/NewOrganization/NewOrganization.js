@@ -383,6 +383,7 @@ class NewOrganization extends Component {
                         variant={'outlined'}>
                         Add
                 </Button>
+                <br/>
                 </Grid>
             </>
         )
