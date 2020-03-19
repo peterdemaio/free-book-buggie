@@ -97,3 +97,21 @@
     width:100px;
     display: inline-block;
   }
+
+  .welcome-message-div {
+    text-align: center;
+    /* float: left; */
+    margin: 0px 0 0 475px;
+    font-size: 20px;
+    /* display: inline-block; */
+    font-family: "Museo Slab";
+    color: #14771B;
+    padding-top: 30px;
+
+  }
+
+  .volunteer-button-div {
+text-align: center;
+padding-top: 75px;
+
+  }
