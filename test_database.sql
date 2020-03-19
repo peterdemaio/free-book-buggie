@@ -213,4 +213,4 @@ CREATE TABLE  "user"(
 );
 
 INSERT INTO "user" ("username", "password", "admin")
-VALUE ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)
+VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)
