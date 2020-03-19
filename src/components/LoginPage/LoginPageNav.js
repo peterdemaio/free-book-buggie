@@ -10,9 +10,9 @@ const Nav = (props) => (
         <div className="nav-title-div">
             {/* <Link to="/home"> */}
 
-            <h2 className="nav-title">The Free Book Buggie</h2>
+            {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
             {/* </Link> */}
-            <div>
+            <div className="buggie-logo">
                 <img
                     className="logo-image"
                     alt="book buggie logo"

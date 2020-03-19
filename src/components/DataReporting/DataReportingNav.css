@@ -18,6 +18,10 @@
 
 }
 
+.buggie-logo{
+  padding-top: 15px;
+}
+
 .nav-title-div {
   text-align: center;
   background-size: 325%;
@@ -33,10 +37,10 @@
   /* justify-content: flex-end; */
   align-items: flex-end;
   /* opacity: .75; */
-  max-height: 350px;
+  max-height: 200px;
 }
 
-.nav-link {
+.nav-link-data {
   float: left;
   color: #ffffff;
   /* background-color:#14771B; */
@@ -54,9 +58,25 @@
   outline:0;
 }
 
-.nav-link:hover {
-  background-color: rgb(29, 114, 35);
+.nav-link-data:hover {
+  border-radius: 15px;
+  background-color: rgb(240, 200, 136);
+  opacity: 83%;
+  /* overflow: hidden; */
+  /* height: auto; */
+  /* margin-top: 15px; */
+  /* max-height: 10px; */
+  /* padding-bottom: 8px; */
+  /* vertical-align: 8; */
+  /* margin: 5px; */
+  /* height: 8px; */
+  /* padding-top: 5px; */
+  min-width: 80px;
+  
 }
+/* .nav-link:hover {
+  background-color: rgb(29, 114, 35);
+} */
 
 .nav-right {
   padding-top: 30px;

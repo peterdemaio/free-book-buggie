@@ -67,7 +67,7 @@ class BookCountUp extends Component {
                         prefix="Children impacted: "
                         suffix=" "
                         // onEnd={() => console.log('Ended! 👏')}
-                        onStart={() => console.log('Started! 💨')}
+                        // onStart={() => console.log('Started! 💨')}
                     // ref={CountUp => { this.myCountUp = CountUp; }}
                     >
                         {({ countUpRef, start }) => (

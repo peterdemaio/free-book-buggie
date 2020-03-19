@@ -159,11 +159,11 @@ router.post('/', (req,res) => {
                         dataArr = [];
                         console.log('Demographics/poverty query response.rows', response.rows)
                         for (event of response.rows) {
-                            let numOfPoorKids = Math.round((event.sum * (event.NSLP / 100)))
+                            let numOfNSLPKids = Math.round((event.sum * (event.NSLP / 100)))
                             let monthInt = event.monthYear.split(' ')[0]
                             let year = event.monthYear.split(' ')[1]
                             labelsArr.push('NSLP Kids in ' + months[monthInt-1] + ' ' + year)
-                            dataArr.push(numOfPoorKids)
+                            dataArr.push(numOfNSLPKids)
                             console.log(dataArr)
                         }
                         let dataExcelArr = [];
@@ -211,13 +211,13 @@ router.post('/', (req,res) => {
                                     //changing from 50 to 0.5, etc.
                                     raceGroupPercentage = raceGroupPercentage / 100;
                                     //same as event.sumColumn
-                                    let raceOfChildren = event[sumColumn];
+                                    let booksOrChildren = event[sumColumn];
                                     //multiply race of children by the percentage
-                                    let approximateRaceOfChildren = raceOfChildren * raceGroupPercentage
+                                    let approximateBooksOrChildren = booksOrChildren * raceGroupPercentage
                                     //round approximate quantity to nearest whole number
-                                    let roundedApproximateRaceOfChildren = Math.round(approximateRaceOfChildren)
+                                    let roundedApproximateBooksOrChildren = Math.round(approximateBooksOrChildren)
                                     //add this quanitity to the previous events' quantities in the same age group
-                                    dataArr[raceGroupIndex] += roundedApproximateRaceOfChildren
+                                    dataArr[raceGroupIndex] += roundedApproximateBooksOrChildren
                                 }
                                 //now move on to the next age group and start with the first event again
                                 console.log('sum:', dataArr[raceGroupIndex])
