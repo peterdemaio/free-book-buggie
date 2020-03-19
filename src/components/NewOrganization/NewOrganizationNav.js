@@ -21,7 +21,7 @@ const Nav = (props) => (
         </div>
 
         <div className="nav-right">
-            <Link className="nav-link" to="/home">
+            <Link className="nav-link-new-org" to="/home">
                 {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
@@ -30,28 +30,28 @@ const Nav = (props) => (
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {props.user.id && (
                 <>
-                    <Link className="nav-link" to="/event">
+                    <Link className="nav-link-new-org" to="/event">
                         New Event
           </Link>
-                    <Link className="nav-link" to="/DataReporting">
+                    <Link className="nav-link-new-org" to="/DataReporting">
                         Data Reporting
           </Link>
-                    <Link className="nav-link" to="/OrganizationsListPage">
+                    <Link className="nav-link-new-org" to="/OrganizationsListPage">
                         Organizations List
           </Link>
-                    <Link className="nav-link" to="/neworganization">
+                    <Link className="nav-link-new-org" to="/neworganization">
                         Add New Org
           </Link>
-                    <Link className="nav-link" to="/contactsListPage">
+                    <Link className="nav-link-new-org" to="/contactsListPage">
                         Contacts List
           </Link>
                     <LogOutButton className="nav-link" />
                 </>
             )}
             {/* Always show this link since the about page is not protected */}
-            <Link className="nav-link" to="/about">
+            {/* <Link className="nav-link" to="/about">
                 About
-      </Link>
+      </Link> */}
         </div>
     </div>
 );
