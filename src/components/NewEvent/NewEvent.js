@@ -11,8 +11,13 @@ import {
     Paper,
     TextField,
     Select,
+
+    // MenuItem,
     InputLabel,
     FormControl,
+    // Input,
+    // NativeSelect
+
 }
     from '@material-ui/core';
 
@@ -47,6 +52,17 @@ const styles = theme => ({
     dropdown: {
         width: '250px',
     },
+    notes: {
+        width: '400px',
+        padding: '25px',
+        margin: '10px',
+    },
+    button: {
+        width: '250px',
+        padding: '10px',
+        margin: '20px',
+        marginLeft: '140px'
+    }
     // submitButton: {
     //     justify: 'center',
     //     alignItems: 'center'
@@ -168,7 +184,7 @@ class NewEvent extends Component {
         return (
             <>
 
-            <NewEventNav/>
+                <NewEventNav />
                 <Grid className={this.props.classes.container}
 
                     container
@@ -291,18 +307,22 @@ class NewEvent extends Component {
                                     onChange={(event) => this.handleInputChangeFor(event, 'numEslAdults')}
                                 />
                                 <TextField
-                                    className={this.props.classes.inputs}
+                                    className={this.props.classes.notes}
                                     value={this.state.notes}
                                     type="text"
                                     margin="normal"
                                     label="Notes"
                                     onChange={(event) => this.handleInputChangeFor(event, 'notes')}
                                 />
-                                <Button color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    color="primary">
                                     Cancel
                                 </Button>
 
-                                <Button onClick={this.newEvent} color="primary">
+                                <Button 
+                                className={this.props.classes.button}
+                                onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>
                             </span>
