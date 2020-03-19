@@ -6,6 +6,7 @@ import LoginPageNav from './LoginPageNav'
 import { createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
 import BookCountUp from '../BookCountUp/BookCountUp';
+import Footer from '../Footer/Footer';
 
 
 
@@ -106,6 +107,7 @@ class LoginPage extends Component {
                 Log In
                 </Fab>
             </div>
+            
           </div>
           {/* Volunteer Registration moved to home page */}
           {/* <center>
@@ -117,7 +119,9 @@ class LoginPage extends Component {
             Volunteer Registration
           </button>
         </center> */}
+          
         </div>
+        
       </>
     );
   }
