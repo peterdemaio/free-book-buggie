@@ -52,6 +52,14 @@ class volunteerEvent extends Component {
         numOfKids: 0,
     }
 
+    // get all events on page load
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'GET_EVENTS',
+            payload: this.props.reduxStore.eventReducer
+        })
+    }
+
     // submit event handler
     addData = (event) => {
         console.log('adding event', this.state);
@@ -98,7 +106,7 @@ class volunteerEvent extends Component {
                             <span className={this.props.classes.line}>
 
                                 {/* show event the volunteers are currently at??? */}
-                                
+
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.collectBooks}
