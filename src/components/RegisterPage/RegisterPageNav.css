@@ -18,6 +18,10 @@
 
 }
 
+.buggie-logo{
+  padding-top: 15px;
+}
+
 .nav-title-div {
   text-align: center;
   background-size: 325%;
@@ -33,7 +37,7 @@
   /* justify-content: flex-end; */
   align-items: flex-end;
   /* opacity: .75; */
-  max-height: 350px;
+  max-height: 200px;
 }
 
 .nav-link {

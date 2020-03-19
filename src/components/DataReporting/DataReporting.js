@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 import CsvDownloader from 'react-csv-downloader';
 // import DownloadExcel from '../DownloadExcel/DownloadExcel';
-import DataReportingNav from './DataReportingNav'
+import DataReportingNav from './DataReportingNav';
+import './DataReportingStyle.css';
 
 const ObjectsToCsv = require('objects-to-csv');
 
@@ -223,7 +224,9 @@ class DataReporting extends Component {
             return (
                 <>
                 <DataReportingNav/>
-                    <h1>DataReporting page</h1>
+                    <div>
+                        <h1 className="data-reporting-styles" >Craft your chart</h1>
+                    </div>
                     <div className='chart-dashboard'>
                         <div className='chart-input-container'>
                             <div className='chart-input'>
