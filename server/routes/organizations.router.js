@@ -5,12 +5,40 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const queryText = `SELECT "organizations".id, "organizations".org_name, "organizations".logo, "organizations".url, "organizations".type, "organizations".address_number, "organizations".address_street, "organizations".address_unit, "organizations".city, "organizations".state, "organizations".zip, "organizations".notes, "counties".county_id, "counties".county_name FROM "organizations"
-                        JOIN "counties" ON "counties".county_id = "organizations".county_id                 
+    const queryText = `SELECT "organizations".id, "organizations".org_name, "organizations".logo, 
+                        "organizations".url, "organizations".type, "organizations".address_number, 
+                        "organizations".address_street, "organizations".address_unit, "organizations".city, 
+                        "organizations".state, "organizations".zip, "organizations".notes, 
+                        "counties".county_id, "counties".county_name, "demographics_age"."0_3" AS "age_0_3", 
+                        "demographics_age"."4_7" AS "age_4_7", "demographics_age"."8_12" AS "age_8_12", "demographics_age"."13_18" AS "age_13_18", 
+                        "demographics_race".white, "demographics_race".black_or_african_american, 
+                        "demographics_race".american_indian_or_alaska_native, "demographics_race".asian, 
+                        "demographics_race".native_hawaiian_or_pacific_islander, "demographics_poverty"."percentage_NSLP"
+                        FROM "organizations"
+                        JOIN "counties" ON "counties".county_id = "organizations".county_id  
+                        JOIN "demographics_age" ON "demographics_age".organizations_id = "organizations".id
+                        JOIN "demographics_race" ON "demographics_race".organizations_id = "organizations".id
+                        JOIN "demographics_poverty" on "demographics_poverty".organizations_id = "organizations".id
                         ORDER BY "organizations".org_name;`
+
     console.log('in organizations router.get', req.body)
     pool.query(queryText)
         .then(result => {
+            // let orgInfo = {
+            //     organization: {
+            //         id: result.rows.id,
+            //         org_name: org_name,
+            //         logo,
+            //         url,
+            //         type,
+            //         address_number,
+            //         address_street,
+            //         address_unit, 
+            //         city,
+            //         state, "organizations".zip, "organizations".notes,
+            //         "counties".county_id, "counties".county_name
+            //     }
+            // }
             //console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
@@ -20,7 +48,7 @@ router.get('/', (req, res) => {
 })
 
 
-//Route setup for post to multiple tables from 'add new organization form'
+//Route setup for edit to multiple tables from 'add new organization form'
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const newEntry = req.body;
@@ -118,21 +146,30 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 });
 
 
-router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('ready to edit organization with', req.body)
-    let id = req.body.id
-    let url = req.body.url
-    let logo = req.body.logo
-    let address_number = req.body.address_number
-    let address_street = req.body.address_street
-    let address_unit = req.body.address_unit
-    let city = req.body.city
-    let state = req.body.state
-    let zip = req.body.zip
-    let county_id = req.body.county_id
-    let notes = req.body.notes
+router.put('/', rejectUnauthenticated, async (req, res) => {
+    const newEntry = req.body;
 
-    let sqlText1 = `UPDATE "organizations" 
+    const connection = await pool.connect()
+
+    try {
+        await connection.query('BEGIN');
+        console.log('ready to edit organization with', req.body)
+
+        const organizationQueryValues = [
+            newEntry.address.logo,
+            newEntry.address.url,
+            newEntry.address.address_number,
+            newEntry.address.address_street,
+            newEntry.address.address_unit,
+            newEntry.address.city,
+            newEntry.address.state,
+            newEntry.address.zip,
+            newEntry.address.county_id,
+            newEntry.address.notes,
+            newEntry.address.id,
+        ]
+
+        let editOrganizationQuery = `UPDATE "organizations" 
                 SET "logo" = $1,
                     "url" = $2,
                     "address_number" = $3, 
@@ -144,13 +181,69 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                     "county_id" = $9, 
                     "notes" = $10 
                     WHERE "id" = $11
-                    RETURNING "organizations";`;
-    pool.query(sqlText1, [logo, url, address_number, address_street, address_unit, city, state, zip, county_id, notes, id])
-    .then(result => {
-        console.log(result.rows)
-      }).catch(error => {
-        console.log('error in event POST', error)
+                    RETURNING "id";`;
+
+        const result = await connection.query(editOrganizationQuery, organizationQueryValues);
+        // Get the id from the result - will have 1 row with the id 
+        const organizationsId = result.rows[0].id;
+
+        const sqlAgeDems = `UPDATE "demographics_age"
+                SET "0_3" = $1,
+                    "4_7" = $2,
+                    "8_12" = $3,
+                    "13_18" = $4
+                WHERE "organizations_id" = $5;`
+
+        const demographicsAgeQueryValues = [
+            newEntry.demographics.age_0_3,
+            newEntry.demographics.age_4_7,
+            newEntry.demographics.age_8_12,
+            newEntry.demographics.age_13_18,
+            organizationsId
+        ]
+
+        await connection.query(sqlAgeDems, demographicsAgeQueryValues);
+
+        const sqlRaceDems = `UPDATE "demographics_race"
+                SET "white" = $1,
+                    "black_or_african_american" = $2,
+                    "american_indian_or_alaska_native" = $3,
+                    "asian" = $4,
+                    "native_hawaiian_or_pacific_islander" = $5
+                WHERE "organizations_id" = $6;`
+
+        const demographicsRaceQueryValues = [
+            newEntry.demographics.white,
+            newEntry.demographics.black_or_african_american,
+            newEntry.demographics.american_indian_or_alaska_native,
+            newEntry.demographics.asian,
+            newEntry.demographics.native_hawaiian_or_pacific_islander,
+            organizationsId
+
+        ]
+
+        await connection.query(sqlRaceDems, demographicsRaceQueryValues);
+
+        const sqlPovertyDems = `UPDATE "demographics_poverty"
+                SET "percentage_NSLP" = $1
+                WHERE "organizations_id" = $2
+            `
+        const demographicsPovertyQueryValues = [
+            newEntry.demographics.percentage_NSLP,
+            organizationsId
+        ]
+
+        await connection.query(sqlPovertyDems, demographicsPovertyQueryValues)
+
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log(`Transaction Error - Rolling back new account`, error);
         res.sendStatus(500);
-      }) 
-})
+    } finally {
+        connection.release()
+    }
+
+});
 module.exports = router;
