@@ -260,7 +260,7 @@ class DataReporting extends Component {
                                     filename="BookBuggieData"
                                     columns={columns} 
                                     datas={this.props.reduxStore.chartDataExcel}>
-                                    <button><img src="https://img.icons8.com/color/48/000000/ms-excel.png" alt=""/></button>
+                                    <button><img src={require('./ms-excel.png')}/></button>
                                 </CsvDownloader>
                             </div>
                         </div>
