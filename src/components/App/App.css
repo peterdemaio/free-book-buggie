@@ -1,3 +1,5 @@
+/* at fontface font family key*/
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
@@ -32,8 +34,9 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover, .login-button:hover {
+.log-in:hover, .log-out:hover, .register:hover, .login-button:hover, .log-out-button:hover {
   background-color: rgb(44, 145, 47);
+  color: #f8f8f8;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -194,3 +197,29 @@ input {
     height: 32px;
     font-size: 20px;
   }
+
+  .log-out-button-div {
+    float: right;
+    padding-top: 16px;
+    padding-left: 8px;
+  }
+
+  /* logout button styling */
+  .log-out-button {
+    border: none;
+    font-family: "Museo Slab";
+    border-bottom:  1px solid #444; 
+    cursor: pointer;
+    border-radius: 10px;
+    color: #14771B;
+    min-height: 40px;
+    min-width: 80px;
+    outline:0;
+    cursor: pointer;
+    display: block;
+    display: inline-block;
+    background-color: #f8f8f8;
+    opacity: 86%;
+
+
+}

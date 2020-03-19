@@ -6,7 +6,7 @@ import LoginPageNav from './LoginPageNav'
 import { createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
 import BookCountUp from '../BookCountUp/BookCountUp';
-
+import Footer from '../Footer/Footer';
 
 
 
@@ -18,9 +18,7 @@ const theme = createMuiTheme({
   }
 })
 
-
 class LoginPage extends Component {
-    
     state = {
     username: '',
     password: '',
@@ -49,10 +47,7 @@ class LoginPage extends Component {
     });
   }
 
-
-
   render() {
-    
     return (
       // <ThemeProvider theme={theme}></ThemeProvider>
       <>
@@ -74,7 +69,6 @@ class LoginPage extends Component {
             onSubmit={this.login}>
             {/* <h4 className="login-label">User Login</h4> */}
             {/* <br></br> */}
-
             <div className="username-div">
               <label htmlFor="username">
                 Username:
@@ -86,7 +80,6 @@ class LoginPage extends Component {
                 />
               </label>
             </div>
-
             <div className="password-div">
               <label htmlFor="password">
                 Password:
@@ -98,7 +91,6 @@ class LoginPage extends Component {
                 />
               </label>
             </div>
-
             <div >
               <Fab
                 variant="extended"
@@ -111,14 +103,12 @@ class LoginPage extends Component {
                 value="User Log In"
                 onClick={this.login}
                 theme={theme}
-                
               >
                 Log In
                 </Fab>
             </div>
-
+            
           </div>
-          
           {/* Volunteer Registration moved to home page */}
           {/* <center>
           <button
@@ -129,12 +119,10 @@ class LoginPage extends Component {
             Volunteer Registration
           </button>
         </center> */}
-        
+          
         </div>
         
-
       </>
-
     );
   }
 }

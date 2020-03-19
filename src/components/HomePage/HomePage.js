@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+// import LogOutButton from '../LogOutButton/LogOutButton';
 import HomePageNav from './HomePageNav'
 
 
-import {
-  Button
-}
-  from '@material-ui/core';
+// import {
+//   Button
+// }
+//   from '@material-ui/core';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -15,22 +15,9 @@ import {
 
 const UserPage = (props) => (
   <>
-  <div>
-    <HomePageNav/>
-    <h1 id="welcome" className="welcome">
-      Welcome, {props.user.username}!
+    <HomePageNav />
 
-    </h1>
-    {/* <p>Your ID is: {props.user.id}</p> */}
-    {/* <Button onClick={() => props.history.push('/event')}>New Event</Button> */}
-    {/* <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button> */}
-    {/* <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button> */}
-    <br />
-    {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
-    {/* <LogOutButton className="log-in" /> */}
-  </div>
-  
-  <div>
+  <div className="volunteer-button-div">
     {/* <h3>Register a new volunteer here: </h3> */}
   <center >
     <button
@@ -43,6 +30,19 @@ const UserPage = (props) => (
           </button>
   </center>
   </div>
+
+    <div className="welcome-message-div">
+      <h1 id="welcome" >
+        Welcome, {props.user.username}!
+    </h1>
+      {/* <p>Your ID is: {props.user.id}</p> */}
+      {/* <Button onClick={() => props.history.push('/event')}>New Event</Button> */}
+      {/* <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button> */}
+      {/* <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button> */}
+      <br />
+      {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
+      {/* <LogOutButton className="log-in" /> */}
+    </div>
   </>
 );
 

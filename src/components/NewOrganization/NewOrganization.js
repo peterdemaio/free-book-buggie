@@ -11,6 +11,7 @@ import {
     from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import NewOrganizationNav from './NewOrganizationNav'
+import './NewOrganizationStyles.css';
 
 
 const styles = theme => ({
@@ -26,7 +27,6 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
@@ -155,7 +155,7 @@ class NewOrganization extends Component {
                     justify="center"
                     alignItems="center"
                 >
-                    <h1 align="center">Add New Organization</h1>
+                    <h1 className="new-organization-styles">Add a new organization</h1>
                     <Paper elevation={5}>
                         <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
                             <TextField

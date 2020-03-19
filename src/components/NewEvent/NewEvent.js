@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NewEventNav from './NewEventNav'
+import './NewEventStyle.css';
 
 // Material UI imports
 import {
@@ -10,11 +11,13 @@ import {
     Paper,
     TextField,
     Select,
+
     // MenuItem,
     InputLabel,
     FormControl,
     // Input,
     // NativeSelect
+
 }
     from '@material-ui/core';
 
@@ -31,7 +34,6 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        // minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
@@ -162,7 +164,7 @@ class NewEvent extends Component {
 
     render() {
 
-        const { classes } = this.props;
+        // const { classes } = this.props;
 
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
@@ -196,7 +198,7 @@ class NewEvent extends Component {
                         item lg={4}
                         justify="center"
                     >
-                        <h1 align="center">Add New Event</h1>
+                        <h1 className="new-event-styles">Add an event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
@@ -326,9 +328,9 @@ class NewEvent extends Component {
                             </span>
                         </Paper>
                     </Grid>
-                    <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button>
-                    <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button>
-                    <Button onClick={() => this.props.history.push('/home')}>Home</Button>
+                    {/* <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button> */}
+                    {/* <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button> */}
+                    {/* <Button onClick={() => this.props.history.push('/home')}>Home</Button> */}
                 </Grid>
             </>
         )
