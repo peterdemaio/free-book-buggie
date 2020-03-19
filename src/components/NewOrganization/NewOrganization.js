@@ -247,6 +247,8 @@ class NewOrganization extends Component {
                                     )}
                                 </Select>
                             </FormControl>
+                            <br/>
+                            <br/>
                             <h3 className={this.props.classes.question}>If you have demographics information please record it below.</h3>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -389,7 +391,6 @@ class NewOrganization extends Component {
         )
     }
 }
-
 
 
 const mapStateToProps = (reduxStore) => ({
