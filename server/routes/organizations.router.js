@@ -24,29 +24,12 @@ router.get('/', (req, res) => {
     console.log('in organizations router.get', req.body)
     pool.query(queryText)
         .then(result => {
-            // let orgInfo = {
-            //     organization: {
-            //         id: result.rows.id,
-            //         org_name: org_name,
-            //         logo,
-            //         url,
-            //         type,
-            //         address_number,
-            //         address_street,
-            //         address_unit, 
-            //         city,
-            //         state, "organizations".zip, "organizations".notes,
-            //         "counties".county_id, "counties".county_name
-            //     }
-            // }
-            //console.log(result.rows)
             res.send(result.rows)
         }).catch(error => {
             console.log('error in organizations GET', error)
             res.sendStatus(500);
         })
 })
-
 
 //Route setup for edit to multiple tables from 'add new organization form'
 
