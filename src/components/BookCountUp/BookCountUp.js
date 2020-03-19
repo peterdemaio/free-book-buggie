@@ -22,8 +22,8 @@ class BookCountUp extends Component {
         
         return (
             <>
-                <p>{JSON.stringify(this.props.reduxStore.bookCountReducer
-                    )}</p>
+                {/* <p>{JSON.stringify(this.props.reduxStore.bookCountReducer[0].sum
+                    )}</p> */}
                     
             <div className="counter-div">
                 <h1 className="counter-style"
@@ -31,7 +31,7 @@ class BookCountUp extends Component {
                 >
                     <CountUp
                         start={0}
-                        end={18164}
+                        end={Number(this.props.reduxStore.bookCountReducer[0].sum)}
                         duration={1.5}
                         delay={.25}
                         separator=","

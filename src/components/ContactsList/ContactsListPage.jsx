@@ -4,6 +4,7 @@ import Input from '@material-ui/core/Input';
 import ContactsListItem from '../ContactsListItem/ContactsListItem'
 import { withStyles, Grid } from '@material-ui/core';
 import axios from 'axios'
+import ContactListNav from './ContactListNav';
 
 const styles = {
     searchBar: {
@@ -47,6 +48,8 @@ class ContactsListPage extends React.Component {
 
     render() {
         return (
+            <>
+            <ContactListNav/>
             <div>
                 <Grid container
                     justify="center"
@@ -69,6 +72,7 @@ class ContactsListPage extends React.Component {
                     )}
                 </Grid>
             </div>
+            </>
         )
     }
 }

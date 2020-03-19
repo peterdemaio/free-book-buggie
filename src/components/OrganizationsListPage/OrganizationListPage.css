@@ -25,10 +25,10 @@
   
 }
 
-.nav-login {
+.nav-org-list {
   overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
-  background-image: url('./HeaderGreen.png');
+  background-image: url('./HeaderPurple.png');
   background-size: cover;
   /* justify-content: flex-end; */
   align-items: flex-end;

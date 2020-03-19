@@ -1,8 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-   
-
 }
 
 .alert {
@@ -34,11 +32,9 @@ input {
   cursor: pointer;
 }
 
-.log-in:hover, .log-out:hover, .register:hover, .login-button:hover {
+.log-in:hover, .log-out:hover, .register:hover, .login-button:hover, .log-out-button:hover {
   background-color: rgb(44, 145, 47);
 }
-
-
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
@@ -105,29 +101,22 @@ input {
   }
 
   /* login button styling */
-  .login-button {
-    /* color:  #14771B; */
-
+  .login-button, .log-out-button {
     border: none;
     font-family: "Museo Slab";
     border-bottom:  1px solid #444; 
     cursor: pointer;
-    /* size: 10px; */
-    background-color:#14771B;
     border-radius: 10px;
     color: #f8f8f8;
     min-height: 40px;
     min-width: 80px;
     outline:0;
     cursor: pointer;
-    /* margin: 70px -8 0 -70px; */
-    /* float: left; */
     display: block;
     display: inline-block;
+    background-color:#14771B;
 
 }
-
-
   /* styling for up-counter component on login page */
   .counter-style {
     font-family: "Museo Slab";
@@ -159,6 +148,8 @@ input {
     color: #3CB64A;
     font-weight: 900;
   }
+
+  
 
   .chart-dashboard {
     display: flex;
@@ -202,4 +193,11 @@ input {
     font-family: Arial, Helvetica, sans-serif;
     height: 32px;
     font-size: 20px;
+  }
+
+  .log-out-button-div {
+    float: right;
+    padding-top: 16px;
+    padding-left: 8px;
+
   }

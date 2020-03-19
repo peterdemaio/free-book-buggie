@@ -10,6 +10,8 @@ import {
 }
     from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import NewOrganizationNav from './NewOrganizationNav'
+
 
 const styles = theme => ({
     root: {
@@ -24,7 +26,6 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
         display: 'block',
         justify: 'center',
         alignItems: 'center',
@@ -146,6 +147,7 @@ class NewOrganization extends Component {
     render() {
         return (
             <>
+            <NewOrganizationNav/>
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"

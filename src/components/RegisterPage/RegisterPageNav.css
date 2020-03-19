@@ -25,10 +25,10 @@
   
 }
 
-.nav-login {
+.nav-register {
   overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
-  background-image: url('./HeaderGreen.png');
+  background-image: url('./HeaderBlue.png');
   background-size: cover;
   /* justify-content: flex-end; */
   align-items: flex-end;
@@ -56,6 +56,8 @@
 
 .nav-link:hover {
   background-color: rgb(29, 114, 35);
+  border-radius: 12px;
+  opacity: 90%;
 }
 
 .nav-right {

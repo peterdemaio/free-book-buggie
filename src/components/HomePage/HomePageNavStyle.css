@@ -55,7 +55,7 @@
 }
 
 .nav-link:hover {
-  background-color: #40C445;
+  background-color: rgb(29, 114, 35);
 }
 
 .nav-right {
@@ -75,4 +75,43 @@
     padding-left: 25px;
     padding-bottom: 20px;
     
+  }
+
+  .welcome{
+    text-align: center;
+    font-family: "Museo Slab";
+    color: #14771B;
+    size: 18px;
+    top: -100%;
+    left: 100%;
+    position: fixed; 
+    width: 800px;
+    height: 200px;
+    z-index: 30;
+    top: 50%;
+    left: 50%;
+    margin: 200px 0 0 320px;
+    border: 8px solid, #3CB64A;
+    font-size: 120%;
+    height:100px;
+    width:100px;
+    display: inline-block;
+  }
+
+  .welcome-message-div {
+    text-align: center;
+    /* float: left; */
+    margin: 0px 0 0 475px;
+    font-size: 20px;
+    /* display: inline-block; */
+    font-family: "Museo Slab";
+    color: #14771B;
+    padding-top: 30px;
+
+  }
+
+  .volunteer-button-div {
+text-align: center;
+padding-top: 75px;
+
   }

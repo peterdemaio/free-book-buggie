@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListItem'
+import OrganizationListPageNav from '../OrganizationsListPage/OrganizationListPageNav'
 import { withStyles, Grid } from '@material-ui/core';
-import axios from 'axios'
+
 
 
 const styles = {
@@ -48,6 +49,8 @@ class OrganizationsListPage extends React.Component {
                      organization.county_name.toLowerCase().includes(searchQuery) 
         )
         return (
+            <>
+            <OrganizationListPageNav/>
             <div>
                 <Grid container
                     justify="center"
@@ -72,6 +75,7 @@ class OrganizationsListPage extends React.Component {
                     )}
                 </Grid>
             </div>
+            </>
         )
     }
 }

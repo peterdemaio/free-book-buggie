@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './HomePageNavStyle.css';
+import './NewEventNav.css';
 
 const Nav = (props) => (
-    <div className="nav">
+    <div className="nav-new-event">
 
         <div className="nav-title-div">
             {/* <Link to="/home"> */}
