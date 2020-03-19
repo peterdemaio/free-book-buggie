@@ -23,8 +23,7 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
-        display: 'block',
+        // display: 'block',
         justify: 'center',
         alignItems: 'center',
         padding: '10px'
@@ -32,6 +31,7 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
+        alignItems: 'center',
     },
     inputs: {
         width: '250px',
@@ -41,6 +41,12 @@ const styles = theme => ({
     },
     dropdown: {
         width: '250px',
+        alignItems: 'center',
+    },
+    notes: {
+        width: '400px',
+        padding: '25px',
+        margin: '10px',
     }
 });
 
@@ -107,21 +113,24 @@ class volunteerEvent extends Component {
                         className={this.props.classes.form}
                         item lg={4}
                         justify="center"
+                        alignItems="center"
                     >
                         <h1 align="center">Add Books By Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                            <FormControl className={this.props.classes.inputs} >
+                                <FormControl className={this.props.classes.inputs} >
                                     <InputLabel>Event Name</InputLabel>
                                     <Select
                                         native
-                                        className={this.props.classes.dropdownItem}
+                                        className={this.props.classes.dropdown}
                                         onChange={(event) => this.handleInputChangeFor(event, 'event_id')}>
                                         >
                                         {eventList}
                                     </Select>
                                 </FormControl>
+
+                                <br />
 
                                 <TextField
                                     className={this.props.classes.inputs}
@@ -148,7 +157,7 @@ class volunteerEvent extends Component {
                                     onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                                 />
                                 <TextField
-                                    className={this.props.classes.inputs}
+                                    className={this.props.classes.notes}
                                     value={this.state.notes}
                                     type="text"
                                     margin="normal"
@@ -156,7 +165,9 @@ class volunteerEvent extends Component {
                                     onChange={(event) => this.handleInputChangeFor(event, 'notes')}
                                 />
 
-                                <Button color="primary">
+                                <Button 
+                                className={this.props.classes.inputs}
+                                color="primary">
                                     Cancel
                                 </Button>
 
