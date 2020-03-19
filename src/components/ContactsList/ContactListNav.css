@@ -40,7 +40,7 @@
   max-height: 200px;
 }
 
-.nav-link {
+.nav-link-contact-list {
   float: left;
   color: #ffffff;
   /* background-color:#14771B; */
@@ -56,6 +56,23 @@
   border:none;
   cursor: pointer;
   outline:0;
+}
+
+.nav-link-contact-list:hover {
+  border-radius: 15px;
+  background-color:rgb(92, 164, 226);
+  opacity: 78%;
+  /* overflow: hidden; */
+  /* height: auto; */
+  /* margin-top: 15px; */
+  /* max-height: 10px; */
+  /* padding-bottom: 8px; */
+  /* vertical-align: 8; */
+  /* margin: 5px; */
+  /* height: 8px; */
+  /* padding-top: 5px; */
+  min-width: 80px;
+  
 }
 
 .nav-link:hover {

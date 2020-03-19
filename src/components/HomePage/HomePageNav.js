@@ -37,10 +37,10 @@ const Nav = (props) => (
                         Data Reporting
           </Link>
                     <Link className="nav-home-page-style" to="/OrganizationsListPage">
-                        Organizations List
+                        Organization List
           </Link>
                     <Link className="nav-home-page-style" to="/contactsListPage">
-                        Contacts List
+                        Contact List
           </Link>
                     <Link className="nav-home-page-style" to="/neworganization">
                         Add New Org

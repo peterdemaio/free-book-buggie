@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 
 // import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
@@ -22,6 +22,7 @@ import NewOrganization from '../NewOrganization/NewOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
 import NewEvent from '../NewEvent/NewEvent';
+import VolunteerEvent from '../VolunteerEvent/VolunteerEvent'
 
 
 import './App.css';
@@ -95,6 +96,11 @@ class App extends Component {
               path="/organizationsListPage"
               component={OrganizationsListPage}
             />
+            <ProtectedRoute
+              exact
+              path="/VolunteerEvent"
+              component={VolunteerEvent}
+            />
             <DataReporting
               exact
               path="/dataReporting"
@@ -103,7 +109,7 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     )

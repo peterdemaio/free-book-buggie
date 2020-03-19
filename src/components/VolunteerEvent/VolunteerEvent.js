@@ -8,6 +8,9 @@ import {
     Grid,
     Paper,
     TextField,
+    Select,
+    InputLabel,
+    FormControl,
     
 }
     from '@material-ui/core';
@@ -21,8 +24,7 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        minHeight: '350',
-        display: 'block',
+        // display: 'block',
         justify: 'center',
         alignItems: 'center',
         padding: '10px'
@@ -30,6 +32,7 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
+        alignItems: 'center',
     },
     inputs: {
         width: '250px',
@@ -39,6 +42,18 @@ const styles = theme => ({
     },
     dropdown: {
         width: '250px',
+        alignItems: 'center',
+    },
+    notes: {
+        width: '400px',
+        padding: '25px',
+        margin: '10px',
+    },
+    button: {
+        width: '100px',
+        padding: '25px',
+        margin: '10px',
+
     }
 });
 
@@ -48,6 +63,16 @@ class volunteerEvent extends Component {
         collectBooks: 0,
         distBooks: 0,
         numOfKids: 0,
+        event_id: 1,
+        notes: '',
+    }
+
+    // get all events on page load
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'GET_EVENTS',
+            payload: this.props.reduxStore.eventReducer
+        })
     }
 
     // submit event handler
@@ -75,6 +100,11 @@ class volunteerEvent extends Component {
 
     render() {
 
+        // map over event reducer and grab the event
+        let eventList = this.props.reduxStore.currentEventReducer.map(event =>
+            <option value={event.id} key={event.event_name} className={this.props.classes.dropdown}>{event.event_name}</option>
+        );
+
         return (
 
             <>
@@ -90,13 +120,25 @@ class volunteerEvent extends Component {
                         className={this.props.classes.form}
                         item lg={4}
                         justify="center"
+                        alignItems="center"
                     >
                         <h1 align="center">Add Books By Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                {/* show event the volunteers are currently at??? */}
-                                
+                                <FormControl className={this.props.classes.inputs} >
+                                    <InputLabel>Event Name</InputLabel>
+                                    <Select
+                                        native
+                                        className={this.props.classes.dropdown}
+                                        onChange={(event) => this.handleInputChangeFor(event, 'event_id')}>
+                                        >
+                                        {eventList}
+                                    </Select>
+                                </FormControl>
+
+                                <br />
+
                                 <TextField
                                     className={this.props.classes.inputs}
                                     value={this.state.collectBooks}
@@ -121,12 +163,24 @@ class volunteerEvent extends Component {
                                     margin="normal"
                                     onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                                 />
+                                <TextField
+                                    className={this.props.classes.notes}
+                                    value={this.state.notes}
+                                    type="text"
+                                    margin="normal"
+                                    label="Notes"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'notes')}
+                                />
 
-                                <Button color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    color="primary">
                                     Cancel
                                 </Button>
 
-                                <Button onClick={this.addData} color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    onClick={this.addData} color="primary">
                                     Submit
                                 </Button>
 

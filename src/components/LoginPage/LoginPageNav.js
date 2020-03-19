@@ -37,10 +37,10 @@ const Nav = (props) => (
                         Add New Org
           </Link>
                     <Link className="nav-link" to="/contactsListPage">
-                        Contacts List
+                        Contact List
           </Link>
                     <Link className="nav-link" to="/OrganizationsListPage">
-                        Organizations List
+                        Organization List
           </Link>
                     <LogOutButton className="nav-link" />
                 </>
