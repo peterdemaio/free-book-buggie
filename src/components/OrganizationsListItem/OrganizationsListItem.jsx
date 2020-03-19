@@ -18,6 +18,7 @@ import {
     Grid,
     FormControl,
     Select,
+    TextField
 }
     from '@material-ui/core';
 
@@ -66,10 +67,21 @@ const styles = theme => ({
         }
     },
     wideInput: {
-        width: '400px'
+        width: '500px'
     },
-    dropdown: {
-
+    smallInput: {
+        width: '20px'
+    },
+    streetNumberInput: {
+        width: '60px'
+    },
+    streetNameInput: {
+        width: '300px'
+    },
+    notes: {
+        width: '500px',
+        height: '100px',
+        border: '1px solid blue'
     }
 })
 
@@ -89,9 +101,22 @@ class OrganizationsListPageItem extends React.Component {
             state: this.props.org.state,
             zip: this.props.org.zip,
             county_id: this.props.org.county_id,
-            notes: this.props.org.notes || ''
+            notes: this.props.org.notes || '',
+        },
+        demographics: {
+            age_0_3: this.props.org.age_0_3,
+            age_4_7: this.props.org.age_4_7,
+            age_8_12: this.props.org.age_8_12,
+            age_13_18: this.props.org.age_13_18,
+            white: this.props.org.white,
+            black_or_african_american: this.props.org.black_or_african_american,
+            american_indian_or_alaska_native: this.props.org.american_indian_or_alaska_native,
+            asian: this.props.org.asian,
+            native_hawaiian_or_pacific_islander: this.props.org.native_hawaiian_or_pacific_islander,
+            percentage_NSLP: this.props.org.percentage_NSLP
         }
     }
+
 
     menuOpen = (event) => {
         console.log(`clicked the open button for ${this.props.org.name}!`)
@@ -107,7 +132,7 @@ class OrganizationsListPageItem extends React.Component {
         this.setState({ open: false })
     }
 
-    setDetails = (event, type) => {
+    setDetailsAddress = (event, type) => {
         // This updates state with the details submitted
         this.setState({
             address: {
@@ -118,11 +143,26 @@ class OrganizationsListPageItem extends React.Component {
         console.log('Ready to edit with', this.state.address)
     }
 
+    setDetailsDemographics = (event, type) => {
+        // This updates state with the details submitted
+        this.setState({
+            demographics: {
+                ...this.state.demographics,
+                [type]: event.target.value
+            }
+        })
+        console.log('Ready to edit with', this.state.demographics)
+    }
+
+
     saveOrg = () => {
         console.log('ready to save org with: ', this.state.address)
         this.props.dispatch({
             type: 'EDIT_ORGANIZATION',
-            payload: this.state.address
+            payload: {
+                address: this.state.address,
+                demographics: this.state.demographics
+            }
         })
         this.setState({
             ...this.state,
@@ -140,12 +180,12 @@ class OrganizationsListPageItem extends React.Component {
                         disableTypography={true}
 
                         avatar={
-                                <div className={this.props.classes.avatar} onClick={() => window.open(this.props.org.url)}>
-                                    <Avatar
-                                        alt={this.props.org.org_name}
-                                        src={this.props.org.logo}
+                            <div className={this.props.classes.avatar} onClick={() => window.open(this.props.org.url)}>
+                                <Avatar
+                                    alt={this.props.org.org_name}
+                                    src={this.props.org.logo}
 
-                                    /></div>
+                                /></div>
                         }
 
                         title={this.props.org.org_name}
@@ -165,125 +205,213 @@ class OrganizationsListPageItem extends React.Component {
                             </div>
                         }>
                     </CardHeader>
-                <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <div onClick={this.edit}>
-                        <div className={this.props.classes.underline}>
-                            Address:
+                    <Collapse className={this.props.classes.content} in={this.state.expanded} timeout="auto" unmountOnExit>
+                        <div onClick={this.edit}>
+                            <div className={this.props.classes.underline}>
+                                <div>Address:</div>
                                 <br></br>
+                                <br></br>
+                                <span>{this.props.org.address_number} </span>
+                                <span>{this.props.org.address_street} </span>
+                                {this.props.org.address_unit}
+                            </div>
+                            <div className={this.props.classes.underline}>
+                                <span>{this.props.org.city} </span>
+                                <span>{this.props.org.state} </span>
+                                <span>{this.props.org.zip} </span>
+                            </div>
+                            <div className={this.props.classes.underline}>
+                                <span>County: {this.props.org.county_name} </span>
+                            </div>
                             <br></br>
-                            <span>{this.props.org.address_number} </span>
-                            <span>{this.props.org.address_street} </span>
-                            {this.props.org.address_unit}
-                        </div>
-                        <div className={this.props.classes.underline}>
-                            <span>{this.props.org.city} </span>
-                            <span>{this.props.org.state} </span>
-                            <span>{this.props.org.zip} </span>
-                        </div>
-                        <div className={this.props.classes.underline}>
-                            <span>County: {this.props.org.county_name} </span>
-                        </div>
-                        <br></br>
-                        <br></br>
-                        <div className={this.props.classes.underline}>
-                            <span>Notes: {this.props.org.notes}</span>
-                        </div>
+                            <br></br>
+                            <div className={this.props.classes.underline}>
+                                <span>Notes: {this.props.org.notes}</span>
+                            </div>
 
-                    </div>
-                </Collapse>
+                        </div>
+                    </Collapse>
                 </Card>
-            <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
-                maxWidth='lg'
-            >
-                <DialogTitle> Edit Organization</DialogTitle>
-                <div>
-                <DialogContent>
-                    <DialogContentText>
-                        Organization URL:
-                            <Input
-                            className={this.props.classes.wideInput}
-                            value={this.state.address.url}
-                            onChange={(event) => this.setDetails(event, 'url')}
-                        ></Input>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    maxWidth='lg'
+                >
+                    <DialogTitle> Edit Organization</DialogTitle>
+                    <div>
+                        <DialogContent>
+                            <DialogContentText>
+                                <div>Organization URL:{'  '}</div>
+                                <Input
+                                    className={this.props.classes.wideInput}
+                                    value={this.state.address.url}
+                                    onChange={(event) => this.setDetailsAddress(event, 'url')}
+                                ></Input>
+                                <br></br>
+                            <div>Organization Logo Link:{'  '}</div>
+                                <Input
+                                    className={this.props.classes.wideInput}
+                                    value={this.state.address.logo}
+                                    onChange={(event) => this.setDetailsAddress(event, 'logo')}
+                                ></Input>
+                                <br></br>
+                            <div>Number:{'  '}
+                                <Input
+                                    className={this.props.classes.streetNumberInput}
+                                    value={this.state.address.address_number}
+                                    onChange={(event) => this.setDetailsAddress(event, 'address_number')}
+                                >
+                                </Input></div>
+                            <div>Street:{'  '}
+                                <Input
+                                    className={this.props.classes.streetNameInput}
+                                    value={this.state.address.address_street}
+                                    onChange={(event) => this.setDetailsAddress(event, 'address_street')}
+                                >
+                                </Input></div>
+                            <div>Unit:{'  '}
+                                <Input
+                                    className={this.props.classes.streetNumberInput}
+                                    value={this.state.address.address_unit}
+                                    onChange={(event) => this.setDetailsAddress(event, 'address_unit')}
+                                >
+                                </Input></div>
+                                <br></br>
+                            City:{'  '}
+                                <Input
+                                    value={this.state.address.city}
+                                    onChange={(event) => this.setDetailsAddress(event, 'city')}
+                                >
+                                </Input>
+                            State:{'  '}
+                                <Input
+                                    className={this.props.classes.streetNumberInput}
+                                    value={this.state.address.state}
+                                    onChange={(event) => this.setDetailsAddress(event, 'state')}
+                                >
+                                </Input>
+                            Zip:{'  '}
+                                <Input
+                                    className={this.props.classes.streetNumberInput}
+                                    value={this.state.address.zip}
+                                    onChange={(event) => this.setDetailsAddress(event, 'zip')}
+                                >
+                                </Input>
+                                <span className={this.props.classes.dropdown}>County:  </span>
+                                <FormControl >
+                                    <Select
+                                        defaultValue={this.props.org.county_id}
+                                        native
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.setDetailsAddress(event, 'county_id')}>
+                                        {this.props.reduxStore.counties.map(county =>
+                                            <option key={county.county_id} value={county.county_id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                <br></br>
+                                <h3>Demographics Information:</h3>
+                                <h4>Age breakdown by percentage:</h4>
+                        0-3:{'  '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.age_0_3}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'age_0_3')}
+                                >
+                                </Input>%
+                                <br></br>
+                        4-7:{'  '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.age_4_7}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'age_4_7')}
+                                >
+                                </Input>%
+                                <br></br>
+                        8-12:{'  '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.age_8_12}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'age_8_12')}
+                                >
+                                </Input>%
+                                <br></br>
+                        13-18:{'  '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.age_13_18}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'age_13_18')}
+                                >
+                                </Input>%
                         <br></br>
-                            Organization Logo Link:
-                            <Input
-                            className={this.props.classes.wideInput}
-                            value={this.state.address.logo}
-                            onChange={(event) => this.setDetails(event, 'logo')}
-                        ></Input>
+                                <br></br>
+                                <h4>Racial Breakdown by percentage:</h4>
+                        White{' '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.white}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'white')}
+                                >
+                                </Input>%<br></br>
+                        Black or African American{' '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.black_or_african_american}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'black_or_african_american')}
+                                >
+                                </Input>%<br></br>
+                        American Indian or Alaska Native{' '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.american_indian_or_alaska_native}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'american_indian_or_alaska_native')}
+                                >
+                                </Input>%<br></br>
+                        Asian{' '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.asian}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'asian')}
+                                >
+                                </Input>%<br></br>
+                        Native Hawaiian or Pacific Islander{' '}
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.native_hawaiian_or_pacific_islander}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'native_hawaiian_or_pacific_islander')}
+                                >
+                                </Input>%<br></br>
+                                <h4>Pencentage of kids who qualify for free or reduced school lunch:</h4>
+                                <Input
+                                    className={this.props.classes.smallInput}
+                                    value={this.state.demographics.percentage_NSLP}
+                                    onChange={(event) => this.setDetailsDemographics(event, 'percentage_NSLP')}
+                                >
+                                </Input>%
                         <br></br>
-                            Number:
-                            <Input
-                            value={this.state.address.address_number}
-                            onChange={(event) => this.setDetails(event, 'address_number')}
-                        >
-                        </Input>
-                            Street:
-                        <Input
-                            value={this.state.address.address_street}
-                            onChange={(event) => this.setDetails(event, 'address_street')}
-                        >
-                        </Input>
-                            Unit:
-                            <Input
-                            value={this.state.address.address_unit}
-                            onChange={(event) => this.setDetails(event, 'address_unit')}
-                        >
-                        </Input>
-                        <br></br>
-                            City:
-                            <Input
-                            value={this.state.address.city}
-                            onChange={(event) => this.setDetails(event, 'city')}
-                        >
-                        </Input>
-                            State:
-                            <Input
-                            value={this.state.address.state}
-                            onChange={(event) => this.setDetails(event, 'state')}
-                        >
-                        </Input>
-                            Zip:
-                        <Input
-                            value={this.state.address.zip}
-                            onChange={(event) => this.setDetails(event, 'zip')}
-                        >
-                        </Input>
-                        <span className={this.props.classes.dropdown}>County:  </span>
-                            <FormControl >
-                                <Select
-                                    defaultValue = {this.props.org.county_id}
-                                    native
-                                    className={this.props.classes.dropdownItem}
-                                    onChange={(event) => this.setDetails(event, 'county_id')}>
-                                    {this.props.reduxStore.counties.map(county =>
-                                        <option key={county.county_id} value={county.county_id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
-                                    )}
-                                </Select>
-                            </FormControl>
-                        <br></br>
+                                <br></br>
                             Notes:
-                            <Input
-                            value={this.state.address.notes}
-                            onChange={(event) => this.setDetails(event, 'notes')}
-                        >
-                        </Input>
-                        <br></br>
-                        <br></br>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={this.saveOrg}
-                        >
-                            Save Details
+                            <TextField
+                                    multiline
+                                    rows="4"
+                                    className={this.props.classes.notes}
+                                    value={this.state.address.notes}
+                                    onChange={(event) => this.setDetailsAddress(event, 'notes')}
+                                >
+                                </TextField>
+                                <br></br>
+                                <br></br>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.saveOrg}
+                                >
+                                    Save Details
                             </Button>
-                    </DialogContentText>
-                </DialogContent>
-                </div>
-            </Dialog>
+                            </DialogContentText>
+                        </DialogContent>
+                    </div>
+                </Dialog>
             </Grid >
 
         )
