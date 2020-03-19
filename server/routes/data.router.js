@@ -290,6 +290,8 @@ router.post('/', (req, res) => {
 //GET for BookCountUp component
 router.get('/', (req, res) => {
     const queryText = `SELECT SUM(books_in) 
+                       FROM events
+                       UNION SELECT SUM(books_out)
                        FROM events;`
     console.log('data.router book get')
     pool.query(queryText)

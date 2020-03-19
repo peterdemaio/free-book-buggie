@@ -7,9 +7,18 @@ import './Footer.css'
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const Footer = () => (
+
+
   <footer>
-    {/* &copy; The Free Book Buggie */}
+    &copy; The Free Book Buggie
+
+    <div className="footer-image">
+
+    </div>
   </footer>
+
+
+
 );
 
 export default Footer;
