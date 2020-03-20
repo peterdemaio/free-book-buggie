@@ -23,6 +23,7 @@ import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPag
 import ContactsListPage from '../ContactsList/ContactsListPage';
 import NewEvent from '../NewEvent/NewEvent';
 import VolunteerEvent from '../VolunteerEvent/VolunteerEvent'
+import registerPage from '../RegisterPage/RegisterPage'
 
 
 import './App.css';
@@ -65,6 +66,11 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+             <ProtectedRoute
+              exact
+              path="/registerPage"
+              component={registerPage}
             />
             <ProtectedRoute
               exact
