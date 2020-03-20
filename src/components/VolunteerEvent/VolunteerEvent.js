@@ -68,10 +68,10 @@ class volunteerEvent extends Component {
     }
 
     // get all events on page load
-    componentDidMount() {
+    componentDidMount(event) {
         this.props.dispatch({
-            type: 'GET_EVENTS',
-            payload: this.props.reduxStore.eventReducer
+            type: 'SET_CURRENT_EVENT',
+            payload: event
         })
     }
 

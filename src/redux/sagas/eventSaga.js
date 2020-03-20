@@ -3,7 +3,7 @@ import { put, takeEvery, } from 'redux-saga/effects';
 
 function* watcherSaga() {
     yield takeEvery('ADD_EVENT', submitEvent);
-    yield takeEvery('VOLUNTEER_EVENT', VolunteerEvent)
+    // yield takeEvery('VOLUNTEER_EVENT', volunteerEvent)
     yield takeEvery('GET_EVENTS', getEvents)
 }
 
@@ -29,16 +29,16 @@ function* getEvents(action) {
     }
 }
 
-function* VolunteerEvent(action) {
-    try {
-        let response = yield axios.post('/api/events', action.payload)
-        console.log(response.data)
-        yield put({ type: 'POST_EVENT', payload: response.data})
-    }
-    catch (error) {
-        console.log('Error submitting event collected', error)
-    }
-}
+// function* volunteerEvent(action) {
+//     try {
+//         let response = yield axios.post('/api/events', action.payload)
+//         console.log(response.data)
+//         yield put({ type: 'POST_EVENT', payload: response.data})
+//     }
+//     catch (error) {
+//         console.log('Error submitting event collected', error)
+//     }
+// }
 
 // function* giveBooks(action) {
 //     try {

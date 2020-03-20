@@ -198,7 +198,7 @@ class NewEvent extends Component {
                         item lg={4}
                         justify="center"
                     >
-                        <h1 className="new-event-styles">Add an event</h1>
+                        <h1 className="new-event-styles">Add an Event</h1>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
