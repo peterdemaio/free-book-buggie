@@ -10,12 +10,15 @@ function* registerUser(action) {
     // passes the username and password from the payload to the server
     yield axios.post('/api/user/register', action.payload);
 
+    // WE WANT THE PERSON LOGGED IN TO STAY LOGGED IN, NOT THE NEW REGISTERED USER TO LOG INOK
+
+
     // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload: action.payload });
+    // yield put({ type: 'LOGIN', payload: action.payload });
     
-    // set to 'login' mode so they see the login screen
-    // after registration or after they log out
-    yield put({type: 'SET_TO_LOGIN_MODE'});
+    // // set to 'login' mode so they see the login screen
+    // // after registration or after they log out
+    // yield put({type: 'SET_TO_LOGIN_MODE'});
   } catch (error) {
       console.log('Error with user registration:', error);
       yield put({type: 'REGISTRATION_FAILED'});
