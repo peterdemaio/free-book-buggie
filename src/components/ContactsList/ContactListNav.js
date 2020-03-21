@@ -16,7 +16,7 @@ const ContactListNav = (props) => (
                     src="https://thefreebookbuggie.org/wp-content/uploads/2018/08/cropped-logo.jpg" />
             </div>
         </div>
-        <div className="nav-right">
+            <div className="nav-right-contact-list">
             <Link className="nav-link-contact-list" to="/home">
                 {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,

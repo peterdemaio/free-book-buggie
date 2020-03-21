@@ -77,8 +77,8 @@
 }
 
 
-.nav-right {
-  padding-top: 30px;
+.nav-right-contact-list {
+  padding-top: 45px;
   float: right;
   justify-content: flex-end;
   align-items: flex-end;
@@ -97,7 +97,7 @@
 
   .log-out-button-div-contact {
     float: right;
-    padding-top: 14px;
+    padding-top: 0px;
     padding-left: 0px;
   }
 
