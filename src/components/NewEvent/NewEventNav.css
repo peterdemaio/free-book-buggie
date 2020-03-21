@@ -43,34 +43,23 @@
 .nav-link-new-event {
   float: left;
   color: #ffffff;
-  /* background-color:#14771B; */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
+  transition: all .18s ease-in-out;
 }
 
 .nav-link-new-event:hover {
   border-radius: 15px;
   background-color:rgb(223, 144, 169);
   opacity: 78%;
-  /* overflow: hidden; */
-  /* height: auto; */
-  /* margin-top: 15px; */
-  /* max-height: 10px; */
-  /* padding-bottom: 8px; */
-  /* vertical-align: 8; */
-  /* margin: 5px; */
-  /* height: 8px; */
-  /* padding-top: 5px; */
+  transform: scale(1.075);
   min-width: 80px;
   
 }

@@ -63,22 +63,8 @@
   background-color: rgb(92, 164, 226);
   opacity: 78%;
   transform: scale(1.075);
-  /* overflow: hidden; */
-  /* height: auto; */
-  /* margin-top: 15px; */
-  /* max-height: 10px; */
-  /* padding-bottom: 8px; */
-  /* vertical-align: 8; */
-  /* margin: 5px; */
-  /* height: 8px; */
-  /* padding-top: 5px; */
-  /* min-width: 80px; */
-  
 }
 
-/* .nav-link:hover {
-  background-color: rgb(29, 114, 35);
-} */
 
 .nav-right {
   padding-top: 30px;

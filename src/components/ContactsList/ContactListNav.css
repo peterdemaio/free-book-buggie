@@ -15,7 +15,6 @@
     width: 33%;
     /* background-color: #14771B; */
     /* opacity: .80; */
-
 }
 
 .buggie-logo-contact{
@@ -43,30 +42,23 @@
 .nav-link-contact-list {
   float: left;
   color: #ffffff;
-  /* background-color:#14771B; */
-  text-align: center;
   padding: 38px 10px;
   text-decoration: none;
   font-size: 20px;
-  justify-content: flex-end;
-  align-items: flex-end;
-  transition: all .2s ease-in-out;
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
-  
+  max-height: 25px;
+  transition: all .18s ease-in-out;
+
 }
  
 .nav-link-contact-list:hover {
+  all: revert;
   border-radius: 15px;
   background-color: rgb(92, 164, 226);
   opacity: 78%;
-  /* height: 20%; */
-  /* min-width: 80px; */
-  /* max-height: 9px; */
-  transform: scale(1.075); 
+  transform: scale(1.075);
 }
 
 
@@ -110,6 +102,10 @@
     display: inline-block;
     background-color: #f8f8f8;
     opacity: 86%;
+}
 
-
+.contact-list-fix {
+  max-inline-size: 4px;
+  width: 50px;
+  height: 50px;
 }

@@ -49,13 +49,15 @@ class ContactsListPage extends React.Component {
     render() {
         return (
             <>
-            <ContactListNav/>
+            <div>   
+             <ContactListNav/>
+            </div>
             <div>
                 <Grid container
                     justify="center"
                     alignItems="center"
                     className={this.props.classes.searchBar}>
-                    <span>Search for an contact by name or organization: </span><br></br>
+                    <span>Search for a contact by name or organization: </span><br></br>
                     <Input
                         className={this.props.classes.input}
                         placeholder="search here "

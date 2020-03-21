@@ -43,19 +43,16 @@
 .nav-link-data {
   float: left;
   color: #ffffff;
-  /* background-color:#14771B; */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
+  transition: all .18s ease-in-out;
 }
 
 .nav-link-data:hover {
@@ -63,7 +60,7 @@
   background-color: rgb(240, 200, 136);
   opacity: 83%;
   min-width: 80px;
-  
+  transform: scale(1.075);
 }
 /* .nav-link:hover {
   background-color: rgb(29, 114, 35);

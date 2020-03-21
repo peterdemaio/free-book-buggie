@@ -46,6 +46,7 @@
   border:none;
   cursor: pointer;
   outline:0;
+  transition: all .18s ease-in-out;
 }
 
 .nav-link-new-org:hover {
@@ -53,7 +54,7 @@
   background-color:rgb(176, 147, 235);
   opacity: 78%;
   min-width: 80px;
-  
+  transform: scale(1.075);
 }
 
 .nav-right {
