@@ -31,6 +31,7 @@ class LoginPage extends Component {
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
+        history: this.props.history, // making history available to login Saga
         payload: {
           username: this.state.username,
           password: this.state.password,
@@ -48,9 +49,13 @@ class LoginPage extends Component {
   }
 
   render() {
+
+    console.log(this.props.history)
+
     return (
       // <ThemeProvider theme={theme}></ThemeProvider>
       <>
+        
         <LoginPageNav/>
         <BookCountUp/>
         <div>
