@@ -111,7 +111,6 @@ class NewOrganization extends Component {
             demographics_race_asian: 0,
             demographics_race_pacific: 0,
             demographics_poverty: 0
-
         },
     }
     componentDidMount() {

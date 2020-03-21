@@ -162,13 +162,13 @@ VALUES ('Free Book Giveaway', 1, 1, '2020-02-29', '10:00', '14:00', 0, 142, 64, 
 CREATE TABLE "demographics_age" (
     "id" serial PRIMARY KEY,
     "organizations_id" integer REFERENCES organizations,
-    "0-3" integer,
-    "4-7" integer,
-    "8-12" integer,
-    "13-18" integer
+    "0_3" integer,
+    "4_7" integer,
+    "8_12" integer,
+    "13_18" integer
 );
 
-INSERT INTO "demographics_age" ("organizations_id", "0-3", "4-7", "8-12", "13-18")
+INSERT INTO "demographics_age" ("organizations_id", "0_3", "4_7", "8_12", "13_18")
 VALUES(1, 0, 75, 25, 0),
 (2, 25, 75, 0, 0),
 (3, 25, 50, 25, 0),
@@ -213,4 +213,4 @@ CREATE TABLE  "user"(
 );
 
 INSERT INTO "user" ("username", "password", "admin")
-VALUE ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)
+VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)

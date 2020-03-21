@@ -8,6 +8,8 @@ import {
 
 import { connect } from 'react-redux';
 
+import '../../../public/Assets/Fonts/Museo_slab-500.otf';
+
 // import Nav from '../Nav/Nav';
 // import Footer from '../Footer/Footer';
 
@@ -23,6 +25,7 @@ import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPag
 import ContactsListPage from '../ContactsList/ContactsListPage';
 import NewEvent from '../NewEvent/NewEvent';
 import VolunteerEvent from '../VolunteerEvent/VolunteerEvent'
+import registerPage from '../RegisterPage/RegisterPage'
 
 
 import './App.css';
@@ -45,11 +48,11 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            <Route
+            {/* <Route
               exact
               path="/about"
               component={AboutPage}
-            />
+            /> */}
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -65,6 +68,11 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+             <ProtectedRoute
+              exact
+              path="/registerPage"
+              component={registerPage}
             />
             <ProtectedRoute
               exact

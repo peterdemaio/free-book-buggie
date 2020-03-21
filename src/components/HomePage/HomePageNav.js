@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './HomePageNavStyle.css';
 
-const Nav = (props) => (
-    <div className="nav">
+const HomePageNav = (props) => (
+    <div className="nav-home-page">
 
         <div className="nav-title-div">
             {/* <Link to="/home"> */}
@@ -32,19 +32,19 @@ const Nav = (props) => (
                 <>
                     <Link className="nav-home-page-style" to="/event">
                         New Event
-          </Link>
+                    </Link>
                     <Link className="nav-home-page-style" to="/DataReporting">
                         Data Reporting
-          </Link>
+                    </Link>
                     <Link className="nav-home-page-style" to="/OrganizationsListPage">
                         Organization List
-          </Link>
+                    </Link>
                     <Link className="nav-home-page-style" to="/contactsListPage">
                         Contact List
-          </Link>
+                    </Link>
                     <Link className="nav-home-page-style" to="/neworganization">
                         Add New Org
-          </Link>
+                    </Link>
                     <LogOutButton className="nav-link" />
                 </>
             )}
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(HomePageNav);

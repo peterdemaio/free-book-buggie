@@ -7,8 +7,6 @@ import './Footer.css'
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const Footer = () => (
-
-
   <footer className="footer-total">
     <div >
       <img 
@@ -23,9 +21,6 @@ const Footer = () => (
     &copy; The Free Book Buggie
     </div>
   </footer>
-
-
-
 );
 
 export default Footer;
