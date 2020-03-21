@@ -50,6 +50,9 @@
   z-index: -1;
   background-repeat: round;
   background-size: cover;
+  min-height: 100%;
+  width: 100%; 
+  height: 140%;
 }
 
 .organization-list-style {
