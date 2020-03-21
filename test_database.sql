@@ -116,7 +116,6 @@ VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uplo
 ('Greendale Community College', 'https://images-na.ssl-images-amazon.com/images/I/41-621wQstL._SX331_BO1,204,203,200_.jpg', 'https://community-sitcom.fandom.com/wiki/Greendale_Community_College', 'school','5443','Community RD E', NULL, 'Minneapolis', 'MN', 62, '55119', null),
 ('Church of The Flying Spaghetti Monster', 'https://images-na.ssl-images-amazon.com/images/I/41kY3eUmMQL._AC_.jpg', 'https://en.wikipedia.org/wiki/Flying_Spaghetti_Monster', 'religious', '1', 'Noodly Appendage Way', NULL, 'Bloomington', 'MN', 27, '55431', null);
 
-
 CREATE TABLE "contacts" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"contact_name" varchar(255) NOT NULL,
