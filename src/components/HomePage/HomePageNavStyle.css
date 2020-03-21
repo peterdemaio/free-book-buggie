@@ -4,7 +4,7 @@
     display: inline-block;
     color: #ffffff;
     padding-right: 30px;
-    /* align-items: flex-start; */
+    align-items: flex-start;
     text-align: center;
     font-family: "Museo Slab";
     font-weight: 900;
@@ -34,7 +34,7 @@
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
   background-image: url('./HeaderBlue.png');
   background-size: cover;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   align-items: flex-end;
   /* opacity: .75; */
   max-height: 200px;
@@ -71,7 +71,7 @@
   /* margin: 5px; */
   /* height: 8px; */
   /* padding-top: 5px; */
-  min-width: 80px;
+  /* min-width: 80px; */
   
 }
 

@@ -30,9 +30,9 @@
 }
 
 .nav-contact-list {
-  overflow: hidden;
+overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
-  background-image: url('./HeaderBlue.png');
+  background-image: url('./HeaderOrange.png');
   background-size: cover;
   /* justify-content: flex-end; */
   align-items: flex-end;
@@ -59,25 +59,15 @@
 }
 
 .nav-link-contact-list:hover {
-  border-radius: 15px;
-  background-color:rgb(92, 164, 226);
-  opacity: 78%;
-  /* overflow: hidden; */
-  /* height: auto; */
-  /* margin-top: 15px; */
-  /* max-height: 10px; */
-  /* padding-bottom: 8px; */
-  /* vertical-align: 8; */
-  /* margin: 5px; */
-  /* height: 8px; */
-  /* padding-top: 5px; */
+   border-radius: 15px;
+  background-color: rgb(240, 200, 136);
+  opacity: 83%;
   min-width: 80px;
-  
 }
 
-.nav-link:hover {
+/* .nav-link:hover {
   background-color: rgb(29, 114, 35);
-}
+} */
 
 .nav-right {
   padding-top: 30px;

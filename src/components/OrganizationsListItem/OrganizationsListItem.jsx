@@ -300,9 +300,8 @@ class OrganizationsListPageItem extends React.Component {
                                 <span className={this.props.classes.dropdown}>County:  </span>
                                 <FormControl >
                                     <Select
-                                        defaultValue={this.props.org.county_id}
-                                        native
-                                        className={this.props.classes.dropdownItem}
+                                        defaultValue={this.Companies}
+                                        native className={this.props.classes.dropdownItem}
                                         onChange={(event) => this.setDetailsAddress(event, 'county_id')}>
                                         {this.props.reduxStore.counties.map(county =>
                                             <option key={county.county_id} value={county.county_id} className={this.props.classes.dropdownMenu}>{county.county_name}</option>
