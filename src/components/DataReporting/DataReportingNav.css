@@ -40,6 +40,20 @@
   max-height: 200px;
 }
 
+.nav-data-reporting::after {
+  content: "";
+  background: url('./HeaderOrange.png');
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-repeat: round;
+  background-size: cover;
+}
+
 .nav-link-data {
   float: left;
   color: #ffffff;
