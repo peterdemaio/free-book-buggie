@@ -25,14 +25,35 @@ class DataReporting extends Component {
     }
 
     handleChangeFor = (event, param) => {
-        console.log('in hangleChangeFor', event, param)
-        
+        console.log('in hangleChangeFor')
+        this.props.dispatch({
+            type: 'GET_DATA',
+            payload: {
+                ...this.state.queryParams,
+                [param]: event.target.value
+            }
+        })
         this.setState({
             queryParams: {
                 ...this.state.queryParams,
                 [param]: event.target.value
             }
         })
+        if (param === 'yAxis') {
+            switch(event.target.value) {
+                case 'Books Distributed':
+                    this.setState({title: 'Books Distributed'})
+                    break;
+                case 'Children':
+                    this.setState({title: 'Children Recipients'})
+                    break;
+                case 'Books Collected':
+                    this.setState({title: 'Books Collected'})
+                    break;
+                default:
+                    console.log('changeYAxis error')
+            }
+        }
     }
 
     componentDidMount() {
