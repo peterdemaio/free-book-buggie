@@ -67,7 +67,7 @@
   border-radius: 15px;
   background-color:rgb(176, 147, 235);
   opacity: 78%;
-  min-width: 80px;
+  /* min-width: 80px; */
   transform: scale(1.075);
 }
 

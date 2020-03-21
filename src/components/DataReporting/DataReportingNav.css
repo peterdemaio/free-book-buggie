@@ -73,7 +73,7 @@
   border-radius: 15px;
   background-color: rgb(240, 200, 136);
   opacity: 83%;
-  min-width: 80px;
+  /* min-width: 80px; */
   transform: scale(1.075);
 }
 /* .nav-link:hover {
