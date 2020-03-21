@@ -8,13 +8,9 @@ const ContactListNav = (props) => (
     <div className="nav-contact-list">
 
         <div className="nav-title-div">
-            {/* <Link to="/home"> */}
-
-            {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
-            {/* </Link> */}
-            <div classname="buggie-logo">
+            <div classname="buggie-logo-contact">
                 <img
-                    className="logo-image"
+                    className="logo-image-contact"
                     alt="book buggie logo"
                     src="https://thefreebookbuggie.org/wp-content/uploads/2018/08/cropped-logo.jpg" />
             </div>
@@ -45,7 +41,9 @@ const ContactListNav = (props) => (
                     <Link className="nav-link-contact-list" to="/neworganization">
                         Add New Org
           </Link>
+                    <div className="log-out-button-div-contact">
                     <LogOutButton className="nav-link" />
+                    </div>
                 </>
             )}
             {/* Always show this link since the about page is not protected */}

@@ -50,7 +50,7 @@
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-
+  transition: all .18s ease-in-out;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
@@ -62,6 +62,7 @@
   border-radius: 15px;
   background-color: rgb(92, 164, 226);
   opacity: 78%;
+  transform: scale(1.075);
   /* overflow: hidden; */
   /* height: auto; */
   /* margin-top: 15px; */
@@ -75,9 +76,9 @@
   
 }
 
-.nav-link:hover {
+/* .nav-link:hover {
   background-color: rgb(29, 114, 35);
-}
+} */
 
 .nav-right {
   padding-top: 30px;

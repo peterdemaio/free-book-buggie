@@ -18,8 +18,8 @@
 
 }
 
-.buggie-logo{
-  padding-top: 15px;
+.buggie-logo-contact{
+  padding-top: 30px;
 }
 
 .nav-title-div {
@@ -30,9 +30,9 @@
 }
 
 .nav-contact-list {
-overflow: hidden;
+  overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
-  background-image: url('./HeaderOrange.png');
+  background-image: url('./HeaderBlue.png');
   background-size: cover;
   /* justify-content: flex-end; */
   align-items: flex-end;
@@ -45,29 +45,30 @@ overflow: hidden;
   color: #ffffff;
   /* background-color:#14771B; */
   text-align: center;
-  padding: 24px 10px;
+  padding: 38px 10px;
   text-decoration: none;
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-
+  transition: all .2s ease-in-out;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
+  
 }
-
+ 
 .nav-link-contact-list:hover {
-   border-radius: 15px;
-  background-color: rgb(240, 200, 136);
-  opacity: 83%;
-  min-width: 80px;
+  border-radius: 15px;
+  background-color: rgb(92, 164, 226);
+  opacity: 78%;
+  /* height: 20%; */
+  /* min-width: 80px; */
+  /* max-height: 9px; */
+  transform: scale(1.075); 
 }
 
-/* .nav-link:hover {
-  background-color: rgb(29, 114, 35);
-} */
 
 .nav-right {
   padding-top: 30px;
@@ -77,13 +78,38 @@ overflow: hidden;
   padding-right: 15px;
 }
 
-.logo-image {
-    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
-    /* z-index: -1; */
-    /* display: inline-flexbox; */
+.logo-image-contact {
+    
     float: left;
     height: 120px;
     padding-left: 25px;
     padding-bottom: 20px;
-    
+    padding-top: 15px
   }
+
+
+  .log-out-button-div-contact {
+    float: right;
+    padding-top: 14px;
+    padding-left: 0px;
+  }
+
+  /* logout button styling */
+  .log-out-button-contact {
+    border: none;
+    font-family: "Museo Slab";
+    border-bottom:  1px solid #444; 
+    cursor: pointer;
+    border-radius: 10px;
+    color: #14771B;
+    min-height: 40px;
+    min-width: 80px;
+    outline:0;
+    cursor: pointer;
+    display: block;
+    display: inline-block;
+    background-color: #f8f8f8;
+    opacity: 86%;
+
+
+}
