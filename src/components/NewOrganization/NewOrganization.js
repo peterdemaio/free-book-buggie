@@ -189,7 +189,12 @@ class NewOrganization extends Component {
                     justify="center"
                     alignItems="center"
                 >
+
+                
+                    <h1 className="new-organization-styles">Add a New Organization</h1>
+
                     <div onClick={this.populateInputs}><h1 className="new-organization-styles">Add a new organization</h1></div>
+
                     <Paper elevation={5}>
                         <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
                             <TextField
