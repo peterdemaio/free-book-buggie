@@ -25,7 +25,8 @@ const UserPage = (props) => (
       
       className="login-button"
       type="button"
-      onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+      // onClick={() => {props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+      onClick={() => props.history.push('/registerPage')}
     >
       Volunteer Registration
           </button>
