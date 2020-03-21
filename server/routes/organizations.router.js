@@ -81,7 +81,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlAddContact, contactQueryValues);
 
         const sqlAddAgeDemographics = `INSERT INTO "demographics_age"
-                                    ("organizations_id", "0-3", "4-7", "8-12", "13-18")
+                                    ("organizations_id", "0_3", "4_7", "8_12", "13_18")
                                     VALUES ($1, $2, $3, $4, $5)`;
         const demQueryValues = [
             organizationsId,
