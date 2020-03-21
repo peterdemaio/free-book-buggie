@@ -155,7 +155,7 @@ class NewOrganization extends Component {
                     alignItems="center"
                 >
                 
-                    <h1 className="new-organization-styles">Add a new organization</h1>
+                    <h1 className="new-organization-styles">Add a New Organization</h1>
                     <Paper elevation={5}>
                         <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
                             <TextField
