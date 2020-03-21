@@ -7,7 +7,7 @@ import './RegisterPageNav.css';
 const RegisterPageNav = (props) => (
     <div className="nav-register">
 
-        <div className="nav-title-div">
+        <div className="nav-registration-div">
             {/* <Link to="/home"> */}
 
             {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
@@ -21,7 +21,7 @@ const RegisterPageNav = (props) => (
         </div>
 
         <div className="nav-right">
-            <Link className="nav-link" to="/home">
+            <Link className="nav-link-register" to="/home">
                 {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
@@ -30,16 +30,16 @@ const RegisterPageNav = (props) => (
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {props.user.id && (
                 <>
-                    <Link className="nav-link" to="/event">
+                    <Link className="nav-link-register" to="/event">
                         New Event
           </Link>
-                    <Link className="nav-link" to="/neworganization">
+                    <Link className="nav-link-register" to="/neworganization">
                         Add New Org
           </Link>
-                    <Link className="nav-link" to="/contactsListPage">
+                    <Link className="nav-link-register" to="/contactsListPage">
                         Contacts List
           </Link>
-                    <Link className="nav-link" to="/OrganizationsListPage">
+                    <Link className="nav-link-register" to="/OrganizationsListPage">
                         Organizations List
           </Link>
                     <LogOutButton className="nav-link" />
