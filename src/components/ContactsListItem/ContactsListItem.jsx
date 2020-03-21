@@ -144,7 +144,7 @@ class ContactsListPageItem extends React.Component {
                             </div>
 
                             <div>
-                                <span className={this.props.classes.underline}>Organization: {this.props.contact.organization_name}</span>
+                                <span className={this.props.classes.underline}>Organization: {this.props.contact.org_name}</span>
                                 <br></br>
                                 <span>Notes: {this.props.contact.notes}</span>
                             </div>

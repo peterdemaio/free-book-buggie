@@ -41,7 +41,8 @@ class ContactsListPage extends React.Component {
         let searchQuery = event.target.value.toLowerCase();
         this.setState({
             filteredContacts: this.state.contacts.filter(
-                contact => contact.contact_name.toLowerCase().includes(searchQuery)
+                contact => contact.contact_name.toLowerCase().includes(searchQuery) ||
+                contact.org_name.toLowerCase().includes(searchQuery)
             )
         })
     }

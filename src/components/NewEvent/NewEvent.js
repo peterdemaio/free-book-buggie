@@ -162,6 +162,24 @@ class NewEvent extends Component {
         })
     };
 
+    populateInputs = () => {
+        this.setState({
+            event_name: 'Big Brothers/Big Sisters Book Distribution Day',
+            location: 'St. Paul Office',
+            date: '2020-03-31',
+            organization_id: 11,
+            contact_id: 11,
+            start_time: '12:00:00',
+            end_time: '14:00:00',
+            volunteers: 'Sue',
+            collectBooks: 0,
+            distBooks: 100,
+            numOfKids: 50,
+            numEslAdults: 0,
+            notes: '',
+        })
+    }
+
     render() {
 
         // const { classes } = this.props;
@@ -198,7 +216,7 @@ class NewEvent extends Component {
                         item lg={4}
                         justify="center"
                     >
-                        <h1 className="new-event-styles">Add an Event</h1>
+                        <div onClick={this.populateInputs}><h1 className="new-event-styles">Add an Event</h1></div>
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
@@ -208,6 +226,7 @@ class NewEvent extends Component {
                                     <Select
                                         native
                                         className={this.props.classes.dropdownItem}
+                                        value={this.state.organization_id}
                                         onChange={(event) => this.handleInputChangeFor(event, 'organization_id')}>
                                         >
                                         {orgList}
@@ -219,6 +238,7 @@ class NewEvent extends Component {
                                     <Select
                                         native
                                         className={this.props.classes.dropdownItem}
+                                        value={this.state.contact_id}
                                         onChange={(event) => this.handleInputChangeFor(event, 'contact_id')}>
                                         {contactList}
                                     </Select>
@@ -320,9 +340,9 @@ class NewEvent extends Component {
                                     Cancel
                                 </Button>
 
-                                <Button 
-                                className={this.props.classes.button}
-                                onClick={this.newEvent} color="primary">
+                                <Button
+                                    className={this.props.classes.button}
+                                    onClick={this.newEvent} color="primary">
                                     Submit
                                 </Button>
                             </span>
