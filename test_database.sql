@@ -109,12 +109,12 @@ CREATE TABLE "organizations" (
 	"notes" varchar(255)
 );
 
-INSERT INTO "organizations" ("org_name", "logo", "url", "type", "address_number", "address_street", "address_unit", "city", "state", "county_id", "zip")
-VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uploads/big05_01c_Dagon_Lovecraft_T-Shirt-100x100.jpg', 'http://www.esotericorderofdagon.org/', 'non-profit','1234','Main Street', '#112', 'Burnsville','MN', 19,'55337'),
-('Read To the Animals', 'https://www.mainstreetbooksminot.com/sites/mainstreetbooksminot.com/files/Reading%20With%20Rover.png', 'https://www.animalhumanesociety.org/education/rescue-readers', 'non-profit','987','West Barkway', NULL, 'Minneapolis','MN',27,'55411'),
-('The Human Fund', 'https://images.adagio.com/images2/custom_blends/33590.jpg', 'http://festivusweb.com/festivus-the-human-fund.php', 'non-profit','1000', 'Wall St.', '#5001', 'New York','NY', 62,'10281'),
-('Greendale Community College', 'https://images-na.ssl-images-amazon.com/images/I/41-621wQstL._SX331_BO1,204,203,200_.jpg', 'https://community-sitcom.fandom.com/wiki/Greendale_Community_College', 'school','5443','Community RD E', NULL, 'Minneapolis', 'MN', 62, '55119'),
-('Church of The Flying Spaghetti Monster', 'https://images-na.ssl-images-amazon.com/images/I/41kY3eUmMQL._AC_.jpg', 'https://en.wikipedia.org/wiki/Flying_Spaghetti_Monster', 'religious', '1', 'Noodly Appendage Way', NULL, 'Bloomington', 'MN', 27, '55431');
+INSERT INTO "organizations" ("org_name", "logo", "url", "type", "address_number", "address_street", "address_unit", "city", "state", "county_id", "zip", "notes")
+VALUES( 'Esoteric Order of Dagon','https://www.octopussgarden.es/wp-content/uploads/big05_01c_Dagon_Lovecraft_T-Shirt-100x100.jpg', 'http://www.esotericorderofdagon.org/', 'non-profit','1234','Main Street', '#112', 'Burnsville','MN', 19,'55337', null),
+('Read To the Animals', 'https://www.mainstreetbooksminot.com/sites/mainstreetbooksminot.com/files/Reading%20With%20Rover.png', 'https://www.animalhumanesociety.org/education/rescue-readers', 'non-profit','987','West Barkway', NULL, 'Minneapolis','MN',27,'55411', null),
+('The Human Fund', 'https://images.adagio.com/images2/custom_blends/33590.jpg', 'http://festivusweb.com/festivus-the-human-fund.php', 'non-profit','1000', 'Wall St.', '#5001', 'New York','NY', 62,'10281', null),
+('Greendale Community College', 'https://images-na.ssl-images-amazon.com/images/I/41-621wQstL._SX331_BO1,204,203,200_.jpg', 'https://community-sitcom.fandom.com/wiki/Greendale_Community_College', 'school','5443','Community RD E', NULL, 'Minneapolis', 'MN', 62, '55119', null),
+('Church of The Flying Spaghetti Monster', 'https://images-na.ssl-images-amazon.com/images/I/41kY3eUmMQL._AC_.jpg', 'https://en.wikipedia.org/wiki/Flying_Spaghetti_Monster', 'religious', '1', 'Noodly Appendage Way', NULL, 'Bloomington', 'MN', 27, '55431', null);
 
 
 CREATE TABLE "contacts" (
@@ -140,12 +140,12 @@ CREATE TABLE "events" (
 	"event_name" varchar(255) NOT NULL,
 	"organizations_id" integer REFERENCES organizations,
     "contacts_id" integer REFERENCES contacts,
-	"date" DATE NOT NULL,
+	"date" DATE,
 	"start_time" TIME,
 	"end_time" TIME,
-	"books_in" int,
-	"books_out" int,
-	"number_of_children" int,
+	"books_in" int default 0,
+	"books_out" int default 0,
+	"number_of_children" int default 0,
 	"number_of_adult_esl_learners" int,
 	"location" varchar(255),
 	"volunteers" varchar(255),
