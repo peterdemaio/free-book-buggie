@@ -8,6 +8,8 @@ import {
 
 import { connect } from 'react-redux';
 
+import '../../../public/Assets/Fonts/Museo_slab-500.otf';
+
 // import Nav from '../Nav/Nav';
 // import Footer from '../Footer/Footer';
 
