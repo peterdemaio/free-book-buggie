@@ -147,13 +147,14 @@ class NewOrganization extends Component {
     render() {
         return (
             <>
-            <NewOrganizationNav/>
+                <NewOrganizationNav/>
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"
                     justify="center"
                     alignItems="center"
                 >
+                
                     <h1 className="new-organization-styles">Add a new organization</h1>
                     <Paper elevation={5}>
                         <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
@@ -383,9 +384,11 @@ class NewOrganization extends Component {
                         size={'large'}
                         variant={'outlined'}>
                         Add
-                </Button>
-                <br/>
-                </Grid>
+                    </Button>
+                    <br/>
+                   
+                    </Grid>
+             
             </>
         )
     }

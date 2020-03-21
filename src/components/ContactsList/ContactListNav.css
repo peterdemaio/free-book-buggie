@@ -15,11 +15,10 @@
     width: 33%;
     /* background-color: #14771B; */
     /* opacity: .80; */
-
 }
 
-.buggie-logo{
-  padding-top: 15px;
+.buggie-logo-contact{
+  padding-top: 30px;
 }
 
 .nav-title-div {
@@ -38,46 +37,45 @@
   align-items: flex-end;
   /* opacity: .75; */
   max-height: 200px;
+  /* opacity: 98%; */
+}
+
+.nav-contact-list::after {
+  content: "";
+  background: url('./HeaderBlue.png');
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-repeat: round;
+  background-size: cover;
 }
 
 .nav-link-contact-list {
   float: left;
   color: #ffffff;
-  /* background-color:#14771B; */
-  text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 20px;
-  justify-content: flex-end;
-  align-items: flex-end;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
-}
+  /* max-height: 25px; */
+  transition: all .18s ease-in-out;
 
+}
+ 
 .nav-link-contact-list:hover {
+  all: revert;
   border-radius: 15px;
-  background-color:rgb(92, 164, 226);
+  background-color: rgb(92, 164, 226);
   opacity: 78%;
-  /* overflow: hidden; */
-  /* height: auto; */
-  /* margin-top: 15px; */
-  /* max-height: 10px; */
-  /* padding-bottom: 8px; */
-  /* vertical-align: 8; */
-  /* margin: 5px; */
-  /* height: 8px; */
-  /* padding-top: 5px; */
-  min-width: 80px;
-  
+  transform: scale(1.075);
 }
 
-.nav-link:hover {
-  background-color: rgb(29, 114, 35);
-}
 
 .nav-right {
   padding-top: 30px;
@@ -87,13 +85,42 @@
   padding-right: 15px;
 }
 
-.logo-image {
-    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
-    /* z-index: -1; */
-    /* display: inline-flexbox; */
+.logo-image-contact {
+    
     float: left;
     height: 120px;
     padding-left: 25px;
     padding-bottom: 20px;
-    
+    padding-top: 15px
   }
+
+
+  .log-out-button-div-contact {
+    float: right;
+    padding-top: 14px;
+    padding-left: 0px;
+  }
+
+  /* logout button styling */
+  .log-out-button-contact {
+    border: none;
+    font-family: "Museo Slab";
+    border-bottom:  1px solid #444; 
+    cursor: pointer;
+    border-radius: 10px;
+    color: #14771B;
+    min-height: 40px;
+    min-width: 80px;
+    outline:0;
+    cursor: pointer;
+    display: block;
+    display: inline-block;
+    background-color: #f8f8f8;
+    opacity: 86%;
+}
+
+.contact-list-fix {
+  max-inline-size: 4px;
+  width: 50px;
+  height: 50px;
+}

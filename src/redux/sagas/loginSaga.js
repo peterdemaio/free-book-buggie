@@ -19,7 +19,11 @@ function* loginUser(action) {
     
     // after the user has logged in
     // get the user information from the server
+
+    // saving login info in a reducer
     yield put({type: 'FETCH_USER'});
+    //make request to /api/user
+    yield put ({type: 'REDIRECT_BY_USER_TYPE', history: action.history}) 
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {

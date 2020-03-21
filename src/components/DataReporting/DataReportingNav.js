@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './DataReportingNav.css';
 
-const Nav = (props) => (
+const DataReportingNav = (props) => (
     <div className="nav-data-reporting ">
 
         <div className="nav-title-div">
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(DataReportingNav);

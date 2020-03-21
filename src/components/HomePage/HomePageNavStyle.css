@@ -4,7 +4,7 @@
     display: inline-block;
     color: #ffffff;
     padding-right: 30px;
-    /* align-items: flex-start; */
+    align-items: flex-start;
     text-align: center;
     font-family: "Museo Slab";
     font-weight: 900;
@@ -29,12 +29,12 @@
   
 }
 
-.nav {
+.nav-home-page {
   overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
   background-image: url('./HeaderBlue.png');
   background-size: cover;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   align-items: flex-end;
   /* opacity: .75; */
   max-height: 200px;
@@ -50,7 +50,7 @@
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-
+  transition: all .18s ease-in-out;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
@@ -59,25 +59,12 @@
 }
 
 .nav-home-page-style:hover {
-  border-radius: 15px;
+  border-radius: 22px;
   background-color: rgb(92, 164, 226);
   opacity: 78%;
-  /* overflow: hidden; */
-  /* height: auto; */
-  /* margin-top: 15px; */
-  /* max-height: 10px; */
-  /* padding-bottom: 8px; */
-  /* vertical-align: 8; */
-  /* margin: 5px; */
-  /* height: 8px; */
-  /* padding-top: 5px; */
-  min-width: 80px;
-  
+  transform: scale(1.075);
 }
 
-.nav-link:hover {
-  background-color: rgb(29, 114, 35);
-}
 
 .nav-right {
   padding-top: 30px;

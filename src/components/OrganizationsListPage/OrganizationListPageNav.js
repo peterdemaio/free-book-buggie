@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './OrganizationListPage.css';
 
-const Nav = (props) => (
+const OrganizationListPageNav = (props) => (
     <div className="nav-org-list">
 
         <div className="nav-title-div">
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(OrganizationListPageNav);

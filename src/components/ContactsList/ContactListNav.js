@@ -4,22 +4,18 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './ContactListNav.css';
 
-const Nav = (props) => (
+const ContactListNav = (props) => (
+    <>
     <div className="nav-contact-list">
 
         <div className="nav-title-div">
-            {/* <Link to="/home"> */}
-
-            {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
-            {/* </Link> */}
-            <div classname="buggie-logo">
+            <div classname="buggie-logo-contact">
                 <img
-                    className="logo-image"
+                    className="logo-image-contact"
                     alt="book buggie logo"
                     src="https://thefreebookbuggie.org/wp-content/uploads/2018/08/cropped-logo.jpg" />
             </div>
         </div>
-
         <div className="nav-right">
             <Link className="nav-link-contact-list" to="/home">
                 {/* Show this link if they are logged in or not,
@@ -45,15 +41,22 @@ const Nav = (props) => (
                     <Link className="nav-link-contact-list" to="/neworganization">
                         Add New Org
           </Link>
+                    <div className="log-out-button-div-contact">
                     <LogOutButton className="nav-link" />
+                    </div>
+                    
                 </>
             )}
             {/* Always show this link since the about page is not protected */}
             {/* <Link className="nav-link" to="/about">
                 About
       </Link> */}
+           
         </div>
+        
     </div>
+        
+    </>
 );
 
 // Instead of taking everything from state, we just want the user
@@ -65,4 +68,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(ContactListNav);

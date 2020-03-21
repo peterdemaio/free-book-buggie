@@ -60,18 +60,19 @@ const styles = theme => ({
 class volunteerEvent extends Component {
 
     state = {
+        event_id: 0,
         collectBooks: 0,
         distBooks: 0,
         numOfKids: 0,
-        event_id: 1,
+        numEslAdults: 0,
         notes: '',
     }
 
     // get all events on page load
-    componentDidMount() {
+    componentDidMount(event) {
         this.props.dispatch({
-            type: 'GET_EVENTS',
-            payload: this.props.reduxStore.eventReducer
+            type: 'SET_CURRENT_EVENT',
+            payload: event
         })
     }
 
@@ -83,9 +84,12 @@ class volunteerEvent extends Component {
             // set up new saga for dispatch type
             type: 'VOLUNTEER_EVENT',
             payload: {
+                event_id: this.state.event_id,
                 collectBooks: this.state.collectBooks,
                 distBooks: this.state.distBooks,
-                numOfKids: this.state.numOfKids
+                numOfKids: this.state.numOfKids,
+                numEslAdults: this.state.numEslAdults,
+                notes: this.state.notes,
             }
         })
         alert('Books Successfully Added!')
@@ -162,6 +166,14 @@ class volunteerEvent extends Component {
                                     label="Number of Children"
                                     margin="normal"
                                     onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
+                                />
+                                <TextField
+                                    className={this.props.classes.inputs}
+                                    value={this.state.numEslAdults}
+                                    type="number"
+                                    label="Number of ESL Adults"
+                                    margin="normal"
+                                    onChange={(event) => this.handleInputChangeFor(event, 'numEslAdults')}
                                 />
                                 <TextField
                                     className={this.props.classes.notes}
