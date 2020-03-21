@@ -31,9 +31,8 @@ function* getEvents(action) {
 
 function* volunteerEvent(action) {
     try {
-        let response = yield axios.post('/api/events', action.payload)
-        console.log(response.data)
-        yield put({ type: 'SET_CURRENT_EVENT', payload: response.data})
+        yield axios.post('/api/events', action.payload)
+        //yield put({ type: 'SET_CURRENT_EVENT', payload: response.data})
     }
     catch (error) {
         console.log('Error submitting event collected', error)

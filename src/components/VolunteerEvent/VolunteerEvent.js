@@ -60,19 +60,20 @@ const styles = theme => ({
 class volunteerEvent extends Component {
 
     state = {
-        event_id: 0,
+        event_name: this.props.reduxStore.events[0].event_name,
+        organizations_id: this.props.reduxStore.events[0].organizations_id,
+        date: this.props.reduxStore.events[0].date,
+        contacts_id: 0,
         collectBooks: 0,
         distBooks: 0,
         numOfKids: 0,
-        numEslAdults: 0,
         notes: '',
     }
 
     // get all events on page load
-    componentDidMount(event) {
+    componentDidMount() {
         this.props.dispatch({
-            type: 'SET_CURRENT_EVENT',
-            payload: event
+            type: 'GET_EVENTS',
         })
     }
 
@@ -83,35 +84,39 @@ class volunteerEvent extends Component {
         this.props.dispatch({
             // set up new saga for dispatch type
             type: 'VOLUNTEER_EVENT',
-            payload: {
-                event_id: this.state.event_id,
-                collectBooks: this.state.collectBooks,
-                distBooks: this.state.distBooks,
-                numOfKids: this.state.numOfKids,
-                numEslAdults: this.state.numEslAdults,
-                notes: this.state.notes,
-            }
+            payload: this.state
         })
         alert('Books Successfully Added!')
     }
 
     handleInputChangeFor = (event, propertyName) => {
         console.log('testing handleInputChangeFor')
+        console.log(event.target.value)
+
         this.setState({
             [propertyName]: event.target.value
         })
     };
 
+    handleEventChange = (event) => {
+        this.setState({
+            event_name: this.props.reduxStore.events[event.target.value].event_name,
+            organizations_id: this.props.reduxStore.events[event.target.value].organizations_id
+        })
+    }
+
     render() {
 
         // map over event reducer and grab the event
-        let eventList = this.props.reduxStore.currentEventReducer.map(event =>
-            <option value={event.id} key={event.event_name} className={this.props.classes.dropdown}>{event.event_name}</option>
+        let eventList = this.props.reduxStore.events.map((event, i) =>
+            <option value={i} key={i} className={this.props.classes.dropdown}>{event.event_name}</option>
         );
 
         return (
-
             <>
+                {JSON.stringify(this.state)}
+                <br/>
+                {JSON.stringify(this.props.reduxStore.events[0])}
                 <Grid
                     className={this.props.classes.container}
                     container
@@ -135,7 +140,7 @@ class volunteerEvent extends Component {
                                     <Select
                                         native
                                         className={this.props.classes.dropdown}
-                                        onChange={(event) => this.handleInputChangeFor(event, 'event_id')}>
+                                        onChange={(event) => this.handleEventChange(event)}>
                                         >
                                         {eventList}
                                     </Select>
@@ -168,14 +173,6 @@ class volunteerEvent extends Component {
                                     onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                                 />
                                 <TextField
-                                    className={this.props.classes.inputs}
-                                    value={this.state.numEslAdults}
-                                    type="number"
-                                    label="Number of ESL Adults"
-                                    margin="normal"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'numEslAdults')}
-                                />
-                                <TextField
                                     className={this.props.classes.notes}
                                     value={this.state.notes}
                                     type="text"
@@ -183,19 +180,16 @@ class volunteerEvent extends Component {
                                     label="Notes"
                                     onChange={(event) => this.handleInputChangeFor(event, 'notes')}
                                 />
-
                                 <Button
                                     className={this.props.classes.button}
                                     color="primary">
                                     Cancel
                                 </Button>
-
                                 <Button
                                     className={this.props.classes.button}
                                     onClick={this.addData} color="primary">
                                     Submit
                                 </Button>
-
                             </span>
                         </Paper>
                     </Grid>
@@ -206,8 +200,6 @@ class volunteerEvent extends Component {
         )
     }
 }
-
-
 
 const mapStateToProps = (reduxStore) => ({
     reduxStore

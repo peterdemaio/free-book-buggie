@@ -11,7 +11,7 @@ import chartData from './chartDataReducer';
 import chartDataExcel from './chartDataExcelReducer';
 import counties from './counties'
 import bookCountReducer from './bookCountReducer'
-import currentEventReducer from './currentEventReducer'
+import events from './eventsReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   counties,
   bookCountReducer,
   chartDataExcel,
-  currentEventReducer,
+  events,
 });
 
 export default rootReducer;
