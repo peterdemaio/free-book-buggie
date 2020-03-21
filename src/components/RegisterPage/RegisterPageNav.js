@@ -33,6 +33,9 @@ const RegisterPageNav = (props) => (
                     <Link className="nav-link-register" to="/event">
                         New Event
           </Link>
+                    <Link className="nav-link-register" to="/DataReporting">
+                        Data Reporting
+          </Link>
                     <Link className="nav-link-register" to="/neworganization">
                         Add New Org
           </Link>
