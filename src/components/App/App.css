@@ -1,17 +1,5 @@
 /* at fontface font family key*/
 
-/* @font-face {
-  font-family: 'Museo Slab';
-  src: local('Museo Slab'), url(../../../public/Assets/Fonts/Museo_Slab_500.otf ) format('truetype');
-} */
-/* @import url(//db.onlinewebfonts.com/c/023dfbd5b3775aaf9066cc15f2b676c9?family=MuseoSlab-500);
-@font-face {font-family: "MuseoSlab-500"; src: url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.eot"); 
-src: url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.eot?#iefix") 
-format("embedded-opentype"), url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.woff2") 
-format("woff2"), url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.woff") format("woff"), 
-url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.ttf") 
-format("truetype"), url("//db.onlinewebfonts.com/t/023dfbd5b3775aaf9066cc15f2b676c9.svg#MuseoSlab-500") 
-format("svg"); } */
 
 
 body {
