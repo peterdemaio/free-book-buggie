@@ -133,7 +133,9 @@ VALUES( '360 Communities','https://360communities.org/wp-content/uploads/2019/04
 ('Urban Ventures', 'https://pbs.twimg.com/profile_images/932038490900099072/VDXezHNX_400x400.jpg', 'https://urbanventures.org/', 'Nonprofit', null, null, null, 'Minneapolis', 'MN', '27', '55408', null),
 ('American Red Cross', 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/072011/americanredcross_logo-converted.png', 'https://www.redcross.org/local/minnesota.html', 'non-profit', '1201', 'W River PKWY', null, 'Minneapolis', 'MN', '27', '55454', null),
 ('Brooklyn Center Police', null, null, 'municipal', '6645', 'Humboldt Ave N', null, 'Brooklyn Center', 'MN', '27', '55430', null ),
-('Bryn Mawr Presbyterian Church', null, null, 'religious', '420', 'Cedar Lake RD S', null, 'Minneapolis', 'MN', '27', '55405', 'St. Annes Place')
+('Bryn Mawr Presbyterian Church', null, null, 'religious', '420', 'Cedar Lake RD S', null, 'Minneapolis', 'MN', '27', '55405', 'St. Annes Place'),
+('Good in the Hood', null, null, 'religious', '1630', 'E 90th ST', null, 'Bloomington', 'MN', '27', '55425', null),
+('ISD191', null, null, 'educational', null, null, null, null, 'MN', 19, null, null)
 
 CREATE TABLE "contacts" (
 	"id" serial PRIMARY KEY NOT NULL,
@@ -164,4 +166,102 @@ VALUES ('Mycie Tew', null, 1, null, null, 'Mtew@360communities.org', null),
 ('Becky Haage', null, 14, '651-424-4186', 'office', 'reachingupmin@gmail.com', null),
 ('Jorge Bardales', null, 19, null, null, 'jbardales@neighb.org', null),
 ('Sally Newbury', 'Volunteer Engagement Coordinator', 20, '651-767-0324', 'office', 'snewbury@npimn.org', null),
-('Kendra Peterson', 'Director, Literacy', 21, '612-638-1000', 'office', 'kendrapeterson@urbanventures.org', null)
+('Kendra Peterson', 'Director, Literacy', 21, '612-638-1000', 'office', 'kendrapeterson@urbanventures.org', null),
+('Jamie Morrison', 'Director of Operations', 25, null, null, 'info@goodinthehood.org', null)
+
+
+CREATE TABLE "events" (
+	"id" serial PRIMARY KEY,
+	"event_name" varchar(255) NOT NULL,
+	"organizations_id" integer REFERENCES organizations,
+    "contacts_id" integer REFERENCES contacts,
+	"secondary_contacts_id" integer REFERENCES contacts,
+	"date" DATE,
+	"start_time" TIME,
+	"end_time" TIME,
+	"books_in" int default 0,
+	"books_out" int default 0,
+	"number_of_children" int default 0,
+	"number_of_adult_esl_learners" int,
+	"location" varchar(255),
+	"volunteers" varchar(255),
+	"notes" varchar(255)
+);
+
+INSERT INTO "events" ("event_name", "organizations_id", "contacts_id", "secondary_contacts_id",  "date", "start_time", "end_time", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners")
+VALUES ('HeadStart Family Fun Night', 3, 5, 6, '2019-01-01', null, null, 0, 200, 100, 0),
+('LGBTQIA Family Night', 3, 5, 6, '2019-02-01', null, null, 0, 200, 120, 0),
+('MPLS ECFE Family Night', 3, 5, 6, '2019-03-01', null, null, 0, 200, 150, 0),
+('YWCA of MPLS Family Night', 3, 5, 6, '2019-04-01', null, null, 0, 200, 100, 0),
+('Fall Family Event', 5, 8, null, '2019-05-01', null, null,  0, 300, 100, 0),
+('Halloween Party', 5, 8, null, '2019-10-25', null, null, 0, 500, 500, 0),
+('Winter Coat Giveaway', 5, 8, null, '2019-11-15', null, null, 0, 150, 75, 0),
+('Earle Brown Days', 6, 9, null, '2019-06-03', null, null, 0, 100, 30, 0),
+('Saturday Market - Grand Opening of Metro Transit C Line', 6, 9, null, '2019-08-01', null, null, 0, 75, 30, 0),
+('Party on the Plaza', 7, 10, null, '2019-08-15', null, null, 0, 300, 100, 0),
+('Summer Activities & Safety Fair', 8, 11, null, '2019-08-01', null, null, 0, 150, 300, 0),
+('Hazel Park Rec Center Summer Safety Camp', 9, null, null, '2019-08-09', null, null, 0, 100, 30, 0),
+('Dec 2018', 10, 12, null, '2018-12-01', null, null, 0, 300, 75, 0),
+('Jan 2019', 10, 12, null, '2019-12-01', null, null, 0, 300, 50, 0),
+('Mar 2019', 10, 12, null, '2019-12-01', null, null, 0, 250, 75, 0),
+('Nov 2018', 10, 12, null, '2018-12-01', null, null, 0, 100, 50, 0),
+('Ice Cream Social', 13, 14, null, '2019-05-05', null, null, 30, 50, 25, 0),
+('Homework Help', 14, 15, null, '2019-08-01', null, null, 0, 300, 30, 0),
+('Food Distribution', 25, 19, null, '2019-03-03', null, null, 0, 100, 30, 0),
+('End of School Summer Reading - Gideon Pond Elemetary', 26, null, null, '2019-05-05', null, null, 0, 1050, 525, 0),
+('End of School Summer Reading - Harriet Bishop Elementary', 26, null, null, '2019-05-05', null, null, 0, 742, 371, 0),
+('End of School Summer Reading - MW Savage Elementary', 26, null, null, '2019-05-05', null, null, 0, 700, 350, 0),
+('End of School Summer Reading - Rahn Elementary', 26, null, null, '2019-05-05', null, null, 0, 736, 368, 0),
+('End of School Summer Reading - Sioux Trail Elementary', 26, null, null, '2019-05-05', null, null, 0, 700, 350, 0),
+('End of School Summer Reading - Sioux Trail Elementary', 26, null, null, '2019-05-10', null, null, 0, 700, 350, 0),
+('End of School Summer Reading - Vista View Elementary', 26, null, null, '2019-05-05', null, null, 0, 650, 325, 0),
+('Clifford Day', 19, 16, null, '2019-02-01', null, null, 0, 150, 30, 0),
+('Family Fun Night', 19, 16, null, '2019-04-01', null, null, 0, 150, 40, 0),
+('Fresh Produce Distribution', 19, 16, null, '2019-05-01', null, null, 0, 100, 50, 0),
+('SNAP Outreach Fair', 19, 16, null, '2019-06-01', null, null, 0, 100, 25, 0);
+
+
+
+
+CREATE TABLE "demographics_age" (
+    "id" serial PRIMARY KEY,
+    "organizations_id" integer REFERENCES organizations,
+    "0_3" integer,
+    "4_7" integer,
+    "8_12" integer,
+    "13_18" integer
+);
+
+INSERT INTO "demographics_age" ("organizations_id", "0_3", "4_7", "8_12", "13_18")
+
+
+CREATE TABLE "demographics_race" (
+    "id" serial PRIMARY KEY,
+    "organizations_id" integer REFERENCES organizations,
+    "white" integer,
+    "black_or_african_american" integer,
+    "american_indian_or_alaska_native" integer, 
+    "asian" integer, 
+    "native_hawaiian_or_pacific_islander" integer
+);
+
+INSERT INTO "demographics_race" ("organizations_id", "white", "black_or_african_american", "american_indian_or_alaska_native", "asian", "native_hawaiian_or_pacific_islander")
+
+CREATE TABLE "demographics_poverty" (
+    "id" serial PRIMARY KEY,
+    "organizations_id" integer REFERENCES organizations,
+    "percentage_NSLP" integer
+);
+
+INSERT INTO "demographics_poverty" ("organizations_id", "percentage_NSLP")
+
+
+CREATE TABLE  "user"(
+    "id" serial PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL,
+    "admin" BOOLEAN DEFAULT false
+);
+
+INSERT INTO "user" ("username", "password", "admin")
+VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)
