@@ -15,7 +15,7 @@ class DataReporting extends Component {
         queryParams: {
             yAxis: 'Books Distributed',
             xAxis: 'Time',
-            startDate: '2010-01-01',
+            startDate: '2018-01-01',
             endDate: '2021-01-01',
             timeUnit: 'Year',
             metric: 'Age'
@@ -56,6 +56,31 @@ class DataReporting extends Component {
         }
     }
 
+    setCurrentDate() {
+        console.log('in setCurrentDate')
+        let today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear();
+        if(dd<10) 
+        {
+            dd='0'+dd;
+        } 
+
+        if(mm<10) 
+        {
+            mm='0'+mm;
+        } 
+        today = yyyy+'-'+mm+'-'+dd;
+        console.log(today)
+        this.setState({
+            queryParams: {
+                ...this.state.queryParams,
+                endDate: today
+            }
+        })    
+    }
+
     componentDidMount() {
         console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
@@ -63,7 +88,7 @@ class DataReporting extends Component {
             type: 'GET_DATA',
             payload: this.state.queryParams
         })
-
+        this.setCurrentDate();        
         this.setState({loading: false})
     }
 
