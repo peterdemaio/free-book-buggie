@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`
   
     pool.query(queryText,
-      [req.body.event_name, req.body.organization_id, req.body.contact_id, req.body.location, req.body.date, req.body.start_time, req.body.end_time, req.body.volunteers, req.body.collectBooks, req.body.distBooks, req.body.numOfKids, req.body.numEslAdults, req.body.notes])
+      [req.body.event_name, req.body.organizations_id, req.body.contacts_id, req.body.location, req.body.date, req.body.start_time, req.body.end_time, req.body.volunteers, req.body.collectBooks, req.body.distBooks, req.body.numOfKids, req.body.numEslAdults, req.body.notes])
       .then(result => {
         console.log(result.rows)
         res.send(result.rows)
