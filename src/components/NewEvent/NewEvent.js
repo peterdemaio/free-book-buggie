@@ -11,22 +11,13 @@ import {
     Paper,
     TextField,
     Select,
-
-    // MenuItem,
     InputLabel,
     FormControl,
-    // Input,
-    // NativeSelect
-
 }
     from '@material-ui/core';
 
 const styles = theme => ({
-    // root: {
-    //     ...theme.mixins.gutters(),
-    //     paddingTop: theme.spacing.unit * 2,
-    //     paddingBottom: theme.spacing.unit * 2,
-    // },
+    
     container: {
         minHeight: '400px'
     },
@@ -63,38 +54,7 @@ const styles = theme => ({
         margin: '20px',
         marginLeft: '140px'
     }
-    // submitButton: {
-    //     justify: 'center',
-    //     alignItems: 'center'
-    // },
-    // demographicsInputs: {
-    //     width: '50px',
-    //     alignItems: 'center',
-    // },
-    // demographicsLine: {
-    //     paddingLeft: '25px',
-    //     paddingBottom: '10px',
-    //     margin: '10px',
-    // },
-    // question: {
-    //     paddingLeft: '25px'
-    // },
-    // selectEmpty: {
-    //     marginTop: theme.spacing.unit * 2,
-    // },
 });
-
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//     PaperProps: {
-//         style: {
-//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//             width: 250,
-//         },
-//     },
-// };
-
 
 class NewEvent extends Component {
 
@@ -113,10 +73,6 @@ class NewEvent extends Component {
         numEslAdults: 0,
         notes: '',
     }
-
-    // handleChange = name => event => {
-    //     this.setState({ [name]: Number(event.target.value) });
-    // };
 
     // mount organizations on page load
     componentDidMount() {
@@ -182,17 +138,10 @@ class NewEvent extends Component {
 
     render() {
 
-        // const { classes } = this.props;
-
         // map over organizations, display in drop down, store in local state when clicked
         let orgList = this.props.reduxStore.organizations.map(org =>
             <option value={org.id} key={org.org_name} className={this.props.classes.dropdown}>{org.org_name} </option>
         );
-
-        // map over organizations, get individual organization name ???
-        // let orgName = this.props.reduxStore.organizations.map(nameOrg =>
-        //     <option key={nameOrg.org_name}>{nameOrg.org_name}</option>
-        // );
 
         // map over contacts, display in drop down, store in local state when clicked
         let contactList = this.props.reduxStore.contacts.map(people =>
@@ -348,9 +297,6 @@ class NewEvent extends Component {
                             </span>
                         </Paper>
                     </Grid>
-                    {/* <Button onClick={() => this.props.history.push('/editOrganization')}>Edit Organization</Button> */}
-                    {/* <Button onClick={() => this.props.history.push('/newOrganization')}>Add New Organization</Button> */}
-                    {/* <Button onClick={() => this.props.history.push('/home')}>Home</Button> */}
                 </Grid>
             </>
         )

@@ -145,7 +145,9 @@ router.post('/', (req, res) => {
                         .then((response) => {
                             console.log('Demographics/age query response.rows:', response.rows)
                             //this array will not be modified, but its values will be used to parse each event object
-                            labelsArr = ['0-3', '4-7', '8-12', '13-18']
+                            labelsArr = ['0_3', '4_7', '8_12', '13_18']
+                            labelsArr2 = ['0-3', '4-7', '8-12', '13-18']
+
                             //this array has corresponding indices to the array above and will represent 
                             //the number of books or children in each age group
                             dataArr = [0, 0, 0, 0]
@@ -185,7 +187,7 @@ router.post('/', (req, res) => {
                             console.log('final dataArr:', dataArr)
                             res.send({
                                 data: dataArr,
-                                labels: labelsArr,
+                                labels: labelsArr2,
                                 label: label
                             })
                         })

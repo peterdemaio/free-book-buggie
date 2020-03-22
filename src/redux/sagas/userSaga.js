@@ -44,7 +44,7 @@ function* redirectSaga(action) {
 
     // redirect based on user type
     if (response.data.admin === false) {
-      action.history.push('/volunteerEvent')
+      action.history.push('/VolunteerEvent')
     }
   } catch (error) {
     console.log('User get request failed', error);

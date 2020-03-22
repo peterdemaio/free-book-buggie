@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import VolunteerEventNav from './VolunteerEventNav';
+import './VolunteerEvent.css';
 
 // Material UI imports
 import {
@@ -11,7 +13,6 @@ import {
     Select,
     InputLabel,
     FormControl,
-    
 }
     from '@material-ui/core';
 
@@ -24,7 +25,7 @@ const styles = theme => ({
         minWidth: '750px',
         maxWidth: '1000px',
         minHeight: '400px',
-        // display: 'block',
+        display: 'block',
         justify: 'center',
         alignItems: 'center',
         padding: '10px'
@@ -32,17 +33,17 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
-        alignItems: 'center',
     },
     inputs: {
         width: '250px',
         padding: '25px',
         margin: '10px',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignItems: 'center',
+        textAlign: 'center'
     },
     dropdown: {
         width: '250px',
-        alignItems: 'center',
     },
     notes: {
         width: '400px',
@@ -50,29 +51,30 @@ const styles = theme => ({
         margin: '10px',
     },
     button: {
-        width: '100px',
-        padding: '25px',
-        margin: '10px',
-
+        width: '250px',
+        padding: '10px',
+        margin: '20px',
+        marginLeft: '140px'
     }
 });
 
 class volunteerEvent extends Component {
 
     state = {
-        event_id: 0,
+        event_name: this.props.reduxStore.events[0].event_name,
+        organizations_id: this.props.reduxStore.events[0].organizations_id,
+        date: this.props.reduxStore.events[0].date,
+        contacts_id: 0,
         collectBooks: 0,
         distBooks: 0,
         numOfKids: 0,
-        numEslAdults: 0,
         notes: '',
     }
 
     // get all events on page load
-    componentDidMount(event) {
+    componentDidMount() {
         this.props.dispatch({
-            type: 'SET_CURRENT_EVENT',
-            payload: event
+            type: 'GET_EVENTS',
         })
     }
 
@@ -83,131 +85,151 @@ class volunteerEvent extends Component {
         this.props.dispatch({
             // set up new saga for dispatch type
             type: 'VOLUNTEER_EVENT',
-            payload: {
-                event_id: this.state.event_id,
-                collectBooks: this.state.collectBooks,
-                distBooks: this.state.distBooks,
-                numOfKids: this.state.numOfKids,
-                numEslAdults: this.state.numEslAdults,
-                notes: this.state.notes,
-            }
+            payload: this.state
+        })
+        this.setState({
+            event_name: '',
+            organizations_id: 0,
+            date: '',
+            contacts_id: 0,
+            collectBooks: 0,
+            distBooks: 0,
+            numOfKids: 0,
+            notes: '',
         })
         alert('Books Successfully Added!')
     }
 
     handleInputChangeFor = (event, propertyName) => {
         console.log('testing handleInputChangeFor')
+        console.log(event.target.value)
+
         this.setState({
             [propertyName]: event.target.value
         })
     };
 
+    handleEventChange = (event) => {
+        console.log('event.target.value:', event.target.value)
+        if (event.target.value === 'select') {
+            console.log('in null case')
+            return
+        }
+        this.setState({
+            event_name: this.props.reduxStore.events[event.target.value].event_name,
+            organizations_id: this.props.reduxStore.events[event.target.value].organizations_id,
+            date: this.props.reduxStore.events[event.target.value].date,
+            contacts_id: this.props.reduxStore.events[event.target.value].contacts_id,
+            start_time: this.props.reduxStore.events[event.target.value].start_time,
+            end_time: this.props.reduxStore.events[event.target.value].end_time
+        })
+    }
+
     render() {
 
-        // map over event reducer and grab the event
-        let eventList = this.props.reduxStore.currentEventReducer.map(event =>
-            <option value={event.id} key={event.event_name} className={this.props.classes.dropdown}>{event.event_name}</option>
-        );
+        let eventList =
+            <>
+                <option value='select' className={this.props.classes.dropdown}>select</option>
+                {this.props.reduxStore.events.map((event, i) =>
+                    <option value={i} key={i} className={this.props.classes.dropdown}>{event.event_name}</option>
+                )}
+            </>
 
         return (
-
             <>
-                <Grid
-                    className={this.props.classes.container}
+                <VolunteerEventNav />
+                <Grid className={this.props.classes.container}
+
                     container
                     direction="column"
-                    justify="center"
+                    // justify="center"
                     alignItems="center"
                 >
                     <Grid
                         container
                         className={this.props.classes.form}
-                        item lg={4}
-                        justify="center"
-                        alignItems="center"
+                        item lg={5}
+                    // justify="center"
                     >
-                        <h1 align="center">Add Books By Event</h1>
+                        <h1
+                            className="new-event-styles"
+                            align="center">Add Books By Event</h1>
+
+
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
-
                                 <FormControl className={this.props.classes.inputs} >
                                     <InputLabel>Event Name</InputLabel>
                                     <Select
                                         native
-                                        className={this.props.classes.dropdown}
-                                        onChange={(event) => this.handleInputChangeFor(event, 'event_id')}>
+                                        className={this.props.classes.dropdownItem}
+                                        onChange={(event) => this.handleEventChange(event)}>
                                         >
                                         {eventList}
                                     </Select>
                                 </FormControl>
 
-                                <br />
+                                <div className="textFieldDiv">
+                                    <TextField
+                                        className={this.props.classes.inputs}
+                                        value={this.state.collectBooks}
+                                        type="number"
+                                        label="Books Collected"
+                                        margin="normal"
+                                        onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
+                                    />
 
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    value={this.state.collectBooks}
-                                    type="number"
-                                    label="Books Collected"
-                                    margin="normal"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
-                                />
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    value={this.state.distBooks}
-                                    type="number"
-                                    label="Books Distributed"
-                                    margin="normal"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
-                                />
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    value={this.state.numOfKids}
-                                    type="number"
-                                    label="Number of Children"
-                                    margin="normal"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
-                                />
-                                <TextField
-                                    className={this.props.classes.inputs}
-                                    value={this.state.numEslAdults}
-                                    type="number"
-                                    label="Number of ESL Adults"
-                                    margin="normal"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'numEslAdults')}
-                                />
-                                <TextField
-                                    className={this.props.classes.notes}
-                                    value={this.state.notes}
-                                    type="text"
-                                    margin="normal"
-                                    label="Notes"
-                                    onChange={(event) => this.handleInputChangeFor(event, 'notes')}
-                                />
+                                    <TextField
+                                        className={this.props.classes.inputs}
+                                        value={this.state.distBooks}
+                                        type="number"
+                                        label="Books Distributed"
+                                        margin="normal"
+                                        onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
+                                    />
+
+                                    <TextField
+                                        className={this.props.classes.inputs}
+                                        value={this.state.numOfKids}
+                                        type="number"
+                                        label="Number of Children"
+                                        margin="normal"
+                                        onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
+                                    />
+
+                                    <TextField
+                                        className={this.props.classes.notes}
+                                        alignItems="center"
+                                        value={this.state.notes}
+                                        type="text"
+                                        label="Notes"
+                                        onChange={(event) => this.handleInputChangeFor(event, 'notes')}
+                                    />
+                                </div>
 
                                 <Button
                                     className={this.props.classes.button}
                                     color="primary">
                                     Cancel
                                 </Button>
-
                                 <Button
                                     className={this.props.classes.button}
                                     onClick={this.addData} color="primary">
                                     Submit
                                 </Button>
-
                             </span>
                         </Paper>
                     </Grid>
-                    <Button onClick={() => this.props.history.push('/home')}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => this.props.history.push('/home')}>
                         Home</Button>
                 </Grid>
             </>
         )
     }
 }
-
-
 
 const mapStateToProps = (reduxStore) => ({
     reduxStore
