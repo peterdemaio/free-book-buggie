@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import ContactsListItem from '../ContactsListItem/ContactsListItem'
 import { withStyles, Grid } from '@material-ui/core';
-import axios from 'axios'
 import ContactListNav from './ContactListNav';
+import BackgroundImage from './HeaderBlueLight.png'
+
 
 const styles = {
+    background: {
+        backgroundImage: `url(${BackgroundImage})`,
+        // backgroundSize: 'covecontainr',
+        backgroundRepeat: 'repeat',
+        paddingLeft: '0',
+        paddingRight: '0',
+        width: '100%'
+    },
     searchBar: {
         paddingTop: '50px',
-        // maxWidth: '600px'
         textSize: '36px'
     },
     input: {
@@ -24,60 +32,61 @@ const styles = {
 class ContactsListPage extends React.Component {
 
     state = {
-        contacts: [],
-        filteredContacts: []
+        searchQuery: "",
     }
     async componentDidMount() {
-        axios.get('/api/contacts')
-        .then((response) => {
-            this.setState({
-            contacts: response.data,
-            filteredContacts: response.data
+        this.props.dispatch({
+            type: 'GET_CONTACTS'
         })
-    })
     }
 
     onInputChange = (event) => {
-        let searchQuery = event.target.value.toLowerCase();
-        this.setState({
-            filteredContacts: this.state.contacts.filter(
-                contact => contact.contact_name.toLowerCase().includes(searchQuery) ||
-                contact.org_name.toLowerCase().includes(searchQuery)
-            )
-        })
+        this.setState({ searchQuery: event.target.value.toLowerCase() })
     }
-
+   
     render() {
+        let searchQuery = this.state.searchQuery
+        const filteredList = this.props.reduxStore.contacts.filter(
+            contact => contact.org_name.toLowerCase().includes(searchQuery) ||
+                contact.contact_name.toLowerCase().includes(searchQuery)
+        )
+
+        let displayList
+
+        if (filteredList.length === 0) {
+            displayList = ('No results')
+        } else {
+            displayList = (
+                filteredList.map(contact =>
+                    <ContactsListItem key={contact.id} contact={contact} />
+                )
+            )
+        }
         return (
-            <>
-            <div>   
-             <ContactListNav/>
-            </div>
             <div>
-                <Grid container
-                    justify="center"
-                    alignItems="center"
-                    className={this.props.classes.searchBar}>
-                    <span>Search for a contact by name or organization: </span><br></br>
-                    <Input
-                        className={this.props.classes.input}
-                        placeholder="search here "
-                        onChange={this.onInputChange}>
-                    </Input>
-                </Grid>
-                <Grid container
-                    className={this.props.classes.list}
-                    direction="column"
-                    justify="space-evenly"
-                    alignItems="center">
-                    {this.state.filteredContacts.map(contact =>
-                        <ContactsListItem key={contact.id} contact={contact} />
-                    )}
-                    <br/>
-                    <br/>
-                </Grid>
+                <ContactListNav />
+                <div className={this.props.classes.background}>
+                    <Grid container
+                        justify="center"
+                        alignItems="center"
+                        className={this.props.classes.searchBar}>
+                        <span>Search for a contact by name or organization: </span><br></br>
+                        <Input
+                            className={this.props.classes.input}
+                            placeholder="search here "
+                            onChange={this.onInputChange}
+                            value={this.state.searchQuery}>
+                        </Input>
+                    </Grid>
+                    <Grid container
+                        className={this.props.classes.list}
+                        direction="column"
+                        justify="space-evenly"
+                        alignItems="center">
+                        {displayList}
+                    </Grid>
+                </div>
             </div>
-            </>
         )
     }
 }

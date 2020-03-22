@@ -3,10 +3,7 @@ import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import organizations from './organizations';
-import updateOrganizations from './updateOrganizations';
 import contacts from './contacts';
-import updateContacts from './updateContacts';
-import demographicsBoolean from './demographicsBooleanReducer';
 import chartData from './chartDataReducer';
 import chartDataExcel from './chartDataExcelReducer';
 import counties from './counties'
@@ -24,10 +21,7 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   organizations,
-  updateOrganizations,
   contacts,
-  updateContacts,
-  demographicsBoolean,
   chartData,
   counties,
   bookCountReducer,
