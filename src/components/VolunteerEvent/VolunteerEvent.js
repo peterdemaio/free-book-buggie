@@ -178,6 +178,7 @@ class volunteerEvent extends Component {
                                         margin="normal"
                                         onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
                                     />
+                                    <br />
 
                                     <TextField
                                         className={this.props.classes.inputs}
@@ -187,7 +188,7 @@ class volunteerEvent extends Component {
                                         margin="normal"
                                         onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
                                     />
-
+                                    <br />
                                     <TextField
                                         className={this.props.classes.inputs}
                                         value={this.state.numOfKids}
@@ -196,6 +197,7 @@ class volunteerEvent extends Component {
                                         margin="normal"
                                         onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                                     />
+                                    <br />
 
                                     <TextField
                                         className={this.props.classes.notes}
