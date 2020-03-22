@@ -1,0 +1,104 @@
+.nav-title {
+    font-size: 40px;
+    font-weight: 740;
+    display: inline-block;
+    color: #ffffff;
+    padding-right: 30px;
+    /* align-items: flex-start; */
+    text-align: center;
+    font-family: "Museo Slab";
+    font-weight: 900;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 8px;
+    padding-left: 22px;
+    width: 33%;
+    /* background-color: #14771B; */
+    /* opacity: .80; */
+
+}
+
+.buggie-logo{
+  padding-top: 15px;
+}
+
+.nav-title-div {
+  text-align: center;
+  background-size: 325%;
+  scroll-padding-top: 10%;
+  
+}
+
+.nav-new-event {
+  overflow: hidden;
+  /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
+  background-image: url('./HeaderPink.png');
+  background-size: cover;
+  /* justify-content: flex-end; */
+  align-items: flex-end;
+  /* opacity: .75; */
+  max-height: 200px;
+}
+
+.nav-new-event::after {
+  content: "";
+  background: url('./HeaderPink.png');
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-repeat: round;
+  background-size: cover;
+  width: 100%; 
+  height: 140%;
+}
+
+.nav-link-new-event {
+  float: left;
+  color: #ffffff;
+  text-align: center;
+  padding: 24px 10px;
+  text-decoration: none;
+  font-size: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border:none;
+  cursor: pointer;
+  outline:0;
+  transition: all .18s ease-in-out;
+}
+
+.nav-link-new-event:hover {
+  border-radius: 15px;
+  background-color:rgb(223, 144, 169);
+  opacity: 78%;
+  transform: scale(1.075);
+  /* min-width: 80px; */
+  
+}
+
+.nav-link:hover {
+  background-color: rgb(29, 114, 35);
+}
+
+.nav-right {
+  padding-top: 30px;
+  float: right;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 15px;
+}
+
+.logo-image {
+    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
+    /* z-index: -1; */
+    /* display: inline-flexbox; */
+    float: left;
+    height: 120px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+    
+  }
