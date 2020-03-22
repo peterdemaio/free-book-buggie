@@ -38,27 +38,9 @@
   max-height: 200px;
 }
 
-.nav-org-list::after {
-  content: "";
-  background-image: url("./HeaderPurple.png");
-  opacity: 0.2;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-  background-repeat: round;
-  background-size: cover;
-  min-height: 100%;
-  width: 100%; 
-  height: 140%;
-}
-
 .organization-list-style {
   float: left;
   color: #ffffff;
-  /* background-color:#14771B; */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;

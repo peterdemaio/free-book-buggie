@@ -25,17 +25,21 @@ import {
 
 const styles = theme => ({
     card: {
+        opacity: '1.0',
         justify: 'flex-start',
         minWidth: '600px',
         maxWidth: '600px',
         padding: '10px',
         margin: '12px',
         textAlign: 'center',
+        fontFamily: 'Museo Slab',
+
     },
     header: {
         color: '#ffffff',
         background: 'linear-gradient(45deg, #40C445 30%, #14771B 90%)',
-        fontSize: '36px'
+        fontSize: '36px',
+        opacity: '1'
     },
     underline: {
         borderBottom: '1px solid red',
@@ -119,7 +123,7 @@ class OrganizationsListPageItem extends React.Component {
 
 
     menuOpen = (event) => {
-        console.log(`clicked the open button for ${this.props.org.name}!`)
+        console.log(`clicked the open button for ${this.props.org.org_name}!`)
         this.setState({ expanded: !this.state.expanded })
     }
 
