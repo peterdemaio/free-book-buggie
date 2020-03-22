@@ -5,6 +5,7 @@
 body {
     font-family: 'Museo Slab', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-attachment: fixed;
 }
 
 .alert {
@@ -205,6 +206,8 @@ input {
     display: inline-block;
     background-color: #f8f8f8;
     opacity: 86%;
+}
 
-
+.registrationDiv {
+  background-color: white;
 }

@@ -41,6 +41,10 @@ const styles = theme => ({
         width: '250px',
         padding: '10px'
     },
+    shortInputs: {
+        width: '50px',
+        padding: '10px'
+    },
     submitButton: {
         justify: 'center',
         alignItems: 'center'
@@ -66,17 +70,18 @@ const styles = theme => ({
         // margin: '10px',
     },
     dropdown: {
-        paddingLeft: '25px'
+        paddingLeft: '25px',
+        width: '200px'
 
     },
     dropdownMenu: {
         padding: '25px',
-        width: '250px',
+        width: '200px',
         paddingLeft: '25px',
         margin: '10px'
     },
     dropdownItem: {
-        width: '250px',
+        width: '200px',
         paddingLeft: '25px'
     }
 });
@@ -264,21 +269,20 @@ class NewOrganization extends Component {
                                     onChange={(event) => this.handleChangeFor(event, 'city')} />
                                 <span>{' '}</span>
                                 <TextField
-                                    className={this.props.classes.inputs}
-                                    value={org.state}
-                                    type="text"
-                                    label="State"
-                                    onChange={(event) => this.handleChangeFor(event, 'state')} />
-                            </span>
-                            <br></br>
-                            <span className={this.props.classes.line}>
-                                <TextField
-                                    className={this.props.classes.inputs}
+                                    className={this.props.classes.shortInputs}
                                     value={org.zip}
                                     type="text"
                                     label="Zip"
                                     onChange={(event) => this.handleChangeFor(event, 'zip')} />
+                                <TextField
+                                    className={this.props.classes.shortInputs}
+                                    value={org.state}
+                                    type="text"
+                                    label="State"
+                                    onChange={(event) => this.handleChangeFor(event, 'state')} />
+                                
                             </span>
+                            <br></br>
                             <br></br>
                             <span className={this.props.classes.dropdown}>County:  </span>
                             <FormControl >
@@ -294,7 +298,7 @@ class NewOrganization extends Component {
                             </FormControl>
                             <br/>
                             <br/>
-                            <h3 className={this.props.classes.question}>If you have demographics information please record it below.</h3>
+                            <div className={this.props.classes.question}>If you have demographics information please record it below.</div>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
                                 direction="column"
