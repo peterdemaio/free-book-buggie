@@ -211,8 +211,8 @@ VALUES ('HeadStart Family Fun Night', 3, 5, 6, '2019-01-01', null, null, 0, 200,
 ('End of School Summer Reading - Gideon Pond Elemetary', 26, null, null, '2019-05-05', null, null, 0, 1050, 525, 0),
 ('End of School Summer Reading - Harriet Bishop Elementary', 26, null, null, '2019-05-05', null, null, 0, 742, 371, 0),
 ('End of School Summer Reading - MW Savage Elementary', 26, null, null, '2019-05-05', null, null, 0, 700, 350, 0),
-('End of School Summer Reading - Rahn Elementary', 26, null, null, '2019-05-05', null, null, 0, 736, 368, 0),
-('End of School Summer Reading - Sioux Trail Elementary', 26, null, null, '2019-05-05', null, null, 0, 700, 350, 0),
+('End of School Summer Reading - Rahn Elementary', 26, null, null, '2019-06-05', null, null, 0, 736, 368, 0),
+('End of School Summer Reading - Sioux Trail Elementary', 26, null, null, '2019-06-05', null, null, 0, 700, 350, 0),
 ('End of School Summer Reading - Sioux Trail Elementary', 26, null, null, '2019-05-10', null, null, 0, 700, 350, 0),
 ('End of School Summer Reading - Vista View Elementary', 26, null, null, '2019-05-05', null, null, 0, 650, 325, 0),
 ('Clifford Day', 19, 16, null, '2019-02-01', null, null, 0, 150, 30, 0),
@@ -233,7 +233,32 @@ CREATE TABLE "demographics_age" (
 );
 
 INSERT INTO "demographics_age" ("organizations_id", "0_3", "4_7", "8_12", "13_18")
-
+VALUES(1, 0, 75, 25, 0),
+(2, 25, 75, 0, 0),
+(3, 25, 50, 25, 0),
+(4, 50, 50, 0, 0),
+(5, 25, 25, 25, 25),
+(6, 0, 75, 25, 0),
+(7, 25, 75, 0, 0),
+(8, 25, 50, 25, 0),
+(9, 50, 50, 0, 0),
+(10, 25, 25, 25, 25),
+(11, 0, 75, 25, 0),
+(12, 25, 75, 0, 0),
+(13, 25, 50, 25, 0),
+(14, 50, 50, 0, 0),
+(15, 25, 25, 25, 25),
+(16, 0, 75, 25, 0),
+(17, 50, 50, 0, 0),
+(18, 50, 50, 0, 0),
+(19, 50, 50, 0, 0),
+(20, 25, 25, 25, 25),
+(21, 0, 75, 25, 0),
+(22, 25, 75, 0, 0),
+(23, 25, 50, 25, 0),
+(24, 50, 50, 0, 0),
+(25, 25, 25, 25, 25),
+(25, 25, 25, 25, 25);
 
 CREATE TABLE "demographics_race" (
     "id" serial PRIMARY KEY,
@@ -246,14 +271,66 @@ CREATE TABLE "demographics_race" (
 );
 
 INSERT INTO "demographics_race" ("organizations_id", "white", "black_or_african_american", "american_indian_or_alaska_native", "asian", "native_hawaiian_or_pacific_islander")
+VALUES(1, 75, 25, 0, 0, 0),
+(2, 90, 10, 0, 0, 0),
+(3, 10, 80, 0, 10, 0),
+(4, 40, 40, 0, 20, 0),
+(5, 20, 30, 10, 30, 10),
+(6, 75, 25, 0, 0, 0),
+(7, 90, 10, 0, 0, 0),
+(8, 10, 80, 0, 10, 0),
+(9, 40, 40, 0, 20, 0),
+(10, 20, 30, 10, 30, 10),
+(11, 75, 25, 0, 0, 0),
+(12, 90, 10, 0, 0, 0),
+(13, 10, 80, 0, 10, 0),
+(14, 40, 40, 0, 20, 0),
+(15, 20, 30, 10, 30, 10),
+(16, 75, 25, 0, 0, 0),
+(17, 90, 10, 0, 0, 0),
+(18, 70, 10, 5, 10, 5),
+(19, 40, 40, 0, 20, 0),
+(20, 20, 30, 10, 30, 10),
+(21, 20, 30, 10, 30, 10),
+(22, 75, 25, 0, 0, 0),
+(23, 90, 10, 0, 0, 0),
+(24, 10, 80, 0, 10, 0),
+(25, 40, 40, 0, 20, 0),
+(26, 20, 30, 10, 30, 10);
+
 
 CREATE TABLE "demographics_poverty" (
     "id" serial PRIMARY KEY,
     "organizations_id" integer REFERENCES organizations,
     "percentage_NSLP" integer
 );
-
 INSERT INTO "demographics_poverty" ("organizations_id", "percentage_NSLP")
+VALUES(1, 75),
+(2, 50),
+(3, 15),
+(4, 100),
+(5, 42),
+(6, 75),
+(7, 50),
+(8, 74),
+(9, 90),
+(10, 42),
+(11, 75),
+(12, 50),
+(13, 15),
+(14, 100),
+(15, 42),
+(16, 75),
+(17, 20),
+(18, 20),
+(19, 100),
+(20, 42),
+(21, 42),
+(22, 75),
+(23, 50),
+(24, 40),
+(25, 100),
+(26, 42);
 
 
 CREATE TABLE  "user"(
@@ -264,4 +341,4 @@ CREATE TABLE  "user"(
 );
 
 INSERT INTO "user" ("username", "password", "admin")
-VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE)
+VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE);
