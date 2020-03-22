@@ -126,7 +126,7 @@ class LoginPage extends Component {
         </center> */}
           
         </div>
-        
+        <br/>
       </>
     );
   }

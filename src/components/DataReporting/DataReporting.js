@@ -132,7 +132,7 @@ class DataReporting extends Component {
                 <>
                 <DataReportingNav/>
                     <div>
-                        <h1 className="data-reporting-styles" >Craft your story</h1>
+                        <h1 className="data-reporting-styles" >Craft Your Story</h1>
                     </div>
                     <div className='chart-dashboard'>
                         <div className='chart-input-container'>

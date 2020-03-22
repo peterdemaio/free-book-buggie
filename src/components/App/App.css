@@ -5,6 +5,7 @@
 body {
     font-family: 'Museo Slab', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-attachment: fixed;
 }
 
 .alert {
