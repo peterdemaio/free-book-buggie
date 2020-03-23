@@ -104,6 +104,7 @@ input {
     display: block;
     display: inline-block;
     background-color:#14771B;
+    margin-left: 25px;
 
 }
   /* styling for up-counter component on login page */
