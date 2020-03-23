@@ -1,24 +1,23 @@
 .nav-title {
-    font-size: 40px;
-    font-weight: 740;
-    display: inline-block;
-    color: #ffffff;
-    padding-right: 30px;
-    align-items: flex-start;
-    text-align: center;
-    font-family: "Museo Slab";
-    font-weight: 900;
-    border-style: solid;
-    border-width: 5px;
-    border-radius: 8px;
-    padding-left: 22px;
-    width: 33%;
-    /* background-color: #14771B; */
-    /* opacity: .80; */
-
+  font-size: 40px;
+  font-weight: 740;
+  display: inline-block;
+  color: #ffffff;
+  padding-right: 30px;
+  align-items: flex-start;
+  text-align: center;
+  font-family: "Museo Slab";
+  font-weight: 900;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 8px;
+  padding-left: 22px;
+  width: 33%;
+  /* background-color: #14771B; */
+  /* opacity: .80; */
 }
 
-.buggie-logo{
+.buggie-logo {
   padding-top: 15px;
 }
 
@@ -26,13 +25,12 @@
   text-align: center;
   background-size: 325%;
   scroll-padding-top: 10%;
-  
 }
 
 .nav-home-page {
   overflow: hidden;
   /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
-  background-image: url('./HeaderBlue.png');
+  background-image: url("./HeaderBlue.png");
   background-size: cover;
   justify-content: flex-end;
   align-items: flex-end;
@@ -50,12 +48,12 @@
   font-size: 20px;
   justify-content: flex-end;
   align-items: flex-end;
-  transition: all .18s ease-in-out;
+  transition: all 0.18s ease-in-out;
   /* these last two make the logout button in
   the nav bar look like another link */
-  border:none;
+  border: none;
   cursor: pointer;
-  outline:0;
+  outline: 0;
 }
 
 .nav-home-page-style:hover {
@@ -64,7 +62,6 @@
   opacity: 78%;
   transform: scale(1.075);
 }
-
 
 .nav-right {
   padding-top: 30px;
@@ -75,51 +72,48 @@
 }
 
 .logo-image {
-    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
-    /* z-index: -1; */
-    /* display: inline-flexbox; */
-    float: left;
-    height: 120px;
-    padding-left: 25px;
-    padding-bottom: 20px;
-    
-  }
+  /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
+  /* z-index: -1; */
+  /* display: inline-flexbox; */
+  float: left;
+  height: 120px;
+  padding-left: 25px;
+  padding-bottom: 20px;
+}
 
-  .welcome{
-    text-align: center;
-    font-family: "Museo Slab";
-    color: #14771B;
-    size: 18px;
-    top: -100%;
-    left: 100%;
-    position: fixed; 
-    width: 800px;
-    height: 200px;
-    z-index: 30;
-    top: 50%;
-    left: 50%;
-    margin: 200px 0 0 320px;
-    border: 8px solid, #3CB64A;
-    font-size: 120%;
-    height:100px;
-    width:100px;
-    display: inline-block;
-  }
+.welcome {
+  text-align: center;
+  font-family: "Museo Slab";
+  color: #14771b;
+  size: 18px;
+  top: -100%;
+  left: 100%;
+  position: fixed;
+  width: 800px;
+  height: 200px;
+  z-index: 30;
+  top: 50%;
+  left: 50%;
+  margin: 200px 0 0 320px;
+  border: 8px solid, #3cb64a;
+  font-size: 120%;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+}
 
-  .welcome-message-div {
-    text-align: center;
-    /* float: left; */
-    margin: 0px 0 0 0px;
-    font-size: 20px;
-    /* display: inline-block; */
-    font-family: "Museo Slab";
-    color: #14771B;
-    padding-top: 30px;
+.welcome-message-div {
+  text-align: center;
+  /* float: left; */
+  margin: 0px 0 0 0px;
+  font-size: 20px;
+  /* display: inline-block; */
+  font-family: "Museo Slab";
+  color: #14771b;
+  padding-top: 30px;
+}
 
-  }
-
-  .volunteer-button-div {
-text-align: center;
-padding-top: 75px;
-
-  }
+.volunteer-button-div {
+  text-align: center;
+  padding-top: 75px;
+}

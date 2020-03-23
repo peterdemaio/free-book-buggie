@@ -18,20 +18,30 @@ const UserPage = (props) => (
   <>
     <HomePageNav />
 
-  <div className="volunteer-button-div">
-    {/* <h3>Register a new volunteer here: </h3> */}
-  <center >
-    <button
-      
-      className="login-button"
-      type="button"
-      // onClick={() => {props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-      onClick={() => props.history.push('/registerPage')}
-    >
-      Volunteer Registration
+    <div className="volunteer-button-div">
+      {/* <h3>Register a new volunteer here: </h3> */}
+      <center >
+        <button
+
+          className="login-button"
+          type="button"
+          // onClick={() => {props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+          onClick={() => props.history.push('/registerPage')}
+        >
+          Volunteer Registration
           </button>
-  </center>
-  </div>
+       
+        <button
+
+          className="login-button"
+          type="button"
+          
+          onClick={() => props.history.push('/volunteerEvent')}
+        >
+          Mobile Recording
+          </button>
+      </center>
+    </div>
 
     <div className="welcome-message-div">
       <h1 id="welcome" >
@@ -45,7 +55,7 @@ const UserPage = (props) => (
       {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
       {/* <LogOutButton className="log-in" /> */}
     </div>
-    <Footer/>
+    <Footer />
   </>
 );
 
