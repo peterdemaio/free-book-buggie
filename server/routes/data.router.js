@@ -31,8 +31,8 @@ router.post('/', (req, res) => {
     switch (req.body.xAxis) {
         case 'Events':
             queryText = `SELECT "event_name", SUM("${sumColumn}") FROM "events"
-                         WHERE "date" > '${req.body.startDate}'
-                         AND "date" < '${req.body.endDate}'
+                         WHERE "date" >= '${req.body.startDate}'
+                         AND "date" <= '${req.body.endDate}'
                          AND "${sumColumn}" > 0
                          GROUP BY "event_name";`;
             pool.query(queryText)
@@ -57,8 +57,8 @@ router.post('/', (req, res) => {
             if (req.body.timeUnit === 'Month') {
                 // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") FROM "events"
-                            WHERE "date" > '${req.body.startDate}'
-                            AND "date" < '${req.body.endDate}'
+                            WHERE "date" >= '${req.body.startDate}'
+                            AND "date" <= '${req.body.endDate}'
                             AND "${sumColumn}" > 0
                             GROUP BY "monthYear";`;
                 pool.query(queryText)
@@ -83,8 +83,8 @@ router.post('/', (req, res) => {
                     })
             } else if (req.body.timeUnit === 'Year') {
                 queryText = `SELECT DATE_PART('year', "date") AS "year", SUM("${sumColumn}") FROM "events"
-                            WHERE "date" > '${req.body.startDate}'
-                            AND "date" < '${req.body.endDate}'
+                            WHERE "date" >= '${req.body.startDate}'
+                            AND "date" <= '${req.body.endDate}'
                             AND "${sumColumn}" > 0
                             GROUP BY "year";`;
                 pool.query(queryText)
@@ -111,8 +111,8 @@ router.post('/', (req, res) => {
         case 'Organizations':
             queryText = `SELECT "org_name", SUM("${sumColumn}") FROM "events"
                              JOIN "organizations" ON "events".organizations_id = "organizations".id
-                             WHERE "date" > '${req.body.startDate}'
-                             AND "date" < '${req.body.endDate}'
+                             WHERE "date" >= '${req.body.startDate}'
+                             AND "date" <= '${req.body.endDate}'
                              AND "${sumColumn}" > 0
                              GROUP BY "org_name";`;
             pool.query(queryText)
@@ -139,8 +139,8 @@ router.post('/', (req, res) => {
                     queryText = `SELECT * FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
                     JOIN "demographics_age" ON "organizations".id = "demographics_age".organizations_id
-                    WHERE "date" > '${req.body.startDate}'
-                    AND "date" < '${req.body.endDate}';`;
+                    WHERE "date" >= '${req.body.startDate}'
+                    AND "date" <= '${req.body.endDate}';`;
                     pool.query(queryText)
                         .then((response) => {
                             console.log('Demographics/age query response.rows:', response.rows)
@@ -201,8 +201,8 @@ router.post('/', (req, res) => {
                     queryText = `SELECT CONCAT(DATE_PART('month', "date"), ' ', DATE_PART('year', "date")) AS "monthYear", SUM("${sumColumn}") as "sum", AVG("demographics_poverty"."percentage_NSLP") as "NSLP"  FROM "events"
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
                     JOIN "demographics_poverty" ON "demographics_poverty".organizations_id = "organizations".id
-                    WHERE "date" > '${req.body.startDate}'
-                    AND "date" < '${req.body.endDate}'
+                    WHERE "date" >= '${req.body.startDate}'
+                    AND "date" <= '${req.body.endDate}'
                     GROUP BY "monthYear";`;
                     pool.query(queryText)
                     .then((response) => {
@@ -231,8 +231,8 @@ router.post('/', (req, res) => {
                     JOIN "organizations" ON "events".organizations_id = "organizations".id
                     JOIN "demographics_race" ON "organizations".id =
                     "demographics_race".organizations_id
-                    WHERE "date" > '${req.body.startDate}'
-                    AND "date" < '${req.body.endDate}'
+                    WHERE "date" >= '${req.body.startDate}'
+                    AND "date" <= '${req.body.endDate}'
                     AND "${sumColumn}" > 0;`;
                     pool.query(queryText)
                         .then((response) => {
