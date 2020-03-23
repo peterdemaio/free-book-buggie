@@ -30,7 +30,7 @@ class BookCountUp extends Component {
                 >
                     <CountUp
                         start={0}
-                        end={Number(this.props.reduxStore.bookCountReducer[0].sum)}
+                        end={Number(this.props.reduxStore.bookCountReducer[1].sum)}
                         duration={1.5}
                         delay={0}
                         separator=","
@@ -58,7 +58,7 @@ class BookCountUp extends Component {
                     <br />
                     <CountUp
                         start={0}
-                        end={Number(this.props.reduxStore.bookCountReducer[1].sum)}
+                        end={Number(this.props.reduxStore.bookCountReducer[0].sum)}
                         duration={1.75}
                         delay={0}
                         separator=","
