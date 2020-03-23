@@ -189,7 +189,8 @@ CREATE TABLE "events" (
 );
 
 INSERT INTO "events" ("event_name", "organizations_id", "contacts_id", "secondary_contacts_id",  "date", "start_time", "end_time", "books_in", "books_out", "number_of_children", "number_of_adult_esl_learners")
-VALUES ('HeadStart Family Fun Night', 3, 5, 6, '2019-01-01', null, null, 833, 1675, 833, 0),
+VALUES ('miscellaneous', null, null, null, null, null, null, 0, 0, 0, 0),
+('HeadStart Family Fun Night', 3, 5, 6, '2019-01-01', null, null, 833, 1675, 833, 0),
 ('LGBTQIA Family Night', 3, 5, 6, '2019-02-01', null, null, 633, 2075, 866, 0),
 ('MPLS ECFE Family Night', 3, 5, 6, '2019-03-01', null, null, 833, 1075, 633, 0),
 ('YWCA of MPLS Family Night', 3, 5, 6, '2019-04-01', null, null, 1033, 2675, 1033, 0),
