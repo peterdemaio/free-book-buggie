@@ -207,6 +207,7 @@ class DataReporting extends Component {
                             data={this.props.reduxStore.chartData}
                             width={1000}
                             height={500}
+                            backgroundColor='white'
                             options={{
                                 title:{
                                     display: true,

@@ -135,7 +135,7 @@ VALUES( '360 Communities','https://360communities.org/wp-content/uploads/2019/04
 ('Brooklyn Center Police', null, null, 'municipal', '6645', 'Humboldt Ave N', null, 'Brooklyn Center', 'MN', '27', '55430', null ),
 ('Bryn Mawr Presbyterian Church', null, null, 'religious', '420', 'Cedar Lake RD S', null, 'Minneapolis', 'MN', '27', '55405', 'St. Annes Place'),
 ('Good in the Hood', null, null, 'religious', '1630', 'E 90th ST', null, 'Bloomington', 'MN', '27', '55425', null),
-('ISD191', null, null, 'educational', null, null, null, null, 'MN', 19, null, null)
+('ISD191', null, null, 'educational', null, null, null, null, 'MN', '19', null, null);
 
 CREATE TABLE "contacts" (
 	"id" serial PRIMARY KEY NOT NULL,
@@ -167,7 +167,7 @@ VALUES ('Mycie Tew', null, 1, null, null, 'Mtew@360communities.org', null),
 ('Jorge Bardales', null, 19, null, null, 'jbardales@neighb.org', null),
 ('Sally Newbury', 'Volunteer Engagement Coordinator', 20, '651-767-0324', 'office', 'snewbury@npimn.org', null),
 ('Kendra Peterson', 'Director, Literacy', 21, '612-638-1000', 'office', 'kendrapeterson@urbanventures.org', null),
-('Jamie Morrison', 'Director of Operations', 25, null, null, 'info@goodinthehood.org', null)
+('Jamie Morrison', 'Director of Operations', 25, null, null, 'info@goodinthehood.org', null);
 
 
 CREATE TABLE "events" (
