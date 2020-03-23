@@ -33,6 +33,7 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
+        fontSize: '20px'
     },
     inputs: {
         width: '250px',
@@ -41,7 +42,7 @@ const styles = theme => ({
         backgroundColor: 'white',
         alignItems: 'center',
         textAlign: 'center',
-        fontSize: '400px'
+        fontSize: '400px',
     },
     dropdown: {
         width: '250px',
@@ -62,8 +63,11 @@ const styles = theme => ({
         // padding: '10px',
         margin: '20px',
         // marginLeft: '140px',
-        alignItems: 'right'
-    }
+        justify: 'center'
+    },
+    resize: {
+        fontSize: '500'
+    },
 });
 
 class volunteerEvent extends Component {
@@ -106,7 +110,22 @@ class volunteerEvent extends Component {
             notes: '',
         })
         alert('Books Successfully Added!')
-    }
+    };
+
+    clearFields = (event) => {
+        // event.preventDefault()
+        this.setState({
+            event_name: '',
+            organizations_id: 0,
+            date: '',
+            contacts_id: 0,
+            collectBooks: 0,
+            distBooks: 0,
+            numOfKids: 0,
+            notes: '',
+        })
+        alert('Inputs Cleared!')
+    };
 
     handleInputChangeFor = (event, propertyName) => {
         console.log('testing handleInputChangeFor')
@@ -164,7 +183,10 @@ class volunteerEvent extends Component {
                     align="center">Add Books By Event</h1>
 
 
-                <Paper elevation={5}>
+                <Paper
+                    elevation={5}
+                    disableTypography={true}
+                >
                     <span className={this.props.classes.line}>
                         <FormControl className={this.props.classes.inputs} >
                             <InputLabel>Event Name</InputLabel>
@@ -185,6 +207,11 @@ class volunteerEvent extends Component {
                                 label="Books Collected"
                                 margin="normal"
                                 onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
+                                InputProps={{
+                                    classes: {
+                                        input: styles.resize,
+                                    },
+                                }}
                             />
                             {/* <br /> */}
 
@@ -218,21 +245,24 @@ class volunteerEvent extends Component {
 
                         <Button
                             className={this.props.classes.button}
+                            onClick={this.clearFields}
                             color="primary">
                             Cancel
                                 </Button>
                         <Button
                             className={this.props.classes.button}
-                            onClick={this.addData} color="primary">
+                            onClick={this.addData}
+                            color="primary">
                             Submit
                                 </Button>
                     </span>
                 </Paper>
                 {/* </Grid> */}
                 <Button
-                    className={this.props.classes.button} 
+                    className={this.props.classes.button}
                     variant="contained"
                     color="primary"
+                    // align="center"
                     onClick={() => this.props.history.push('/home')}>
                     Home</Button>
                 {/* </Grid> */}
