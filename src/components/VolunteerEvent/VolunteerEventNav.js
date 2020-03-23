@@ -8,9 +8,7 @@ const NewEventNav = (props) => (
     <div className="nav-new-event">
 
         <div className="nav-title-div">
-            {/* <Link to="/home"> */}
-
-            {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
+            
             {/* </Link> */}
             <div className="buggie-logo">
                 <img
@@ -27,31 +25,7 @@ const NewEventNav = (props) => (
         and call this link 'Login / Register' if they are not */}
                 {props.user.id ? 'Home' : 'Login / Register'}
             </Link>
-            {/* Show the link to the info page and the logout button if the user is logged in */}
-            {/* {props.user.id && (
-                <>
-                    <Link className="nav-link-new-event" to="/event">
-                        New Event
-          </Link>
-                    <Link className="nav-link-new-event" to="/DataReporting">
-                        Data Reporting
-          </Link>
-                    <Link className="nav-link-new-event" to="/OrganizationsListPage">
-                        Organization List
-          </Link>
-                    <Link className="nav-link-new-event" to="/contactsListPage">
-                        Contact List
-          </Link>
-                    <Link className="nav-link-new-event" to="/neworganization">
-                        Add New Org
-          </Link>
-                    <LogOutButton className="nav-link" />
-                </>
-            )} */}
-            {/* Always show this link since the about page is not protected */}
-            {/* <Link className="nav-link" to="/about">
-                About
-      </Link> */}
+            
         </div>
     </div>
 );

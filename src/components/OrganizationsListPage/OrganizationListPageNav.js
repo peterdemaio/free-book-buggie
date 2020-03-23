@@ -30,9 +30,7 @@ const OrganizationListPageNav = (props) => (
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {props.user.id && (
                 <>
-                    <Link className="organization-list-style" to="/event">
-                        New Event
-          </Link>
+
                     <Link className="organization-list-style" to="/DataReporting">
                         Data Reporting
           </Link>
@@ -41,6 +39,9 @@ const OrganizationListPageNav = (props) => (
           </Link>
                     <Link className="organization-list-style" to="/contactsListPage">
                         Contact List
+          </Link>
+                    <Link className="organization-list-style" to="/event">
+                        New Event
           </Link>
                     <Link className="organization-list-style" to="/neworganization">
                         Add New Org

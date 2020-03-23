@@ -30,21 +30,25 @@ const RegisterPageNav = (props) => (
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {props.user.id && (
                 <>
-                    <Link className="nav-link-register" to="/event">
-                        New Event
-          </Link>
+
                     <Link className="nav-link-register" to="/DataReporting">
                         Data Reporting
-          </Link>
-                    <Link className="nav-link-register" to="/neworganization">
-                        Add New Org
-          </Link>
-                    <Link className="nav-link-register" to="/contactsListPage">
-                        Contacts List
           </Link>
                     <Link className="nav-link-register" to="/OrganizationsListPage">
                         Organizations List
           </Link>
+                    <Link className="nav-link-register" to="/contactsListPage">
+                        Contacts List
+          </Link>
+          <Link className="nav-link-register" to="/event">
+                        New Event
+          </Link>
+                    <Link className="nav-link-register" to="/neworganization">
+                        Add New Org
+          </Link>
+
+                    
+
                     <LogOutButton className="nav-link" />
                 </>
             )}

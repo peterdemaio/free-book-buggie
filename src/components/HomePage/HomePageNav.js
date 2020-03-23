@@ -30,9 +30,7 @@ const HomePageNav = (props) => (
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {props.user.id && (
                 <>
-                    <Link className="nav-home-page-style" to="/event">
-                        New Event
-                    </Link>
+
                     <Link className="nav-home-page-style" to="/DataReporting">
                         Data Reporting
                     </Link>
@@ -41,6 +39,9 @@ const HomePageNav = (props) => (
                     </Link>
                     <Link className="nav-home-page-style" to="/contactsListPage">
                         Contact List
+                    </Link>
+                    <Link className="nav-home-page-style" to="/event">
+                        New Event
                     </Link>
                     <Link className="nav-home-page-style" to="/neworganization">
                         Add New Org
