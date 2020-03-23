@@ -137,19 +137,51 @@ class volunteerEvent extends Component {
     };
 
     handleEventChange = (event) => {
+        console.log('current date:', this.getCurrentDate())
+        const currentDate = this.getCurrentDate()
         console.log('event.target.value:', event.target.value)
         if (event.target.value === 'select') {
             console.log('in null case')
             return
+        } else if (event.target.value == 0) {
+            console.log('in miscellaneous case')
+            this.setState({
+                event_name: this.props.reduxStore.events[event.target.value].event_name,
+                organizations_id: this.props.reduxStore.events[event.target.value].organizations_id,
+                date: currentDate,
+                contacts_id: this.props.reduxStore.events[event.target.value].contacts_id,
+                start_time: this.props.reduxStore.events[event.target.value].start_time,
+                end_time: this.props.reduxStore.events[event.target.value].end_time
+            })
+        } else {
+            this.setState({
+                event_name: this.props.reduxStore.events[event.target.value].event_name,
+                organizations_id: this.props.reduxStore.events[event.target.value].organizations_id,
+                date: this.props.reduxStore.events[event.target.value].date,
+                contacts_id: this.props.reduxStore.events[event.target.value].contacts_id,
+                start_time: this.props.reduxStore.events[event.target.value].start_time,
+                end_time: this.props.reduxStore.events[event.target.value].end_time
+            })
         }
-        this.setState({
-            event_name: this.props.reduxStore.events[event.target.value].event_name,
-            organizations_id: this.props.reduxStore.events[event.target.value].organizations_id,
-            date: this.props.reduxStore.events[event.target.value].date,
-            contacts_id: this.props.reduxStore.events[event.target.value].contacts_id,
-            start_time: this.props.reduxStore.events[event.target.value].start_time,
-            end_time: this.props.reduxStore.events[event.target.value].end_time
-        })
+    }
+
+    getCurrentDate() {
+        console.log('in setCurrentDate')
+        let today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear();
+        if(dd<10) 
+        {
+            dd='0'+dd;
+        } 
+
+        if(mm<10) 
+        {
+            mm='0'+mm;
+        } 
+        today = yyyy+'-'+mm+'-'+dd;
+        return today
     }
 
     render() {
