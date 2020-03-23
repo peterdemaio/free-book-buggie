@@ -33,6 +33,7 @@ const styles = theme => ({
     line: {
         padding: '25px',
         margin: '10px',
+        fontSize: '20px'
     },
     inputs: {
         width: '250px',
@@ -40,10 +41,17 @@ const styles = theme => ({
         margin: '10px',
         backgroundColor: 'white',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: '400px',
     },
     dropdown: {
         width: '250px',
+        padding: '25px',
+        margin: '10px',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        textAlign: 'center',
+        fontSize: '400px'
     },
     notes: {
         width: '400px',
@@ -51,11 +59,15 @@ const styles = theme => ({
         margin: '10px',
     },
     button: {
-        width: '250px',
-        padding: '10px',
+        width: '100px',
+        // padding: '10px',
         margin: '20px',
-        marginLeft: '140px'
-    }
+        // marginLeft: '140px',
+        justify: 'center'
+    },
+    resize: {
+        fontSize: '500'
+    },
 });
 
 class volunteerEvent extends Component {
@@ -98,7 +110,22 @@ class volunteerEvent extends Component {
             notes: '',
         })
         alert('Books Successfully Added!')
-    }
+    };
+
+    clearFields = (event) => {
+        // event.preventDefault()
+        this.setState({
+            event_name: '',
+            organizations_id: 0,
+            date: '',
+            contacts_id: 0,
+            collectBooks: 0,
+            distBooks: 0,
+            numOfKids: 0,
+            notes: '',
+        })
+        alert('Inputs Cleared!')
+    };
 
     handleInputChangeFor = (event, propertyName) => {
         console.log('testing handleInputChangeFor')
@@ -138,7 +165,7 @@ class volunteerEvent extends Component {
         return (
             <>
                 <VolunteerEventNav />
-                <Grid className={this.props.classes.container}
+                {/* <Grid className={this.props.classes.container}
 
                     container
                     direction="column"
@@ -150,84 +177,95 @@ class volunteerEvent extends Component {
                         className={this.props.classes.form}
                         item lg={5}
                     // justify="center"
-                    >
-                        <h1
-                            className="new-event-styles"
-                            align="center">Add Books By Event</h1>
+                    > */}
+                <h1
+                    className="new-event-styles"
+                    align="center">Add Books By Event</h1>
 
 
-                        <Paper elevation={5}>
-                            <span className={this.props.classes.line}>
-                                <FormControl className={this.props.classes.inputs} >
-                                    <InputLabel>Event Name</InputLabel>
-                                    <Select
-                                        native
-                                        className={this.props.classes.dropdownItem}
-                                        onChange={(event) => this.handleEventChange(event)}>
-                                        >
+                <Paper
+                    elevation={5}
+                    disableTypography={true}
+                >
+                    <span className={this.props.classes.line}>
+                        <FormControl className={this.props.classes.inputs} >
+                            <InputLabel>Event Name</InputLabel>
+                            <Select
+                                native
+                                className={this.props.classes.dropdownItem}
+                                onChange={(event) => this.handleEventChange(event)}>
+                                >
                                         {eventList}
-                                    </Select>
-                                </FormControl>
+                            </Select>
+                        </FormControl>
 
-                                <div className="textFieldDiv">
-                                    <TextField
-                                        className={this.props.classes.inputs}
-                                        value={this.state.collectBooks}
-                                        type="number"
-                                        label="Books Collected"
-                                        margin="normal"
-                                        onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
-                                    />
-                                    <br />
+                        <div className="textFieldDiv">
+                            <TextField
+                                className={this.props.classes.inputs}
+                                value={this.state.collectBooks}
+                                type="number"
+                                label="Books Collected"
+                                margin="normal"
+                                onChange={(event) => this.handleInputChangeFor(event, 'collectBooks')}
+                                InputProps={{
+                                    classes: {
+                                        input: styles.resize,
+                                    },
+                                }}
+                            />
+                            {/* <br /> */}
 
-                                    <TextField
-                                        className={this.props.classes.inputs}
-                                        value={this.state.distBooks}
-                                        type="number"
-                                        label="Books Distributed"
-                                        margin="normal"
-                                        onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
-                                    />
-                                    <br />
-                                    <TextField
-                                        className={this.props.classes.inputs}
-                                        value={this.state.numOfKids}
-                                        type="number"
-                                        label="Number of Children"
-                                        margin="normal"
-                                        onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
-                                    />
-                                    <br />
+                            <TextField
+                                className={this.props.classes.inputs}
+                                value={this.state.distBooks}
+                                type="number"
+                                label="Books Distributed"
+                                margin="normal"
+                                onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
+                            />
+                            {/* <br /> */}
+                            <TextField
+                                className={this.props.classes.inputs}
+                                value={this.state.numOfKids}
+                                type="number"
+                                label="Number of Children"
+                                margin="normal"
+                                onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
+                            />
+                            {/* <br /> */}
+                            <TextField
+                                className={this.props.classes.inputs}
+                                alignItems="center"
+                                value={this.state.notes}
+                                type="text"
+                                label="Notes"
+                                onChange={(event) => this.handleInputChangeFor(event, 'notes')}
+                            />
+                        </div>
 
-                                    <TextField
-                                        className={this.props.classes.notes}
-                                        alignItems="center"
-                                        value={this.state.notes}
-                                        type="text"
-                                        label="Notes"
-                                        onChange={(event) => this.handleInputChangeFor(event, 'notes')}
-                                    />
-                                </div>
-
-                                <Button
-                                    className={this.props.classes.button}
-                                    color="primary">
-                                    Cancel
+                        <Button
+                            className={this.props.classes.button}
+                            onClick={this.clearFields}
+                            color="primary">
+                            Cancel
                                 </Button>
-                                <Button
-                                    className={this.props.classes.button}
-                                    onClick={this.addData} color="primary">
-                                    Submit
+                        <Button
+                            className={this.props.classes.button}
+                            onClick={this.addData}
+                            color="primary">
+                            Submit
                                 </Button>
-                            </span>
-                        </Paper>
-                    </Grid>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => this.props.history.push('/home')}>
-                        Home</Button>
-                </Grid>
+                    </span>
+                </Paper>
+                {/* </Grid> */}
+                <Button
+                    className={this.props.classes.button}
+                    variant="contained"
+                    color="primary"
+                    // align="center"
+                    onClick={() => this.props.history.push('/home')}>
+                    Home</Button>
+                {/* </Grid> */}
             </>
         )
     }
