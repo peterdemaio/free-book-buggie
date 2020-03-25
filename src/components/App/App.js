@@ -8,14 +8,8 @@ import {
 
 import { connect } from 'react-redux';
 
-// import '../../../public/Assets/Fonts/Museo_slab-500.otf';
-
-// import Nav from '../Nav/Nav';
-// import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
 import InfoPage from '../InfoPage/InfoPage';
 import DataReporting from '../DataReporting/DataReporting';

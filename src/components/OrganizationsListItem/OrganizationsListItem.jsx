@@ -123,12 +123,10 @@ class OrganizationsListPageItem extends React.Component {
 
 
     menuOpen = (event) => {
-        console.log(`clicked the open button for ${this.props.org.org_name}!`)
         this.setState({ expanded: !this.state.expanded })
     }
 
     edit = () => {
-        console.log('ready to edit:', this.props.org.org_name)
         this.setState({ open: true })
     }
 
@@ -144,7 +142,6 @@ class OrganizationsListPageItem extends React.Component {
                 [type]: event.target.value
             }
         })
-        console.log('Ready to edit with', this.state.address)
     }
 
     setDetailsDemographics = (event, type) => {
@@ -155,12 +152,10 @@ class OrganizationsListPageItem extends React.Component {
                 [type]: event.target.value
             }
         })
-        console.log('Ready to edit with', this.state.demographics)
     }
 
 
     saveOrg = () => {
-        console.log('ready to save org with: ', this.state.address)
         this.props.dispatch({
             type: 'EDIT_ORGANIZATION',
             payload: {
