@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import HomePage from '../HomePage/HomePage';
-import InfoPage from '../InfoPage/InfoPage';
 import DataReporting from '../DataReporting/DataReporting';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
@@ -53,11 +52,6 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
              <ProtectedRoute
               exact
               path="/registerPage"

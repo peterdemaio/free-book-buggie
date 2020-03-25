@@ -77,12 +77,10 @@ class ContactsListPageItem extends React.Component {
     }
 
     menuOpen = (event) => {
-        console.log(`clicked the open button for ${this.props.contact.name}!`)
         this.setState({ expanded: !this.state.expanded })
     }
 
     edit = () => {
-        console.log('ready to edit:', this.props.contact.name)
         this.setState({ open: true })
     }
     handleClose = () => {
@@ -97,11 +95,9 @@ class ContactsListPageItem extends React.Component {
                 [type]: event.target.value
             }
         })
-        console.log('Ready to edit with', this.state.contact)
     }
 
     saveContact = () => {
-        console.log('ready to save org with: ', this.state.contact)
         this.props.dispatch({
             type: 'EDIT_CONTACT',
             payload: this.state.contact

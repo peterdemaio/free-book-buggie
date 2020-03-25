@@ -9,7 +9,7 @@ import DataReportingNav from './DataReportingNav';
 import './DataReportingStyle.css';
 
 class DataReporting extends Component {
-    
+
     state = {
         loading: true,
         queryParams: {
@@ -25,7 +25,6 @@ class DataReporting extends Component {
     }
 
     handleChangeFor = (event, param) => {
-        console.log('in hangleChangeFor')
         this.props.dispatch({
             type: 'GET_DATA',
             payload: {
@@ -40,61 +39,54 @@ class DataReporting extends Component {
             }
         })
         if (param === 'yAxis') {
-            switch(event.target.value) {
+            switch (event.target.value) {
                 case 'Books Distributed':
-                    this.setState({title: 'Books Distributed'})
+                    this.setState({ title: 'Books Distributed' })
                     break;
                 case 'Children':
-                    this.setState({title: 'Children Recipients'})
+                    this.setState({ title: 'Children Recipients' })
                     break;
                 case 'Books Collected':
-                    this.setState({title: 'Books Collected'})
+                    this.setState({ title: 'Books Collected' })
                     break;
                 default:
-                    console.log('changeYAxis error')
             }
         }
     }
 
     setCurrentDate() {
-        console.log('in setCurrentDate')
         let today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth()+1; 
+        var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
-        if(dd<10) 
-        {
-            dd='0'+dd;
-        } 
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
 
-        if(mm<10) 
-        {
-            mm='0'+mm;
-        } 
-        today = yyyy+'-'+mm+'-'+dd;
-        console.log(today)
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
         this.setState({
             queryParams: {
                 ...this.state.queryParams,
                 endDate: today
             }
-        })    
+        })
     }
 
     componentDidMount() {
-        console.log('in DataReporting componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
             type: 'GET_DATA',
             payload: this.state.queryParams
         })
-        this.setCurrentDate();        
-        this.setState({loading: false})
+        this.setCurrentDate();
+        this.setState({ loading: false })
     }
 
     render() {
-        console.log('in render. this.state.queryparams:', this.state.queryParams)
-        
+
         // declare jsx object that contains conditionally-rendered dropdowns 
         let thirdOption
 
@@ -102,47 +94,45 @@ class DataReporting extends Component {
         switch (this.state.queryParams.xAxis) {
             case 'Time':
                 thirdOption = <>
-                                <div className='chart-input'>
-                                    <label for='thirdDropdown'>Time Unit</label>
-                                    <select id='thirdDropdown' className='chart-select' onChange={(event) => this.handleChangeFor(event, 'timeUnit')} style={{width:'100px'}}>
-                                        <option value='Year'>Year</option>
-                                        <option value='Month'>Month</option>
-                                    </select>
-                                </div>
-                              </>
+                    <div className='chart-input'>
+                        <label for='thirdDropdown'>Time Unit</label>
+                        <select id='thirdDropdown' className='chart-select' onChange={(event) => this.handleChangeFor(event, 'timeUnit')} style={{ width: '100px' }}>
+                            <option value='Year'>Year</option>
+                            <option value='Month'>Month</option>
+                        </select>
+                    </div>
+                </>
                 break;
             case 'Events':
                 thirdOption = <>
-                              </>
+                </>
                 break;
             case 'Organizations':
                 thirdOption = <>
-                              </>
+                </>
                 break;
             case 'Demographics':
                 thirdOption = <>
-                                <div className='chart-input'>
-                                    <label for='metric'>Metric</label>
-                                    <select id='thirdDropdown' className='chart-select' onChange={(event) => this.handleChangeFor(event, 'metric')}>
-                                            <option value='Age'>Age</option>
-                                            <option value='Poverty'>Poverty</option>
-                                            <option value='Race'>Race</option>
-                                    </select>
-                                </div>
-                              </>
+                    <div className='chart-input'>
+                        <label for='metric'>Metric</label>
+                        <select id='thirdDropdown' className='chart-select' onChange={(event) => this.handleChangeFor(event, 'metric')}>
+                            <option value='Age'>Age</option>
+                            <option value='Poverty'>Poverty</option>
+                            <option value='Race'>Race</option>
+                        </select>
+                    </div>
+                </>
                 break;
-            default: 
+            default:
                 thirdOption = <>
-                              </>
+                </>
         }
 
         let columns = [];
         for (let column in this.props.reduxStore.chartDataExcel[0]) {
-            console.log('column:', column)
             columns.push(column)
         }
-        console.log('columns:', columns)
-             
+
         if (this.state.loading) {
             return (
                 <div>
@@ -155,7 +145,7 @@ class DataReporting extends Component {
         } else {
             return (
                 <>
-                <DataReportingNav/>
+                    <DataReportingNav />
                     <div>
                         <h1 className="data-reporting-styles" >Craft Your Story</h1>
                     </div>
@@ -182,26 +172,30 @@ class DataReporting extends Component {
                             {thirdOption}
                             <div className='chart-input'>
                                 <label for='startDate'>Start Date</label>
-                                <input type='date' id='startDate' name='Start Date' className='date-input' onChange={(event) => this.handleChangeFor(event, 'startDate')} value={this.state.queryParams.startDate} style={{width:'185px'}}></input>
+                                <input type='date' id='startDate' name='Start Date' className='date-input' onChange={(event) => this.handleChangeFor(event, 'startDate')} value={this.state.queryParams.startDate} style={{ width: '185px' }}></input>
                             </div>
                             <div className='chart-input'>
                                 <label for='endDate'>End Date</label>
-                                <input type='date' id='endDate' name='End Date' className='date-input' onChange={(event) => this.handleChangeFor(event, 'endDate')} value={this.state.queryParams.endDate} style={{width:'185px'}}></input>
+                                <input type='date' id='endDate' name='End Date' className='date-input' onChange={(event) => this.handleChangeFor(event, 'endDate')} value={this.state.queryParams.endDate} style={{ width: '185px' }}></input>
                             </div>
                         </div>
                         <div className='export-options'>
                             <div className='chart-input'>
-                                <CsvDownloader 
+                                <CsvDownloader
                                     filename="BookBuggieData"
-                                    columns={columns} 
+                                    columns={columns}
                                     datas={this.props.reduxStore.chartDataExcel}>
-                                    <button><img src={require('./ms-excel.png')}/></button>
+                                    <button>
+                                        <img 
+                                        alt='download btn'
+                                        src={require('./ms-excel.png')} />
+                                    </button>
                                 </CsvDownloader>
                             </div>
                         </div>
                     </div>
-                    <br/>
-                    <div style={{marginLeft:'12%', marginRight:'12%'}}>
+                    <br />
+                    <div style={{ marginLeft: '12%', marginRight: '12%' }}>
                         <Bar
                             ref={this.state.myRef}
                             data={this.props.reduxStore.chartData}
@@ -209,11 +203,11 @@ class DataReporting extends Component {
                             height={500}
                             backgroundColor='white'
                             options={{
-                                title:{
+                                title: {
                                     display: true,
                                     text: this.state.title
                                 },
-                                legend:{
+                                legend: {
                                     display: false
                                 },
                                 scales: {

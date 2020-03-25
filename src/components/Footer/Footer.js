@@ -10,9 +10,8 @@ const Footer = () => (
   <footer className="footer-total">
     <div >
       <img 
-      className="footer-image"
         src="https://freebookbuggie.files.wordpress.com/2018/08/cropped-bookbuggie_main1.jpg"
-        alt="the book buggie image"
+        alt="the book buggie"
         width="700px"
         
       />
