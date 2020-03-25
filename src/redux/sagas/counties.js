@@ -10,7 +10,6 @@ function* getCounties(action) {
         let response = yield axios.get('/api/counties')
         yield put ({ type: 'SET_COUNTIES', payload: response.data })
     } catch (err){
-        console.log('Error getting counties:', err)
     }
 }
 

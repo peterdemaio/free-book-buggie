@@ -47,10 +47,6 @@ class LoginMiniChart extends Component {
                 }}
             />
         </div>
-
-    // <ul>
-    //     {JSON.stringify(this.props.reduxStore.chartData)}
-    // </ul>
 )}}
 
 

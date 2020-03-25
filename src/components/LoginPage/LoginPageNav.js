@@ -8,10 +8,7 @@ const LoginPageNav = (props) => (
     <div className="nav-login">
 
         <div className="nav-title-div">
-            {/* <Link to="/home"> */}
-
-            {/* <h2 className="nav-title">The Free Book Buggie</h2> */}
-            {/* </Link> */}
+          
             <div className="buggie-logo">
                 <img
                     className="logo-image"
@@ -46,10 +43,7 @@ const LoginPageNav = (props) => (
                     <LogOutButton className="nav-link" />
                 </>
             )}
-            {/* Always show this link since the about page is not protected */}
-            {/* <Link className="nav-link" to="/about">
-                About
-      </Link> */}
+            
         </div>
     </div>
 );

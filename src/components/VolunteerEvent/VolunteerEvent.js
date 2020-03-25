@@ -7,7 +7,6 @@ import './VolunteerEvent.css';
 import {
     withStyles,
     Button,
-    Grid,
     Paper,
     TextField,
     Select,
@@ -60,9 +59,7 @@ const styles = theme => ({
     },
     button: {
         width: '100px',
-        // padding: '10px',
         margin: '20px',
-        // marginLeft: '140px',
         justify: 'center'
     },
     resize: {
@@ -92,7 +89,6 @@ class volunteerEvent extends Component {
 
     // submit event handler
     addData = (event) => {
-        console.log('adding event', this.state);
         event.preventDefault();
         this.props.dispatch({
             // set up new saga for dispatch type
@@ -128,8 +124,6 @@ class volunteerEvent extends Component {
     };
 
     handleInputChangeFor = (event, propertyName) => {
-        console.log('testing handleInputChangeFor')
-        console.log(event.target.value)
 
         this.setState({
             [propertyName]: event.target.value
@@ -137,11 +131,10 @@ class volunteerEvent extends Component {
     };
 
     handleEventChange = (event) => {
-        console.log('current date:', this.getCurrentDate())
+
         const currentDate = this.getCurrentDate()
-        console.log('event.target.value:', event.target.value)
+
         if (event.target.value === 'select') {
-            console.log('in null case')
             return
         } else if (event.target.value == 0) {
             console.log('in miscellaneous case')
@@ -197,19 +190,7 @@ class volunteerEvent extends Component {
         return (
             <>
                 <VolunteerEventNav />
-                {/* <Grid className={this.props.classes.container}
-
-                    container
-                    direction="column"
-                    // justify="center"
-                    alignItems="center"
-                >
-                    <Grid
-                        container
-                        className={this.props.classes.form}
-                        item lg={5}
-                    // justify="center"
-                    > */}
+                
                 <h1
                     className="new-event-styles"
                     align="center">Add Books By Event</h1>
@@ -245,7 +226,7 @@ class volunteerEvent extends Component {
                                     },
                                 }}
                             />
-                            {/* <br /> */}
+                           
 
                             <TextField
                                 className={this.props.classes.inputs}
@@ -255,7 +236,7 @@ class volunteerEvent extends Component {
                                 margin="normal"
                                 onChange={(event) => this.handleInputChangeFor(event, 'distBooks')}
                             />
-                            {/* <br /> */}
+                            
                             <TextField
                                 className={this.props.classes.inputs}
                                 value={this.state.numOfKids}
@@ -264,7 +245,7 @@ class volunteerEvent extends Component {
                                 margin="normal"
                                 onChange={(event) => this.handleInputChangeFor(event, 'numOfKids')}
                             />
-                            {/* <br /> */}
+                            
                             <TextField
                                 className={this.props.classes.inputs}
                                 alignItems="center"
@@ -289,15 +270,14 @@ class volunteerEvent extends Component {
                                 </Button>
                     </span>
                 </Paper>
-                {/* </Grid> */}
+                
                 <Button
                     className={this.props.classes.button}
                     variant="contained"
                     color="primary"
-                    // align="center"
                     onClick={() => this.props.history.push('/home')}>
                     Home</Button>
-                {/* </Grid> */}
+                
             </>
         )
     }

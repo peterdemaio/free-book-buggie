@@ -4,7 +4,6 @@
     display: inline-block;
     color: #ffffff;
     padding-right: 30px;
-    /* align-items: flex-start; */
     text-align: center;
     font-family: "Museo Slab";
     font-weight: 900;
@@ -13,9 +12,6 @@
     border-radius: 8px;
     padding-left: 22px;
     width: 33%;
-    /* background-color: #14771B; */
-    /* opacity: .80; */
-
 }
 
 .nav-title-div {
@@ -68,9 +64,6 @@
 }
 
 .logo-image {
-    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
-    /* z-index: -1; */
-    /* display: inline-flexbox; */
     float: left;
     height: 120px;
     padding-left: 25px;

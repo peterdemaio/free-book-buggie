@@ -6,7 +6,7 @@ import LoginPageNav from './LoginPageNav'
 import { createMuiTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab'
 import BookCountUp from '../BookCountUp/BookCountUp';
-// import Footer from '../Footer/Footer';
+
 
 
 
@@ -26,7 +26,6 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
-    // console.log('in login function');
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
@@ -50,10 +49,9 @@ class LoginPage extends Component {
 
   render() {
 
-    console.log(this.props.history)
 
     return (
-      // <ThemeProvider theme={theme}></ThemeProvider>
+      
       <>
         
         <LoginPageNav/>
@@ -72,8 +70,7 @@ class LoginPage extends Component {
           <div
             className="login-div"
             onSubmit={this.login}>
-            {/* <h4 className="login-label">User Login</h4> */}
-            {/* <br></br> */}
+            
             <div className="username-div">
               <label htmlFor="username">
                 Username:
@@ -114,16 +111,7 @@ class LoginPage extends Component {
             </div>
             
           </div>
-          {/* Volunteer Registration moved to home page */}
-          {/* <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
-            Volunteer Registration
-          </button>
-        </center> */}
+          
           
         </div>
         <br/>

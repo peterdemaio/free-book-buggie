@@ -4,7 +4,6 @@
     display: inline-block;
     color: #ffffff;
     padding-right: 30px;
-    /* align-items: flex-start; */
     text-align: center;
     font-family: "Museo Slab";
     font-weight: 900;
@@ -13,9 +12,6 @@
     border-radius: 8px;
     padding-left: 22px;
     width: 33%;
-    /* background-color: #14771B; */
-    /* opacity: .80; */
-
 }
 
 .buggie-logo{
@@ -31,12 +27,9 @@
 
 .nav-data-reporting {
   overflow: hidden;
-  /* background-image: linear-gradient(45deg, #40C445 30%, #14771B 90%); */
   background-image: url('./HeaderOrange.png');
   background-size: cover;
-  /* justify-content: flex-end; */
   align-items: flex-end;
-  /* opacity: .75; */
   max-height: 200px;
 }
 
@@ -75,13 +68,8 @@
   border-radius: 15px;
   background-color: rgb(240, 200, 136);
   opacity: 83%;
-  /* min-width: 80px; */
   transform: scale(1.075);
 }
-/* .nav-link:hover {
-  background-color: rgb(29, 114, 35);
-} */
-
 .nav-right {
   padding-top: 30px;
   float: right;
@@ -91,12 +79,8 @@
 }
 
 .logo-image {
-    /* image-rendering: url('../Nav/book-cropped-logo.jpg'); */
-    /* z-index: -1; */
-    /* display: inline-flexbox; */
     float: left;
     height: 120px;
     padding-left: 25px;
-    padding-bottom: 20px;
-    
+    padding-bottom: 20px;  
   }

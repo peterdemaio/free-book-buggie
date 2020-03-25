@@ -1,31 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import LogOutButton from '../LogOutButton/LogOutButton';
 import HomePageNav from './HomePageNav'
 import Footer from '../Footer/Footer'
 
-
-// import {
-//   Button
-// }
-//   from '@material-ui/core';
-
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
 
 const UserPage = (props) => (
   <>
     <HomePageNav />
 
     <div className="volunteer-button-div">
-      {/* <h3>Register a new volunteer here: </h3> */}
+      
       <center >
         <button
 
           className="login-button"
           type="button"
-          // onClick={() => {props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+          
           onClick={() => props.history.push('/registerPage')}
         >
           Volunteer Registration
@@ -47,13 +37,7 @@ const UserPage = (props) => (
       <h1 id="welcome" >
         Welcome, {props.user.username}!
     </h1>
-      {/* <p>Your ID is: {props.user.id}</p> */}
-      {/* <Button onClick={() => props.history.push('/event')}>New Event</Button> */}
-      {/* <Button onClick={() => props.history.push('/distributeBooks')}>Distribute Books</Button> */}
-      {/* <Button onClick={() => props.history.push('/dataReporting')}>Data Reporting</Button> */}
-      <br />
-      {/* <Button onClick={() => props.history.push('/organizationsListPage')}>Organization List</Button> */}
-      {/* <LogOutButton className="log-in" /> */}
+     
     </div>
     <Footer />
   </>
