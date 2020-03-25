@@ -7,7 +7,6 @@ import { Bar } from 'react-chartjs-2';
 class LoginMiniChart extends Component {
 
     componentDidMount() {
-        console.log('in LoginMiniChart componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
             type: 'GET_DATA',

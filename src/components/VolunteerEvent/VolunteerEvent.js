@@ -136,8 +136,7 @@ class volunteerEvent extends Component {
 
         if (event.target.value === 'select') {
             return
-        } else if (event.target.value == 0) {
-            console.log('in miscellaneous case')
+        } else if (event.target.value === 0) {
             this.setState({
                 event_name: this.props.reduxStore.events[event.target.value].event_name,
                 organizations_id: this.props.reduxStore.events[event.target.value].organizations_id,
@@ -159,7 +158,6 @@ class volunteerEvent extends Component {
     }
 
     getCurrentDate() {
-        console.log('in setCurrentDate')
         let today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; 
