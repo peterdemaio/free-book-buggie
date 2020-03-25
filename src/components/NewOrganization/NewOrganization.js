@@ -150,51 +150,55 @@ class NewOrganization extends Component {
             console.log('dispatch error')
         }
     }
-    populateInputs = () => {
-        this.setState({
-            newEntry: {
-                name: 'Big Brothers Big Sisters Twin Cities',
-                logo: 'https://www.bigstwincities.org/wp-content/themes/bbbs/images/home-page-images-2019/Logo-Anniversary@2x.png',
-                url: 'https://www.bigstwincities.org/',
-                type: 'non-profit',
-                address_number: '2550',
-                address_unit: '#410N',
-                address_street: 'University Ave W',
-                city: 'St. Paul',
-                state: 'MN',
-                county_id: 62,
-                zip: '55114',
-                contact_name: 'Barb Johnson',
-                title: 'Volunteer Coordinator',
-                phone_number: '651-789-2400',
-                phone_number_type: 'office',
-                email: 'barb@bbbs.org',
-                notes: '',
-                demographics_age_0_3: 25,
-                demographics_age_4_7: 25,
-                demographics_age_8_12: 25,
-                demographics_age_13_18: 25,
-                demographics_race_white: 25,
-                demographics_race_black: 50,
-                demographics_race_native: 0,
-                demographics_race_asian: 25,
-                demographics_race_pacific: 0,
-                demographics_poverty: 75
-            },
-        })
-    }
+
+    /////// for presentation purposes only
+    // populateInputs = () => {
+    //     this.setState({
+    //         newEntry: {
+    //             name: 'Big Brothers Big Sisters Twin Cities',
+    //             logo: 'https://www.bigstwincities.org/wp-content/themes/bbbs/images/home-page-images-2019/Logo-Anniversary@2x.png',
+    //             url: 'https://www.bigstwincities.org/',
+    //             type: 'non-profit',
+    //             address_number: '2550',
+    //             address_unit: '#410N',
+    //             address_street: 'University Ave W',
+    //             city: 'St. Paul',
+    //             state: 'MN',
+    //             county_id: 62,
+    //             zip: '55114',
+    //             contact_name: 'Barb Johnson',
+    //             title: 'Volunteer Coordinator',
+    //             phone_number: '651-789-2400',
+    //             phone_number_type: 'office',
+    //             email: 'barb@bbbs.org',
+    //             notes: '',
+    //             demographics_age_0_3: 25,
+    //             demographics_age_4_7: 25,
+    //             demographics_age_8_12: 25,
+    //             demographics_age_13_18: 25,
+    //             demographics_race_white: 25,
+    //             demographics_race_black: 50,
+    //             demographics_race_native: 0,
+    //             demographics_race_asian: 25,
+    //             demographics_race_pacific: 0,
+    //             demographics_poverty: 75
+    //         },
+    //     })
+    // }
     render() {
         let org = this.state.newEntry
         return (
             <>
-                <NewOrganizationNav/>
+                <NewOrganizationNav />
                 <Grid className={this.props.classes.container}
                     container
                     direction="column"
                     justify="center"
                     alignItems="center"
                 >
-                    <div onClick={this.populateInputs}><h1 className="new-organization-styles">Add a new organization</h1></div>
+                    {/* <div onClick={this.populateInputs}> */}
+                        <h1 className="new-organization-styles">Add a new organization</h1>
+                    {/* </div> */}
                     <Paper elevation={5}>
                         <Grid item justify='center' alignItems='center' className={this.props.classes.nameLine}>
                             <TextField
@@ -280,7 +284,7 @@ class NewOrganization extends Component {
                                     type="text"
                                     label="State"
                                     onChange={(event) => this.handleChangeFor(event, 'state')} />
-                                
+
                             </span>
                             <br></br>
                             <br></br>
@@ -296,8 +300,8 @@ class NewOrganization extends Component {
                                     )}
                                 </Select>
                             </FormControl>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <div className={this.props.classes.question}>If you have demographics information please record it below.</div>
                             <Grid container
                                 className={this.props.classes.demographicsLine}
@@ -428,7 +432,7 @@ class NewOrganization extends Component {
                                 <br></br>
                             </span>
                             <span className={this.props.classes.line}>
-                            <TextField
+                                <TextField
                                     className={this.props.classes.inputs}
                                     type="text"
                                     label="Email"
@@ -450,10 +454,10 @@ class NewOrganization extends Component {
                         variant={'outlined'}>
                         Add
                     </Button>
-                    <br/>
-                   
-                    </Grid>
-             
+                    <br />
+
+                </Grid>
+
             </>
         )
     }

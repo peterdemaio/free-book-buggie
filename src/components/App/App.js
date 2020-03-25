@@ -19,7 +19,6 @@ import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
 import InfoPage from '../InfoPage/InfoPage';
 import DataReporting from '../DataReporting/DataReporting';
-import DistributeBooks from '../DistributeBooks/DistributeBooks';
 import NewOrganization from '../NewOrganization/NewOrganization';
 import OrganizationsListPage from '../OrganizationsListPage/OrganizationsListPage';
 import ContactsListPage from '../ContactsList/ContactsListPage';
@@ -48,11 +47,7 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            {/* <Route
-              exact
-              path="/about"
-              component={AboutPage}
-            /> */}
+          
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -86,11 +81,6 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/distributeBooks"
-              component={DistributeBooks}
-            />
-            <ProtectedRoute
-              exact
               path="/Event"
               component={NewEvent}
             />
@@ -117,7 +107,7 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          {/* <Footer /> */}
+          
         </div>
       </Router>
     )

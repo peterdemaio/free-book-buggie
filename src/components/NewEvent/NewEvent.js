@@ -118,23 +118,24 @@ class NewEvent extends Component {
         })
     };
 
-    populateInputs = () => {
-        this.setState({
-            event_name: 'Big Brothers/Big Sisters Book Distribution Day',
-            location: 'St. Paul Office',
-            date: '2020-03-31',
-            organization_id: 11,
-            contact_id: 11,
-            start_time: '12:00:00',
-            end_time: '14:00:00',
-            volunteers: 'Sue',
-            collectBooks: 0,
-            distBooks: 100,
-            numOfKids: 50,
-            numEslAdults: 0,
-            notes: '',
-        })
-    }
+    /////// for demonstration purposes
+    // populateInputs = () => {
+    //     this.setState({
+    //         event_name: 'Big Brothers/Big Sisters Book Distribution Day',
+    //         location: 'St. Paul Office',
+    //         date: '2020-03-31',
+    //         organization_id: 11,
+    //         contact_id: 11,
+    //         start_time: '12:00:00',
+    //         end_time: '14:00:00',
+    //         volunteers: 'Sue',
+    //         collectBooks: 0,
+    //         distBooks: 100,
+    //         numOfKids: 50,
+    //         numEslAdults: 0,
+    //         notes: '',
+    //     })
+    // }
 
     render() {
 
@@ -165,11 +166,13 @@ class NewEvent extends Component {
                         item lg={4}
                         justify="center"
                     >
-                        <div onClick={this.populateInputs}><h1 className="new-event-styles">Add an Event</h1></div>
+                        {/* <div onClick={this.populateInputs}> */}
+                            <h1 className="new-event-styles">Add an Event</h1>
+                        {/* </div> */}
                         <Paper elevation={5}>
                             <span className={this.props.classes.line}>
 
-                                {/* <form className={this.props.classes.inputs} autoComplete="off"> */}
+                                
                                 <FormControl className={this.props.classes.inputs} >
                                     <InputLabel>Organization Name</InputLabel>
                                     <Select

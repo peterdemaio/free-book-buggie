@@ -8,8 +8,7 @@ const NewEventNav = (props) => (
     <div className="nav-new-event">
 
         <div className="nav-title-div">
-            
-            {/* </Link> */}
+        
             <div className="buggie-logo">
                 <img
                     className="logo-image"

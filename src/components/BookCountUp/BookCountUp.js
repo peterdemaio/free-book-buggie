@@ -22,7 +22,6 @@ class BookCountUp extends Component {
         
         return (
             <>
-                {/* <p>{JSON.stringify(this.props.reduxStore.bookCountReducer[1].sum)}</p>  */}
 
             <div className="counter-div">
                 <h1 className="counter-style"
@@ -38,22 +37,14 @@ class BookCountUp extends Component {
                         decimal=","
                         prefix="Books distributed: "
                         suffix=" "
-                        // onEnd={() => console.log('Ended! 👏')}
-                        // onStart={() => console.log('Started! 💨')}
-                    // ref={CountUp => { this.myCountUp = CountUp; }}
+                        
                     >
                         {({ countUpRef, start }) => (
                             <VisibilitySensor onChange={start} delayedCall>
                                 <span ref={countUpRef} />
                             </VisibilitySensor>
                         )}
-                        {/* removing button in favor of page load  */}
-                        {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
+                        
                     </CountUp>
                     <br />
                     <CountUp
@@ -66,22 +57,14 @@ class BookCountUp extends Component {
                         decimal=","
                         prefix="Children impacted: "
                         suffix=" "
-                        // onEnd={() => console.log('Ended! 👏')}
-                        // onStart={() => console.log('Started! 💨')}
-                    // ref={CountUp => { this.myCountUp = CountUp; }}
+                        
                     >
                         {({ countUpRef, start }) => (
                                 <VisibilitySensor onChange={start} delayedCall>
                                 <span ref={countUpRef} />
                             </VisibilitySensor>
                         )}
-                        {/* removing button in favor of page load */}
-                        {/* {({ countUpRef, start }) => (
-              <div>
-                <span ref={countUpRef} />
-                <button onClick={start}>Start</button>
-              </div>
-            )} */}
+                        
                     </CountUp>
                 </h1>
             </div>
