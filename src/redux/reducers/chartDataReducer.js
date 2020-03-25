@@ -1,6 +1,5 @@
 const chartData = (state = {}, action) => {
     if (action.type === 'SET_DATA') {
-        console.log('in chartDataReducer.action.payload:', action.payload)
         
         
         let chartData = {

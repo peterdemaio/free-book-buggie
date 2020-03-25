@@ -25,7 +25,6 @@ function* loginUser(action) {
     //make request to /api/user
     yield put ({type: 'REDIRECT_BY_USER_TYPE', history: action.history}) 
   } catch (error) {
-    console.log('Error with user login:', error);
     if (error.response.status === 401) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
@@ -59,7 +58,6 @@ function* logoutUser(action) {
     yield put({ type: 'UNSET_USER' });
 
   } catch (error) {
-    console.log('Error with user logout:', error);
   }
 }
 

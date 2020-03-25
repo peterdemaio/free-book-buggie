@@ -126,18 +126,15 @@ class NewOrganization extends Component {
     }
 
     handleChangeFor = (event, propertyName) => {
-        console.log('Setting state for:', event.target.value, propertyName);
         this.setState({
             newEntry: {
                 ...this.state.newEntry,
                 [propertyName]: event.target.value
             }
         })
-        console.log(this.state.newEntry)
     }
     handleClick = async (event) => {
         event.preventDefault()
-        console.log(this.state.newEntry)
         try {
             await this.props.dispatch({
                 type: 'POST_NEW_ORGANIZATION',
@@ -147,7 +144,6 @@ class NewOrganization extends Component {
 
             this.props.history.push('/organizationsListPage')
         } catch {
-            console.log('dispatch error')
         }
     }
 

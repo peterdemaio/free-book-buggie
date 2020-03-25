@@ -88,7 +88,6 @@ class NewEvent extends Component {
 
     // submit event handler
     newEvent = (event) => {
-        console.log('adding event', this.state);
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_EVENT',
@@ -112,7 +111,6 @@ class NewEvent extends Component {
     }
 
     handleInputChangeFor = (event, propertyName) => {
-        console.log('testing handleInputChangeFor')
         this.setState({
             [propertyName]: event.target.value
         })

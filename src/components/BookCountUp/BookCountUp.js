@@ -8,7 +8,6 @@ import VisibilitySensor from 'react-visibility-sensor';
 class BookCountUp extends Component {
 
     componentDidMount() {
-        // console.log('in CountUp componentDidMount')
         // get events from database and store them in redux
         this.props.dispatch({
             type: 'GET_BOOK_COUNT_DATA'   
@@ -16,7 +15,6 @@ class BookCountUp extends Component {
     }
 
     render() {
-        console.log('broooooooooooo', this.props.reduxStore.bookCountReducer);
         //need to map over bookCountReducer.sum and pass to end={}
         //then repeat for 'books out' and pass to end={} for books out countUp
         

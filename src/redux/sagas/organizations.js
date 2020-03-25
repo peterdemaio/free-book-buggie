@@ -7,13 +7,10 @@ function* organizationsSaga() {
 }
 
 function* editOrganization(action) {
-    console.log('ready to edit organizaiton:', action.payload)
     try {
         let response = yield axios.put('/api/organizations', action.payload)
-        console.log('here is the returning data:', response.data)
         yield put ({type: 'GET_ORGANIZATIONS', payload: response.data })
     } catch (err) {
-        console.log('err editing organization', err)
     }
 }
 function* getOrganizations(action) {
@@ -21,7 +18,6 @@ function* getOrganizations(action) {
         let response = yield axios.get('/api/organizations')
         yield put ({ type: 'SET_ORGANIZATIONS', payload: response.data })
     } catch (err){
-        console.log('Error getting organizations:', err)
     }
 }
 

@@ -26,7 +26,6 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
-    // console.log('in login function');
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
@@ -50,7 +49,6 @@ class LoginPage extends Component {
 
   render() {
 
-    console.log(this.props.history)
 
     return (
       

@@ -7,7 +7,6 @@ import './VolunteerEvent.css';
 import {
     withStyles,
     Button,
-    Grid,
     Paper,
     TextField,
     Select,
@@ -60,9 +59,7 @@ const styles = theme => ({
     },
     button: {
         width: '100px',
-        // padding: '10px',
         margin: '20px',
-        // marginLeft: '140px',
         justify: 'center'
     },
     resize: {
@@ -92,7 +89,6 @@ class volunteerEvent extends Component {
 
     // submit event handler
     addData = (event) => {
-        console.log('adding event', this.state);
         event.preventDefault();
         this.props.dispatch({
             // set up new saga for dispatch type
@@ -128,8 +124,6 @@ class volunteerEvent extends Component {
     };
 
     handleInputChangeFor = (event, propertyName) => {
-        console.log('testing handleInputChangeFor')
-        console.log(event.target.value)
 
         this.setState({
             [propertyName]: event.target.value
@@ -137,9 +131,7 @@ class volunteerEvent extends Component {
     };
 
     handleEventChange = (event) => {
-        console.log('event.target.value:', event.target.value)
         if (event.target.value === 'select') {
-            console.log('in null case')
             return
         }
         this.setState({
