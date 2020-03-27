@@ -58,5 +58,8 @@
       "error",
       "SequenceExpression"
     ]
+  },
+  "engines": {
+    "node": "13.3.0"
   }
 }
