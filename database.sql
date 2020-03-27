@@ -1,9 +1,26 @@
-CREATE TABLE "counties" (
-	"county_id" SERIAL PRIMARY KEY,
-	"county_name" VARCHAR(255)
+
+-- USER is a reserved keyword with Postgres
+-- You must use double quotes in every query that user is in:
+-- ex. SELECT * FROM "user";
+-- Otherwise you will have errors!
+CREATE TABLE  "user"(
+    "id" serial PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL,
+    "admin" BOOLEAN DEFAULT false
 );
 
-INSERT INTO "counties" ("county_name") VALUES ('Aitkin'),
+INSERT INTO "user" ("username", "password", "admin")
+VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE);
+
+-- List of Minnesota Counties
+
+CREATE TABLE "counties" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(255)
+);
+
+INSERT INTO "counties" ("name") VALUES ('Aitkin'),
 ('Anoka'),
 ('Becker'),
 ('Beltrami'),
@@ -89,9 +106,9 @@ INSERT INTO "counties" ("county_name") VALUES ('Aitkin'),
 ('Wilkin'),
 ('Winona'),
 ('Wright'),
-('Yellow Medicine'),
-('St. Croix, WI'),
-('Other');
+('Yellow Medicine');
+
+-- List of organizations
 
 CREATE TABLE "organizations" (
 	"id" serial PRIMARY KEY,
@@ -169,7 +186,6 @@ VALUES ('Mycie Tew', null, 1, null, null, 'Mtew@360communities.org', null),
 ('Kendra Peterson', 'Director, Literacy', 21, '612-638-1000', 'office', 'kendrapeterson@urbanventures.org', null),
 ('Jamie Morrison', 'Director of Operations', 25, null, null, 'info@goodinthehood.org', null);
 
-
 CREATE TABLE "events" (
 	"id" serial PRIMARY KEY,
 	"event_name" varchar(255) NOT NULL,
@@ -221,9 +237,6 @@ VALUES ('miscellaneous', null, null, null, null, null, null, 0, 0, 0, 0),
 ('Fresh Produce Distribution', 19, 16, null, '2019-05-01', null, null, 933, 2075, 833, 0),
 ('SNAP Outreach Fair', 19, 16, null, '2019-06-01', null, null, 0, 100, 25, 0);
 
-
-
-
 CREATE TABLE "demographics_age" (
     "id" serial PRIMARY KEY,
     "organizations_id" integer REFERENCES organizations,
@@ -261,50 +274,12 @@ VALUES(1, 0, 75, 25, 0),
 (25, 25, 25, 25, 25),
 (25, 25, 25, 25, 25);
 
-CREATE TABLE "demographics_race" (
-    "id" serial PRIMARY KEY,
-    "organizations_id" integer REFERENCES organizations,
-    "white" integer,
-    "black_or_african_american" integer,
-    "american_indian_or_alaska_native" integer, 
-    "asian" integer, 
-    "native_hawaiian_or_pacific_islander" integer
-);
-
-INSERT INTO "demographics_race" ("organizations_id", "white", "black_or_african_american", "american_indian_or_alaska_native", "asian", "native_hawaiian_or_pacific_islander")
-VALUES(1, 75, 25, 0, 0, 0),
-(2, 90, 10, 0, 0, 0),
-(3, 10, 80, 0, 10, 0),
-(4, 40, 40, 0, 20, 0),
-(5, 20, 30, 10, 30, 10),
-(6, 75, 25, 0, 0, 0),
-(7, 90, 10, 0, 0, 0),
-(8, 10, 80, 0, 10, 0),
-(9, 40, 40, 0, 20, 0),
-(10, 20, 30, 10, 30, 10),
-(11, 75, 25, 0, 0, 0),
-(12, 90, 10, 0, 0, 0),
-(13, 10, 80, 0, 10, 0),
-(14, 40, 40, 0, 20, 0),
-(15, 20, 30, 10, 30, 10),
-(16, 75, 25, 0, 0, 0),
-(17, 90, 10, 0, 0, 0),
-(18, 70, 10, 5, 10, 5),
-(19, 40, 40, 0, 20, 0),
-(20, 20, 30, 10, 30, 10),
-(21, 20, 30, 10, 30, 10),
-(22, 75, 25, 0, 0, 0),
-(23, 90, 10, 0, 0, 0),
-(24, 10, 80, 0, 10, 0),
-(25, 40, 40, 0, 20, 0),
-(26, 20, 30, 10, 30, 10);
-
-
 CREATE TABLE "demographics_poverty" (
     "id" serial PRIMARY KEY,
     "organizations_id" integer REFERENCES organizations,
     "percentage_NSLP" integer
 );
+
 INSERT INTO "demographics_poverty" ("organizations_id", "percentage_NSLP")
 VALUES(1, 75),
 (2, 50),
@@ -332,14 +307,3 @@ VALUES(1, 75),
 (24, 40),
 (25, 100),
 (26, 42);
-
-
-CREATE TABLE  "user"(
-    "id" serial PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
-    "admin" BOOLEAN DEFAULT false
-);
-
-INSERT INTO "user" ("username", "password", "admin")
-VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS', TRUE);
