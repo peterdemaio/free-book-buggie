@@ -307,3 +307,41 @@ VALUES(1, 75),
 (24, 40),
 (25, 100),
 (26, 42);
+
+CREATE TABLE "demographics_race" (
+    "id" serial PRIMARY KEY,
+    "organizations_id" integer REFERENCES organizations,
+    "white" integer,
+    "black_or_african_american" integer,
+    "american_indian_or_alaska_native" integer, 
+    "asian" integer, 
+    "native_hawaiian_or_pacific_islander" integer
+);
+
+INSERT INTO "demographics_race" ("organizations_id", "white", "black_or_african_american", "american_indian_or_alaska_native", "asian", "native_hawaiian_or_pacific_islander")
+VALUES(1, 75, 25, 0, 0, 0),
+(2, 90, 10, 0, 0, 0),
+(3, 10, 80, 0, 10, 0),
+(4, 40, 40, 0, 20, 0),
+(5, 20, 30, 10, 30, 10),
+(6, 75, 25, 0, 0, 0),
+(7, 90, 10, 0, 0, 0),
+(8, 10, 80, 0, 10, 0),
+(9, 40, 40, 0, 20, 0),
+(10, 20, 30, 10, 30, 10),
+(11, 75, 25, 0, 0, 0),
+(12, 90, 10, 0, 0, 0),
+(13, 10, 80, 0, 10, 0),
+(14, 40, 40, 0, 20, 0),
+(15, 20, 30, 10, 30, 10),
+(16, 75, 25, 0, 0, 0),
+(17, 90, 10, 0, 0, 0),
+(18, 70, 10, 5, 10, 5),
+(19, 40, 40, 0, 20, 0),
+(20, 20, 30, 10, 30, 10),
+(21, 20, 30, 10, 30, 10),
+(22, 75, 25, 0, 0, 0),
+(23, 90, 10, 0, 0, 0),
+(24, 10, 80, 0, 10, 0),
+(25, 40, 40, 0, 20, 0),
+(26, 20, 30, 10, 30, 10);
