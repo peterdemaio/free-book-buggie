@@ -20,8 +20,7 @@ class DataReporting extends Component {
             timeUnit: 'Year',
             metric: 'Age'
         },
-        title: 'Books Distributed',
-        myRef: React.createRef()
+        title: 'Books Distributed'
     }
 
     handleChangeFor = (event, param) => {
@@ -197,7 +196,6 @@ class DataReporting extends Component {
                     <br />
                     <div style={{ marginLeft: '12%', marginRight: '12%' }}>
                         <Bar
-                            ref={this.state.myRef}
                             data={this.props.reduxStore.chartData}
                             width={1000}
                             height={500}
