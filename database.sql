@@ -16,11 +16,11 @@ VALUES ('admin', '$2a$10$fld6zZiQxdgcbVIWKAzve.g9NEEfGWHaN7/LSbshYl9R3BH/0rSbS',
 -- List of Minnesota Counties
 
 CREATE TABLE "counties" (
-	"id" SERIAL PRIMARY KEY,
-	"name" VARCHAR(255)
+	"county_id" SERIAL PRIMARY KEY,
+	"county_name" VARCHAR(255)
 );
 
-INSERT INTO "counties" ("name") VALUES ('Aitkin'),
+INSERT INTO "counties" ("county_name") VALUES ('Aitkin'),
 ('Anoka'),
 ('Becker'),
 ('Beltrami'),
@@ -106,7 +106,9 @@ INSERT INTO "counties" ("name") VALUES ('Aitkin'),
 ('Wilkin'),
 ('Winona'),
 ('Wright'),
-('Yellow Medicine');
+('Yellow Medicine'),
+('St. Croix, WI'),
+('Other');
 
 -- List of organizations
 
