@@ -65,4 +65,4 @@ typings/
 package-lock.json
 
 # database configuration
-pool.js
+pool
