@@ -14,7 +14,7 @@ The Free Book Buggie is a website made for the Free Book Buggie Non-Profit Organ
 
 The purpose of the website is to record data on the organization’s collecting and distribution of books and children served. Combined with demographics information of the children, this data can then be presented in many ways to facilitate the solicitation of donations or assist in grant writing.
 
-To see the fully functional site, please visit: (INSERT DEPLOYED VERSION HERE)
+To see the fully functional site, please visit: https://morning-tundra-98645.herokuapp.com/
 
 ## Screen Shot
 
