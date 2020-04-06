@@ -4,17 +4,17 @@
 ![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
 
 
-# The Free Book Buggie
+# The Free Book Buggie Data Tool
 
 ## Description
 
 _Duration: 2 week sprint_
 
-The Free Book Buggie is a website made for the Free Book Buggie Non-Profit Organization, an organization based out of the Twin Cities of Minnesota that collects used children’s books before they end up in landfills and distributes them to underserved communities. 
+The Free Book Buggie Data Tool is a web app made for The Free Book Buggie, a nonprofit organization based out of the Twin Cities that collects used children’s books before they end up in landfills and distributes them to underserved communities. 
 
 The purpose of the website is to record data on the organization’s collecting and distribution of books and children served. Combined with demographics information of the children, this data can then be presented in many ways to facilitate the solicitation of donations or assist in grant writing.
 
-To see the fully functional site, please visit: https://morning-tundra-98645.herokuapp.com/
+To see the fully functional site, please visit: https://the-free-book-buggie.herokuapp.com/
 
 ## Screen Shot
 
@@ -44,7 +44,7 @@ User clicks on “add new event” to create a new event for the future. For fut
 The mobile recording button on the home screen allows a volunteer to record the number of books collected, distributed and number of kids served for an already created event. 
 
 ## Built With
-	Material-UI, Axios, Chart.js, Express, PG, React.js, and Redux.
+	React.js, Redux, Material-UI, Chart.js, Axios, Node.js, Express, PG, and PostgreSQL.
 
 ## Acknowledgement
 Thanks to Prime Digital Academy for their support during the project, and The Free Book Buggie for their work and inspiration. 
