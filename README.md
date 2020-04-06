@@ -18,8 +18,8 @@ To see the fully functional site, please visit: https://the-free-book-buggie.her
 
 ## Screen Shot
 
-<image src="documentation/images/Screen Shot 2020-04-05 at 9.16.27 PM.png" width=200>
-<image src="documentation/images/Screen Shot 2020-04-05 at 9.50.10 PM.png" width=200>
+<image src="documentation/images/Screen Shot 2020-04-05 at 9.16.27 PM.png" width=1000>
+<image src="documentation/images/Screen Shot 2020-04-05 at 9.50.10 PM.png" width=1000>
 	
 ## Installation
 
