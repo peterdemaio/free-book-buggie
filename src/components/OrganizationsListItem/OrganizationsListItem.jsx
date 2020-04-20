@@ -7,6 +7,9 @@ import {
     Input,
     FormControl,
     Select,
+    Dialog,
+    DialogActions,
+    DialogTitle
 }
     from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
@@ -84,6 +87,8 @@ const styles = theme => ({
 class OrganizationsListPageItem extends React.Component {
 
     state = {
+        setOpen: false,
+        edit: false,
         open: false,
         address: {
             id: this.props.org.id,
@@ -111,11 +116,30 @@ class OrganizationsListPageItem extends React.Component {
         }
     }
     edit = () => {
-        this.setState({ open: !this.state.open })
+        this.setState({ edit: !this.state.edit })
     }
 
+    handleClickOpen = () => {
+        console.log('clicked the open button')
+        this.setState({
+            setOpen: true
+        })
+    };
+
     handleClose = () => {
-        this.setState({ open: false })
+        this.setState({
+            setOpen: false
+        })
+    };
+
+    delete = () => {
+        this.setState({
+            setOpen: false
+        })
+        this.props.dispatch({
+            type: 'DELETE_ORG',
+            payload: this.state.address
+        })
     }
 
     setDetailsAddress = (event, type) => {
@@ -149,7 +173,7 @@ class OrganizationsListPageItem extends React.Component {
         })
         this.setState({
             ...this.state,
-            open: false
+            edit: false
         })
     }
 
@@ -158,7 +182,7 @@ class OrganizationsListPageItem extends React.Component {
         let displayRow
 
         {
-            if (this.state.open === false) {
+            if (this.state.edit === false) {
                 displayRow = (
                     <TableRow key={org.id} className={this.props.classes.row}>
                         <TableCell colSpan={2}>{org.org_name}</TableCell>
@@ -169,7 +193,23 @@ class OrganizationsListPageItem extends React.Component {
                         <TableCell >{org.county_name}</TableCell>
                         <TableCell >{org.notes}</TableCell>
                         <TableCell><Button onClick={this.edit} variant="contained" size="small" color="primary">Edit</Button></TableCell>
-                        <TableCell><Button variant="contained" size="small" color="secondary">Delete</Button></TableCell>
+                        <TableCell><Button onClick={this.handleClickOpen} variant="contained" size="small" color="secondary">Delete</Button></TableCell>
+                        <Dialog
+                            open={this.state.setOpen}
+                            onClose={this.handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">{"Are you sure you wish to delete this organization?"}</DialogTitle>
+                            <DialogActions>
+                                <Button onClick={this.handleClose} color="primary">
+                                    No
+                                </Button>
+                                <Button onClick={this.delete} color="primary" autoFocus>
+                                    Yes
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </TableRow >
                 )
             } else {

@@ -73,7 +73,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             pool.query(sqlText2)
                 .then(result => {
                     console.log(result.rows)
-                    res.send(result.rows)
+                    res.sendStatus(200)
                 })
                 .catch((err) => {
                     console.log('Error updating organization', err);

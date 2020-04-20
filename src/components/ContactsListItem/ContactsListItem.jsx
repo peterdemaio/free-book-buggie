@@ -131,7 +131,7 @@ class ContactsListPageItem extends React.Component {
         })
         this.setState({
             ...this.state,
-            open: false
+            edit: false
         })
     }
 

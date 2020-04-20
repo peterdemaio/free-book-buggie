@@ -4,6 +4,44 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
+    const id = req.params.id
+    console.log('ready to delete contact:', id)
+
+    const connection = await pool.connect()
+    try {
+        await connection.query('BEGIN');
+
+        const sqlDeletePov = `DELETE from "demographics_poverty" WHERE "organizations_id" = $1;`;
+        await connection.query(sqlDeletePov, [id]);
+
+        const sqlDeleteRace = `DELETE from "demographics_race" WHERE "organizations_id" = $1;`;
+        await connection.query(sqlDeleteRace, [id]);
+
+        const sqlDeleteAges = `DELETE from "demographics_age" WHERE "organizations_id" = $1;`;
+        await connection.query(sqlDeleteAges, [id]);
+
+        const sqlUpdateEvents = `UPDATE "events" SET "organizations_id" = NULL WHERE "organizations_id" = $1;`;
+        await connection.query(sqlUpdateEvents, [id]);
+
+        const sqlUpdateContacts = `UPDATE "contacts" SET "organizations_id" = NULL WHERE "organizations_id" = $1;`;
+        await connection.query(sqlUpdateContacts, [id]);
+
+        const sqlDeleteOrg = `DELETE FROM "organizations" WHERE "id" = $1;`;
+        await connection.query(sqlDeleteOrg, [id]);
+
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (err) {
+        await connection.query('ROLLBACK');
+        console.log('Transaction err - rolling back contact delete', err)
+        res.sendStatus(500)
+    } finally {
+        connection.release()
+    }
+})
+
+
 router.get('/', (req, res) => {
     const queryText = `SELECT "organizations".id, "organizations".org_name, "organizations".logo, 
                         "organizations".url, "organizations".type, "organizations".address_number, 

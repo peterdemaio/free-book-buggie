@@ -19,7 +19,7 @@ function* deleteContact(action) {
 function* editContacts(action) {
     try {
         let response = yield axios.put('/api/contacts', action.payload)
-        yield put({ type: 'UPDATE_CONTACTS', payload: response.data })
+        yield put({ type: 'GET_CONTACTS', payload: response.data })
     } catch (err) {
         console.log(err)
     }
