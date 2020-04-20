@@ -148,7 +148,7 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
             newEntry.address.state,
             newEntry.address.zip,
             newEntry.address.county_id,
-            newEntry.address.notes,
+            newEntry.address.org_notes,
             newEntry.address.id,
         ]
 
@@ -219,6 +219,7 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
         await connection.query(sqlPovertyDems, demographicsPovertyQueryValues)
 
         await connection.query('COMMIT');
+        console.log('edited organization!')
         res.sendStatus(200);
     } catch (error) {
         await connection.query('ROLLBACK');

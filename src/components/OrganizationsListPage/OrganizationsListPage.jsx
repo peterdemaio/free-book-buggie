@@ -12,8 +12,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 
-
-
 const styles = {
     background: {
         backgroundImage: `url(${BackgroundImage})`,
@@ -105,7 +103,7 @@ class OrganizationsListPage extends React.Component {
                         fixedHeader={false} style={{ width: "auto", tableLayout: 'auto' }}>
                         <TableHead>
                             <TableRow className={this.props.classes.tableHead}>
-                                <TableCell style={{ fontSize: '24px', width: "25%" }}>Organization Name</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "25%" }} colSpan={2} >Organization Name</TableCell>
                                 <TableCell style={{ fontSize: '24px', width: "27.5%" }}>Address</TableCell>
                                 <TableCell style={{ fontSize: '24px', width: "10%" }}>City</TableCell>
                                 <TableCell style={{ fontSize: '24px', width: "2.5%" }}>State</TableCell>
