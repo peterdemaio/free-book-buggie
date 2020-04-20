@@ -4,6 +4,39 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+
+    console.log('ready to delete contact:', id);
+
+    const connection = await pool.connect()
+    try {
+        await connection.query('BEGIN');
+        const sqlUpdateEvent = `UPDATE "events" SET "contacts_id" = NULL WHERE "contacts_id" = $1`
+
+
+        await connection.query(sqlUpdateEvent, [id])
+
+        const sqlUpdateEventAgain = `UPDATE "events" SET "secondary_contacts_id" = NULL WHERE "secondary_contacts_id" = $1`
+
+
+        await connection.query(sqlUpdateEventAgain, [id])
+
+        const sqlDeleteContact = `DELETE FROM "contacts" WHERE "id" = $1;`
+
+        await connection.query(sqlDeleteContact, [id])
+
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (err) {
+        await connection.query('ROLLBACK');
+        console.log('Transaction err - rolling back contact delete', err)
+        res.sendStatus(500)
+    } finally {
+        connection.release()
+    }
+});
+
 router.get('/', (req, res) => {
     const queryText = `SELECT "contacts".id, "contacts".contact_name, "contacts".phone_number, "contacts".phone_number_type, "contacts".email, "contacts".notes, "organizations".org_name FROM "contacts"
     JOIN "organizations" ON "organizations".id = "contacts".organizations_id;`
@@ -40,7 +73,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             pool.query(sqlText2)
                 .then(result => {
                     console.log(result.rows)
-                    res.send(result.rows)
+                    res.sendStatus(200)
                 })
                 .catch((err) => {
                     console.log('Error updating organization', err);

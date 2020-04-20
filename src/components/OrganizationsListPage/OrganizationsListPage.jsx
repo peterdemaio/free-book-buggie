@@ -5,7 +5,11 @@ import OrganizationsListItem from '../OrganizationsListItem/OrganizationsListIte
 import OrganizationListPageNav from '../OrganizationsListPage/OrganizationListPageNav'
 import { withStyles, Grid } from '@material-ui/core'
 import BackgroundImage from './HeaderPurpleLight.png'
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 
 const styles = {
@@ -30,11 +34,15 @@ const styles = {
         padding: '10px',
         opacity: '1'
     },
-    list: {
-        paddingLeft: '0px',
-        paddingRight: '0px',
-        opacity: '1'
-
+    table: {
+        width: '80%',
+        marginRight: '15px',
+        marginLeft: '35px',
+        margin: '2em',
+    },
+    tableHead: {
+        backgroundColor: 'lightGrey',
+        fontSize: '34px',
     }
 }
 
@@ -65,7 +73,6 @@ class OrganizationsListPage extends React.Component {
         )
 
         let displayList
-
         if (filteredList.length === 0) {
             displayList = ('No results')
         } else {
@@ -82,7 +89,8 @@ class OrganizationsListPage extends React.Component {
                     <Grid container
                         justify="center"
                         alignItems="center"
-                        className={this.props.classes.searchBar}>
+                        className={this.props.classes.searchBar}
+                        style={{ fontSize: '34px' }}>
                         <span>Search for an organization by name, city or county: </span>
                         <Input
                             className={this.props.classes.input}
@@ -91,14 +99,25 @@ class OrganizationsListPage extends React.Component {
                             value={this.state.searchQuery}>
                         </Input>
                     </Grid>
-                <Grid container
-                    className={this.props.classes.list}
-                    direction="column"
-                    justify="space-evenly"
-                    alignItems="center"
-                >
-                    {displayList}
-                </Grid>
+                    <Table size="small" aria-label="organization table" className={this.props.classes.table}
+                        fixedHeader={false} style={{ width: "auto", tableLayout: 'auto' }}>
+                        <TableHead>
+                            <TableRow className={this.props.classes.tableHead}>
+                                <TableCell style={{ fontSize: '24px', width: "25%" }} colSpan={2} >Organization Name</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "27.5%" }}>Address</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "10%" }}>City</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "2.5%" }}>State</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "5%" }}>Zip</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "10%" }}>County</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "10%" }}>Notes</TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "5%" }}></TableCell>
+                                <TableCell style={{ fontSize: '24px', width: "5%" }}></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {displayList}
+                        </TableBody>
+                    </Table>
                 </div>
             </div>
         )
